@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
+import Input from "./fields/Input";
 
 //encrypt password before sending?
 class SignUpForm extends Component {
@@ -7,7 +8,6 @@ class SignUpForm extends Component {
         const { firstName, lastName, nickname, email, password, conditions } = formValues;
         const { reset } = this.props;
         // createUser({ formValues });
-        reset();
     }
 
     render() {
@@ -20,41 +20,41 @@ class SignUpForm extends Component {
                         <label>First Name</label>
                         <Field 
                         name="firstName" 
-                        component="input" 
+                        component={Input}
                         type="text" />
                     </div>
                     <div>
                         <label>Last Name</label>
                         <Field 
                         name="lastName" 
-                        component="input" 
+                        component={Input} 
                         type="text" />
                     </div>
                     <div>
                         <label>Nickname</label>
                         <Field 
                         name="nickname" 
-                        component="input" 
+                        component={Input}
                         type="text" />
                     </div>
                     <div>
                         <label>Email</label>
                         <Field 
                         name="email" 
-                        component="input" 
+                        component={Input}
                         type="email" />
                     </div>
                     <div>
                         <label>Password</label>
                         <Field 
                         name="password" 
-                        component="input" 
+                        component={Input}
                         type="password" />
                     </div>
                     <div>
                         <Field 
-                        name="conditions" 
-                        component="input" 
+                        name="agreements" 
+                        component={Input}
                         type="checkbox" />
                         I have read and agreed to the Terms &amp; Conditions
                     </div>
@@ -68,7 +68,36 @@ class SignUpForm extends Component {
 }
 
 const WrappedSignUpForm = reduxForm({
-    form: "signup"
+    form: "signup",
+    validate: ({ firstName, lastName, nickname, email, password, agreement }) => {
+        const errors = {}
+
+        if (!firstName) {
+            errors.title = "First name is required!"
+        }
+
+        if (!lastName) {
+            errors.title = "Last name is required!"
+        }
+
+        if (!nickname) {
+            errors.title = "Nickname is required!"
+        }
+
+        if (!email) {
+            errors.title = "Email is required!"
+        }
+
+        if (!password) {
+            errors.title = "Password is required!"
+        }
+
+        if (!agreement) {
+            errors.title = "Please confirm your agreement to Terms & Conditions!"
+        }
+
+        return errors;
+    }
 })(SignUpForm)
 
 export default WrappedSignUpForm;
