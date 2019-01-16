@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
 import LocalApi from "../../apis/local";
+import { setAuthToken } from "./../../actions";
 
 //encrypt password before sending?
 class RegisterForm extends Component {
@@ -9,9 +10,10 @@ class RegisterForm extends Component {
         const { firstName, lastName, nickname, email, password, conditions } = formValues;
         LocalApi.post("/signup", {firstName, lastName, nickname, email, password, conditions})
         .then(response => {
-            //acquire token
+            //acquring token
+            setAuthToken(response.data.token);
             //redirect
-            this.props.history.push("/dashboard");
+            this.props.history.push("/newsfeed");
         })
         .catch(err => console.log(err));
         }
