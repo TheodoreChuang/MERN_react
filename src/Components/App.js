@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
+import RegisterPage from "./pages/RegisterPage";
 
 class App extends Component {
   render() {
@@ -10,7 +10,7 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Route exact path = "/" component = {LoginPage} />
-            <Route exact path = "/signup" component = {SignUpPage} />
+            <Route exact path = "/signup" component = {RegisterPage} />
           </div>
         </BrowserRouter>
       </div>

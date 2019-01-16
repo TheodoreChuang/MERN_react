@@ -1,21 +1,27 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
+import LocalApi from "../../apis/local";
 
 //encrypt password before sending?
-class SignUpForm extends Component {
-    onSignUpFormSubmit = (formValues) => {
+class RegisterForm extends Component {
+    onRegisterFormSubmit = (formValues) => {
         const { firstName, lastName, nickname, email, password, conditions } = formValues;
-        const { reset } = this.props;
-        // createUser({ formValues });
-    }
+        LocalApi.post("/signup", {firstName, lastName, nickname, email, password, conditions})
+        .then(response => {
+            //acquire token
+            //redirect
+            this.props.history.push("/dashboard");
+        })
+        .catch(err => console.log(err));
+        }
 
     render() {
         const { handleSubmit } = this.props;
 
         return (
             <div>
-                <form onSubmit = {handleSubmit(this.onSignUpFormSubmit)}> 
+                <form onSubmit = {handleSubmit(this.onRegisterFormSubmit)}> 
                     <div>
                         <label>First Name</label>
                         <Field 
@@ -67,8 +73,8 @@ class SignUpForm extends Component {
     }
 }
 
-const WrappedSignUpForm = reduxForm({
-    form: "signup",
+const WrappedRegisterForm = reduxForm({
+    form: "register",
     validate: ({ firstName, lastName, nickname, email, password, agreement }) => {
         const errors = {}
 
@@ -98,6 +104,6 @@ const WrappedSignUpForm = reduxForm({
 
         return errors;
     }
-})(SignUpForm)
+})(RegisterForm)
 
-export default WrappedSignUpForm;
+export default WrappedRegisterForm;
