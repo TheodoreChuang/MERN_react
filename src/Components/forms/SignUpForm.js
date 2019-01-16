@@ -1,36 +1,65 @@
 import React, { Component } from "react";
+import { Field, reduxForm } from "redux-form";
 
+//encrypt password before sending?
 class SignUpForm extends Component {
+    onSignUpFormSubmit = (formValues) => {
+        const { firstName, lastName, nickname, email, password, conditions } = formValues;
+        const { reset } = this.props;
+        // createUser({ formValues });
+        reset();
+    }
 
     render() {
+        const { handleSubmit } = this.props;
+
         return (
             <div>
-                <form>
+                <form onSubmit = {handleSubmit(this.onSignUpFormSubmit)}> 
                     <div>
                         <label>First Name</label>
-                        <input type="text" />
+                        <Field 
+                        name="firstName" 
+                        component="input" 
+                        type="text" />
                     </div>
                     <div>
                         <label>Last Name</label>
-                        <input type="text" />
+                        <Field 
+                        name="lastName" 
+                        component="input" 
+                        type="text" />
                     </div>
                     <div>
                         <label>Nickname</label>
-                        <input type="text" />
+                        <Field 
+                        name="nickname" 
+                        component="input" 
+                        type="text" />
                     </div>
                     <div>
                         <label>Email</label>
-                        <input type="email" />
+                        <Field 
+                        name="email" 
+                        component="input" 
+                        type="email" />
                     </div>
                     <div>
                         <label>Password</label>
-                        <input type="password" />
+                        <Field 
+                        name="password" 
+                        component="input" 
+                        type="password" />
                     </div>
                     <div>
-                        <input type="checkbox" /> I have read and agreed to the Terms &amp; Conditions
+                        <Field 
+                        name="conditions" 
+                        component="input" 
+                        type="checkbox" />
+                        I have read and agreed to the Terms &amp; Conditions
                     </div>
                     <div>
-                        <input type="submit" value="Submit" />
+                        <button type="submit">Submit</button>
                     </div>
                 </form>
             </div>
@@ -38,4 +67,8 @@ class SignUpForm extends Component {
     }
 }
 
-export default SignUpForm;
+const WrappedSignUpForm = reduxForm({
+    form: "signup"
+})(SignUpForm)
+
+export default WrappedSignUpForm;
