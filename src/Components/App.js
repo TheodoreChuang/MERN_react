@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage";
 import RegisterPage from "./pages/RegisterPage";
 import NewsFeedPage from "./pages/NewsFeedPage";
 import LoginPage from "./pages/LoginPage";
+import PrivateRoute from "./PrivateRoute";
 
 class App extends Component {
   render() {
@@ -11,10 +12,10 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <div>
-            <Route exact path = "/" component = {MainPage} />
+            <Route exact path = "/portal" component = {MainPage} />
             <Route exact path = "/login" component = {LoginPage} />
             <Route exact path = "/register" component = {RegisterPage} />
-            <Route exact path = "/newsfeed" component = {NewsFeedPage} />
+            <PrivateRoute exact path = "/" component = {NewsFeedPage} />
           </div>
         </BrowserRouter>
       </div>
