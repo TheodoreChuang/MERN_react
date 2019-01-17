@@ -14,6 +14,7 @@ import photo from './../images/profile_image.jpg';
 const styles = {
   card: {
     minWidth: 275,
+    maxWidth: 600,
   },
   bullet: {
     display: 'inline-block',

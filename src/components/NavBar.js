@@ -154,7 +154,7 @@ class PrimarySearchAppBar extends React.Component {
           </IconButton>
           <p>Notifications</p>
         </MenuItem>
-        <MenuItem onClick={this.handleProfileMenuOpen}>
+        <MenuItem component={Link} to="/profile" >
           <IconButton color="inherit">
             <AccountCircle />
           </IconButton>
