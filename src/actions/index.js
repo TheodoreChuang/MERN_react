@@ -8,3 +8,12 @@ export const setAuthToken = (token) => {
         payload: token
     };
 }
+
+export const removeAuthToken = () => {
+    localStorage.clear();
+
+    return {
+        type: "REMOVE_TOKEN",
+        payload: null
+    };
+}
