@@ -18,7 +18,7 @@ class RegisterForm extends Component {
             //redirect
             this.props.history.push("/newsfeed");
         })
-        .catch(err => console.log("post error:",err));
+        .catch(err => console.log(err));
         }
 
     render() {
@@ -61,7 +61,7 @@ class RegisterForm extends Component {
                         name="password" 
                         component={Input}
                         type="password" />
-                    </div>
+                    </div>  
                     <div>
                         <Field 
                         name="terms_conditions" 
