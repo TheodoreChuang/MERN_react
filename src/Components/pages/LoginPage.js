@@ -2,16 +2,14 @@ import React, { Component } from "react";
 
 class LoginPage extends Component  {
 
-    onSignUpClick() {
-        const { history } = this.props;
-
-        return history.push("/signup");
+    onLogInClick() {
     }
 
     render() {
         return (
             <div>
                 <h1> Login Page</h1>
+                {/* <LoginForm /> */}
                 <button onClick = { 
                     () => this.onSignUpClick()
                 }> Sign up via email </button>

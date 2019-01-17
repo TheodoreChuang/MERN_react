@@ -3,19 +3,22 @@ import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
 import LocalApi from "../../apis/local";
 import { setAuthToken } from "./../../actions";
+import { connect } from "react-redux";
 
-//encrypt password before sending?
 class RegisterForm extends Component {
+    
     onRegisterFormSubmit = (formValues) => {
-        const { firstName, lastName, nickname, email, password, conditions } = formValues;
-        LocalApi.post("/signup", {firstName, lastName, nickname, email, password, conditions})
+        const { first_name, last_name, nickname, email, password, terms_conditions } = formValues;
+        const { setAuthToken } = this.props;
+
+        LocalApi.post("/register", {first_name, last_name, nickname, email, password, terms_conditions})
         .then(response => {
             //acquring token
             setAuthToken(response.data.token);
             //redirect
             this.props.history.push("/newsfeed");
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log("post error:",err));
         }
 
     render() {
@@ -27,14 +30,14 @@ class RegisterForm extends Component {
                     <div>
                         <label>First Name</label>
                         <Field 
-                        name="firstName" 
+                        name="first_name" 
                         component={Input}
                         type="text" />
                     </div>
                     <div>
                         <label>Last Name</label>
                         <Field 
-                        name="lastName" 
+                        name="last_name" 
                         component={Input} 
                         type="text" />
                     </div>
@@ -61,7 +64,7 @@ class RegisterForm extends Component {
                     </div>
                     <div>
                         <Field 
-                        name="agreements" 
+                        name="terms_conditions" 
                         component={Input}
                         type="checkbox" />
                         I have read and agreed to the Terms &amp; Conditions
@@ -77,35 +80,37 @@ class RegisterForm extends Component {
 
 const WrappedRegisterForm = reduxForm({
     form: "register",
-    validate: ({ firstName, lastName, nickname, email, password, agreement }) => {
+    validate: ({ first_name, last_name, nickname, email, password, terms_conditions }) => {
         const errors = {}
 
-        if (!firstName) {
-            errors.title = "First name is required!"
+        if (!first_name) {
+            errors.first_name = "First name is required!"
         }
 
-        if (!lastName) {
-            errors.title = "Last name is required!"
+        if (!last_name) {
+            errors.last_name = "Last name is required!"
         }
 
         if (!nickname) {
-            errors.title = "Nickname is required!"
+            errors.nickname = "Nickname is required!"
         }
 
         if (!email) {
-            errors.title = "Email is required!"
+            errors.email = "Email is required!"
         }
 
         if (!password) {
-            errors.title = "Password is required!"
+            errors.password = "Password is required!"
         }
 
-        if (!agreement) {
-            errors.title = "Please confirm your agreement to Terms & Conditions!"
+        if (!terms_conditions) {
+            errors.terms_conditions = "Please confirm your agreement to Terms & Conditions!"
         }
 
         return errors;
     }
 })(RegisterForm)
 
-export default WrappedRegisterForm;
+export default connect(null, {
+    setAuthToken
+}) (WrappedRegisterForm);
