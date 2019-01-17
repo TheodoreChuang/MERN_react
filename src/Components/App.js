@@ -5,8 +5,10 @@ import RegisterPage from "./pages/RegisterPage";
 import NewsFeedPage from "./pages/NewsFeedPage";
 import LoginPage from "./pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
+import NewChallengePage from "./pages/NewChallengePage";
 
 class App extends Component {
+  
   render() {
     return (
       <div>
@@ -16,6 +18,7 @@ class App extends Component {
             <Route exact path = "/login" component = {LoginPage} />
             <Route exact path = "/register" component = {RegisterPage} />
             <PrivateRoute exact path = "/" component = {NewsFeedPage} />
+            <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
           </div>
         </BrowserRouter>
       </div>
