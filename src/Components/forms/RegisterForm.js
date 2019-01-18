@@ -4,6 +4,21 @@ import Input from "./fields/Input";
 import LocalApi from "../../apis/local";
 import { setAuthToken } from "./../../actions";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
+//materialize
+import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = (theme) => ({
+    button: {
+      margin: theme.spacing.unit,
+    },
+    input: {
+      display: 'none',
+    },
+  });
 
 class RegisterForm extends Component {
     
@@ -22,44 +37,44 @@ class RegisterForm extends Component {
         }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, classes } = this.props;
 
         return (
             <div>
                 <form onSubmit = {handleSubmit(this.onRegisterFormSubmit)}> 
                     <div>
-                        <label>First Name</label>
                         <Field 
                         name="first_name" 
                         component={Input}
+                        placeholder="First name"
                         type="text" />
                     </div>
                     <div>
-                        <label>Last Name</label>
                         <Field 
                         name="last_name" 
                         component={Input} 
+                        placeholder="Last name"
                         type="text" />
                     </div>
                     <div>
-                        <label>Nickname</label>
                         <Field 
                         name="nickname" 
                         component={Input}
+                        placeholder="Nickname"
                         type="text" />
                     </div>
                     <div>
-                        <label>Email</label>
                         <Field 
                         name="email" 
                         component={Input}
+                        placeholder="Email"
                         type="email" />
                     </div>
                     <div>
-                        <label>Password</label>
                         <Field 
                         name="password" 
                         component={Input}
+                        placeholder="Password"
                         type="password" />
                     </div>  
                     <div>
@@ -67,9 +82,13 @@ class RegisterForm extends Component {
                         name="terms_conditions" 
                         component={Input}
                         type="checkbox" />
-                        I have read and agreed to the Terms &amp; Conditions
+                        I have read and agreed to the 
+                        <Link to="/register/termsandconditions"> Terms &amp; Conditions </Link>
                     </div>
                     <div>
+                    <Button variant="outlined" color="primary" className={classes.button}>
+                        Primary
+                    </Button>
                         <button type="submit">Submit</button>
                     </div>
                 </form>
@@ -77,6 +96,7 @@ class RegisterForm extends Component {
         );
     }
 }
+
 
 const WrappedRegisterForm = reduxForm({
     form: "register",
@@ -109,8 +129,14 @@ const WrappedRegisterForm = reduxForm({
 
         return errors;
     }
-})(RegisterForm)
+})(RegisterForm);
 
-export default connect(null, {
+
+// WrappedRegisterForm.propTypes = {
+//     classes: PropTypes.object.isRequired,
+//   };
+
+export default connect(null, withStyles(styles), {
     setAuthToken
 }) (WrappedRegisterForm);
+// export default withStyles(styles)(WrappedRegisterForm);

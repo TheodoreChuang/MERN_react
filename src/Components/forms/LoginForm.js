@@ -4,6 +4,7 @@ import Input from "./fields/Input";
 import { setAuthToken } from "./../../actions";
 import LocalApi from "./../../apis/local";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class LoginForm extends Component {
 
@@ -23,23 +24,32 @@ class LoginForm extends Component {
         return (
             <form onSubmit = {handleSubmit(this.onLoginFormSubmit)}>
                 <div>
-                    <label>Email</label>
                     <Field
                     name="email"
                     component={Input}
                     type="email"
+                    placeholder="Email"
                     />
                 </div>
                 <div>
-                    <label>Password</label>
                     <Field
                     name="password"
                     component={Input}
                     type="password"
+                    placeholder="Password"
                     />
                     </div>
                 <div>
-                    <button type="submit">Login</button>
+                <div>
+                    <a href="/forgotpassword" target="_blank"> 
+                        Forgot password?
+                    </a>
+                </div>
+                    <button type="submit">Sign in</button>
+                </div>
+                <div>
+                    Don't have an account? 
+                    <Link to="/register"> Sign Up </Link>
                 </div>
             </form>
         );

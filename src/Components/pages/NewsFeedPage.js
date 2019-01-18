@@ -8,7 +8,7 @@ class NewsFeedPage extends Component  {
         const { removeAuthToken } = this.props;
 
         return (
-            <div>
+            <div className="container">
                 <h1> News Feed</h1>
                 <button onClick={() => {
                     removeAuthToken();
