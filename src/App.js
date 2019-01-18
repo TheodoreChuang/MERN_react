@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import ProfilePage from './ProfilePage';
-import FeedPage from './FeedPage';
+import FeedPage from './FeedPage'; 
 
 
 
