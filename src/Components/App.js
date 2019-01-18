@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import RegisterPage from "./pages/RegisterPage";
 import NewsFeedPage from "./pages/NewsFeedPage";
@@ -13,13 +13,13 @@ class App extends Component {
     return (
       <div>
         <BrowserRouter>
-          <div>
-            <Route exact path = "/portal" component = {MainPage} />
-            <Route exact path = "/login" component = {LoginPage} />
-            <Route exact path = "/register" component = {RegisterPage} />
-            <PrivateRoute exact path = "/" component = {NewsFeedPage} />
-            <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
-          </div>
+          <Switch>
+              <Route exact path = "/portal" component = {MainPage} />
+              <Route exact path = "/login" component = {LoginPage} />
+              <Route exact path = "/register" component = {RegisterPage} />
+              <PrivateRoute exact path = "/" component = {NewsFeedPage} />
+              <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
+            </Switch>
         </BrowserRouter>
       </div>
     );
