@@ -6,6 +6,7 @@ import NewsFeedPage from "./pages/NewsFeedPage";
 import LoginPage from "./pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import NewChallengePage from "./pages/NewChallengePage";
+import StylesPage from "./pages/StylesPage";
 
 class App extends Component {
   
@@ -17,6 +18,7 @@ class App extends Component {
               <Route exact path = "/portal" component = {MainPage} />
               <Route exact path = "/login" component = {LoginPage} />
               <Route exact path = "/register" component = {RegisterPage} />
+              <Route exact path = "/styles" component = {StylesPage} />
               <PrivateRoute exact path = "/" component = {NewsFeedPage} />
               <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
             </Switch>
