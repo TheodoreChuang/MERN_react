@@ -1,19 +1,20 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class MainPage extends Component  {
 
     render() {
         return (
             <div>
-                <h1> Main Page</h1>
+                <h1> oneup </h1>
                 <button onClick = {
                     () => this.props.history.push("/register")}> Sign up via email</button>
                 <button> Sign up via Facebook </button>
 
                 <div>
-                    <button onClick={
-                        () => this.props.history.push("/login")}> Already have an account? Log in
-                    </button>
+                Already have an account?
+                    <Link to="/login"> Log In
+                    </Link>
                 </div>
             </div>
         );
