@@ -9,7 +9,6 @@ import NewChallengePage from "./pages/NewChallengePage";
 import StylesPage from "./pages/StylesPage";
 
 class App extends Component {
-  
   render() {
     return (
       <div>
