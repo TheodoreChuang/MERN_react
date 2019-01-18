@@ -17,6 +17,8 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom'
+import LockIcon from '@material-ui/icons/Https';
+import UnlockIcon from '@material-ui/icons/LockOpen';
 
 const styles = theme => ({
   root: {
@@ -138,22 +140,26 @@ class PrimarySearchAppBar extends React.Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
-        <MenuItem>
+        <MenuItem component={Link} to="/register">
           <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <MailIcon />
-            </Badge>
+              <LockIcon />
           </IconButton>
-          <p>Messages</p>
+          <p>Log Out</p>
         </MenuItem>
-        <MenuItem>
+        <MenuItem component={Link} to="/register">
+          <IconButton color="inherit">
+              <UnlockIcon />
+          </IconButton>
+          <p>Log In</p>
+        </MenuItem>
+        {/* <MenuItem>
           <IconButton color="inherit">
             <Badge badgeContent={11} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
           <p>Notifications</p>
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem component={Link} to="/profile" >
           <IconButton color="inherit">
             <AccountCircle />
@@ -187,16 +193,17 @@ class PrimarySearchAppBar extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <MailIcon />
-                </Badge>
+              <IconButton color="inherit" component={Link} to="/register">
+                  <LockIcon />
               </IconButton>
-              <IconButton color="inherit">
+              <IconButton color="inherit" component={Link} to="/register">
+                  <UnlockIcon />
+              </IconButton>
+              {/* <IconButton color="inherit">
                 <Badge badgeContent={17} color="secondary">
                   <NotificationsIcon />
                 </Badge>
-              </IconButton>
+              </IconButton> */}
               <IconButton
                 aria-owns={isMenuOpen ? 'material-appbar' : undefined}
                 aria-haspopup="true"
