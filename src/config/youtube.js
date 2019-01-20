@@ -1,4 +1,4 @@
-const { google } = require("googleapis");
+import { google } from "googleapis";
 
 const oauth2Client = new google.auth.OAuth2(
     process.env.CLIENT_ID,
@@ -11,4 +11,4 @@ const oauth2Client = new google.auth.OAuth2(
 
     const youtube = google.youtube({version: 'v3', auth: oauth2Client });
 
-module.exports = youtube;
+export default youtube;
