@@ -7,18 +7,18 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 //materialize
-import Button from '@material-ui/core/Button';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+// import Button from '@material-ui/core/Button';
+// import PropTypes from 'prop-types';
+// import { withStyles } from '@material-ui/core/styles';
 
-const styles = (theme) => ({
-    button: {
-      margin: theme.spacing.unit,
-    },
-    input: {
-      display: 'none',
-    },
-  });
+// const styles = (theme) => ({
+//     button: {
+//       margin: theme.spacing.unit,
+//     },
+//     input: {
+//       display: 'none',
+//     },
+//   });
 
 class RegisterForm extends Component {
     
@@ -37,7 +37,7 @@ class RegisterForm extends Component {
         }
 
     render() {
-        const { handleSubmit, classes } = this.props;
+        const { handleSubmit } = this.props;
 
         return (
             <div>
@@ -86,9 +86,9 @@ class RegisterForm extends Component {
                         <Link to="/register/termsandconditions"> Terms &amp; Conditions </Link>
                     </div>
                     <div>
-                    <Button variant="outlined" color="primary" className={classes.button}>
+                    {/* <Button variant="outlined" color="primary" className={classes.button}>
                         Primary
-                    </Button>
+                    </Button> */}
                         <button type="submit">Submit</button>
                     </div>
                 </form>
@@ -132,11 +132,6 @@ const WrappedRegisterForm = reduxForm({
 })(RegisterForm);
 
 
-// WrappedRegisterForm.propTypes = {
-//     classes: PropTypes.object.isRequired,
-//   };
-
-export default connect(null, withStyles(styles), {
+export default connect(null, {
     setAuthToken
-}) (WrappedRegisterForm);
-// export default withStyles(styles)(WrappedRegisterForm);
+})(WrappedRegisterForm);
