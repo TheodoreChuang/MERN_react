@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from './App';
-import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 
+import App from './components/App';
+import { Provider } from "react-redux";
+import store from "./store";
+require('dotenv').config({ path: "./../.env"});
 
-render((
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-), document.getElementById('root'));
+ReactDOM.render (
+    <Provider store={store}>
+        <App />
+    </Provider>,
+document.getElementById('root')
+);
