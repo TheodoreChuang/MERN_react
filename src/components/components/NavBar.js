@@ -19,6 +19,8 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom'
 import LockIcon from '@material-ui/icons/Https';
 import UnlockIcon from '@material-ui/icons/LockOpen';
+import { removeAuthToken } from "./../../actions";
+import { connect } from "react-redux"; 
 
 const styles = theme => ({
   root: {
@@ -96,6 +98,7 @@ class PrimarySearchAppBar extends React.Component {
     mobileMoreAnchorEl: null,
   };
 
+
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
@@ -140,7 +143,7 @@ class PrimarySearchAppBar extends React.Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
-        <MenuItem component={Link} to="/register">
+        <MenuItem component={Link} to="/portal" onClick={() => {removeAuthToken()}}>
           <IconButton color="inherit">
               <LockIcon />
           </IconButton>
@@ -233,4 +236,5 @@ PrimarySearchAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PrimarySearchAppBar);
+ export default withStyles(styles)(PrimarySearchAppBar);
+
