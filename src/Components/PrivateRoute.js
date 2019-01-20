@@ -3,9 +3,9 @@ import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 const PrivateRoute = (props) => {
-    const { component: Component, token } = props;
+    const { component: Component, token, ...other } = props;
 
-    return <Route render={props => {
+    return <Route {...other} render={props => {
         if (token) {
             return <Component {...props} />
         }

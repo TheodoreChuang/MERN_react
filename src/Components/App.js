@@ -6,7 +6,10 @@ import NewsFeedPage from "./pages/NewsFeedPage";
 import LoginPage from "./pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import NewChallengePage from "./pages/NewChallengePage";
-import StylesPage from "./pages/StylesPage";
+
+import FeedPage from "./pages/FeedPage";
+import ProfilePage from "./pages/ProfilePage";
+import { Switch } from "react-router-dom";
 
 class App extends Component {
   render() {
@@ -21,6 +24,7 @@ class App extends Component {
               <PrivateRoute exact path = "/" component = {NewsFeedPage} />
               <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
             </Switch>
+
         </BrowserRouter>
       </div>
     );

@@ -31,7 +31,7 @@ class RegisterForm extends Component {
             //acquring token
             setAuthToken(response.data.token);
             //redirect
-            this.props.history.push("/newsfeed");
+            this.props.history.push("/");
         })
         .catch(err => console.log(err));
         }

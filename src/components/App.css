@@ -1,0 +1,17 @@
+.feed {
+  background-color: aqua;
+}
+
+.profile_card {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.challenge_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
