@@ -14,16 +14,10 @@ class NewChallengeForm extends Component {
         fd.append("video", file);
         fd.append("title", title);
         fd.append("desc", desc);
-    
-        try {
-            LocalApi.post("/challenges/upload", fd);
-            // if (error) throw error;
-    
-            alert("Succesfully submitted");
-    
-        } catch(error) {
-            console.log(error);
-        }
+
+        LocalApi.post("/challenges/upload", fd)
+        .then(response => alert("Submitted"))
+        .catch(error => alert(error))
     }
 
     render() {
@@ -52,6 +46,7 @@ class NewChallengeForm extends Component {
                     name="video"
                     component={Input}
                     type="file"
+                    required="true"
                     />
                 </div>
                 <div>
@@ -66,8 +61,26 @@ class NewChallengeForm extends Component {
     }
 }
 
+//include validation on video on form
+
 const WrappedNewChallengeForm = reduxForm({
-    form: "upload"
+    form: "upload",
+    validate: ({
+        title, desc
+    }) => {
+    const errors = {}
+    
+    if (!title) {
+        errors.title = "title is required!"
+    }
+
+    if (!desc) {
+        errors.desc = "video description is required!"
+    }
+
+    return errors;
+
+    }
 })(NewChallengeForm);
 
 export default WrappedNewChallengeForm;
