@@ -10,10 +10,10 @@ class Profile extends Component {
     return (
       <div>
         <NavBar />
-        <div class="profile_card">
+        <div className="profile_card">
           <ProfileInfoCard />
         </div>
-        <div class="challenge_card">
+        <div className="challenge_card">
          <ChallengeCard />
         </div>
       </div>

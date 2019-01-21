@@ -96,7 +96,6 @@ class PrimarySearchAppBar extends React.Component {
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
-    isHidden: false,
   };
 
   handleProfileMenuOpen = event => {
@@ -121,6 +120,7 @@ class PrimarySearchAppBar extends React.Component {
     const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    const currentPath = window.location.pathname;
 
     const renderMenu = (
       <Menu
@@ -176,8 +176,8 @@ class PrimarySearchAppBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-              <MenuIcon onClick={this.handleProfileMenuOpen} />
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer" onClick={this.handleProfileMenuOpen}>
+              <MenuIcon  />
             </IconButton>
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
               1UP
@@ -202,21 +202,15 @@ class PrimarySearchAppBar extends React.Component {
               <IconButton color="inherit" component={Link} to="/register">
                   <UnlockIcon />
               </IconButton>
-              {/* <IconButton color="inherit">
-                <Badge badgeContent={17} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton> */}
+
+              {!currentPath.includes('profile') ? 
               <IconButton
-                // aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-                // aria-haspopup="true"
-                // onClick={this.handleProfileMenuOpen}
                 color="inherit"
                 component={Link} 
-                to="/profile"
-              >
-                <AccountCircle isHidden={true}/>
-              </IconButton>
+                to="/profile" >
+                <AccountCircle />
+              </IconButton> : null }
+            
             </div>
             <div className={classes.sectionMobile}>
               <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
