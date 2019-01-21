@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import NewChallengePage from "./pages/NewChallengePage";
 import FeedPage from "./pages/FeedPage";
 import ProfilePage from "./pages/ProfilePage";
+import NewRegister from "./forms/NewRegisterForm"
 import { Switch } from "react-router-dom";
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
         <BrowserRouter>
             <div>
               <Switch>
+                <Route exact path = "/newregister" component = {NewRegister} />
                 <Route exact path = "/portal" component = {MainPage} />
                 <Route exact path = "/login" component = {LoginPage} />
                 <Route exact path = "/register" component = {RegisterPage} />

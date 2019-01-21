@@ -96,8 +96,8 @@ class PrimarySearchAppBar extends React.Component {
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
+    isHidden: false,
   };
-
 
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -208,14 +208,14 @@ class PrimarySearchAppBar extends React.Component {
                 </Badge>
               </IconButton> */}
               <IconButton
-                aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-                aria-haspopup="true"
-                onClick={this.handleProfileMenuOpen}
+                // aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+                // aria-haspopup="true"
+                // onClick={this.handleProfileMenuOpen}
                 color="inherit"
                 component={Link} 
                 to="/profile"
               >
-                <AccountCircle />
+                <AccountCircle isHidden={true}/>
               </IconButton>
             </div>
             <div className={classes.sectionMobile}>
