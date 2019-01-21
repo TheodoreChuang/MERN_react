@@ -1,33 +1,22 @@
 import React from "react";
 import LocalApi from "../../apis/local";
 
-//upload file function
-const uploadFile = (file) => {
-    console.log("inside upload file function");
-    console.log(file);
-    // const url = "http://localhost:3000/challenges/upload";
-    // const xhr = new XMLHttpRequest();
-    const fd = new FormData();
 
-    // xhr.open("POST", url, true);
-    fd.append("upload_file", file);
-    // xhr.send(fd);
-
-    LocalApi.post("/challenges/upload", fd);
-
-    console.log("upload file method ran");
-
-}
 
 const NewChallengeForm = () => {
     return (
         <form onSubmit = {(e) => {
             e.preventDefault();
-            console.log("onsubmit running");
-        const file = document.getElementById('uploadvideo').files[0]; 
-        uploadFile(file);
-        }}>
-            <input type="file" id="uploadvideo" name="video" />
+            const file = document.getElementById("uploadvideo").files[0]; 
+            const title = document.getElementById("title").value;
+            uploadFile(file, title);
+            }} encType="multipart/form-data">
+            <div>
+                <input type="text" placeholder="title" name="title" id="title" />
+            </div>
+            <div>
+                <input type="file" id="uploadvideo" name="video" />
+            </div>
             <div>
                 <input type="submit" />
             </div>
@@ -35,6 +24,19 @@ const NewChallengeForm = () => {
     );
 }
 
+//upload file function
+const uploadFile = (file, title) => {
+    const fd = new FormData();
+    fd.append("video", file);
+    fd.append("title", title);
+    console.log("inside fd");
+
+
+    LocalApi.post("/challenges/upload", fd);
+
+    console.log("upload file method ran");
+
+}
 // document.addEventListener("DOMContentLoaded", () => {
 //     const uploadVideo = document.querySelector("#uploadvideo");
 //         uploadVideo.addEventListener("change", () => {
@@ -48,3 +50,5 @@ const NewChallengeForm = () => {
 
 
 export default NewChallengeForm;
+
+//enctype="multipart/form-data"
