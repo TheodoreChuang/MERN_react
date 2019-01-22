@@ -149,20 +149,6 @@ class PrimarySearchAppBar extends React.Component {
           </IconButton>
           <p>Log Out</p>
         </MenuItem>
-        <MenuItem component={Link} to="/register">
-          <IconButton color="inherit">
-              <UnlockIcon />
-          </IconButton>
-          <p>Log In</p>
-        </MenuItem>
-        {/* <MenuItem>
-          <IconButton color="inherit">
-            <Badge badgeContent={11} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <p>Notifications</p>
-        </MenuItem> */}
         <MenuItem component={Link} to="/profile" >
           <IconButton color="inherit">
             <AccountCircle />
@@ -196,11 +182,8 @@ class PrimarySearchAppBar extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit" component={Link} to="/register">
+              <IconButton color="inherit" component={Link} to="/portal" onClick={() => {removeAuthToken()}}>
                   <LockIcon />
-              </IconButton>
-              <IconButton color="inherit" component={Link} to="/register">
-                  <UnlockIcon />
               </IconButton>
 
               {!currentPath.includes('profile') ? 

@@ -6,17 +6,18 @@ import { setAuthToken } from "./../../actions";
 import { connect } from "react-redux";
 import Checkbox from "./fields/CheckboxField";
 
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-//import Input from '@material-ui/core/Input';
 import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 
 const styles = theme => ({
+    body: {
+        margin: '0 25px 0 10px',
+    },
     container: {
       display: 'flex',
-      width: '70%',
+      maxWidth: '400px',
       margin: '50px auto 0 auto',
       position: 'center',
       flexDirection: 'column',
@@ -71,6 +72,7 @@ class RegisterForm extends Component {
             const { handleSubmit } = this.props;
             
             return (
+            <div className={classes.body}>
               <div className={classes.container} onSubmit = {this.onRegisterFormSubmit}>
 
                 <form onSubmit = {handleSubmit(this.onRegisterFormSubmit)}>
@@ -134,7 +136,7 @@ class RegisterForm extends Component {
                 </div>
                 <div>
                 <Fab type="submit" variant="extended" color="primary" aria-label="Add" className={classes.margin}>
-                    Submit
+                    Register
                 </Fab>
                 </div>
                 <div className={classes.signin}> 
@@ -142,6 +144,7 @@ class RegisterForm extends Component {
                 </div>
                 </div>
                 </form>
+              </div>
               </div>
             );
           }

@@ -1,12 +1,56 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
+import LocalApi from "../../apis/local";
 import { setAuthToken } from "./../../actions";
-import LocalApi from "./../../apis/local";
 import { connect } from "react-redux";
+import Checkbox from "./fields/CheckboxField";
+
+import { withStyles } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
+import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
+
+const styles = theme => ({
+    container: {
+      display: 'flex',
+      width: '70%',
+      margin: '50px auto 0 auto',
+      position: 'center',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    input: {
+      margin: theme.spacing.unit,
+      padding: '6px 0',
+    },
+    margin: {
+      width: '200px',
+    },
+    checkbox: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      margin: '10px',
+      maxWidth: '360px',
+      alignItems: 'center',
+    },
+    checkboxButton: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: '15px 0 0 0',
+    },
+    signin: {
+      margin: '10px',
+      padding: '20px',
+    },
+  });
 
 class LoginForm extends Component {
-
+    
     onLoginFormSubmit = (formValues) => {
         const { email, password } = formValues;
         LocalApi.post("/login", {email, password})
@@ -17,52 +61,67 @@ class LoginForm extends Component {
         .catch(err => console.log(err));
     }
 
-    render() {
-        const { handleSubmit } = this.props;
+        render() {
+            const { classes } = this.props;
+            const { handleSubmit } = this.props;
+            
+            return (
+              <div className={classes.container} onSubmit = {this.onRegisterFormSubmit}>
 
-        return (
-            <form onSubmit = {handleSubmit(this.onLoginFormSubmit)}>
-                <div>
-                    <label>Email</label>
-                    <Field
-                    name="email"
-                    component={Input}
-                    type="email"
-                    />
+                <form onSubmit = {handleSubmit(this.onLoginFormSubmit)}>
+                <Field
+                  name="email"
+                  component={Input}
+                  placeholder="Email"
+                  className={classes.input}
+                  fullWidth
+                  inputProps={{
+                    'aria-label': 'Description',
+                  }}
+                />
+                <Field
+                  name="password"
+                  component={Input}
+                  placeholder="Password"
+                  className={classes.input}
+                  fullWidth
+                  inputProps={{
+                    'aria-label': 'Description',
+                  }}
+                />
+                <div className={classes.checkbox}>
+                <div className={classes.checkboxButton} >
+                <Fab type="submit" variant="extended" color="primary" aria-label="Add" className={classes.margin}>
+                    Log In
+                </Fab>
                 </div>
-                <div>
-                    <label>Password</label>
-                    <Field
-                    name="password"
-                    component={Input}
-                    type="password"
-                    />
-                    </div>
-                <div>
-                    <button type="submit">Login</button>
+                <div className={classes.signin}> 
+                <Typography>Dont have an account? <Link to="/register">Register</Link></Typography>
                 </div>
-            </form>
-        );
-    }
+                </div>
+                </form>
+              </div>
+            );
+          }
 }
 
-const WrappedLoginForm = reduxForm({
-    form: "login",
-    validate: ({ email, password }) => {
+const WrappedRegisterForm = reduxForm({
+    form: "register",
+    validate: ({ first_name, last_name, nickname, email, password, terms_conditions }) => {
         const errors = {}
 
         if (!email) {
-            errors.email = "email is required!"
+            errors.email = "Email is required!"
         }
 
         if (!password) {
-            errors.password = "password is required!"
+            errors.password = "Password is required!"
         }
 
         return errors;
     }
-})(LoginForm)
+})(withStyles(styles)(LoginForm))
 
-export default connect (null, {
+export default connect(null, {
     setAuthToken
-}) (WrappedLoginForm);
+}) (WrappedRegisterForm);
