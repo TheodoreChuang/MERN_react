@@ -18,11 +18,13 @@ export const removeAuthToken = () => {
     };
 }
 
-export const fetchChallenges = async () => {
-    response = await LocalApi.get("/");
+export const fetchChallenges = () => {
+    return async (dispatch, getState) => {
+    const response = await LocalApi.get("/");
 
     dispatch({
         type: "CHALLENGES_LIST",
         payload: response.data
     });
+    }
 }

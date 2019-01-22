@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { removeAuthToken } from "./../../actions";
+import { removeAuthToken, fetchChallenges } from "./../../actions";
 import { connect } from "react-redux"; 
 import NavBar from '../components/NavBar';
 import ChallengeCard from '../components/ChallengeCard';
@@ -8,6 +8,7 @@ class NewsFeedPage extends Component  {
 
     componentDidMount() {
         const { fetchChallenges } = this.props;
+        
         fetchChallenges();
     }
 
