@@ -98,7 +98,6 @@ class PrimarySearchAppBar extends React.Component {
     mobileMoreAnchorEl: null,
   };
 
-
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
@@ -121,6 +120,7 @@ class PrimarySearchAppBar extends React.Component {
     const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    const currentPath = window.location.pathname;
 
     const renderMenu = (
       <Menu
@@ -149,20 +149,6 @@ class PrimarySearchAppBar extends React.Component {
           </IconButton>
           <p>Log Out</p>
         </MenuItem>
-        <MenuItem component={Link} to="/register">
-          <IconButton color="inherit">
-              <UnlockIcon />
-          </IconButton>
-          <p>Log In</p>
-        </MenuItem>
-        {/* <MenuItem>
-          <IconButton color="inherit">
-            <Badge badgeContent={11} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <p>Notifications</p>
-        </MenuItem> */}
         <MenuItem component={Link} to="/profile" >
           <IconButton color="inherit">
             <AccountCircle />
@@ -176,8 +162,8 @@ class PrimarySearchAppBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-              <MenuIcon onClick={this.handleProfileMenuOpen} />
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer" onClick={this.handleProfileMenuOpen}>
+              <MenuIcon  />
             </IconButton>
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
               1UP
@@ -196,27 +182,18 @@ class PrimarySearchAppBar extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit" component={Link} to="/register">
+              <IconButton color="inherit" component={Link} to="/portal" onClick={() => {removeAuthToken()}}>
                   <LockIcon />
               </IconButton>
-              <IconButton color="inherit" component={Link} to="/register">
-                  <UnlockIcon />
-              </IconButton>
-              {/* <IconButton color="inherit">
-                <Badge badgeContent={17} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton> */}
+
+              {!currentPath.includes('profile') ? 
               <IconButton
-                aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-                aria-haspopup="true"
-                onClick={this.handleProfileMenuOpen}
                 color="inherit"
                 component={Link} 
-                to="/profile"
-              >
+                to="/profile" >
                 <AccountCircle />
-              </IconButton>
+              </IconButton> : null }
+            
             </div>
             <div className={classes.sectionMobile}>
               <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">

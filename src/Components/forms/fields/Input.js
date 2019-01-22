@@ -1,12 +1,16 @@
 import React from "react";
+import Input from '@material-ui/core/Input';
 
-const Input = ({meta, input, type, placeholder, id, value, name, required }) => {
+
+const InputField = ({meta, input, type, ...other}) => {
+    
     return (
         <span>
-            <input {...input} autoComplete="false" type={type} id={id} placeholder={placeholder} value={value} name={name} required={required} />
+            <Input {...input} type={type} {...other} autoComplete="off" />
+
             <span> {meta.touched && meta.error} </span>
         </span>
     );
 }
 
-export default Input;
+export default InputField;

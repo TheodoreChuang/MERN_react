@@ -20,10 +20,10 @@ class NewsFeedPage extends Component  {
             
                 <div>
                     <NavBar />
-                    <div class="challenge_card">
+                    <div className="challenge_card">
                     <ChallengeCard />
                     </div>
-                    <div class="challenge_card">
+                    <div className="challenge_card">
                     <ChallengeCard />
                     </div>
                     <div class="challenge_card">
