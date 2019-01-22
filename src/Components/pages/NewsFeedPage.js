@@ -10,8 +10,14 @@ class NewsFeedPage extends Component  {
         const { removeAuthToken } = this.props;
 
         return (
-            
             <div>
+                <div className="container">
+                    <h1> News Feed</h1>
+                    <button onClick={() => {
+                        removeAuthToken();
+                    }}> Logout </button>
+                </div>
+            
                 <div>
                     <NavBar />
                     <div className="challenge_card">
@@ -19,26 +25,16 @@ class NewsFeedPage extends Component  {
                     </div>
                     <div className="challenge_card">
                     <ChallengeCard />
-                    <div className="challenge_card">
+                    </div>
+                    <div class="challenge_card">
                     <ChallengeCard />
                     </div>
                 </div>
             </div>
-            </div>
-            
         );
     }
 }
 
-export default NewsFeedPage;
-
-// export default connect(null, {
-//     removeAuthToken
-// })(NewsFeedPage);
-
-// </div>
-// <h1> News Feed</h1>
-// <button onClick={() => {
-//     removeAuthToken();
-// }}> Logout </button>
-// </div>
+export default connect(null, {
+    removeAuthToken
+})(NewsFeedPage);

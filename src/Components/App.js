@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import RegisterPage from "./pages/RegisterPage";
 import NewsFeedPage from "./pages/NewsFeedPage";
 import LoginPage from "./pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import NewChallengePage from "./pages/NewChallengePage";
+import SubmissionPage from "./pages/SubmissionPage";
 import FeedPage from "./pages/FeedPage";
 import ProfilePage from "./pages/ProfilePage";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import { Switch } from "react-router-dom";
 
+
 class App extends Component {
-  
   render() {
     return (
       <div>
@@ -29,6 +30,7 @@ class App extends Component {
                 <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
               </Switch>
             </div>
+
         </BrowserRouter>
       </div>
     );

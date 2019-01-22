@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import LoginForm from "./../forms/LoginForm";
+import "./LoginPage.css";
 
 class LoginPage extends Component {
     render() {
         return (
-            <div>
+            <div className="container">
                 <LoginForm history = {this.props.history}/>
             </div>
         );

@@ -4,6 +4,7 @@ import Input from "./fields/Input";
 import LocalApi from "../../apis/local";
 import { setAuthToken } from "./../../actions";
 import { connect } from "react-redux";
+
 import Checkbox from "./fields/CheckboxField";
 
 import { withStyles } from '@material-ui/core/styles';
@@ -143,12 +144,14 @@ class RegisterForm extends Component {
                 <Typography>Already have an accout? <Link to="/login">Sign in</Link></Typography>
                 </div>
                 </div>
+
                 </form>
               </div>
               </div>
             );
           }
 }
+
 
 const WrappedRegisterForm = reduxForm({
     form: "register",
@@ -181,8 +184,10 @@ const WrappedRegisterForm = reduxForm({
 
         return errors;
     }
+
 })(withStyles(styles)(RegisterForm))
+
 
 export default connect(null, {
     setAuthToken
-}) (WrappedRegisterForm);
+})(WrappedRegisterForm);
