@@ -9,6 +9,7 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import { Link } from 'react-router-dom';
 
 const styles = {
   root: {
@@ -21,42 +22,33 @@ const styles = {
 };
 
 class CheckboxLabels extends React.Component {
-  state = {
-    checkedA: true,
-    checkedB: true,
-    checkedF: true,
-    checkedG: true,
-  };
-
   handleChange = name => event => {
-    this.setState({ [name]: event.target.checked });
+    const { onChange } = this.props.input;
+    onChange(event.target.checked);
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, input, ...other } = this.props;
+    const { onChange, value, ...otherInput } = input;
 
     return (
       <FormGroup row>
-        {/* <FormControlLabel
-          control={
-            <Checkbox
-              checked={this.state.checkedA}
-              onChange={this.handleChange('checkedA')}
-              value="checkedA"
-            />
-          }
-          label="Secondary"
-        /> */}
         <FormControlLabel
           control={
             <Checkbox
-              checked={this.state.checkedB}
-              onChange={this.handleChange('checkedB')}
-              value="checkedB"
-              color="primary"
+              {...otherInput}
+              {...other}
+              value={value ? "checked" : ""}
+              checked={value}
+              onChange={this.handleChange('checked')}
             />
           }
-          label="I have read and agreed to the Terms & Conditions"
+          label={
+            <div>
+            <span>I have read and agreed to the </span>
+            <Link to="/termsandconditions">Terms & Conditions</Link>
+            </div>
+          }
         />
        
       </FormGroup>
