@@ -3,7 +3,7 @@ import LocalApi from "../../apis/local";
 import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
 
-class NewChallengeForm extends Component {
+class SubmissionForm extends Component {
     onUploadSubmit = (formValues) => {
         const { title, description, video } = formValues;
         this.uploadFile(video[0], title, description);
@@ -15,7 +15,7 @@ class NewChallengeForm extends Component {
         fd.append("title", title);
         fd.append("description", description);
 
-        LocalApi.post("/challenges/upload", fd)
+        LocalApi.post("/challenges/submission", fd)
         .then(response => alert("Submitted"))
         .catch(error => alert(error))
     }
@@ -35,7 +35,7 @@ class NewChallengeForm extends Component {
                 </div>
                 <div>
                     <Field
-                    name="description"
+                    name="desc"
                     component={Input}
                     placeholder="description of challenge"
                     type="text"
@@ -63,10 +63,10 @@ class NewChallengeForm extends Component {
 
 //include validation on video on form
 
-const WrappedNewChallengeForm = reduxForm({
-    form: "upload",
+const WrappedSubmissionForm = reduxForm({
+    form: "submission",
     validate: ({
-        title, description
+        title
     }) => {
     const errors = {}
     
@@ -74,13 +74,9 @@ const WrappedNewChallengeForm = reduxForm({
         errors.title = "title is required!"
     }
 
-    if (!description) {
-        errors.description = "video description is required!"
-    }
-
     return errors;
 
     }
-})(NewChallengeForm);
+})(SubmissionForm);
 
-export default WrappedNewChallengeForm;
+export default WrappedSubmissionForm;

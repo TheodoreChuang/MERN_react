@@ -6,10 +6,10 @@ import NewsFeedPage from "./pages/NewsFeedPage";
 import LoginPage from "./pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import NewChallengePage from "./pages/NewChallengePage";
+import SubmissionPage from "./pages/SubmissionPage";
 
 import FeedPage from "./pages/FeedPage";
 import ProfilePage from "./pages/ProfilePage";
-import { Switch } from "react-router-dom";
 
 class App extends Component {
   render() {
@@ -20,9 +20,9 @@ class App extends Component {
               <Route exact path = "/portal" component = {MainPage} />
               <Route exact path = "/login" component = {LoginPage} />
               <Route exact path = "/register" component = {RegisterPage} />
-              <Route exact path = "/styles" component = {StylesPage} />
               <PrivateRoute exact path = "/" component = {NewsFeedPage} />
-              <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
+              <PrivateRoute exact path = "/upload" component = {NewChallengePage} />
+              <PrivateRoute exact path = "/submission" component = {SubmissionPage} />
             </Switch>
 
         </BrowserRouter>
