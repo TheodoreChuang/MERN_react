@@ -10,6 +10,7 @@ class NewsFeedPage extends Component  {
         const { removeAuthToken } = this.props;
 
         return (
+            
                 <div>
                     <NavBar />
                     <div className="challenge_card">
