@@ -10,7 +10,6 @@ import SubmissionPage from "./pages/SubmissionPage";
 import FeedPage from "./pages/FeedPage";
 import ProfilePage from "./pages/ProfilePage";
 import TermsAndConditions from "./pages/TermsAndConditions";
-import { Switch } from "react-router-dom";
 
 
 class App extends Component {
