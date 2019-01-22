@@ -6,6 +6,11 @@ import ChallengeCard from '../components/ChallengeCard';
 
 class NewsFeedPage extends Component  {
 
+    componentDidMount() {
+        const { fetchChallenges } = this.props;
+        fetchChallenges();
+    }
+
     render() {
         const { removeAuthToken } = this.props;
 
@@ -28,6 +33,13 @@ class NewsFeedPage extends Component  {
     }
 }
 
-export default connect(null, {
-    removeAuthToken
+const mapStateToProps = (state) => {
+    return {
+        challenges: state.challenges
+    };
+}
+
+export default connect(mapStateToProps, {
+    removeAuthToken,
+    fetchChallenges
 })(NewsFeedPage);

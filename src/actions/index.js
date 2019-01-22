@@ -17,3 +17,12 @@ export const removeAuthToken = () => {
         payload: null
     };
 }
+
+export const fetchChallenges = async () => {
+    response = await LocalApi.get("/");
+
+    dispatch({
+        type: "CHALLENGES_LIST",
+        payload: response.data
+    });
+}
