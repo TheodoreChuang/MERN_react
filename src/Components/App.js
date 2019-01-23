@@ -7,7 +7,6 @@ import LoginPage from "./pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import NewChallengePage from "./pages/NewChallengePage";
 import SubmissionPage from "./pages/SubmissionPage";
-import FeedPage from "./pages/FeedPage";
 import ProfilePage from "./pages/ProfilePage";
 import TermsAndConditions from "./pages/TermsAndConditions";
 
@@ -23,10 +22,10 @@ class App extends Component {
                 <Route exact path = "/portal" component = {MainPage} />
                 <Route exact path = "/login" component = {LoginPage} />
                 <Route exact path = "/register" component = {RegisterPage} />
-                <Route exact path = "/feed" component = {FeedPage} />
-                <Route exact path = "/profile" component = {ProfilePage} />
-                <PrivateRoute exact path = "/" component = {NewsFeedPage} />
+                <PrivateRoute exact path = "/profile" component = {ProfilePage} />
+                <PrivateRoute exact path = "/home" component = {NewsFeedPage} />
                 <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
+                <PrivateRoute exact path = "/newsubmission" component = {SubmissionPage} />
               </Switch>
             </div>
 

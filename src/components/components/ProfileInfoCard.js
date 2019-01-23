@@ -33,9 +33,23 @@ const styles = {
   }
 };
 
-function SimpleCard(props) {
-  const { classes } = props;
-  const bull = <span className={classes.bullet}>•</span>;
+
+
+class SimpleCard extends React.Component  {
+  state = {
+    data: null,
+  }
+
+  // componentDidMount() {
+  //   fetch('/user', { credentials : 'same-origin' })
+  //   .then(response => response.json())
+  //   .then( data => this.setState({ data }))
+  // }
+
+  render() {
+    const { classes } = this.props;
+    const bull = <span className={classes.bullet}>•</span>;
+    const baseUrl = 'mongodb://localhost/1up_api'
 
   return (
     <Card className={classes.card}>
@@ -48,7 +62,7 @@ function SimpleCard(props) {
           </Grid>
           <Grid container direction="column" justify="center" alignItems="center">
           <Typography>
-            Bob Lastname
+            {this.state.data}
           </Typography>
           <Typography>
             random@test.com
@@ -72,6 +86,7 @@ make the world a better place.
       </CardActions>
     </Card>
   );
+}
 }
 
 SimpleCard.propTypes = {
