@@ -1,33 +1,32 @@
 import React, { Component } from "react";
-import { removeAuthToken, fetchChallenges } from "../../actions";
+import { removeAuthToken, fetchSubmissions } from "../../actions";
 import { connect } from "react-redux"; 
 import NavBar from '../components/NavBar';
 import ChallengeCard from '../components/ChallengeCard';
 
 class SubmissionFeedPage extends Component  {
 
-    componentDidMount() {
-        const { fetchChallenges } = this.props;
-        
-        fetchChallenges();
+    constructor(props) {
+        super(props);
+        const { fetchSubmissions } = this.props;
+
+        fetchSubmissions();
     }
 
     render() {
-        const { removeAuthToken } = this.props;
+        const { submissions } = this.props;
 
         return (
                 <div>
                     <NavBar />
                     <h2>Submission Feed Page</h2>
-                    <div className="challenge_card">
-                    <ChallengeCard />
-                    </div>
-                    <div className="challenge_card">
-                    <ChallengeCard />
-                    </div>
-                    <div class="challenge_card">
-                    <ChallengeCard />
-                    </div>
+                        {submissions.map (function(submission) {
+                            return ( 
+                                <div key={submission.title}>
+                                    <ChallengeCard yt_id={submission.yt_id} title={submission.title}  date_created={submission.date_created} /> 
+                                </div>
+                                );
+                        })}
                 </div>
         );
     }
@@ -35,11 +34,11 @@ class SubmissionFeedPage extends Component  {
 
 const mapStateToProps = (state) => {
     return {
-        challenges: state.challenges
+        submissions: state.submissions
     };
 }
 
 export default connect(mapStateToProps, {
     removeAuthToken,
-    fetchChallenges
+    fetchSubmissions
 })(SubmissionFeedPage);

@@ -6,25 +6,14 @@ import ChallengeCard from "./../components/ChallengeCard";
 
 class ChallengeFeedPage extends Component  {
     constructor(props) {
-        console.log("constructor ran");
         super(props);
-
         const { fetchChallenges } = this.props;
+
         fetchChallenges();
-        console.log(this.props.challenges);
-
-    }
-
-    componentDidMount() {
-        console.log("mounted");
-        // const { fetchChallenges } = this.props;
-        
-        // fetchChallenges();
     }
 
     render() {
-        console.log("render")
-        const { removeAuthToken, challenges } = this.props;
+        const {challenges } = this.props;
 
         return (
                 <div>
