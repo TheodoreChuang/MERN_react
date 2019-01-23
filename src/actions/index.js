@@ -22,9 +22,21 @@ export const fetchChallenges = () => {
     return async (dispatch, getState) => {
     const response = await LocalApi.get("/");
 
-    dispatch({
-        type: "CHALLENGES_LIST",
-        payload: response.data
-    });
-    }
+        dispatch({
+            type: "CHALLENGES_LIST",
+            payload: response.data
+        });
+    };
+}
+
+
+export const fetchSubmissions = () => {
+    return async (dispatch, getState) => {
+        const response = await LocalApi.get("/");
+
+        dispatch({
+            type: "SUBMISSIONS_LIST",
+            payload: response.data
+        });
+    };
 }

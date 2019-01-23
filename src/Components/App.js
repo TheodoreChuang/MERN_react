@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import RegisterPage from "./pages/RegisterPage";
-import SubmissionsFeedPage from "./pages/SubmissionsFeedPage";
+import SubmissionFeedPage from "./pages/SubmissionFeedPage";
 import LoginPage from "./pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import NewChallengePage from "./pages/NewChallengePage";
@@ -25,7 +25,7 @@ class App extends Component {
                 <Route exact path = "/register" component = {RegisterPage} />
                 <Route exact path = "/feed" component = {FeedPage} />
                 <Route exact path = "/profile" component = {ProfilePage} />
-                <PrivateRoute exact path = "/" component = {SubmissionsFeedPage} />
+                <PrivateRoute exact path = "/" component = {SubmissionFeedPage} />
                 <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
                 <Route exact path = "/challengefeed" component = {ChallengeFeedPage } />
               </Switch>

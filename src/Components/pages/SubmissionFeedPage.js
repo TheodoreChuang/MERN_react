@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import NavBar from '../components/NavBar';
 import ChallengeCard from '../components/ChallengeCard';
 
-class SubmissionsFeedPage extends Component  {
+class SubmissionFeedPage extends Component  {
 
     componentDidMount() {
         const { fetchChallenges } = this.props;
@@ -16,9 +16,9 @@ class SubmissionsFeedPage extends Component  {
         const { removeAuthToken } = this.props;
 
         return (
-            
                 <div>
                     <NavBar />
+                    <h2>Submission Feed Page</h2>
                     <div className="challenge_card">
                     <ChallengeCard />
                     </div>
@@ -29,7 +29,6 @@ class SubmissionsFeedPage extends Component  {
                     <ChallengeCard />
                     </div>
                 </div>
-            // </div>
         );
     }
 }
@@ -43,4 +42,4 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     removeAuthToken,
     fetchChallenges
-})(SubmissionsFeedPage);
+})(SubmissionFeedPage);
