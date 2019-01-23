@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { removeAuthToken, fetchChallenges } from "./../../actions";
+import { removeAuthToken, fetchChallenges } from "../../actions";
 import { connect } from "react-redux"; 
 import NavBar from '../components/NavBar';
 import ChallengeCard from '../components/ChallengeCard';
 
-class NewsFeedPage extends Component  {
+class SubmissionsFeedPage extends Component  {
 
     componentDidMount() {
         const { fetchChallenges } = this.props;
@@ -43,4 +43,4 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     removeAuthToken,
     fetchChallenges
-})(NewsFeedPage);
+})(SubmissionsFeedPage);

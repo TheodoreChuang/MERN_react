@@ -4,9 +4,11 @@ import YouTube from "react-youtube";
 //reusable YT video player component
 class YTvideo extends Component {
     render() {
+      const { yt_id } = this.props;
+
       const opts = {
-        height: '390',
-        width: '640',
+        height: 'auto',
+        width: '100%',
         playerVars: { // https://developers.google.com/youtube/player_parameters
           autoplay: 0
         }
@@ -14,7 +16,7 @@ class YTvideo extends Component {
   
       return (
         <YouTube
-          videoId={props.yt_id}
+          videoId={yt_id}
           opts={opts}
           onReady={this._onReady}
         />
