@@ -109,8 +109,17 @@ class ChallengeCard extends React.Component {
             aria-expanded={this.state.expanded}
             aria-label="Show more"
           >
-           <ShareIcon onClick={() => history.push(`/challenges/${id}`)}/>
           </IconButton>
+          <IconButton
+            className={classnames(classes.expand, {
+              [classes.expandOpen]: this.state.expanded,
+            })}
+            onClick={() => history.push(`/challenges/${id}`)}
+            aria-expanded={this.state.expanded}
+            aria-label="Show more"
+          > do challenge
+          </IconButton>
+          {/* <ShareIcon onClick={() => history.push(`/challenges/${id}`)}/> */}
             {/* <ExpandMoreIcon /> */}
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>

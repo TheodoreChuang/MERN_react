@@ -11,7 +11,7 @@ class SubmissionForm extends Component {
     }
 
     uploadFile = (file, title, description) => {
-        const { addSubmission } = thisprops;
+        const { addSubmission } = this.props;
         const fd = new FormData();
         fd.append("video", file);
         fd.append("title", title);

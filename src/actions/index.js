@@ -54,7 +54,7 @@ export const fetchSubmissions = () => {
     };
 }
 
-export const addChallenge = (fd) => {
+export const addSubmission = (fd) => {
     return async (dispatch, getState) => {
         const response = await LocalApi.post("/challenges/submission", fd)
 

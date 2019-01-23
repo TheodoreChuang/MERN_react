@@ -15,7 +15,7 @@ class ChallengePage extends Component  {
         const { match, challenges } = this.props;
 
         const challenge = challenges.find(function(element) {
-            return element.id == match.params.id;
+            return parseInt(element.id) === match.params.id;
         });
 
         return (
