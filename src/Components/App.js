@@ -30,6 +30,7 @@ class App extends Component {
                 <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
                 <Route exact path = "/challengefeed" component = {ChallengeFeedPage } />
                 <Route exact path = "/challenges/:id" component = {ChallengePage } />
+                <Route exact path = "/submit" component = {SubmissionPage} />
               </Switch>
             </div>
 

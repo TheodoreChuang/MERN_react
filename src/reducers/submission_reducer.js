@@ -13,6 +13,10 @@ export default (state = defaultState, action) => {
     switch(action.type) {
         case "SUBMISSIONS_LIST":
             return action.payload;
+        case "ADD_SUBMISSION":
+            return action.payload;
+        case "DELETE_SUBMISSION":
+            return action.paylod
         default:
             return state;
     }

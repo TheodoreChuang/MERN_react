@@ -12,6 +12,7 @@ class ChallengeFeedPage extends Component  {
     }
 
     render() {
+        console.log("rendered");
         const {challenges } = this.props;
 
         return (

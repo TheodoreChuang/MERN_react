@@ -23,7 +23,6 @@ class ChallengePage extends Component  {
                 <h2> Specific Challenge Page </h2>
                 <ChallengeCard {...challenge} />
                 <h2> Specific Challenge Submissions </h2>
-                {}
             </div>
         );
     }
