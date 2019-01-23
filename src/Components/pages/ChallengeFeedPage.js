@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { removeAuthToken, fetchChallenges } from "../../actions";
 import { connect } from "react-redux"; 
-import YTvideo from "./../components/YTvideo";
 import ChallengeCard from "./../components/ChallengeCard";
 
 class ChallengeFeedPage extends Component  {
@@ -23,7 +22,8 @@ class ChallengeFeedPage extends Component  {
                     {challenges.map (function(challenge) {
                         return ( 
                             <div key={challenge.title}>
-                                <ChallengeCard yt_id={challenge.yt_id} title={challenge.title} description={challenge.description}  date_created={challenge.date_created} /> 
+                                <ChallengeCard yt_id={challenge.yt_id} title={challenge.title} description={challenge.description}  date_created={challenge.date_created} 
+                                id={challenge.id}/> 
                             </div>
                             );
                     })}

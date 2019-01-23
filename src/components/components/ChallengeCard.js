@@ -18,6 +18,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Snowboard from './images/snowboarding.jpg';
 import YTvideo from "./YTvideo";
+import { withRouter } from "react-router-dom";
 
 const styles = theme => ({
   card: {
@@ -48,12 +49,15 @@ const styles = theme => ({
 class ChallengeCard extends React.Component {
   state = { expanded: false };
 
+
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
   render() {
-    const { classes, yt_id, title, description, date_created } = this.props;
+    // console.log("card");
+    // console.log(this.props);
+    const { classes, yt_id, title, description, date_created, id, history } = this.props;
 
     return (
       <Card className={classes.card}>
@@ -96,8 +100,18 @@ class ChallengeCard extends React.Component {
             aria-expanded={this.state.expanded}
             aria-label="Show more"
           >
-            {/* <ExpandMoreIcon /> */}
           </IconButton>
+          <IconButton
+            className={classnames(classes.expand, {
+              [classes.expandOpen]: this.state.expanded,
+            })}
+            onClick={this.handleExpandClick}
+            aria-expanded={this.state.expanded}
+            aria-label="Show more"
+          >
+           <ShareIcon onClick={() => history.push(`/challenges/${id}`)}/>
+          </IconButton>
+            {/* <ExpandMoreIcon /> */}
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           {/* <CardContent>
@@ -135,4 +149,6 @@ ChallengeCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ChallengeCard);
+const WrappedChallengeCard = withRouter(ChallengeCard)
+
+export default withStyles(styles)(WrappedChallengeCard);
