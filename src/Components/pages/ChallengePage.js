@@ -23,6 +23,14 @@ class ChallengePage extends Component  {
                 <h2> Specific Challenge Page </h2>
                 <ChallengeCard {...challenge} />
                 <h2> Specific Challenge Submissions </h2>
+                {console.log(challenge.submissions)}
+                {challenge.submissions.map((element) => {
+                    return (
+                        <div>
+                            <ChallengeCard yt_id={element} />
+                        </div>
+                    )
+                })}
             </div>
         );
     }
