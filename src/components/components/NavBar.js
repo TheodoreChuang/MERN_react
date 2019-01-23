@@ -20,7 +20,6 @@ import { Link } from 'react-router-dom'
 import LockIcon from '@material-ui/icons/Https';
 import UnlockIcon from '@material-ui/icons/LockOpen';
 import { removeAuthToken } from "./../../actions";
-import { connect } from "react-redux"; 
 
 const styles = theme => ({
   root: {
