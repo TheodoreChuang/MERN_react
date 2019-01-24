@@ -17,15 +17,11 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Snowboard from './images/snowboarding.jpg';
-<<<<<<< HEAD
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom'
-
-=======
 import YTvideo from "./YTvideo";
 import { withRouter } from "react-router-dom";
->>>>>>> 4103001afd33376aad787fcdf5be3abd867c6975
 
 const styles = theme => ({
   card: {
@@ -83,9 +79,9 @@ class ChallengeCard extends React.Component {
   };
 
   render() {
-<<<<<<< HEAD
+
     const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const { classes } = this.props;
+    // const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
 
     const renderMenu = (
@@ -99,11 +95,10 @@ class ChallengeCard extends React.Component {
         <MenuItem component={Link} to="/newsubmission" onClick={this.handleMenuClose}>New Submission</MenuItem>
       </Menu>
     );
-=======
+
     // console.log("card");
     // console.log(this.props);
     const { classes, yt_id, title, description, date_created, id, history } = this.props;
->>>>>>> 4103001afd33376aad787fcdf5be3abd867c6975
 
     return (
       <div className={classes.root}>

@@ -11,6 +11,7 @@ import ProfilePage from "./pages/ProfilePage";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import ChallengeFeedPage from "./pages/ChallengeFeedPage";
 import ChallengePage from "./pages/ChallengePage";
+import NewsFeedPage from "./pages/NewsFeedPage";
 
 class App extends Component {
   render() {
@@ -27,7 +28,6 @@ class App extends Component {
                 <PrivateRoute exact path = "/home" component = {NewsFeedPage} />
                 <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
                 <PrivateRoute exact path = "/newsubmission" component = {SubmissionPage} />
-                <Route exact path = "/feed" component = {FeedPage} />
                 <PrivateRoute exact path = "/submissionfeed" component = {SubmissionFeedPage} />
                 <Route exact path = "/challengefeed" component = {ChallengeFeedPage } />
                 <Route exact path = "/challenges/:id" component = {ChallengePage } />

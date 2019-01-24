@@ -22,7 +22,6 @@ class NewsFeedPage extends Component  {
                     <ChallengeCard />
                     </div>
                 </div>
-            // </div>
         );
     }
 }
