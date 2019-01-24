@@ -1,7 +1,7 @@
 import React from "react";
 // import Input from '@material-ui/core/Input';
 
-const Input = ({meta, input, ...other }) => {
+const Input = ({meta, input, type, name, placeholder, value, creator_id, required }) => {
     
     return (
         <span>

@@ -84,6 +84,7 @@ class LoginForm extends Component {
                   name="password"
                   component={Input}
                   placeholder="Password"
+                  type="password"
                   className={classes.input}
                   fullWidth
                   inputProps={{

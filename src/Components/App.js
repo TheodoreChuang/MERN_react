@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import RegisterPage from "./pages/RegisterPage";
-import SubmissionFeedPage from "./pages/SubmissionFeedPage";
 import LoginPage from "./pages/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import NewChallengePage from "./pages/NewChallengePage";
 import SubmissionPage from "./pages/SubmissionPage";
 import ProfilePage from "./pages/ProfilePage";
 import TermsAndConditions from "./pages/TermsAndConditions";
-import ChallengeFeedPage from "./pages/ChallengeFeedPage";
 import ChallengePage from "./pages/ChallengePage";
 import NewsFeedPage from "./pages/NewsFeedPage";
 
