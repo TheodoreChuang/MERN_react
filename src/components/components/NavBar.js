@@ -22,8 +22,11 @@ import { Link } from 'react-router-dom'
 import LockIcon from '@material-ui/icons/Https';
 import UnlockIcon from '@material-ui/icons/LockOpen';
 import { removeAuthToken } from "./../../actions";
+<<<<<<< HEAD
 import Icon from '@material-ui/core/Icon';
 import { connect } from "react-redux"; 
+=======
+>>>>>>> 4103001afd33376aad787fcdf5be3abd867c6975
 
 const styles = theme => ({
   root: {

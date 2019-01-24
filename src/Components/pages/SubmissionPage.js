@@ -5,6 +5,7 @@ import NavBar from "../components/NavBar";
 class SubmissionPage extends Component {
 
     render() {
+        console.log("rendered");
         return (
             <div>
                 <NavBar />

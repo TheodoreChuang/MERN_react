@@ -17,10 +17,15 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Snowboard from './images/snowboarding.jpg';
+<<<<<<< HEAD
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom'
 
+=======
+import YTvideo from "./YTvideo";
+import { withRouter } from "react-router-dom";
+>>>>>>> 4103001afd33376aad787fcdf5be3abd867c6975
 
 const styles = theme => ({
   card: {
@@ -63,6 +68,7 @@ class ChallengeCard extends React.Component {
     this.setState({ anchorEl: event.currentTarget });
   };
 
+
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
@@ -77,6 +83,7 @@ class ChallengeCard extends React.Component {
   };
 
   render() {
+<<<<<<< HEAD
     const { anchorEl, mobileMoreAnchorEl } = this.state;
     const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
@@ -92,6 +99,11 @@ class ChallengeCard extends React.Component {
         <MenuItem component={Link} to="/newsubmission" onClick={this.handleMenuClose}>New Submission</MenuItem>
       </Menu>
     );
+=======
+    // console.log("card");
+    // console.log(this.props);
+    const { classes, yt_id, title, description, date_created, id, history } = this.props;
+>>>>>>> 4103001afd33376aad787fcdf5be3abd867c6975
 
     return (
       <div className={classes.root}>
@@ -99,7 +111,7 @@ class ChallengeCard extends React.Component {
         <CardHeader
           avatar={
             <Avatar aria-label="Recipe" className={classes.avatar}>
-              R
+              1Up
             </Avatar>
           }
           action={
@@ -107,18 +119,17 @@ class ChallengeCard extends React.Component {
               <MoreVertIcon />
             </IconButton>
           }
-          title="Snowboarding Challenge"
-          subheader="September 14, 2016"
+          title={title}
+          subheader={date_created}
         />
-        <CardMedia
-          className={classes.media}
-          image={Snowboard}
-          title="Paella dish"
-        />
+        {/* <CardMedia */}
+          <YTvideo yt_id={yt_id} />
+        {/* /> */}
         <CardContent>
           <Typography component="p">
-            This impressive paella is a perfect party dish and a fun meal to cook together with your
-            guests. Add 1 cup of frozen peas along with the mussels, if you like.
+            {/* This impressive paella is a perfect party dish and a fun meal to cook together with your
+            guests. Add 1 cup of frozen peas along with the mussels, if you like. */}
+            {description}
           </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
@@ -136,11 +147,30 @@ class ChallengeCard extends React.Component {
             aria-expanded={this.state.expanded}
             aria-label="Show more"
           >
-            <ExpandMoreIcon />
           </IconButton>
+          <IconButton
+            className={classnames(classes.expand, {
+              [classes.expandOpen]: this.state.expanded,
+            })}
+            onClick={this.handleExpandClick}
+            aria-expanded={this.state.expanded}
+            aria-label="Show more"
+          >
+          </IconButton>
+          <IconButton
+            className={classnames(classes.expand, {
+              [classes.expandOpen]: this.state.expanded,
+            })}
+            onClick={() => history.push(`/challenges/${id}`)}
+            aria-expanded={this.state.expanded}
+            aria-label="Show more"
+          > do challenge
+          </IconButton>
+          {/* <ShareIcon onClick={() => history.push(`/challenges/${id}`)}/> */}
+            {/* <ExpandMoreIcon /> */}
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          <CardContent>
+          {/* <CardContent>
             <Typography paragraph>Method:</Typography>
             <Typography paragraph>
               Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
@@ -164,7 +194,7 @@ class ChallengeCard extends React.Component {
             <Typography>
               Set aside off of the heat to let rest for 10 minutes, and then serve.
             </Typography>
-          </CardContent>
+          </CardContent> */}
         </Collapse>
       </Card>
       {renderMenu}
@@ -177,4 +207,6 @@ ChallengeCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ChallengeCard);
+const WrappedChallengeCard = withRouter(ChallengeCard)
+
+export default withStyles(styles)(WrappedChallengeCard);
