@@ -30,12 +30,10 @@ function TabContainer({ children, dir }) {
 const styles = theme => ({
     root: {
       backgroundColor: theme.palette.background.paper,
-      width: "100%",
       direction: "column",
       justify: "center"
     },
     custom: {
-        border: "1px solid black",
         display: "flex",
         flexDirection: "column",
         alignItems: "center"

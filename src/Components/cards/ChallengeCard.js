@@ -25,7 +25,7 @@ import { withRouter } from "react-router-dom";
 
 const styles = theme => ({
   card: {
-     maxWidth: 600,
+    //  maxWidth: 600,
   },
   menuButton: {
     marginLeft: -12,
@@ -36,7 +36,7 @@ const styles = theme => ({
     paddingTop: '56.25%', // 16:9
   },
   actions: {
-    display: 'flex',
+    display: 'flex'
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -101,7 +101,7 @@ class ChallengeCard extends React.Component {
     
     return (
       <div className={`${classes.root} ${classes.custom}`}>
-      <Card className={classes.card}>
+      <Card className={`${classes.card} ${classes.test}`}>
         <CardHeader
           avatar={
             <Avatar aria-label="Recipe" className={classes.avatar}>
@@ -116,9 +116,7 @@ class ChallengeCard extends React.Component {
           title={title}
           subheader={date_created}
         />
-        {/* <CardMedia */}
-          <YTvideo yt_id={yt_id} />
-        {/* /> */}
+            <YTvideo yt_id={yt_id} />
         <CardContent>
           <Typography component="p">
             {description}
