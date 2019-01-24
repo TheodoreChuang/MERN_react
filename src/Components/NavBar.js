@@ -142,7 +142,7 @@ class PrimarySearchAppBar extends React.Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
-        <MenuItem component={Link} to="/portal" onClick={() => {removeAuthToken()}}>
+        <MenuItem component={Link} to="/landing" onClick={() => {removeAuthToken()}}>
           <IconButton color="inherit">
               <LockIcon />
           </IconButton>
@@ -181,7 +181,7 @@ class PrimarySearchAppBar extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit" component={Link} to="/portal" onClick={() => {removeAuthToken()}}>
+              <IconButton color="inherit" component={Link} to="/landing" onClick={() => {removeAuthToken()}}>
                   <LockIcon />
               </IconButton>
 

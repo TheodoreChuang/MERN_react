@@ -11,6 +11,7 @@ import ProfilePage from "./pages/ProfilePage";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import ChallengeFeedPage from "./pages/ChallengeFeedPage";
 import ChallengePage from "./pages/ChallengePage";
+import NewsFeedPage from "./pages/NewsFeedPage";
 
 class App extends Component {
   render() {
@@ -24,9 +25,8 @@ class App extends Component {
                 <Route exact path = "/login" component = {LoginPage} />
                 <Route exact path = "/register" component = {RegisterPage} />
                 <PrivateRoute exact path = "/profile" component = {ProfilePage} />
-                <PrivateRoute exact path = "/" component = {SubmissionFeedPage} />
+                <PrivateRoute exact path = "/" component = {NewsFeedPage} />
                 <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
-                <PrivateRoute exact path = "/challengefeed" component = {ChallengeFeedPage } />
                 <PrivateRoute exact path = "/challenges/:id" component = {ChallengePage } />
                 <PrivateRoute exact path = "/submit/:id/" component = {SubmissionPage} />
               </Switch>

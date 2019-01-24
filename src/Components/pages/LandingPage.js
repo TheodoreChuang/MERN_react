@@ -19,8 +19,7 @@ const styles = theme => ({
 
 class LandingPage extends Component  {
     
-    render(props) {
-        console.log(props);
+    render() {
         const { classes } = this.props;
 
         return (
