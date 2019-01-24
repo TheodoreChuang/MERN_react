@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { removeAuthToken, fetchChallenges } from "../../actions";
 import { connect } from "react-redux"; 
-import ChallengeCard from "./../components/ChallengeCard";
+import ChallengeCard from "./../cards/ChallengeCard";
 
 class ChallengeFeedPage extends Component  {
     constructor(props) {
         super(props);
         const { fetchChallenges } = this.props;
-
+        console.log("challenge feed constructor");
         fetchChallenges();
     }
 
@@ -22,7 +22,7 @@ class ChallengeFeedPage extends Component  {
                         return ( 
                             <div key={challenge.title}>
                                 <ChallengeCard yt_id={challenge.yt_id} title={challenge.title} description={challenge.description}  date_created={challenge.date_created} 
-                                id={challenge.id}/> 
+                                id={challenge._id}/> 
                             </div>
                             );
                     })}

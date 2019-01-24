@@ -11,13 +11,14 @@ class SubmissionForm extends Component {
     }
 
     uploadFile = (file, title, description) => {
-        const { addSubmission } = this.props;
+        console.log("form", this.props);
+        const { addSubmission, match } = this.props;
         const fd = new FormData();
         fd.append("video", file);
         fd.append("title", title);
         fd.append("description", description);
 
-        addSubmission(fd);
+        addSubmission(fd, match.params.id);
     }
 
     render() {
@@ -35,7 +36,7 @@ class SubmissionForm extends Component {
                 </div>
                 <div>
                     <Field
-                    name="desc"
+                    name="description"
                     component={Input}
                     placeholder="description of challenge"
                     type="text"

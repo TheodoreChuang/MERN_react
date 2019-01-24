@@ -17,7 +17,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Snowboard from './images/snowboarding.jpg';
-import YTvideo from "./YTvideo";
+import YTvideo from "../YTvideo";
 import { withRouter } from "react-router-dom";
 
 const styles = theme => ({

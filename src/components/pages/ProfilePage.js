@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './../App.css';
-import NavBar from '../components/NavBar';
-import ProfileInfoCard from '../components/ProfileInfoCard';
-import ChallengeCard from '../components/ChallengeCard';
+import NavBar from './../NavBar';
+import ProfileInfoCard from '../cards/ProfileInfoCard';
+import ChallengeCard from "./../cards/ChallengeCard";
 
 
 class Profile extends Component {

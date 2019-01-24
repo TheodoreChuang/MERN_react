@@ -6,26 +6,46 @@ import { addChallenge } from "./../../actions"
 
 class NewChallengeForm extends Component {
     onUploadSubmit = (formValues) => {
-        const { title, description, video } = formValues;
-        this.uploadFile(video[0], title, description);
+
+        const { title, description, video, creator_id, expiry_date } = formValues;
+        this.uploadFile(video[0], title, description, creator_id, expiry_date);
+        console.log(formValues);
     }
 
-    uploadFile = (file, title, description) => {
+    uploadFile = (file, title, description, creator_id, expiry_date) => {
         const { addChallenge } = this.props;
 
         const fd = new FormData();
         fd.append("video", file);
         fd.append("title", title);
         fd.append("description", description);
-
+        fd.append("creator_id", creator_id);
+        fd.append("expiry_date", expiry_date);
+        console.log(fd);
         addChallenge(fd);
     }
 
     render() {
-        const { handleSubmit, } = this.props;
+        const { handleSubmit } = this.props;
 
         return (
             <form onSubmit= {handleSubmit(this.onUploadSubmit)} encType="multipart/form-data">
+                <div>
+                    <Field
+                    name="creator_id"
+                    component={Input}
+                    placeholder="creator_id"
+                    type="text"
+                    />
+                </div>
+                <div>
+                    <Field
+                    name="expiry_date"
+                    component={Input}
+                    placeholder="expiry date"
+                    type="date"
+                    />
+                </div>
                 <div>
                     <Field
                     name="title"
@@ -47,14 +67,13 @@ class NewChallengeForm extends Component {
                     name="video"
                     component={Input}
                     type="file"
-                    required="true"
+                    // required="true"
                     />
                 </div>
                 <div>
                     <Field
-                    type="submit"
                     component={Input}
-                    value="submit"
+                    type="submit"
                     />
                 </div>
             </form>
@@ -66,22 +85,22 @@ class NewChallengeForm extends Component {
 
 const WrappedNewChallengeForm = reduxForm({
     form: "upload",
-    validate: ({
-        title, description
-    }) => {
-    const errors = {}
+    // validate: ({
+    //     title, description
+    // }) => {
+    // const errors = {}
     
-    if (!title) {
-        errors.title = "title is required!"
-    }
+    // if (!title) {
+    //     errors.title = "title is required!"
+    // }
 
-    if (!description) {
-        errors.description = "video description is required!"
-    }
+    // if (!description) {
+    //     errors.description = "video description is required!"
+    // }
 
-    return errors;
+    // return errors;
 
-    }
+    // }
 })(NewChallengeForm);
 
 const mapStateToProps = (state) => {

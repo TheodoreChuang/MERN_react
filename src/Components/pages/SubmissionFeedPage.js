@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { removeAuthToken, fetchSubmissions } from "../../actions";
 import { connect } from "react-redux"; 
-import NavBar from '../components/NavBar';
-import ChallengeCard from '../components/ChallengeCard';
+import NavBar from '../NavBar';
+import ChallengeCard from '../cards/ChallengeCard';
 
 class SubmissionFeedPage extends Component  {
 
