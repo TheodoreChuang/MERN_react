@@ -7,7 +7,7 @@ class SubmissionPage extends Component {
     render() {
         return (
             <div>
-                {/* <NavBar /> */}
+                <NavBar />
                 <h1> Submit Challenge </h1>
                 <SubmissionForm />
             </div>
