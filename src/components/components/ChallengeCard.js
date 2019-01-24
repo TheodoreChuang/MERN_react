@@ -23,6 +23,7 @@ import { Link } from 'react-router-dom'
 import YTvideo from "./YTvideo";
 import { withRouter } from "react-router-dom";
 
+
 const styles = theme => ({
   card: {
      maxWidth: 600,
@@ -99,7 +100,7 @@ class ChallengeCard extends React.Component {
     // console.log("card");
     // console.log(this.props);
     const { classes, yt_id, title, description, date_created, id, history } = this.props;
-
+    
     return (
       <div className={classes.root}>
       <Card className={classes.card}>
