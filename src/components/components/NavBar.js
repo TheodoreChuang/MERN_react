@@ -13,6 +13,8 @@ import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Home from '@material-ui/icons/Home';
+import Add from '@material-ui/icons/AddCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
@@ -20,6 +22,7 @@ import { Link } from 'react-router-dom'
 import LockIcon from '@material-ui/icons/Https';
 import UnlockIcon from '@material-ui/icons/LockOpen';
 import { removeAuthToken } from "./../../actions";
+import Icon from '@material-ui/core/Icon';
 import { connect } from "react-redux"; 
 
 const styles = theme => ({
@@ -143,28 +146,46 @@ class PrimarySearchAppBar extends React.Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
+        {!currentPath.includes('home') ? 
+        <MenuItem component={Link} to="/home" >
+        <IconButton
+          color="inherit" >
+          <Home />
+        </IconButton> 
+        <p>Home</p>
+        </MenuItem> : null }
+        {!currentPath.includes('profile') ? 
+        <MenuItem component={Link} to="/profile" >
+          <IconButton color="inherit">
+            <AccountCircle />
+          </IconButton>
+          <p>Profile</p>
+        </MenuItem> : null }
+        {!currentPath.includes('newchallenge') ?
+        <MenuItem component={Link} to="/newchallenge" >
+        <IconButton
+          color="inherit" >
+          <Add />
+        </IconButton> 
+        <p>New Challenge</p>
+        </MenuItem> : null }
         <MenuItem component={Link} to="/portal" onClick={() => {removeAuthToken()}}>
           <IconButton color="inherit">
               <LockIcon />
           </IconButton>
           <p>Log Out</p>
         </MenuItem>
-        <MenuItem component={Link} to="/profile" >
-          <IconButton color="inherit">
-            <AccountCircle />
-          </IconButton>
-          <p>Profile</p>
-        </MenuItem>
-      </Menu>
+        </Menu>
+      
     );
 
     return (
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer" onClick={this.handleProfileMenuOpen}>
+            {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer" onClick={this.handleProfileMenuOpen}>
               <MenuIcon  />
-            </IconButton>
+            </IconButton> */}
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
               1UP
             </Typography>
@@ -182,9 +203,14 @@ class PrimarySearchAppBar extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit" component={Link} to="/portal" onClick={() => {removeAuthToken()}}>
-                  <LockIcon />
-              </IconButton>
+
+            {!currentPath.includes('home') ? 
+              <IconButton
+                color="inherit"
+                component={Link} 
+                to="/home" >
+                <Home />
+              </IconButton> : null }
 
               {!currentPath.includes('profile') ? 
               <IconButton
@@ -193,6 +219,15 @@ class PrimarySearchAppBar extends React.Component {
                 to="/profile" >
                 <AccountCircle />
               </IconButton> : null }
+
+              {!currentPath.includes('newchallenge') ?  
+              <IconButton color="inherit" component={Link} to="/newchallenge">
+                <Add />
+              </IconButton> : null }
+
+              <IconButton color="inherit" component={Link} to="/portal" onClick={() => {removeAuthToken()}}>
+                  <LockIcon />
+              </IconButton>
             
             </div>
             <div className={classes.sectionMobile}>

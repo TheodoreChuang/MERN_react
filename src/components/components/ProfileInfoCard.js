@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import photo from './images/profile_image.jpg';
+import LocalApi from './../../apis/local';
 
 
 
@@ -33,9 +34,32 @@ const styles = {
   }
 };
 
-function SimpleCard(props) {
-  const { classes } = props;
-  const bull = <span className={classes.bullet}>•</span>;
+
+
+class SimpleCard extends React.Component  {
+  state = {
+    user: {}
+  }
+
+  // async componentDidMount() {
+  //   console.log(this.state.users)
+  //   await LocalApi.get('/profile/test')
+  //   // .then(res => res.json())
+  //   .then( users => this.setState({ users }));
+  //   console.log(this.state.users)
+    
+  // }
+
+  async componentDidMount() {
+    // console.log(this.state.users)
+    await LocalApi.get('/profile/info')
+    .then( res => this.setState({ user: res.data }))
+    // console.log(this.state.users)
+  }
+
+  render() {
+    const { classes } = this.props;
+    const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <Card className={classes.card}>
@@ -48,10 +72,10 @@ function SimpleCard(props) {
           </Grid>
           <Grid container direction="column" justify="center" alignItems="center">
           <Typography>
-            Bob Lastname
+            {this.state.user.first_name}
           </Typography>
           <Typography>
-            random@test.com
+          {this.state.user.email}
           </Typography>
           <Typography>
             Age: 40
@@ -61,9 +85,9 @@ function SimpleCard(props) {
           </Typography>
           <Typography>
           I'm really passionate about outdoofr 
-activites, but that's not why I'm here. I'm 
-here to challenge and get challenged to 
-make the world a better place.
+          activites, but that's not why I'm here. I'm 
+          here to challenge and get challenged to 
+          make the world a better place.
           </Typography>
         </Grid>
       </CardContent>
@@ -72,6 +96,7 @@ make the world a better place.
       </CardActions>
     </Card>
   );
+}
 }
 
 SimpleCard.propTypes = {

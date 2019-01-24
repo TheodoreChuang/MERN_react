@@ -17,10 +17,18 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Snowboard from './images/snowboarding.jpg';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import { Link } from 'react-router-dom'
+
 
 const styles = theme => ({
   card: {
      maxWidth: 600,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
   },
   media: {
     height: 0,
@@ -45,16 +53,48 @@ const styles = theme => ({
 });
 
 class ChallengeCard extends React.Component {
-  state = { expanded: false };
+  state = { 
+    expanded: false,
+    anchorEl: null,
+    mobileMoreAnchorEl: null,
+   };
+
+  handleProfileMenuOpen = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
+  handleMenuClose = () => {
+    this.setState({ anchorEl: null });
+    this.handleMobileMenuClose();
+  };
+
+  handleMobileMenuClose = () => {
+    this.setState({ mobileMoreAnchorEl: null });
+  };
+
   render() {
+    const { anchorEl, mobileMoreAnchorEl } = this.state;
     const { classes } = this.props;
+    const isMenuOpen = Boolean(anchorEl);
+
+    const renderMenu = (
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={isMenuOpen}
+        onClose={this.handleMenuClose}
+      >
+        <MenuItem component={Link} to="/newsubmission" onClick={this.handleMenuClose}>New Submission</MenuItem>
+      </Menu>
+    );
 
     return (
+      <div className={classes.root}>
       <Card className={classes.card}>
         <CardHeader
           avatar={
@@ -63,7 +103,7 @@ class ChallengeCard extends React.Component {
             </Avatar>
           }
           action={
-            <IconButton>
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer" onClick={this.handleProfileMenuOpen}>
               <MoreVertIcon />
             </IconButton>
           }
@@ -127,6 +167,8 @@ class ChallengeCard extends React.Component {
           </CardContent>
         </Collapse>
       </Card>
+      {renderMenu}
+      </div>
     );
   }
 }

@@ -63,7 +63,7 @@ class RegisterForm extends Component {
             //acquring token
             setAuthToken(response.data.token);
             //redirect
-            this.props.history.push("/");
+            this.props.history.push("/home");
         })
         .catch(err => console.log(err));
         }
