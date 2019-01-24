@@ -7,7 +7,7 @@ class YTvideo extends Component {
       const { yt_id } = this.props;
 
       const opts = {
-        height: 'auto',
+        height: 'auto%',
         width: '100%',
         playerVars: { // https://developers.google.com/youtube/player_parameters
           autoplay: 0

@@ -17,16 +17,11 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Snowboard from './images/snowboarding.jpg';
-<<<<<<< HEAD:src/components/components/ChallengeCard.js
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom'
-import YTvideo from "./YTvideo";
-=======
 import YTvideo from "../YTvideo";
->>>>>>> cleanup-james:src/Components/cards/ChallengeCard.js
 import { withRouter } from "react-router-dom";
-
 
 const styles = theme => ({
   card: {
@@ -56,6 +51,9 @@ const styles = theme => ({
   avatar: {
     backgroundColor: red[500],
   },
+  custom: {
+    padding: "20px",
+  }
 });
 
 class ChallengeCard extends React.Component {
@@ -84,11 +82,10 @@ class ChallengeCard extends React.Component {
   };
 
   render() {
-<<<<<<< HEAD:src/components/components/ChallengeCard.js
 
     const { anchorEl, mobileMoreAnchorEl } = this.state;
-    // const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
+    const { classes, yt_id, title, description, date_created, id, history } = this.props;
 
     const renderMenu = (
       <Menu
@@ -98,18 +95,12 @@ class ChallengeCard extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem component={Link} to="/newsubmission" onClick={this.handleMenuClose}>New Submission</MenuItem>
+        <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>New Submission</MenuItem>
       </Menu>
     );
-
-    // console.log("card");
-    // console.log(this.props);
-=======
->>>>>>> cleanup-james:src/Components/cards/ChallengeCard.js
-    const { classes, yt_id, title, description, date_created, id, history } = this.props;
     
     return (
-      <div className={classes.root}>
+      <div className={`${classes.root} ${classes.custom}`}>
       <Card className={classes.card}>
         <CardHeader
           avatar={
@@ -157,15 +148,6 @@ class ChallengeCard extends React.Component {
             aria-expanded={this.state.expanded}
             aria-label="Show more"
           >
-          </IconButton>
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded,
-            })}
-            onClick={() => history.push(`/challenges/${id}`)}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
-          > do challenge
           </IconButton>
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>

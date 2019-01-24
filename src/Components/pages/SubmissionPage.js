@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SubmissionForm from "./../forms/SubmissionForm";
-import NavBar from "../components/NavBar";
+import NavBar from "../NavBar";
 
 class SubmissionPage extends Component {
 

@@ -31,9 +31,15 @@ const styles = theme => ({
     root: {
       backgroundColor: theme.palette.background.paper,
       width: "100%",
-      border: "5px solid black",
+      direction: "column",
+      justify: "center"
     },
-
+    custom: {
+        border: "1px solid black",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+    }
   })
 
 class NewsFeedPage extends Component  {
@@ -63,7 +69,7 @@ class NewsFeedPage extends Component  {
         return (
             <div>
                 <NavBar />
-                 <div className={classes.root}>
+                 <div className={`${classes.root} ${classes.custom}`}>
                     <AppBar position="static" color="default">
                     <Tabs
                         value={this.state.value}

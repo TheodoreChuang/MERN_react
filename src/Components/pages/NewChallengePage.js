@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import NewChallengeForm from "./../forms/NewChallengeForm";
-import NavBar from "../components/NavBar";
+import NavBar from "../NavBar";
 
 class NewChallengePage extends Component {
 
