@@ -25,10 +25,10 @@ class App extends Component {
                 <Route exact path = "/register" component = {RegisterPage} />
                 <PrivateRoute exact path = "/profile" component = {ProfilePage} />
                 <PrivateRoute exact path = "/home" component = {NewsFeedPage} />
-                <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
                 <PrivateRoute exact path = "/newsubmission" component = {SubmissionPage} />
                 <Route exact path = "/feed" component = {FeedPage} />
                 <PrivateRoute exact path = "/submissionfeed" component = {SubmissionFeedPage} />
+                <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
                 <Route exact path = "/challengefeed" component = {ChallengeFeedPage } />
                 <Route exact path = "/challenges/:id" component = {ChallengePage } />
                 <Route exact path = "/submit" component = {SubmissionPage} />
