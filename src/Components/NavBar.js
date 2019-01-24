@@ -21,7 +21,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom'
 import LockIcon from '@material-ui/icons/Https';
 import UnlockIcon from '@material-ui/icons/LockOpen';
-import { removeAuthToken } from "./../../actions";
+import { removeAuthToken } from "./../actions";
 import Icon from '@material-ui/core/Icon';
 import { connect } from "react-redux"; 
 
@@ -146,6 +146,7 @@ class PrimarySearchAppBar extends React.Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
+{/* <<<<<<< HEAD:src/components/components/NavBar.js
         {!currentPath.includes('home') ? 
         <MenuItem component={Link} to="/home" >
         <IconButton
@@ -155,6 +156,13 @@ class PrimarySearchAppBar extends React.Component {
         <p>Home</p>
         </MenuItem> : null }
         {!currentPath.includes('profile') ? 
+======= */}
+        <MenuItem component={Link} to="/landing" onClick={() => {removeAuthToken()}}>
+          <IconButton color="inherit">
+              <LockIcon />
+          </IconButton>
+          <p>Log Out</p>
+        </MenuItem>
         <MenuItem component={Link} to="/profile" >
           <IconButton color="inherit">
             <AccountCircle />
@@ -203,6 +211,7 @@ class PrimarySearchAppBar extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
+{/* <<<<<<< HEAD:src/components/components/NavBar.js
 
             {!currentPath.includes('home') ? 
               <IconButton
@@ -211,7 +220,10 @@ class PrimarySearchAppBar extends React.Component {
                 to="/home" >
                 <Home />
               </IconButton> : null }
-
+======= */}
+              <IconButton color="inherit" component={Link} to="/landing" onClick={() => {removeAuthToken()}}>
+                  <LockIcon />
+              </IconButton>
               {!currentPath.includes('profile') ? 
               <IconButton
                 color="inherit"

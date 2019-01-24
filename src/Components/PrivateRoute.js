@@ -10,7 +10,7 @@ const PrivateRoute = (props) => {
             return <Component {...props} />
         }
 
-        return <Redirect to="/portal" />
+        return <Redirect to="/landing" />
     }} />
 }
 

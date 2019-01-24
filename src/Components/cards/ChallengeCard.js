@@ -17,10 +17,14 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Snowboard from './images/snowboarding.jpg';
+<<<<<<< HEAD:src/components/components/ChallengeCard.js
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom'
 import YTvideo from "./YTvideo";
+=======
+import YTvideo from "../YTvideo";
+>>>>>>> cleanup-james:src/Components/cards/ChallengeCard.js
 import { withRouter } from "react-router-dom";
 
 
@@ -80,6 +84,7 @@ class ChallengeCard extends React.Component {
   };
 
   render() {
+<<<<<<< HEAD:src/components/components/ChallengeCard.js
 
     const { anchorEl, mobileMoreAnchorEl } = this.state;
     // const { classes } = this.props;
@@ -99,6 +104,8 @@ class ChallengeCard extends React.Component {
 
     // console.log("card");
     // console.log(this.props);
+=======
+>>>>>>> cleanup-james:src/Components/cards/ChallengeCard.js
     const { classes, yt_id, title, description, date_created, id, history } = this.props;
     
     return (
@@ -123,8 +130,6 @@ class ChallengeCard extends React.Component {
         {/* /> */}
         <CardContent>
           <Typography component="p">
-            {/* This impressive paella is a perfect party dish and a fun meal to cook together with your
-            guests. Add 1 cup of frozen peas along with the mussels, if you like. */}
             {description}
           </Typography>
         </CardContent>
@@ -162,35 +167,8 @@ class ChallengeCard extends React.Component {
             aria-label="Show more"
           > do challenge
           </IconButton>
-          {/* <ShareIcon onClick={() => history.push(`/challenges/${id}`)}/> */}
-            {/* <ExpandMoreIcon /> */}
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          {/* <CardContent>
-            <Typography paragraph>Method:</Typography>
-            <Typography paragraph>
-              Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-              minutes.
-            </Typography>
-            <Typography paragraph>
-              Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-              heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-              browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving
-              chicken and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion,
-              salt and pepper, and cook, stirring often until thickened and fragrant, about 10
-              minutes. Add saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-            </Typography>
-            <Typography paragraph>
-              Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook
-              without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat
-              to medium-low, add reserved shrimp and mussels, tucking them down into the rice, and
-              cook again without stirring, until mussels have opened and rice is just tender, 5 to 7
-              minutes more. (Discard any mussels that don’t open.)
-            </Typography>
-            <Typography>
-              Set aside off of the heat to let rest for 10 minutes, and then serve.
-            </Typography>
-          </CardContent> */}
         </Collapse>
       </Card>
       {renderMenu}

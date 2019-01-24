@@ -56,7 +56,7 @@ class LoginForm extends Component {
         LocalApi.post("/login", {email, password})
         .then(response => {
             setAuthToken(response.data.token);
-            this.props.history.push("/home");
+            this.props.history.push("/");
         })
         .catch(err => console.log(err));
     }
@@ -83,6 +83,7 @@ class LoginForm extends Component {
                   name="password"
                   component={Input}
                   placeholder="Password"
+                  type="password"
                   className={classes.input}
                   fullWidth
                   inputProps={{

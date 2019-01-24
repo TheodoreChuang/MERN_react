@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./MainPage.css";
+import "./LandingPage.css";
 
 //materialize
 import PropTypes from 'prop-types';
@@ -17,10 +17,9 @@ const styles = theme => ({
     },
   }); 
 
-class MainPage extends Component  {
+class LandingPage extends Component  {
     
-    render(props) {
-        console.log(props);
+    render() {
         const { classes } = this.props;
 
         return (
@@ -56,4 +55,4 @@ class MainPage extends Component  {
 //     classes: PropTypes.object.isRequired,
 //   };
 
-export default withStyles(styles)(MainPage);
+export default withStyles(styles)(LandingPage);
