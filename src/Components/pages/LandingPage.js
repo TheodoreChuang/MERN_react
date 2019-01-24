@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./LandingPage.css";
 
 //materialize
 import PropTypes from 'prop-types';
@@ -10,11 +9,21 @@ import Button from '@material-ui/core/Button';
 const styles = theme => ({
     button: {
       margin: theme.spacing.unit,
-      borderRadius: "50px"
+      borderRadius: "50px",
+      textTransform: "none"
     },
     input: {
       display: 'none',
     },
+    container: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-around",
+        height: "100vh",
+        textTransform: "none",
+        textAlign: "center"
+    }
   }); 
 
 class LandingPage extends Component  {
@@ -24,20 +33,20 @@ class LandingPage extends Component  {
 
         return (
             
-            <div className="container">
+            <div className={classes.container}>
                 <h1> oneup </h1>
                 <p> Create challenges, share them with your friends and just have fun! </p>
                 <div>
-                    <div className="center">
+                    <div>
                         <Button variant="outlined" className={classes.button} onClick = {
                             () => this.props.history.push("/register")}>
-                            <span className="btn">Sign up via email</span>
+                            Sign up via email
                         </Button>
                     </div>
                     <div>
                         <Button variant="outlined" className={classes.button} onClick = {
                             () => this.props.history.push("/facebook")}>
-                            <span className="btn">Sign up via via Facebook</span>
+                            Sign up via via Facebook
                         </Button>
                     </div>
                 </div>

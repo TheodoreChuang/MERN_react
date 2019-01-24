@@ -63,7 +63,7 @@ class RegisterForm extends Component {
             //acquring token
             setAuthToken(response.data.token);
             //redirect
-            this.props.history.push("/home");
+            this.props.history.push("/");
         })
         .catch(err => console.log(err));
         }
@@ -83,9 +83,11 @@ class RegisterForm extends Component {
                   placeholder="First Name"
                   className={classes.input}
                   fullWidth
+                  value
                   inputProps={{
                     'aria-label': 'Description',
                   }}
+                  
                 /> 
                  <Field
                   name="last_name"
@@ -116,6 +118,7 @@ class RegisterForm extends Component {
                   inputProps={{
                     'aria-label': 'Description',
                   }}
+                  type="email"
                 />
                 <Field
                   name="password"
@@ -126,6 +129,7 @@ class RegisterForm extends Component {
                   inputProps={{
                     'aria-label': 'Description',
                   }}
+                  type="password"
                 />
                 <div className={classes.checkboxButton} >
                 <div className={classes.checkbox}>
@@ -141,7 +145,7 @@ class RegisterForm extends Component {
                 </Fab>
                 </div>
                 <div className={classes.signin}> 
-                <Typography>Already have an accout? <Link to="/login">Sign in</Link></Typography>
+                <Typography>Already have an account? <Link to="/login">Sign in</Link></Typography>
                 </div>
                 </div>
 

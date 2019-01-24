@@ -108,7 +108,7 @@ class LoginForm extends Component {
 
 const WrappedRegisterForm = reduxForm({
     form: "register",
-    validate: ({ first_name, last_name, nickname, email, password, terms_conditions }) => {
+    validate: ({ email, password }) => {
         const errors = {}
 
         if (!email) {

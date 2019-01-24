@@ -157,18 +157,18 @@ class PrimarySearchAppBar extends React.Component {
         </MenuItem> : null }
         {!currentPath.includes('profile') ? 
 ======= */}
-        <MenuItem component={Link} to="/landing" onClick={() => {removeAuthToken()}}>
+        {/* <MenuItem component={Link} to="/landing" onClick={() => {removeAuthToken()}}>
           <IconButton color="inherit">
               <LockIcon />
           </IconButton>
           <p>Log Out</p>
-        </MenuItem>
-        <MenuItem component={Link} to="/profile" >
+        </MenuItem> */}
+        {/* <MenuItem component={Link} to="/profile" >
           <IconButton color="inherit">
             <AccountCircle />
           </IconButton>
           <p>Profile</p>
-        </MenuItem> : null }
+        </MenuItem> : null } */}
         {!currentPath.includes('newchallenge') ?
         <MenuItem component={Link} to="/newchallenge" >
         <IconButton
@@ -177,7 +177,7 @@ class PrimarySearchAppBar extends React.Component {
         </IconButton> 
         <p>New Challenge</p>
         </MenuItem> : null }
-        <MenuItem component={Link} to="/portal" onClick={() => {removeAuthToken()}}>
+        <MenuItem component={Link} to="/landing" onClick={() => {removeAuthToken()}}>
           <IconButton color="inherit">
               <LockIcon />
           </IconButton>
@@ -221,20 +221,17 @@ class PrimarySearchAppBar extends React.Component {
                 <Home />
               </IconButton> : null }
 ======= */}
-              <IconButton color="inherit" component={Link} to="/landing" onClick={() => {removeAuthToken()}}>
-                  <LockIcon />
-              </IconButton>
+              {!currentPath.includes('newchallenge') ?  
+              <IconButton color="inherit" component={Link} to="/newchallenge">
+                <Add />
+              </IconButton> : null }
+
               {!currentPath.includes('profile') ? 
               <IconButton
                 color="inherit"
                 component={Link} 
                 to="/profile" >
                 <AccountCircle />
-              </IconButton> : null }
-
-              {!currentPath.includes('newchallenge') ?  
-              <IconButton color="inherit" component={Link} to="/newchallenge">
-                <Add />
               </IconButton> : null }
 
               <IconButton color="inherit" component={Link} to="/portal" onClick={() => {removeAuthToken()}}>

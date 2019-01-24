@@ -37,6 +37,9 @@ const styles = theme => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center"
+    },
+    label: {
+        textTransform: "none"
     }
   })
 
@@ -76,8 +79,8 @@ class NewsFeedPage extends Component  {
                         textColor="primary"
                         variant="fullWidth"
                     >
-                        <Tab label="Newsfeed" />
-                        <Tab label="Challenges" />
+                        <Tab label="Newsfeed" className={classes.label} />
+                        <Tab label="Challenges" className={classes.label} />
                     </Tabs>
                     </AppBar>
                     <SwipeableViews

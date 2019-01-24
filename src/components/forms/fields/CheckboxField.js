@@ -28,7 +28,8 @@ class CheckboxLabels extends React.Component {
   };
 
   render() {
-    const { classes, input, ...other } = this.props;
+    console.log(this.props);
+    const { classes, input, meta, ...other } = this.props;
     const { onChange, value, ...otherInput } = input;
 
     return (
@@ -46,12 +47,14 @@ class CheckboxLabels extends React.Component {
           label={
             <div>
             <span>I have read and agreed to the </span>
-            <Link to="/termsandconditions">Terms & Conditions</Link>
+            <Link to="/termsandconditions">Terms and Conditions</Link>
+            <div> {meta.touched && meta.error} </div>
             </div>
           }
         />
        
       </FormGroup>
+      
     );
   }
 }

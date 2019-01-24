@@ -10,11 +10,6 @@ class RegisterPage extends Component  {
             <div className="container">
                 <h2> oneup </h2>
                 <RegisterForm history={this.props.history}/>
-                <div>
-                    Already have an account?
-                        <Link to="/login"> Sign in
-                        </Link>
-                </div>
             </div>
         );
     }
