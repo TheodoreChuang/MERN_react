@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import LocalApi from "../../apis/local";
 import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
+import { connect } from "react-redux";
+import { addSubmission } from "./../../actions"
 
 class SubmissionForm extends Component {
     onUploadSubmit = (formValues) => {
@@ -10,14 +11,13 @@ class SubmissionForm extends Component {
     }
 
     uploadFile = (file, title, description) => {
+        const { addSubmission } = this.props;
         const fd = new FormData();
         fd.append("video", file);
         fd.append("title", title);
         fd.append("description", description);
 
-        LocalApi.post("/challenges/submission", fd)
-        .then(response => alert("Submitted"))
-        .catch(error => alert(error))
+        addSubmission(fd);
     }
 
     render() {
@@ -79,4 +79,12 @@ const WrappedSubmissionForm = reduxForm({
     }
 })(SubmissionForm);
 
-export default WrappedSubmissionForm;
+const mapStateToProps = (state) => {
+    return {
+        submissions: state.submissions
+    }
+}
+
+export default connect(mapStateToProps, {
+    addSubmission
+})(WrappedSubmissionForm);
