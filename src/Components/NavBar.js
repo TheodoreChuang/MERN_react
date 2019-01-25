@@ -146,7 +146,6 @@ class PrimarySearchAppBar extends React.Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
-{/* <<<<<<< HEAD:src/components/components/NavBar.js
         {!currentPath.includes('home') ? 
         <MenuItem component={Link} to="/home" >
         <IconButton
@@ -155,20 +154,13 @@ class PrimarySearchAppBar extends React.Component {
         </IconButton> 
         <p>Home</p>
         </MenuItem> : null }
-        {!currentPath.includes('profile') ? 
-======= */}
-        {/* <MenuItem component={Link} to="/landing" onClick={() => {removeAuthToken()}}>
-          <IconButton color="inherit">
-              <LockIcon />
-          </IconButton>
-          <p>Log Out</p>
-        </MenuItem> */}
-        {/* <MenuItem component={Link} to="/profile" >
+        {!currentPath.includes('profile') ?
+        <MenuItem component={Link} to="/profile" >
           <IconButton color="inherit">
             <AccountCircle />
           </IconButton>
           <p>Profile</p>
-        </MenuItem> : null } */}
+        </MenuItem> : null }
         {!currentPath.includes('newchallenge') ?
         <MenuItem component={Link} to="/newchallenge" >
         <IconButton
@@ -182,10 +174,12 @@ class PrimarySearchAppBar extends React.Component {
               <LockIcon />
           </IconButton>
           <p>Log Out</p>
-        </MenuItem>
+          </MenuItem>
         </Menu>
+       
       
     );
+    
 
     return (
       <div className={classes.root}>
@@ -211,7 +205,6 @@ class PrimarySearchAppBar extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-{/* <<<<<<< HEAD:src/components/components/NavBar.js
 
             {!currentPath.includes('home') ? 
               <IconButton
@@ -220,7 +213,6 @@ class PrimarySearchAppBar extends React.Component {
                 to="/home" >
                 <Home />
               </IconButton> : null }
-======= */}
               {!currentPath.includes('newchallenge') ?  
               <IconButton color="inherit" component={Link} to="/newchallenge">
                 <Add />
