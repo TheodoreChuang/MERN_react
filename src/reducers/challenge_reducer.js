@@ -20,8 +20,6 @@ export default (state = defaultState, action) => {
     switch(action.type) {
         case "CHALLENGES_LIST":
             return action.payload;
-        case "ADD_CHALLENGE":
-            return action.payload;
         default: 
             return state;
     }

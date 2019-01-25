@@ -3,6 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
 import { connect } from "react-redux";
 import { addSubmission } from "./../../actions"
+import Button from '@material-ui/core/Button';
 
 class SubmissionForm extends Component {
     onUploadSubmit = (formValues) => {
@@ -11,19 +12,20 @@ class SubmissionForm extends Component {
     }
 
     uploadFile = (file, title, description) => {
-        console.log("form", this.props);
-        const { addSubmission, match } = this.props;
+        
+        const { addSubmission, match, history } = this.props;
         const fd = new FormData();
         fd.append("video", file);
         fd.append("title", title);
         fd.append("description", description);
 
         addSubmission(fd, match.params.id);
+        history.push(`/challenges/${match.params.id}`);
     }
 
     render() {
         const { handleSubmit } = this.props;
-
+        console.log(this.props);
         return (
             <form onSubmit= {handleSubmit(this.onUploadSubmit)} encType="multipart/form-data">
                 <div>
@@ -47,15 +49,13 @@ class SubmissionForm extends Component {
                     name="video"
                     component={Input}
                     type="file"
-                    required="true"
                     />
                 </div>
                 <div>
-                    <Field
-                    type="submit"
-                    component={Input}
-                    value="submit"
-                    />
+                    <Button
+                    type="submit">
+                    Join Challenge
+                    </Button>
                 </div>
             </form>
         );

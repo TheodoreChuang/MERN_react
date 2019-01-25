@@ -96,7 +96,7 @@ class ChallengeCard extends React.Component {
         onClose={this.handleMenuClose}
       >
         <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>View More Challenge Details</MenuItem>
-        <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>Join Challenge</MenuItem>
+        <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Join Challenge</MenuItem>
       </Menu>
     );
     

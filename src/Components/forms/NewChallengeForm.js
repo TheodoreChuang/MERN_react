@@ -4,6 +4,7 @@ import Input from "./fields/Input";
 import { connect } from "react-redux";
 import { addChallenge } from "./../../actions"
 import Button from '@material-ui/core/Button';
+import { Link } from "react-router-dom";
 
 class NewChallengeForm extends Component {
     onUploadSubmit = (formValues) => {
@@ -30,6 +31,10 @@ class NewChallengeForm extends Component {
         const { handleSubmit } = this.props;
 
         return (
+            <div>
+            <Link to="/">
+            to Feed
+            </Link>
             <form onSubmit= {handleSubmit(this.onUploadSubmit)} encType="multipart/form-data">
                 <div>
                     <Field
@@ -77,6 +82,7 @@ class NewChallengeForm extends Component {
                     </Button>
                 </div>
             </form>
+            </div>
         );
     }
 }
