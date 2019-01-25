@@ -45,10 +45,15 @@ const styles = theme => ({
 
 class NewsFeedPage extends Component  {
     constructor(props) {
+        console.log("newsfeedpage constr");
         super(props);
         const { fetchChallenges, fetchSubmissions } = this.props;
         fetchChallenges();
         fetchSubmissions();
+    }
+
+    componentDidMount() {
+        console.log("mounted");
     }
 
     state = {
@@ -64,6 +69,7 @@ class NewsFeedPage extends Component  {
       };
 
     render() {
+        console.log("newsfeed page rendered");
         const {challenges, submissions } = this.props;
         const { classes, theme } = this.props;
 
@@ -89,16 +95,17 @@ class NewsFeedPage extends Component  {
                     onChangeIndex={this.handleChangeIndex}
                     >
                     <TabContainer dir={theme.direction}>
-                        {submissions.map (function(submission) {
+                        {submissions && submissions.map (function(submission) {
+                            console.log(submission);
                             return ( 
                                 <div key={submission.title}>
-                                    <ChallengeCard yt_id={submission.yt_id} title={submission.title}  date_created={submission.date_created} /> 
+                                    <ChallengeCard yt_id={submission.yt_id} title={submission.title}  date_created={submission.date_created} id={submission._id} /> 
                                 </div>
                             );
                         })}
                     </TabContainer>
                     <TabContainer dir={theme.direction}>
-                        {challenges.map (function(challenge) {
+                        {challenges && challenges.map (function(challenge) {
                             return ( 
                                 <div key={challenge.title}>
                                     <ChallengeCard yt_id={challenge.yt_id} title={challenge.title} description={challenge.description}  date_created={challenge.date_created} 

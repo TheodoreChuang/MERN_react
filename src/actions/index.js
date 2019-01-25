@@ -36,7 +36,7 @@ export const addChallenge = (fd) => {
         const response = await LocalApi.post("/challenges/upload", fd)
 
         dispatch({
-            type: "ADD_CHALLENGE",
+            type: "CHALLENGES_LIST",
             payload: response.data
         })
     }
@@ -59,7 +59,7 @@ export const addSubmission = (fd, id) => {
         const response = await LocalApi.post(`/challenges/${id}/submissions`, fd)
 
         dispatch({
-            type: "ADD_SUBMISSION",
+            type: "SUBMISSIONS_LIST",
             payload: response.data
         })
     }

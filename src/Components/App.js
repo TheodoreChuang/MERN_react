@@ -26,7 +26,7 @@ class App extends Component {
                 <PrivateRoute exact path = "/home" component = {NewsFeedPage} />
                 <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
                 <PrivateRoute exact path = "/challenges/:id" component = {ChallengePage } />
-                <PrivateRoute exact path = "/submit/:id/" component = {SubmissionPage} />
+                <PrivateRoute exact path = "/challenges/:id/submit" component = {SubmissionPage} />
               </Switch>
             </div>
         </BrowserRouter>
