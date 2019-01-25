@@ -234,7 +234,7 @@ class PrimarySearchAppBar extends React.Component {
                 <AccountCircle />
               </IconButton> : null }
 
-              <IconButton color="inherit" component={Link} to="/portal" onClick={() => {removeAuthToken()}}>
+              <IconButton color="inherit" component={Link} to="/landing" onClick={() => {removeAuthToken()}}>
                   <LockIcon />
               </IconButton>
             

@@ -23,8 +23,6 @@ const styles = theme => ({
           {...other}
           meta={meta}
           className={classes.input}
-          value={value}
-          input={input}
         />
         <div> {meta.touched && meta.error} </div>
       </div>

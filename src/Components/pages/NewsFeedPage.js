@@ -90,9 +90,10 @@ class NewsFeedPage extends Component  {
                     >
                     <TabContainer dir={theme.direction}>
                         {submissions.map (function(submission) {
+                            console.log(submission);
                             return ( 
                                 <div key={submission.title}>
-                                    <ChallengeCard yt_id={submission.yt_id} title={submission.title}  date_created={submission.date_created} /> 
+                                    <ChallengeCard yt_id={submission.yt_id} title={submission.title}  date_created={submission.date_created} id={submission._id} /> 
                                 </div>
                             );
                         })}
