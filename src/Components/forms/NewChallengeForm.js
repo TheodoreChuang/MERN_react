@@ -3,6 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
 import { connect } from "react-redux";
 import { addChallenge } from "./../../actions"
+import Button from '@material-ui/core/Button';
 
 class NewChallengeForm extends Component {
     onUploadSubmit = (formValues) => {
@@ -67,14 +68,13 @@ class NewChallengeForm extends Component {
                     name="video"
                     component={Input}
                     type="file"
-                    // required="true"
                     />
                 </div>
                 <div>
-                    <Field
-                    component={Input}
-                    type="submit"
-                    />
+                    <Button
+                    type="submit">
+                    Upload Challenge
+                    </Button>
                 </div>
             </form>
         );

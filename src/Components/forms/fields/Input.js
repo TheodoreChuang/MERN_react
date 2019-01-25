@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import Input from '@material-ui/core/Input';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
@@ -13,20 +13,40 @@ const styles = theme => ({
     },
   });
   
-  function Inputs(props) {
-    const { classes, meta, value, input, ...other } = props;
-    console.log(props);
-    return (
-      <div className={classes.container}>
-        <Input
-          {...input}
-          {...other}
-          meta={meta}
-          className={classes.input}
-        />
-        <div> {meta.touched && meta.error} </div>
-      </div>
-    );
+  class Inputs extends Component {
+    state = { current: "" }
+    
+    onChange = (event) => {
+      const { input: { onChange }, type } = this.props;
+      let value = event.target.value;
+
+      if (type === "file") {
+        this.setState({ current: value });
+        value = event.target.files[0];
+      }
+    
+      onChange(value);
+    }
+
+    render() {
+      const { classes, meta, input, ...other } = this.props;
+      const { value, onChange, ...otherInput } = input;
+      const { current } = this.state;
+
+      return (
+        <div className={classes.container}>
+          <Input
+            {...other}
+            {...otherInput}
+            meta={meta}
+            className={classes.input}
+            value={other.type === "file" ? current : value}
+            onChange={this.onChange}
+          />
+          <div> {meta.touched && meta.error} </div>
+        </div>
+      );
+    }
   }
   
   Inputs.propTypes = {
