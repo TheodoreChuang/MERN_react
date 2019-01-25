@@ -217,7 +217,7 @@ class PrimarySearchAppBar extends React.Component {
               <IconButton
                 color="inherit"
                 component={Link} 
-                to="/home" >
+                to="/" >
                 <Home />
               </IconButton> : null }
 ======= */}

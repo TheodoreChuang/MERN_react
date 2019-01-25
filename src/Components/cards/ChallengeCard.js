@@ -22,6 +22,7 @@ import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom'
 import YTvideo from "../YTvideo";
 import { withRouter } from "react-router-dom";
+import LocalApi from "./../../apis/local";
 
 const styles = theme => ({
   card: {
@@ -97,6 +98,8 @@ class ChallengeCard extends React.Component {
       >
         <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>View More Challenge Details</MenuItem>
         <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Join Challenge</MenuItem>
+        {/* delete function */}
+        {/* <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Delete Challenge</MenuItem> */}
       </Menu>
     );
     
@@ -151,6 +154,11 @@ class ChallengeCard extends React.Component {
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
         </Collapse>
+        <button onClick={() => {
+           console.log(this.props);
+           console.log(id);
+          LocalApi.delete(`/challenges/submissions/${id}`)
+        }}>Delete</button>
       </Card>
       {renderMenu}
       </div>

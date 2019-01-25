@@ -11,6 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
+import CustomizedDialogDemo from "./../PopUp";
 
 const styles = theme => ({
     body: {
@@ -139,6 +140,19 @@ class RegisterForm extends Component {
                   type="checkbox" 
                   color="primary"/>
                 </div>
+                <CustomizedDialogDemo 
+                title="Terms and Conditions"
+                button="Terms and Conditions"
+                content="You agree not to use the App in any way that:
+                is unlawful, illegal or unauthorised;
+                is defamatory of any other person;
+                is obscene or offensive;
+                promotes discrimination based on race, sex, religion, nationality, disability, sexual orientation or age;
+                infringes any copyright, database right or trade mark of any other person;
+                is likely to harass, upset, embarrass, alarm or annoy any other person;
+                is likely to disrupt our service in any way; or
+                advocates, promotes or assists any unlawful act such as (by way of example only) copyright infringement or computer misuse."
+                />
                 <div>
                 <Fab type="submit" variant="extended" color="primary" aria-label="Add" className={classes.margin}>
                     Register

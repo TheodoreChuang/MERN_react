@@ -42,13 +42,13 @@ class CheckboxLabels extends React.Component {
               value={value ? "checked" : ""}
               checked={value}
               onChange={this.handleChange('checked')}
+              
             />
           }
           label={
             <div>
-            <span>I have read and agreed to the </span>
-            <Link to="/termsandconditions">Terms and Conditions</Link>
-            <div> {meta.touched && meta.error} </div>
+            <span>I have read and agree to the </span>
+            {/* <div> {meta.touched && meta.error} </div> */}
             </div>
           }
         />

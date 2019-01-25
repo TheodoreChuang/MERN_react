@@ -4,7 +4,6 @@ import Input from "./fields/Input";
 import { connect } from "react-redux";
 import { addChallenge } from "./../../actions"
 import Button from '@material-ui/core/Button';
-import { Link } from "react-router-dom";
 
 class NewChallengeForm extends Component {
     onUploadSubmit = (formValues) => {
@@ -32,56 +31,53 @@ class NewChallengeForm extends Component {
 
         return (
             <div>
-            <Link to="/">
-            to Feed
-            </Link>
-            <form onSubmit= {handleSubmit(this.onUploadSubmit)} encType="multipart/form-data">
-                <div>
-                    <Field
-                    name="creator_id"
-                    component={Input}
-                    placeholder="creator_id"
-                    type="text"
-                    />
-                </div>
-                <div>
-                    <Field
-                    name="expiry_date"
-                    component={Input}
-                    placeholder="expiry date"
-                    type="date"
-                    />
-                </div>
-                <div>
-                    <Field
-                    name="title"
-                    component={Input}
-                    placeholder="title"
-                    type="text"
-                    />
-                </div>
-                <div>
-                    <Field
-                    name="description"
-                    component={Input}
-                    placeholder="description of challenge"
-                    type="text"
-                    />
-                </div>
-                <div>
-                    <Field
-                    name="video"
-                    component={Input}
-                    type="file"
-                    />
-                </div>
-                <div>
-                    <Button
-                    type="submit">
-                    Upload Challenge
-                    </Button>
-                </div>
-            </form>
+                <form onSubmit= {handleSubmit(this.onUploadSubmit)} encType="multipart/form-data">
+                    <div>
+                        <Field
+                        name="creator_id"
+                        component={Input}
+                        placeholder="creator_id"
+                        type="text"
+                        />
+                    </div>
+                    <div>
+                        <Field
+                        name="expiry_date"
+                        component={Input}
+                        placeholder="expiry date"
+                        type="date"
+                        />
+                    </div>
+                    <div>
+                        <Field
+                        name="title"
+                        component={Input}
+                        placeholder="title"
+                        type="text"
+                        />
+                    </div>
+                    <div>
+                        <Field
+                        name="description"
+                        component={Input}
+                        placeholder="description of challenge"
+                        type="text"
+                        />
+                    </div>
+                    <div>
+                        <Field
+                        name="video"
+                        component={Input}
+                        type="file"
+                        />
+                    </div>
+                    <div>
+                        <Button
+                        type="submit">
+                        Upload Challenge
+                        </Button>
+                    </div>
+                </form>
             </div>
         );
     }
@@ -91,22 +87,22 @@ class NewChallengeForm extends Component {
 
 const WrappedNewChallengeForm = reduxForm({
     form: "upload",
-    // validate: ({
-    //     title, description
-    // }) => {
-    // const errors = {}
+    validate: ({
+        title, description
+    }) => {
+    const errors = {}
     
-    // if (!title) {
-    //     errors.title = "title is required!"
-    // }
+    if (!title) {
+        errors.title = "title is required!"
+    }
 
-    // if (!description) {
-    //     errors.description = "video description is required!"
-    // }
+    if (!description) {
+        errors.description = "video description is required!"
+    }
 
-    // return errors;
+    return errors;
 
-    // }
+    }
 })(NewChallengeForm);
 
 const mapStateToProps = (state) => {

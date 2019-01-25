@@ -31,9 +31,10 @@ export const fetchChallenges = () => {
     };
 }
 
-export const addChallenge = (fd) => {
+export const addChallenge = (formValues) => {
+    console.log("inside addchallenge");
     return async (dispatch, getState) => {
-        const response = await LocalApi.post("/challenges/upload", fd)
+        const response = await LocalApi.post("/challenges/upload", formValues)
 
         dispatch({
             type: "CHALLENGES_LIST",
@@ -65,13 +66,13 @@ export const addSubmission = (fd, id) => {
     }
 }
 
-// export const deleteChallenge = () => {
-//     return async (dispatch, getState) => {
-//         const response = await LocalApi.delete("/challenges/submission/:id")
+export const deleteChallenge = () => {
+    return async (dispatch, getState) => {
+        const response = await LocalApi.delete("/challenges/submission/:id")
 
-//         dispatch({
-//             type: "DELETE_SUBMISSION",
-//             payload: response.data
-//         })
-//     }
-// }
+        dispatch({
+            type: "CHALLENGE_LIST",
+            payload: response.data
+        })
+    }
+}
