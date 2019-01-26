@@ -8,8 +8,8 @@ import Loader from "./../Loader";
 
 class NewChallengeForm extends Component {
     state = { loading: false }
-    onUploadSubmit = (formValues) => {
 
+    onUploadSubmit = (formValues) => {
         const { title, description, video, creator_id, expiry_date } = formValues;
         this.uploadFile(video[0], title, description, creator_id, expiry_date);
         console.log(formValues);
@@ -46,22 +46,6 @@ class NewChallengeForm extends Component {
                 <form onSubmit= {handleSubmit(this.onUploadSubmit)} encType="multipart/form-data">
                     <div>
                         <Field
-                        name="creator_id"
-                        component={Input}
-                        placeholder="creator_id"
-                        type="text"
-                        />
-                    </div>
-                    <div>
-                        <Field
-                        name="expiry_date"
-                        component={Input}
-                        placeholder="expiry date"
-                        type="date"
-                        />
-                    </div>
-                    <div>
-                        <Field
                         name="title"
                         component={Input}
                         placeholder="title"
@@ -78,6 +62,22 @@ class NewChallengeForm extends Component {
                     </div>
                     <div>
                         <Field
+                        name="creator_id"
+                        component={Input}
+                        placeholder="creator id"
+                        type="text"
+                        />
+                    </div>
+                    <div>
+                        <Field
+                        name="expiry_date"
+                        component={Input}
+                        placeholder="expiry date"
+                        type="date"
+                        />
+                    </div>
+                    <div>
+                        <Field
                         name="video"
                         component={Input}
                         type="file"
@@ -85,6 +85,7 @@ class NewChallengeForm extends Component {
                     </div>
                     <div>
                         <Button
+                        style={{textTransform: "none"}}
                         type="submit">
                         Upload Challenge
                         </Button>
@@ -106,20 +107,29 @@ class NewChallengeForm extends Component {
 const WrappedNewChallengeForm = reduxForm({
     form: "upload",
     validate: ({
-        title, description, file
+        title, description, creator_id, video
     }) => {
     const errors = {}
+    console.log("113");
+    console.log(title);
+    console.log(video);
+
+    if (!creator_id) {
+        errors.creator_id = "Required!"
+    }
     
     if (!title) {
-        errors.title = "title is required!"
+        errors.title = "Required!"
     }
 
     if (!description) {
-        errors.description = "video description is required!"
+        errors.description = "Required!"
     }
 
-    if (!file) {
-        errors.description = "file required"
+    if (video) {
+        if (video.length < 1 ) {
+            errors.video = "Required"
+        }
     }
 
     return errors;

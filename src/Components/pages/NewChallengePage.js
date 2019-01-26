@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NewChallengeForm from "./../forms/NewChallengeForm";
 import NavBar from "../NavBar";
-import "./NewChallengePage.js"
+import "./NewChallengePage.css"
 
 class NewChallengePage extends Component {
 
