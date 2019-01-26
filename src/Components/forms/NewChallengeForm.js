@@ -4,8 +4,10 @@ import Input from "./fields/Input";
 import { connect } from "react-redux";
 import { addChallenge } from "./../../actions"
 import Button from '@material-ui/core/Button';
+import Loader from "./../Loader";
 
 class NewChallengeForm extends Component {
+    state = { loading: false }
     onUploadSubmit = (formValues) => {
 
         const { title, description, video, creator_id, expiry_date } = formValues;
@@ -16,6 +18,7 @@ class NewChallengeForm extends Component {
     uploadFile = (file, title, description, creator_id, expiry_date) => {
         const { addChallenge } = this.props;
 
+        // Using FD to let express server our data includes a file type
         const fd = new FormData();
         fd.append("video", file);
         fd.append("title", title);
@@ -23,10 +26,19 @@ class NewChallengeForm extends Component {
         fd.append("creator_id", creator_id);
         fd.append("expiry_date", expiry_date);
         console.log(fd);
-        addChallenge(fd);
-    }
+        addChallenge(
+        () => {
+            console.log("inside cb1");
+            this.setState({ loading: true });
+        },
+        fd, 
+        async () =>  {
+            await this.setState({ loading: "success" });
+        }
+        )}
 
     render() {
+        console.log("rendered");
         const { handleSubmit } = this.props;
 
         return (
@@ -78,6 +90,12 @@ class NewChallengeForm extends Component {
                         </Button>
                     </div>
                 </form>
+                <div>
+                    {this.state.loading === true && <Loader />}
+                </div>
+                <div>
+                    {this.state.loading === "success" && "Upload Succesful!"}
+                </div>
             </div>
         );
     }
@@ -88,7 +106,7 @@ class NewChallengeForm extends Component {
 const WrappedNewChallengeForm = reduxForm({
     form: "upload",
     validate: ({
-        title, description
+        title, description, file
     }) => {
     const errors = {}
     
@@ -98,6 +116,10 @@ const WrappedNewChallengeForm = reduxForm({
 
     if (!description) {
         errors.description = "video description is required!"
+    }
+
+    if (!file) {
+        errors.description = "file required"
     }
 
     return errors;
