@@ -29,6 +29,7 @@ const styles = theme => ({
       onChange(value);
     }
 
+
     render() {
       // Props are coming off redux form
       const { classes, meta: {touched, error}, input, ...other } = this.props;
@@ -41,7 +42,7 @@ const styles = theme => ({
             {...other}
             {...otherInput}
             className={classes.input}
-            value={other.type === "file" ? current : value}
+            value={other.type === "file" ? current : value }
             onChange={this.onChange}
           />
           <div

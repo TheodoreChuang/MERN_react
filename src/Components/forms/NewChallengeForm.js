@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { addChallenge } from "./../../actions"
 import Button from '@material-ui/core/Button';
 import Loader from "./../Loader";
+import DateC from "./fields/Date";
 
 class NewChallengeForm extends Component {
     state = { loading: false }
@@ -58,6 +59,7 @@ class NewChallengeForm extends Component {
                         component={Input}
                         placeholder="description of challenge"
                         type="text"
+                        multiline
                         />
                     </div>
                     <div>
@@ -68,11 +70,18 @@ class NewChallengeForm extends Component {
                         type="text"
                         />
                     </div>
-                    <div>
+                    {/* <div>
                         <Field
                         name="expiry_date"
                         component={Input}
-                        placeholder="expiry date"
+                        type="date"
+                        />
+                    </div> */}
+                    <div>
+                        <Field
+                        name="expiry_date"
+                        label="expiry date"
+                        component={DateC}
                         type="date"
                         />
                     </div>
@@ -107,12 +116,9 @@ class NewChallengeForm extends Component {
 const WrappedNewChallengeForm = reduxForm({
     form: "upload",
     validate: ({
-        title, description, creator_id, video
+        title, description, creator_id, video, expiry_date
     }) => {
     const errors = {}
-    console.log("113");
-    console.log(title);
-    console.log(video);
 
     if (!creator_id) {
         errors.creator_id = "Required!"
@@ -124,6 +130,10 @@ const WrappedNewChallengeForm = reduxForm({
 
     if (!description) {
         errors.description = "Required!"
+    }
+
+    if (expiry_date > "2000-01-01") {
+        errors.expiry_date = "testing"
     }
 
     if (video) {
