@@ -1,19 +1,11 @@
 export default function getDateToday() {
     const today = new Date();
-    const dd = today.getDate();
-    const mm = today.getMonth() + 1; //January is 0!
+    
+    // Slices to ensure the month/day is always in 2 digit format
+    const dd = ("0" + today.getDate()).slice(-2);
+    const mm = ("0" + today.getMonth() + 1).slice(-2); //January is 0!
     const yyyy = today.getFullYear();
     
-    if (dd < 10) {
-      dd = '0' + dd;
-    }
-    
-    if (mm < 10) {
-      mm = '0' + mm;
-    }
-    
     // DefaultValue (Date Component of Material UI) requires this specific date format otherwise won't  recognise/accept
-    return today = `${yyyy}-${mm}-${dd}`;
+    return `${yyyy}-${mm}-${dd}`;
     }
-
-// export default getDateToday;

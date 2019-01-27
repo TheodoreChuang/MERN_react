@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import getDateToday from "./DateHelper";
-
-console.log("line 7");
-getDateToday();
+import currentDate from "./DateHelper";
 
 const styles = theme => ({
   container: {
     display: 'flex',
+    flexDirection: 'column',
     flexWrap: 'wrap',
   },
   textField: {
@@ -23,12 +21,12 @@ const styles = theme => ({
 function DatePickers(props) {
   const { classes, label, meta: {touched, error}, input } = props;
   const { value, ...otherInput } = input;
-  console.log(props);
+  
   return (
     <div className={classes.container} noValidate>
       <TextField
         {...otherInput}
-        defaultValue={getDateToday()}
+        // defaultValue={currentDate()}
         id="date"
         label={label}
         type="date"

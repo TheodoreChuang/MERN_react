@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import { addChallenge } from "./../../actions"
 import Button from '@material-ui/core/Button';
 import Loader from "./../Loader";
-import DateC from "./fields/Date";
+import DateField from "./fields/DateField";
+import DateHelper from "./fields/DateHelper";
 
 class NewChallengeForm extends Component {
     state = { loading: false }
@@ -39,7 +40,6 @@ class NewChallengeForm extends Component {
         )}
 
     render() {
-        console.log("rendered");
         const { handleSubmit } = this.props;
 
         return (
@@ -49,7 +49,7 @@ class NewChallengeForm extends Component {
                         <Field
                         name="title"
                         component={Input}
-                        placeholder="title"
+                        placeholder="Title of challenge"
                         type="text"
                         />
                     </div>
@@ -57,7 +57,7 @@ class NewChallengeForm extends Component {
                         <Field
                         name="description"
                         component={Input}
-                        placeholder="description of challenge"
+                        placeholder="Description of challenge"
                         type="text"
                         multiline
                         />
@@ -66,22 +66,15 @@ class NewChallengeForm extends Component {
                         <Field
                         name="creator_id"
                         component={Input}
-                        placeholder="creator id"
+                        placeholder="Creator id"
                         type="text"
                         />
                     </div>
-                    {/* <div>
-                        <Field
-                        name="expiry_date"
-                        component={Input}
-                        type="date"
-                        />
-                    </div> */}
                     <div>
                         <Field
                         name="expiry_date"
-                        label="expiry date"
-                        component={DateC}
+                        label="Expiry date"
+                        component={DateField}
                         type="date"
                         />
                     </div>
@@ -132,8 +125,8 @@ const WrappedNewChallengeForm = reduxForm({
         errors.description = "Required!"
     }
 
-    if (expiry_date > "2000-01-01") {
-        errors.expiry_date = "testing"
+    if (expiry_date < DateHelper()) {
+        errors.expiry_date = "Invalid!"
     }
 
     if (video) {
