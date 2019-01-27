@@ -5,8 +5,11 @@ import { connect } from "react-redux";
 import { addSubmission } from "./../../actions"
 import Button from '@material-ui/core/Button';
 import { withRouter } from "react-router-dom";
+import Loader from "./../Loader";
 
 class SubmissionForm extends Component {
+    state = { loading: false }
+
     onUploadSubmit = (formValues) => {
         const { title, description, video } = formValues;
         const { addSubmission, match, history } = this.props;
@@ -20,13 +23,21 @@ class SubmissionForm extends Component {
             fd.append("description", description);
         }
        
-        addSubmission(fd, match.params.id);
-        history.push(`/challenges/${match.params.id}`);
-    }
+        addSubmission(
+            () => {
+                this.setState({ loading: true });
+            },
+            fd, match.params.id,
+            () =>  {
+                this.setState({ loading: "success" });
+            });
+
+        // history.push(`/challenges/${match.params.id}`);
+        }
 
     render() {
         const { handleSubmit } = this.props;
-        console.log(this.props);
+
         return (
             <form onSubmit= {handleSubmit(this.onUploadSubmit)} encType="multipart/form-data">
                 <div>
@@ -59,6 +70,12 @@ class SubmissionForm extends Component {
                     type="submit">
                     Join Challenge
                     </Button>
+                </div>
+                <div>
+                    {this.state.loading === true && <Loader />}
+                </div>
+                <div>
+                    {this.state.loading === "success" && "Submission Succesful!"}
                 </div>
             </form>
         );

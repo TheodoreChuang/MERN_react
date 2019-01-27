@@ -57,9 +57,11 @@ export const fetchSubmissions = () => {
     };
 }
 
-export const addSubmission = (fd, id) => {
+export const addSubmission = (cbOne, fd, id , cbTwo) => {
     return async (dispatch, getState) => {
+        cbOne();
         const response = await LocalApi.post(`/challenges/${id}/submissions`, fd)
+        cbTwo();
 
         dispatch({
             type: "SUBMISSIONS_LIST",

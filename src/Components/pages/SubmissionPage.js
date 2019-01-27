@@ -8,8 +8,11 @@ class SubmissionPage extends Component {
         return (
             <div>
                 <NavBar />
-                <h1> Submit Challenge </h1>
-                <SubmissionForm/>
+                <div
+                style={{display: "flex", justifyContent: "center", height: "100vh", alignItems: "center", flexDirection:"column"}}>
+                    <h1> Submit challenge </h1>
+                    <SubmissionForm/>
+                </div>
             </div>
             );
         }
