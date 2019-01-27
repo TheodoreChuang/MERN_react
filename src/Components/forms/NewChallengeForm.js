@@ -12,31 +12,28 @@ class NewChallengeForm extends Component {
     state = { loading: false }
 
     onUploadSubmit = (formValues) => {
-        const { title, description, video, creator_id, expiry_date } = formValues;
-        this.uploadFile(video[0], title, description, creator_id, expiry_date);
-        console.log(formValues);
-    }
-
-    uploadFile = (file, title, description, creator_id, expiry_date) => {
         const { addChallenge } = this.props;
+        const { title, description, video, creator_id, expiry_date } = formValues;
 
-        // Using FD to let express server our data includes a file type
         const fd = new FormData();
-        fd.append("video", file);
+        fd.append("video", video[0]);
         fd.append("title", title);
         fd.append("description", description);
         fd.append("creator_id", creator_id);
-        fd.append("expiry_date", expiry_date);
-        console.log(fd);
-        addChallenge(
-        () => {
-            console.log("inside cb1");
-            this.setState({ loading: true });
-        },
-        fd, 
-        async () =>  {
-            await this.setState({ loading: "success" });
+        // Conditional as expiry_date value might not be entered as it is not mandatory
+        if (expiry_date) {
+            fd.append("expiry_date", expiry_date);
         }
+
+        addChallenge(
+            // Callbacks added for loading animation
+            () => {
+                this.setState({ loading: true });
+            },
+            fd, 
+            () =>  {
+                this.setState({ loading: "success" });
+            }
         )}
 
     render() {
@@ -103,8 +100,6 @@ class NewChallengeForm extends Component {
         );
     }
 }
-
-//include validation on video on form
 
 const WrappedNewChallengeForm = reduxForm({
     form: "upload",
