@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -16,19 +16,36 @@ class App extends Component {
     return (
       <div>
         <BrowserRouter>
-            <div>
-              <Switch>
-                <Route exact path = "/termsandconditions" component = {TermsAndConditions} />
-                <Route exact path = "/landing" component = {LandingPage} />
-                <Route exact path = "/login" component = {LoginPage} />
-                <Route exact path = "/register" component = {RegisterPage} />
-                <PrivateRoute exact path = "/profile" component = {ProfilePage} />
-                <PrivateRoute exact path = "/home" component = {NewsFeedPage} />
-                <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
-                <PrivateRoute exact path = "/challenges/:id" component = {ChallengePage } />
-                <PrivateRoute exact path = "/challenges/:id/submit" component = {SubmissionPage} />
-              </Switch>
-            </div>
+          <div>
+            <Switch>
+              <Route
+                exact
+                path="/termsandconditions"
+                component={TermsAndConditions}
+              />
+              <Route exact path="/landing" component={LandingPage} />
+              <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/register" component={RegisterPage} />
+              <Route exact path="/profile/:id" component={ProfilePage} />
+              <PrivateRoute exact path="/profile" component={ProfilePage} />
+              <PrivateRoute exact path="/home" component={NewsFeedPage} />
+              <PrivateRoute
+                exact
+                path="/newchallenge"
+                component={NewChallengePage}
+              />
+              <PrivateRoute
+                exact
+                path="/challenges/:id"
+                component={ChallengePage}
+              />
+              <PrivateRoute
+                exact
+                path="/challenges/:id/submit"
+                component={SubmissionPage}
+              />
+            </Switch>
+          </div>
         </BrowserRouter>
       </div>
     );

@@ -43,6 +43,9 @@ const styles = theme => ({
   },
   label: {
     textTransform: "none"
+  },
+  cardContainer: {
+    margin: "20px"
   }
 });
 
@@ -102,7 +105,10 @@ class NewsFeedPage extends Component {
                 submissions.map(function(submission) {
                   console.log("submission feed", submission);
                   return (
-                    <div key={submission.submission_id}>
+                    <div
+                      key={submission.submission_id}
+                      className={classes.cardContainer}
+                    >
                       <ChallengeCard
                         id={submission.challenge_id}
                         user_id={submission.submission_user_id}
@@ -121,7 +127,7 @@ class NewsFeedPage extends Component {
               {challenges &&
                 challenges.map(function(challenge) {
                   return (
-                    <div key={challenge._id}>
+                    <div key={challenge._id} className={classes.cardContainer}>
                       <ChallengeCard
                         id={challenge._id}
                         user_id={challenge.user.creator_id}

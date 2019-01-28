@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -18,14 +18,15 @@ import red from "@material-ui/core/colors/red";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
 import SocialShareIcon from "./../icons/SocialShareIcon";
 
 import YTvideo from "../YTvideo";
 
 const styles = theme => ({
   card: {
-    //  maxWidth: 600,
+    minWidth: 275,
+    maxWidth: 600,
+    padding: "20px"
   },
   menuButton: {
     marginLeft: -12,
@@ -50,13 +51,10 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: red[500]
-  },
-  custom: {
-    padding: "20px"
   }
 });
 
-class ChallengeCard extends React.Component {
+class ChallengeCard extends Component {
   state = {
     expanded: false,
     anchorEl: null,
@@ -122,8 +120,8 @@ class ChallengeCard extends React.Component {
     );
 
     return (
-      <div className={`${classes.root} ${classes.custom}`}>
-        <Card className={`${classes.card} ${classes.test}`}>
+      <div className={`${classes.root}`}>
+        <Card className={classes.card}>
           <CardHeader
             avatar={
               <Avatar aria-label="avatar" className={classes.avatar}>

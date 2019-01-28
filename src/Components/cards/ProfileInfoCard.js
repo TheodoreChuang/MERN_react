@@ -1,106 +1,101 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import CardMedia from '@material-ui/core/CardMedia';
-import Grid from '@material-ui/core/Grid';
-import photo from './images/profile_image.jpg';
-import LocalApi from './../../apis/local';
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import CardMedia from "@material-ui/core/CardMedia";
+import Grid from "@material-ui/core/Grid";
 
-
-
-const styles = {
+const styles = theme => ({
   card: {
     minWidth: 275,
     maxWidth: 600,
+    padding: "20px"
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
+  grid: {
+    flexGrow: 1
   },
   media: {
-    height: '100px',
-    width: '100px',
+    height: "100px",
+    width: "100px",
+    borderRadius: "50%",
+    marginBottom: "20px"
+  },
+  typography: {
+    textAlign: "center"
   }
-};
+});
 
-
-
-class SimpleCard extends React.Component  {
+class ProfileInfoCard extends Component {
   state = {
     user: {}
-  }
-
-  // async componentDidMount() {
-  //   console.log(this.state.users)
-  //   await LocalApi.get('/profile/test')
-  //   // .then(res => res.json())
-  //   .then( users => this.setState({ users }));
-  //   console.log(this.state.users)
-    
-  // }
-
-  async componentDidMount() {
-    // console.log(this.state.users)
-    await LocalApi.get('/profile/info')
-    .then( res => this.setState({ user: res.data }))
-    // console.log(this.state.users)
-  }
+  };
 
   render() {
-    const { classes } = this.props;
-    const bull = <span className={classes.bullet}>•</span>;
+    const {
+      classes,
+      first_name,
+      last_name,
+      nickname,
+      bio,
+      profile_image,
+      gender,
+      age,
+      location
+    } = this.props;
 
-  return (
-    <Card className={classes.card}>
-      <CardContent>
-        <Grid container direction="row" justify="center" alignItems="center">
-          <CardMedia
-          className={classes.media}
-          image={photo}
-          title="Profile Picture" />
+    return (
+      <Card>
+        <CardContent className={classes.card}>
+          <Grid className={classes.grid} container>
+            <Grid item xs={4} />
+            <Grid item xs={4} container justify="center">
+              <CardMedia
+                className={classes.media}
+                image={profile_image}
+                title="Profile Picture"
+              />
+            </Grid>
+            <Grid
+              item
+              xs={4}
+              container
+              direction="column"
+              justify="center"
+              alignItems="flex-start"
+            >
+              <Typography className={classes.typography} variant="button">
+                {gender}
+              </Typography>
+              <Typography className={classes.typography} variant="caption">
+                {age} years old
+              </Typography>
+              <Typography className={classes.typography} variant="caption">
+                {location}
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid container direction="column" justify="center" alignItems="center">
-          <Typography>
-            {this.state.user.first_name}
-          </Typography>
-          <Typography>
-          {this.state.user.email}
-          </Typography>
-          <Typography>
-            Age: 40
-          </Typography>
-          <Typography>
-            Gender: Male
-          </Typography>
-          <Typography>
-          I'm really passionate about outdoofr 
-          activites, but that's not why I'm here. I'm 
-          here to challenge and get challenged to 
-          make the world a better place.
-          </Typography>
-        </Grid>
-      </CardContent>
-      <CardActions>
-        {/* <Button size="small">Learn More</Button> */}
-      </CardActions>
-    </Card>
-  );
-}
+
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
+            <Typography className={classes.typography} variant="h5">
+              {first_name} {last_name}
+            </Typography>
+            <Typography className={classes.typography} variant="body2">
+              {nickname}
+            </Typography>
+            <Typography className={classes.typography} variant="body1">
+              {bio}
+            </Typography>
+          </Grid>
+        </CardContent>
+      </Card>
+    );
+  }
 }
 
-SimpleCard.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(SimpleCard);
+export default withStyles(styles)(ProfileInfoCard);
