@@ -98,7 +98,7 @@ class NewsFeedPage extends Component  {
                         {submissions && submissions.map (function(submission) {
                             console.log(submission);
                             return ( 
-                                <div key={submission.title}>
+                                <div key={submission._id}>
                                     <ChallengeCard yt_id={submission.yt_id} title={submission.title}  date_created={submission.date_created} id={submission._id} /> 
                                 </div>
                             );
@@ -107,7 +107,7 @@ class NewsFeedPage extends Component  {
                     <TabContainer dir={theme.direction}>
                         {challenges && challenges.map (function(challenge) {
                             return ( 
-                                <div key={challenge.title}>
+                                <div key={challenge._id}>
                                     <ChallengeCard yt_id={challenge.yt_id} title={challenge.title} description={challenge.description}  date_created={challenge.date_created} 
                                     id={challenge._id}/> 
                                 </div>

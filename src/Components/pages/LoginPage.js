@@ -7,7 +7,7 @@ class LoginPage extends Component {
         return (
             <div className="container">
             <h2> oneup </h2>
-                <LoginForm history = {this.props.history}/>
+                <LoginForm />
             </div>
         );
     }

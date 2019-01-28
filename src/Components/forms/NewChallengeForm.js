@@ -93,7 +93,8 @@ class NewChallengeForm extends Component {
                 <div>
                     {this.state.loading === true && <Loader />}
                 </div>
-                <div>
+                <div
+                style={{color: "green", marginLeft: "10px"}}>
                     {this.state.loading === "success" && "Upload Succesful!"}
                 </div>
             </div>

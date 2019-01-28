@@ -10,6 +10,7 @@ import ProfilePage from "./pages/ProfilePage";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import ChallengePage from "./pages/ChallengePage";
 import NewsFeedPage from "./pages/NewsFeedPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 class App extends Component {
   render() {
@@ -27,6 +28,7 @@ class App extends Component {
                 <PrivateRoute exact path = "/newchallenge" component = {NewChallengePage} />
                 <PrivateRoute exact path = "/challenges/:id" component = {ChallengePage } />
                 <PrivateRoute exact path = "/challenges/:id/submit" component = {SubmissionPage} />
+                <PrivateRoute exact path = "/resetpassword/:token" component = {ResetPasswordPage} />
               </Switch>
             </div>
         </BrowserRouter>

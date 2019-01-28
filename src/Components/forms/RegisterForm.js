@@ -72,6 +72,7 @@ class RegisterForm extends Component {
         render() {
             const { classes } = this.props;
             const { handleSubmit } = this.props;
+            console.log(this.props);
             
             return (
             <div className={classes.body}>
@@ -177,27 +178,27 @@ const WrappedRegisterForm = reduxForm({
         const errors = {}
 
         if (!first_name) {
-            errors.first_name = "First name is required!"
+            errors.first_name = "Required!"
         }
 
         if (!last_name) {
-            errors.last_name = "Last name is required!"
+            errors.last_name = "Required!"
         }
 
         if (!nickname) {
-            errors.nickname = "Nickname is required!"
+            errors.nickname = "Required!"
         }
 
         if (!email) {
-            errors.email = "Email is required!"
+            errors.email = "Required!"
         }
 
         if (!password) {
-            errors.password = "Password is required!"
+            errors.password = "Required!"
         }
 
         if (!terms_conditions) {
-            errors.terms_conditions = "Please confirm your agreement to Terms & Conditions!"
+            errors.terms_conditions = "Required!"
         }
 
         return errors;

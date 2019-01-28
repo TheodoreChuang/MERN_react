@@ -10,6 +10,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
+import FormDialog from "./FormDialog";
 
 const styles = theme => ({
     container: {
@@ -52,11 +54,13 @@ const styles = theme => ({
 class LoginForm extends Component {
     
     onLoginFormSubmit = (formValues) => {
-        const { email, password } = formValues;
+      const { history } = this.props;
+      const { email, password } = formValues;
+
         LocalApi.post("/login", {email, password})
         .then(response => {
             setAuthToken(response.data.token);
-            this.props.history.push("/");
+            history.push("/");
         })
         .catch(err => console.log(err));
     }
@@ -92,12 +96,25 @@ class LoginForm extends Component {
                 />
                 <div className={classes.checkbox}>
                 <div className={classes.checkboxButton} >
+                <div>
+                  <FormDialog 
+                  buttonText= "Forgot password?"
+                  header="Reset password"
+                  content="A link will be emailed to the address you provide below with instructions."
+                  submitButtonText="Send"
+                  action={(value) => {
+                    LocalApi.post("/reseturl", {
+                      email: value
+                    })
+                  }}
+                  />
+                </div>
                 <Fab type="submit" variant="extended" color="primary" aria-label="Add" className={classes.margin}>
                     Log In
                 </Fab>
                 </div>
                 <div className={classes.signin}> 
-                <Typography>Dont have an account? <Link to="/register">Register</Link></Typography>
+                <Typography>Dont have an account? <Link to="/register">Sign Up</Link></Typography>
                 </div>
                 </div>
                 </form>
@@ -125,4 +142,4 @@ const WrappedRegisterForm = reduxForm({
 
 export default connect(null, {
     setAuthToken
-}) (WrappedRegisterForm);
+}) (withRouter(WrappedRegisterForm));

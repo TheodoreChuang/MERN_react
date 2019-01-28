@@ -74,7 +74,8 @@ class SubmissionForm extends Component {
                 <div>
                     {this.state.loading === true && <Loader />}
                 </div>
-                <div>
+                <div
+                style={{color: "green", marginLeft: "10px"}}>
                     {this.state.loading === "success" && "Submission Succesful!"}
                 </div>
             </form>
