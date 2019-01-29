@@ -52,6 +52,7 @@ const styles = theme => ({
   });
 
 class LoginForm extends Component {
+  state = { error : "" }
     
     onLoginFormSubmit = (formValues) => {
       const { history } = this.props;
@@ -98,6 +99,7 @@ class LoginForm extends Component {
                 <div className={classes.checkboxButton} >
                 <div>
                   <FormDialog 
+                  style={{ backgroundColor: "transparent", textTransform: "none" }}
                   buttonText= "Forgot password?"
                   header="Reset password"
                   content="A link will be emailed to the address you provide below with instructions."
@@ -105,6 +107,19 @@ class LoginForm extends Component {
                   action={(value) => {
                     LocalApi.post("/reseturl", {
                       email: value
+                    })
+                    .then(res => {
+                      if (res.status === 200) {
+                        return alert("Email succesfully sent!");
+                      }
+
+                    })
+                    .catch(err => {
+                      let error = "";
+                      for(let i in err.response.data) {
+                        error += `${err.response.data[i]} \r\n`;
+                      }
+                      return alert(error);
                     })
                   }}
                   />
@@ -118,6 +133,7 @@ class LoginForm extends Component {
                 </div>
                 </div>
                 </form>
+                {"Success" && this.state.error === "success"}
               </div>
             );
           }

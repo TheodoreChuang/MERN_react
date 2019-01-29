@@ -30,7 +30,9 @@ export default class FormDialog extends React.Component {
 
     return (
       <div>
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}
+        style={{ border: "none", backgroundColor: "transparent", textTransform: "none" }}
+        >
           {buttonText}
         </Button>
         <Dialog
@@ -59,7 +61,6 @@ export default class FormDialog extends React.Component {
             </Button>
             <Button onClick={
               () => {
-                console.log(this.state.email);
                 action(this.state.email);
               this.handleClose();
             }} color="primary">

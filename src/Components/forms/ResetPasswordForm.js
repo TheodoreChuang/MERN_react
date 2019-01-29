@@ -6,9 +6,10 @@ import Input from "./fields/Input";
 import Button from '@material-ui/core/Button';
 
 class ResetPasswordForm extends Component {
-    state = { email: null, success: "" }
+    state = { error: "" }
 
     onFormSubmit = (formValues) => {
+        const { history} = this.props;
         const { token } = this.props.match.params;
         const { password, confirm_password } = formValues;
 
@@ -16,19 +17,38 @@ class ResetPasswordForm extends Component {
             return alert("Passwords don't match");
         }
 
-        LocalApi.put(`/resetpassword/${token}`, {password});
+        LocalApi.put(`/resetpassword/${token}`, {password})
+        .then(res => {
+
+            if (res.status === 200) {
+                console.log("200");
+                alert("Password succesfully updated!")
+                return history.push("/");
+                }
+            })
+        .catch(err => {
+            this.setState({ error: true });
+                return alert(err);
+            })
     }
     
     async componentDidMount() {
-        console.log(this.props.match.params);
+        console.log("mounted"); 
         await LocalApi.get(`/resetpassword/${this.props.match.params.token}`)
         .then(res => {
-            if (res.data.message === "valid") {
-                console.log("cool");
-                this.setState({ success: "test" });
+
+            if (res.status === 200) {
+                return this.setState({ error: false });
             }
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            this.setState({ error: true });
+            let error = "";
+            for(let i in err.response.data) {
+              error += `${err.response.data[i]} \r\n`;
+            }
+            return alert(error);
+          })
     }
 
     render() {
@@ -36,31 +56,33 @@ class ResetPasswordForm extends Component {
         const { handleSubmit } = this.props;
 
         return (
-            <form onSubmit= {handleSubmit(this.onFormSubmit)}>
-                <div>
-                    <Field
-                    placeholder="new password"
-                    name="password"
-                    component={Input}
-                    type="password"
-                    />
-                </div>
-                <div>
-                    <Field
-                    placeholder="confirm new password"
-                    name="confirm_password"
-                    component={Input}
-                    type="password"
-                    />
-                </div>
-                <div>
-                    <Button
-                    style={{textTransform: "none"}}
-                    type="submit">
-                    Change Password
-                    </Button>
-                </div>
-            </form>
+            <div>
+                {this.state.error === false && <form onSubmit= {handleSubmit(this.onFormSubmit)}>
+                    <div>
+                        <Field
+                        placeholder="new password"
+                        name="password"
+                        component={Input}
+                        type="password"
+                        />
+                    </div>
+                    <div>
+                        <Field
+                        placeholder="confirm new password"
+                        name="confirm_password"
+                        component={Input}
+                        type="password"
+                        />
+                    </div>
+                    <div>
+                        <Button
+                        style={{textTransform: "none"}}
+                        type="submit">
+                        Change Password
+                        </Button>
+                    </div>
+                </form> }
+            </div>
         )
     }
 }
