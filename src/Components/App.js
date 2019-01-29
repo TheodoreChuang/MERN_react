@@ -19,25 +19,47 @@ class App extends Component {
     return (
       <div>
         <BrowserRouter>
-
-          <div>
             <Switch>
               <Route
                 exact
                 path="/termsandconditions"
                 component={TermsAndConditions}
               />
-              <Route exact path = "/updateinfo" component = {UpdateProfileInfoPage} />
-              <Route exact path="/landing" component={LandingPage} />
-              <Route exact path="/login" component={LoginPage} />
-              <Route exact path="/register" component={RegisterPage} />
-              <Route exact path="/profile/:id" component={ProfilePage} />
+              <Route 
+                exact 
+                path = "/updateinfo" 
+                component={UpdateProfileInfoPage} 
+              />
+              <Route 
+                exact 
+                path="/landing" 
+                component={LandingPage} 
+              />
+              <Route 
+                exact 
+                path="/login" 
+                component={LoginPage} 
+              />
+              <Route 
+                exact 
+                path="/register" 
+                component={RegisterPage} 
+              />
+              <Route 
+                exact 
+                path="/profile/:id" 
+                component={ProfilePage} 
+              />
               <PrivateRoute
                 exact
                 path="/profile"
                 component={ProfileCurrentPage}
               />
-              <PrivateRoute exact path="/" component={NewsFeedPage} />
+              <PrivateRoute 
+                exact 
+                path="/" 
+                component={NewsFeedPage} 
+              />
               <PrivateRoute
                 exact
                 path="/newchallenge"
@@ -53,8 +75,11 @@ class App extends Component {
                 path="/challenges/:id/submit"
                 component={SubmissionPage}
               />
+              <Route 
+                exact 
+                path="/resetpassword/:token" 
+                component={ResetPasswordPage} />
             </Switch>
-          </div>
         </BrowserRouter>
       </div>
     );

@@ -19,8 +19,6 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import SocialShareIcon from "./../icons/SocialShareIcon";
-
-import YTvideo from "../YTvideo";
 import LocalApi from "./../../apis/local";
 import VideoPlayer from "./../VideoPlayer";
 
