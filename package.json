@@ -44,5 +44,6 @@
     "enzyme-adapter-react-16": "^1.7.1",
     "jest": "^23.6.0",
     "jest-enzyme": "^7.0.1"
-  }
+  },
+  "proxy": "https://one-up-webapp.herokuapp.com/"
 }
