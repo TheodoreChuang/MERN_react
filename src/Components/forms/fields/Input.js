@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 const styles = theme => ({
     container: {
       display: 'flex',
+      flexDirection: 'column',
       flexWrap: 'wrap',
     },
     input: {
@@ -28,8 +29,10 @@ const styles = theme => ({
       onChange(value);
     }
 
+
     render() {
-      const { classes, meta, input, ...other } = this.props;
+      // Props are coming off redux form
+      const { classes, meta: {touched, error}, input, ...other } = this.props;
       const { value, onChange, ...otherInput } = input;
       const { current } = this.state;
 
@@ -38,12 +41,13 @@ const styles = theme => ({
           <Input
             {...other}
             {...otherInput}
-            meta={meta}
             className={classes.input}
-            value={other.type === "file" ? current : value}
+            value={other.type === "file" ? current : value }
             onChange={this.onChange}
           />
-          <div> {meta.touched && meta.error} </div>
+          <div
+          style={{color:"red", marginLeft: "10px"}}> 
+            {touched && error} </div>
         </div>
       );
     }
@@ -54,18 +58,3 @@ const styles = theme => ({
   };
   
   export default withStyles(styles)(Inputs);
-
-  //old code
-  // const Input = ({meta, input, type, name, placeholder, value, creator_id, required }) => {
-    
-//     return (
-//         <span>
-            
-//             <input {...input} type={type} name={name} placeholder={placeholder} value={value} creator_id={creator_id} required = {required} autoComplete="off"  />
-
-//             <span> {meta.touched && meta.error} </span>
-//         </span>
-//     );
-// }
-
-// export default Input;

@@ -9,13 +9,14 @@ import ChallengeCard from "./../cards/ChallengeCard";
 import NavBar from "../NavBar";
 
 // Materalize
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import SwipeableViews from "react-swipeable-views";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import SwipeableViews from 'react-swipeable-views';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import TestPage from "./TestPage";
 
 function TabContainer({ children, dir }) {
   return (

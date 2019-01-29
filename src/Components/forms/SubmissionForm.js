@@ -4,35 +4,47 @@ import Input from "./fields/Input";
 import { connect } from "react-redux";
 import { addSubmission } from "./../../actions"
 import Button from '@material-ui/core/Button';
+import { withRouter } from "react-router-dom";
+import Loader from "./../Loader";
 
 class SubmissionForm extends Component {
+    state = { loading: false }
+
     onUploadSubmit = (formValues) => {
         const { title, description, video } = formValues;
-        this.uploadFile(video[0], title, description);
-    }
-
-    uploadFile = (file, title, description) => {
-        
         const { addSubmission, match, history } = this.props;
         const fd = new FormData();
-        fd.append("video", file);
-        fd.append("title", title);
-        fd.append("description", description);
 
-        addSubmission(fd, match.params.id);
-        history.push(`/challenges/${match.params.id}`);
-    }
+        fd.append("video", video[0]);
+        fd.append("title", title);
+
+        // Conditional as description value might not be entered as it is not mandatory
+        if (description) {
+            fd.append("description", description);
+        }
+       
+        addSubmission(
+            () => {
+                this.setState({ loading: true });
+            },
+            fd, match.params.id,
+            () =>  {
+                this.setState({ loading: "success" });
+            });
+
+        // history.push(`/challenges/${match.params.id}`);
+        }
 
     render() {
         const { handleSubmit } = this.props;
-        console.log(this.props);
+
         return (
             <form onSubmit= {handleSubmit(this.onUploadSubmit)} encType="multipart/form-data">
                 <div>
                     <Field
                     name="title"
                     component={Input}
-                    placeholder="title"
+                    placeholder="Title"
                     type="text"
                     />
                 </div>
@@ -40,8 +52,9 @@ class SubmissionForm extends Component {
                     <Field
                     name="description"
                     component={Input}
-                    placeholder="description of challenge"
+                    placeholder="Description of submission"
                     type="text"
+                    multiline
                     />
                 </div>
                 <div>
@@ -53,26 +66,38 @@ class SubmissionForm extends Component {
                 </div>
                 <div>
                     <Button
+                    style={{textTransform: "none"}}
                     type="submit">
                     Join Challenge
                     </Button>
+                </div>
+                <div>
+                    {this.state.loading === true && <Loader />}
+                </div>
+                <div
+                style={{color: "green", marginLeft: "10px"}}>
+                    {this.state.loading === "success" && "Submission Succesful!"}
                 </div>
             </form>
         );
     }
 }
 
-//include validation on video on form
-
 const WrappedSubmissionForm = reduxForm({
     form: "submission",
     validate: ({
-        title
+        title, video
     }) => {
     const errors = {}
     
     if (!title) {
-        errors.title = "title is required!"
+        errors.title = "Required!"
+    }
+
+    if (video) {
+        if (video.length < 1) {
+            errors.video = "Required!"
+        }
     }
 
     return errors;
@@ -88,4 +113,4 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     addSubmission
-})(WrappedSubmissionForm);
+}) (withRouter(WrappedSubmissionForm));

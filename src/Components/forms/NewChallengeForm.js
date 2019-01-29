@@ -4,109 +4,136 @@ import Input from "./fields/Input";
 import { connect } from "react-redux";
 import { addChallenge } from "./../../actions"
 import Button from '@material-ui/core/Button';
-import { Link } from "react-router-dom";
+import Loader from "./../Loader";
+import DateField from "./fields/DateField";
+import DateHelper from "./fields/DateHelper";
 
 class NewChallengeForm extends Component {
+    state = { loading: false }
+
     onUploadSubmit = (formValues) => {
-
-        const { title, description, video, creator_id, expiry_date } = formValues;
-        this.uploadFile(video[0], title, description, creator_id, expiry_date);
-        console.log(formValues);
-    }
-
-    uploadFile = (file, title, description, creator_id, expiry_date) => {
         const { addChallenge } = this.props;
+        const { title, description, video, creator_id, expiry_date } = formValues;
 
         const fd = new FormData();
-        fd.append("video", file);
+        fd.append("video", video[0]);
         fd.append("title", title);
         fd.append("description", description);
         fd.append("creator_id", creator_id);
-        fd.append("expiry_date", expiry_date);
-        console.log(fd);
-        addChallenge(fd);
-    }
+        // Conditional as expiry_date value might not be entered as it is not mandatory
+        if (expiry_date) {
+            fd.append("expiry_date", expiry_date);
+        }
+
+        addChallenge(
+            // Callbacks added for loading animation
+            () => {
+                this.setState({ loading: true });
+            },
+            fd, 
+            () =>  {
+                this.setState({ loading: "success" });
+            }
+        )}
 
     render() {
         const { handleSubmit } = this.props;
 
         return (
             <div>
-            <Link to="/">
-            to Feed
-            </Link>
-            <form onSubmit= {handleSubmit(this.onUploadSubmit)} encType="multipart/form-data">
+                <form onSubmit= {handleSubmit(this.onUploadSubmit)} encType="multipart/form-data">
+                    <div>
+                        <Field
+                        name="title"
+                        component={Input}
+                        placeholder="Title of challenge"
+                        type="text"
+                        />
+                    </div>
+                    <div>
+                        <Field
+                        name="description"
+                        component={Input}
+                        placeholder="Description of challenge"
+                        type="text"
+                        multiline
+                        />
+                    </div>
+                    <div>
+                        <Field
+                        name="creator_id"
+                        component={Input}
+                        placeholder="Creator id"
+                        type="text"
+                        />
+                    </div>
+                    <div>
+                        <Field
+                        name="expiry_date"
+                        label="Expiry date"
+                        component={DateField}
+                        type="date"
+                        />
+                    </div>
+                    <div>
+                        <Field
+                        name="video"
+                        component={Input}
+                        type="file"
+                        />
+                    </div>
+                    <div>
+                        <Button
+                        style={{textTransform: "none"}}
+                        type="submit">
+                        Upload Challenge
+                        </Button>
+                    </div>
+                </form>
                 <div>
-                    <Field
-                    name="creator_id"
-                    component={Input}
-                    placeholder="creator_id"
-                    type="text"
-                    />
+                    {this.state.loading === true && <Loader />}
                 </div>
-                <div>
-                    <Field
-                    name="expiry_date"
-                    component={Input}
-                    placeholder="expiry date"
-                    type="date"
-                    />
+                <div
+                style={{color: "green", marginLeft: "10px"}}>
+                    {this.state.loading === "success" && "Upload Succesful!"}
                 </div>
-                <div>
-                    <Field
-                    name="title"
-                    component={Input}
-                    placeholder="title"
-                    type="text"
-                    />
-                </div>
-                <div>
-                    <Field
-                    name="description"
-                    component={Input}
-                    placeholder="description of challenge"
-                    type="text"
-                    />
-                </div>
-                <div>
-                    <Field
-                    name="video"
-                    component={Input}
-                    type="file"
-                    />
-                </div>
-                <div>
-                    <Button
-                    type="submit">
-                    Upload Challenge
-                    </Button>
-                </div>
-            </form>
             </div>
         );
     }
 }
 
-//include validation on video on form
-
 const WrappedNewChallengeForm = reduxForm({
     form: "upload",
-    // validate: ({
-    //     title, description
-    // }) => {
-    // const errors = {}
+    validate: ({
+        title, description, creator_id, video, expiry_date
+    }) => {
+    const errors = {}
+
+    if (!creator_id) {
+        errors.creator_id = "Required!"
+    }
     
-    // if (!title) {
-    //     errors.title = "title is required!"
-    // }
+    if (!title) {
+        errors.title = "Required!"
+    }
 
-    // if (!description) {
-    //     errors.description = "video description is required!"
-    // }
+    if (!description) {
+        errors.description = "Required!"
+    }
 
-    // return errors;
+    if (expiry_date < DateHelper()) {
+        errors.expiry_date = "Invalid!"
+    }
 
-    // }
+    if (video) {
+        if (video.length < 1 ) {
+            errors.video = "Required"
+        }
+    }
+
+    return errors;
+
+    }
 })(NewChallengeForm);
 
 const mapStateToProps = (state) => {

@@ -5,13 +5,14 @@ import NavBar from "../NavBar";
 class SubmissionPage extends Component {
 
     render() {
-        const { match } = this.props;
-        console.log("rendered");
         return (
             <div>
                 <NavBar />
-                <h1> Submit Challenge </h1>
-                <SubmissionForm match={match}/>
+                <div
+                style={{display: "flex", justifyContent: "center", height: "100vh", alignItems: "center", flexDirection:"column"}}>
+                    <h1> Submit challenge </h1>
+                    <SubmissionForm/>
+                </div>
             </div>
             );
         }

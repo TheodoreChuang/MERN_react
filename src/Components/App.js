@@ -11,6 +11,7 @@ import ProfileCurrentPage from "./pages/ProfileCurrentPage";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import ChallengePage from "./pages/ChallengePage";
 import NewsFeedPage from "./pages/NewsFeedPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 import UpdateProfileInfoPage from "./pages/UpdateProfileInfoPage";
 
 class App extends Component {
@@ -36,7 +37,7 @@ class App extends Component {
                 path="/profile"
                 component={ProfileCurrentPage}
               />
-              <PrivateRoute exact path="/home" component={NewsFeedPage} />
+              <PrivateRoute exact path="/" component={NewsFeedPage} />
               <PrivateRoute
                 exact
                 path="/newchallenge"

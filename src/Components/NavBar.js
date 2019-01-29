@@ -227,7 +227,7 @@ class PrimarySearchAppBar extends Component {
             <div className={classes.sectionDesktop}>
               {!currentPath.includes("home") ? (
                 <span>
-                  <IconButton color="inherit" component={Link} to="/home">
+                  {/* <IconButton color="inherit" component={Link} to="/home">
                     <Home />
                   </IconButton>
                   {currentUser._id && (
@@ -237,10 +237,18 @@ class PrimarySearchAppBar extends Component {
                       to="/profile/edit"
                     >
                       <Edit />
-                    </IconButton>
-                  )}
+                    </IconButton> */}
+                  {/* )} */}
                 </span>
               ) : null}
+
+            {!currentPath.includes('home') ? 
+              <IconButton
+                color="inherit"
+                component={Link} 
+                to="/" >
+                <Home />
+              </IconButton> : null }
 
               {/* Only Admin can create challenge for MVP
               {!currentPath.includes('newchallenge') ?  

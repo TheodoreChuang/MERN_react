@@ -11,6 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
+import CustomizedDialogDemo from "./../PopUp";
 
 const styles = theme => ({
     body: {
@@ -71,6 +72,7 @@ class RegisterForm extends Component {
         render() {
             const { classes } = this.props;
             const { handleSubmit } = this.props;
+            console.log(this.props);
             
             return (
             <div className={classes.body}>
@@ -139,6 +141,19 @@ class RegisterForm extends Component {
                   type="checkbox" 
                   color="primary"/>
                 </div>
+                <CustomizedDialogDemo 
+                title="Terms and Conditions"
+                button="Terms and Conditions"
+                content="You agree not to use the App in any way that:
+                is unlawful, illegal or unauthorised;
+                is defamatory of any other person;
+                is obscene or offensive;
+                promotes discrimination based on race, sex, religion, nationality, disability, sexual orientation or age;
+                infringes any copyright, database right or trade mark of any other person;
+                is likely to harass, upset, embarrass, alarm or annoy any other person;
+                is likely to disrupt our service in any way; or
+                advocates, promotes or assists any unlawful act such as (by way of example only) copyright infringement or computer misuse."
+                />
                 <div>
                 <Fab type="submit" variant="extended" color="primary" aria-label="Add" className={classes.margin}>
                     Register
@@ -163,27 +178,27 @@ const WrappedRegisterForm = reduxForm({
         const errors = {}
 
         if (!first_name) {
-            errors.first_name = "First name is required!"
+            errors.first_name = "Required!"
         }
 
         if (!last_name) {
-            errors.last_name = "Last name is required!"
+            errors.last_name = "Required!"
         }
 
         if (!nickname) {
-            errors.nickname = "Nickname is required!"
+            errors.nickname = "Required!"
         }
 
         if (!email) {
-            errors.email = "Email is required!"
+            errors.email = "Required!"
         }
 
         if (!password) {
-            errors.password = "Password is required!"
+            errors.password = "Required!"
         }
 
         if (!terms_conditions) {
-            errors.terms_conditions = "Please confirm your agreement to Terms & Conditions!"
+            errors.terms_conditions = "Required!"
         }
 
         return errors;
