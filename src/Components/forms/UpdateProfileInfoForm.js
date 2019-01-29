@@ -5,13 +5,10 @@ import LocalApi from "../../apis/local";
 import { setAuthToken } from "./../../actions";
 import { connect } from "react-redux";
 
-import Checkbox from "./fields/CheckboxField";
-
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
-import CustomizedDialogDemo from "./../PopUp";
 
 const styles = theme => ({
     body: {
@@ -19,7 +16,6 @@ const styles = theme => ({
     },
     container: {
       display: 'flex',
-      maxWidth: '400px',
       margin: '50px auto 0 auto',
       position: 'center',
       flexDirection: 'column',
@@ -33,14 +29,6 @@ const styles = theme => ({
     margin: {
       width: '200px',
     },
-    checkbox: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      margin: '10px',
-      maxWidth: '360px',
-      alignItems: 'center',
-    },
     checkboxButton: {
       display: 'flex',
       flexDirection: 'column',
@@ -51,20 +39,28 @@ const styles = theme => ({
       margin: '10px',
       padding: '20px',
     },
+    gender: {
+      color: 'grey',
+      margin: '20px',
+      fontSize: '40px',
+    },
+    title: {
+      marginBottom: '10px'
+    },
   });
 
-class RegisterForm extends Component {
+class UpdateProfileInfoForm extends Component {
     
-    onRegisterFormSubmit = (formValues) => {
-        const { first_name, last_name, nickname, email, password, terms_conditions } = formValues;
+    updateUserFormSubmit = (formValues) => {
+        const { first_name, last_name, nickname } = formValues;
         const { setAuthToken } = this.props;
 
-        LocalApi.post("/register", {first_name, last_name, nickname, email, password, terms_conditions})
+        LocalApi.patch("/profile", {first_name, last_name, nickname})
         .then(response => {
             //acquring token
-            setAuthToken(response.data.token);
+            // setAuthToken(response.data.token);
             //redirect
-            this.props.history.push("/home");
+            //this.props.history.push("/profile");
         })
         .catch(err => console.log(err));
         }
@@ -72,13 +68,14 @@ class RegisterForm extends Component {
         render() {
             const { classes } = this.props;
             const { handleSubmit } = this.props;
-            console.log(this.props);
             
             return (
             <div className={classes.body}>
-              <div className={classes.container} onSubmit = {this.onRegisterFormSubmit}>
-
-                <form onSubmit = {handleSubmit(this.onRegisterFormSubmit)}>
+              <div className={classes.container} onSubmit = {this.updateUserFormSubmit}>
+                <div className={classes.title}>
+                 <Typography variant="h4" gutterBottom >Update Profile Information</Typography>
+                </div>
+                <form onSubmit = {handleSubmit(this.updateUserFormSubmit)}>
                 <Field
                   name="first_name"
                   component={Input}
@@ -111,57 +108,79 @@ class RegisterForm extends Component {
                     'aria-label': 'Description',
                   }}
                 />
-                <Field
-                  name="email"
+                 <Field
+                  name="age"
                   component={Input}
-                  placeholder="Email"
+                  placeholder="Age"
                   className={classes.input}
                   fullWidth
                   inputProps={{
                     'aria-label': 'Description',
                   }}
-                  type="email"
                 />
                 <Field
-                  name="password"
+                  name="location"
                   component={Input}
-                  placeholder="Password"
+                  placeholder="Location"
                   className={classes.input}
                   fullWidth
                   inputProps={{
                     'aria-label': 'Description',
                   }}
-                  type="password"
                 />
-                <div className={classes.checkboxButton} >
-                <div className={classes.checkbox}>
-                  <Field 
-                  name="terms_conditions" 
-                  component={Checkbox}
-                  type="checkbox" 
-                  color="primary"/>
+                <Field
+                  name="bio"
+                  component={Input}
+                  id="outlined-textarea"
+                  label="Bio"
+                  placeholder="Bio"
+                  multiline
+                  className={classes.textField}
+                  margin="normal"
+                  variant="outlined"
+                />
+                <div className={classes.gender}>
+                <div className={classes.title}>
+                <Typography color="inherit">Gender</Typography>
                 </div>
-                <CustomizedDialogDemo 
-                title="Terms and Conditions"
-                button="Terms and Conditions"
-                content="You agree not to use the App in any way that:
-                is unlawful, illegal or unauthorised;
-                is defamatory of any other person;
-                is obscene or offensive;
-                promotes discrimination based on race, sex, religion, nationality, disability, sexual orientation or age;
-                infringes any copyright, database right or trade mark of any other person;
-                is likely to harass, upset, embarrass, alarm or annoy any other person;
-                is likely to disrupt our service in any way; or
-                advocates, promotes or assists any unlawful act such as (by way of example only) copyright infringement or computer misuse."
-                />
+                <div>
+                  <Typography color="inherit">
+                    <Field
+                      name="sex"
+                      component="input"
+                      type="radio"
+                      value="male"
+                    />{' '}
+                    Male
+                  </Typography>
+                  <Typography color="inherit">
+                    <Field
+                      name="sex"
+                      component="input"
+                      type="radio"
+                      value="female"
+                    />{' '}
+                    Female
+                    </Typography>
+                    <Typography color="inherit">
+                    <Field
+                      name="sex"
+                      component="input"
+                      type="radio"
+                      value="Rather not say"
+                    />{' '}
+                    Rather not say
+                    </Typography>
+                </div>
+            </div>
+                <div className={classes.checkboxButton} >
+                
                 <div>
                 <Fab type="submit" variant="extended" color="primary" aria-label="Add" className={classes.margin}>
-                    Register
+                    Update
                 </Fab>
                 </div>
-                <div className={classes.signin}> 
-                <Typography>Already have an account? <Link to="/login">Sign in</Link></Typography>
-                </div>
+                
                 </div>
 
                 </form>
@@ -172,41 +191,41 @@ class RegisterForm extends Component {
 }
 
 
-const WrappedRegisterForm = reduxForm({
+const WrappedUpdateInfoForm = reduxForm({
     form: "register",
-    validate: ({ first_name, last_name, nickname, email, password, terms_conditions }) => {
+    validate: ({ first_name, last_name, nickname }) => {
         const errors = {}
 
         if (!first_name) {
-            errors.first_name = "Required!"
+            errors.first_name = "First name is required!"
         }
 
         if (!last_name) {
-            errors.last_name = "Required!"
+            errors.last_name = "Last name is required!"
         }
 
         if (!nickname) {
-            errors.nickname = "Required!"
+            errors.nickname = "Nickname is required!"
         }
 
-        if (!email) {
-            errors.email = "Required!"
-        }
+        // if (!email) {
+        //     errors.email = "Email is required!"
+        // }
 
-        if (!password) {
-            errors.password = "Required!"
-        }
+        // if (!password) {
+        //     errors.password = "Password is required!"
+        // }
 
-        if (!terms_conditions) {
-            errors.terms_conditions = "Required!"
-        }
+        // if (!terms_conditions) {
+        //     errors.terms_conditions = "Please confirm your agreement to Terms & Conditions!"
+        // }
 
         return errors;
     }
 
-})(withStyles(styles)(RegisterForm))
+})(withStyles(styles)(UpdateProfileInfoForm))
 
 
 export default connect(null, {
     setAuthToken
-})(WrappedRegisterForm);
+})(WrappedUpdateInfoForm);
