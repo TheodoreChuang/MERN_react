@@ -32,7 +32,6 @@ export const fetchChallenges = () => {
 }
 
 export const addChallenge = (cbOne, formValues, cbTwo) => {
-    console.log("inside addchallenge");
     return async (dispatch, getState) => {
         cbOne();
         const response = await LocalApi.post("/challenges/upload", formValues)

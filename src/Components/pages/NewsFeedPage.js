@@ -12,6 +12,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import TestPage from "./TestPage";
 
 function TabContainer({ children, dir }) {
     return (
@@ -44,16 +45,12 @@ const styles = theme => ({
   })
 
 class NewsFeedPage extends Component  {
-    constructor(props) {
-        console.log("newsfeedpage constr");
-        super(props);
-        const { fetchChallenges, fetchSubmissions } = this.props;
-        fetchChallenges();
-        fetchSubmissions();
-    }
 
     componentDidMount() {
-        console.log("mounted");
+        console.log("news feed mounted");
+        // const { fetchChallenges, fetchSubmissions } = this.props;
+        // fetchChallenges();
+        // fetchSubmissions();
     }
 
     state = {
@@ -93,6 +90,7 @@ class NewsFeedPage extends Component  {
                     axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                     index={this.state.value}
                     onChangeIndex={this.handleChangeIndex}
+
                     >
                     <TabContainer dir={theme.direction}>
                         {submissions && submissions.map (function(submission) {
@@ -104,7 +102,8 @@ class NewsFeedPage extends Component  {
                             );
                         })}
                     </TabContainer>
-                    <TabContainer dir={theme.direction}>
+                    <TestPage />
+                    {/* <TabContainer dir={theme.direction}>
                         {challenges && challenges.map (function(challenge) {
                             return ( 
                                 <div key={challenge._id}>
@@ -114,7 +113,7 @@ class NewsFeedPage extends Component  {
                             );
                         })}
                     </TabContainer>
-                    <TabContainer dir={theme.direction}>Item Three</TabContainer>
+                    <TabContainer dir={theme.direction}>Item Three</TabContainer> */}
                     </SwipeableViews>
                 </div>
             </div>
