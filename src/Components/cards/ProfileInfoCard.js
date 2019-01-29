@@ -27,10 +27,6 @@ const styles = theme => ({
 });
 
 class ProfileInfoCard extends Component {
-  state = {
-    user: {}
-  };
-
   render() {
     const {
       classes,

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getCurrentUser } from "../../actions";
 import NavBar from "./../NavBar";
 import ProfileInfoCard from "../cards/ProfileInfoCard";
 import ChallengeCard from "./../cards/ChallengeCard";
-import LocalApi from "./../../apis/local";
 
 import "./../App.css";
 import { withStyles } from "@material-ui/core/styles";
@@ -23,28 +24,16 @@ const styles = theme => ({
   }
 });
 
-class ProfilePage extends Component {
-  state = {
-    user: null
-  };
-
-  componentDidMount() {
-    this.getUser();
+class ProfileCurrentPage extends Component {
+  constructor(props) {
+    super(props);
+    const { getCurrentUser } = this.props;
+    getCurrentUser();
   }
 
-  getUser = async () => {
-    const { match } = this.props;
-    try {
-      const response = await LocalApi.get(`/profile/${match.params.id}`);
-      this.setState({ user: response.data });
-    } catch (error) {
-      console.warn(error);
-    }
-  };
-
   render() {
-    const { classes } = this.props;
-    const { user } = this.state;
+    const { classes, user } = this.props;
+    console.log(user.submissions);
 
     return (
       <div>
@@ -63,17 +52,20 @@ class ProfilePage extends Component {
               </div>
 
               <Typography className={classes.typography} variant="h5">
-                completed {(user && user.submissions.length) || 0} challenges
+                completed{" "}
+                {(user && user.submissions && user.submissions.length) || 0}{" "}
+                challenges
               </Typography>
 
               {user &&
+                user.submissions &&
                 user.submissions.map(submission => {
                   return (
                     <div key={submission._id} className={classes.cardContainer}>
                       <ChallengeCard
                         id={submission.challengeId}
                         user_id={user._id}
-                        nickname={user.nickname}
+                        nickname="You"
                         profile_image={user.profile_image}
                         title={submission.challengeTitle}
                         yt_id={submission.yt_id}
@@ -92,4 +84,17 @@ class ProfilePage extends Component {
   }
 }
 
-export default withStyles(styles)(ProfilePage);
+const mapStateToProps = state => {
+  return {
+    user: state.currentUser
+  };
+};
+
+const Wrapped = connect(
+  mapStateToProps,
+  {
+    getCurrentUser
+  }
+)(ProfileCurrentPage);
+
+export default withStyles(styles)(Wrapped);

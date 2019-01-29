@@ -7,6 +7,7 @@ import PrivateRoute from "./PrivateRoute";
 import NewChallengePage from "./pages/NewChallengePage";
 import SubmissionPage from "./pages/SubmissionPage";
 import ProfilePage from "./pages/ProfilePage";
+import ProfileCurrentPage from "./pages/ProfileCurrentPage";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import ChallengePage from "./pages/ChallengePage";
 import NewsFeedPage from "./pages/NewsFeedPage";
@@ -27,7 +28,11 @@ class App extends Component {
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/register" component={RegisterPage} />
               <Route exact path="/profile/:id" component={ProfilePage} />
-              <PrivateRoute exact path="/profile" component={ProfilePage} />
+              <PrivateRoute
+                exact
+                path="/profile"
+                component={ProfileCurrentPage}
+              />
               <PrivateRoute exact path="/home" component={NewsFeedPage} />
               <PrivateRoute
                 exact

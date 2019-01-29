@@ -1,29 +1,33 @@
-import React from "react";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
-import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import { withStyles } from "@material-ui/core/styles";
+
+import Icon from "@material-ui/core/Icon";
+import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Home from "@material-ui/icons/Home";
+import Edit from "@material-ui/icons/Edit";
 import Add from "@material-ui/icons/AddCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import { Link } from "react-router-dom";
 import LockIcon from "@material-ui/icons/Https";
 import UnlockIcon from "@material-ui/icons/LockOpen";
+
 import { removeAuthToken } from "./../actions";
-import Icon from "@material-ui/core/Icon";
-import { connect } from "react-redux";
 
 const styles = theme => ({
   root: {
@@ -95,7 +99,7 @@ const styles = theme => ({
   }
 });
 
-class PrimarySearchAppBar extends React.Component {
+class PrimarySearchAppBar extends Component {
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null
@@ -120,7 +124,7 @@ class PrimarySearchAppBar extends React.Component {
 
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const { classes } = this.props;
+    const { classes, currentUser } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const currentPath = window.location.pathname;
@@ -158,6 +162,7 @@ class PrimarySearchAppBar extends React.Component {
             <p>Home</p>
           </MenuItem>
         ) : null}
+
         {!currentPath.includes("profile") ? (
           <MenuItem component={Link} to="/profile">
             <IconButton color="inherit">
@@ -166,14 +171,16 @@ class PrimarySearchAppBar extends React.Component {
             <p>Profile</p>
           </MenuItem>
         ) : null}
-        {!currentPath.includes("newchallenge") ? (
-          <MenuItem component={Link} to="/newchallenge">
+
+        {currentPath.includes("profile") && currentUser._id && (
+          <MenuItem component={Link} to="/profile/edit">
             <IconButton color="inherit">
-              <Add />
+              <Edit />
+              <p>Edit Profile</p>
             </IconButton>
-            <p>New Challenge</p>
           </MenuItem>
-        ) : null}
+        )}
+
         <MenuItem
           component={Link}
           to="/landing"
@@ -219,9 +226,20 @@ class PrimarySearchAppBar extends React.Component {
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               {!currentPath.includes("home") ? (
-                <IconButton color="inherit" component={Link} to="/home">
-                  <Home />
-                </IconButton>
+                <span>
+                  <IconButton color="inherit" component={Link} to="/home">
+                    <Home />
+                  </IconButton>
+                  {currentUser._id && (
+                    <IconButton
+                      color="inherit"
+                      component={Link}
+                      to="/profile/edit"
+                    >
+                      <Edit />
+                    </IconButton>
+                  )}
+                </span>
               ) : null}
 
               {/* Only Admin can create challenge for MVP
@@ -269,4 +287,15 @@ PrimarySearchAppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(PrimarySearchAppBar);
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  };
+};
+
+const Wrapped = connect(
+  mapStateToProps,
+  null
+)(PrimarySearchAppBar);
+
+export default withStyles(styles)(Wrapped);

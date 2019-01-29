@@ -24,7 +24,8 @@ const styles = theme => ({
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    outline: "none"
+    outline: "none",
+    borderRadius: "10px"
   },
   list: {
     padding: 0
