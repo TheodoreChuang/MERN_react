@@ -13,5 +13,4 @@ class RegisterPage extends Component  {
         );
     }
 }
-
 export default RegisterPage;
