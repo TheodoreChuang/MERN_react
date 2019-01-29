@@ -11,12 +11,14 @@ import ProfileCurrentPage from "./pages/ProfileCurrentPage";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import ChallengePage from "./pages/ChallengePage";
 import NewsFeedPage from "./pages/NewsFeedPage";
+import UpdateProfileInfoPage from "./pages/UpdateProfileInfoPage";
 
 class App extends Component {
   render() {
     return (
       <div>
         <BrowserRouter>
+
           <div>
             <Switch>
               <Route
@@ -24,6 +26,7 @@ class App extends Component {
                 path="/termsandconditions"
                 component={TermsAndConditions}
               />
+              <Route exact path = "/updateinfo" component = {UpdateProfileInfoPage} />
               <Route exact path="/landing" component={LandingPage} />
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/register" component={RegisterPage} />

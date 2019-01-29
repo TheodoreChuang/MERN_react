@@ -16,6 +16,7 @@ const styles = theme => ({
     flexGrow: 1
   },
   media: {
+
     height: "100px",
     width: "100px",
     borderRadius: "50%",
@@ -23,6 +24,7 @@ const styles = theme => ({
   },
   typography: {
     textAlign: "center"
+
   }
 });
 
