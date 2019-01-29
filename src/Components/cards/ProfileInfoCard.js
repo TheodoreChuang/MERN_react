@@ -52,7 +52,7 @@ class SimpleCard extends React.Component  {
 
   async componentDidMount() {
     // console.log(this.state.users)
-    await LocalApi.get('/profile/info')
+    await LocalApi.get('/profile/')
     .then( res => this.setState({ user: res.data }))
     // console.log(this.state.users)
   }
