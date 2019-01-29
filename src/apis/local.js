@@ -4,7 +4,6 @@ import store from "./../store";
 //creates instance of axios
 const LocalApi = axios.create({
   baseURL: "https://one-up-webapp.herokuapp.com/"
-  // baseURL: "http://localhost:3000"
 });
 
 LocalApi.interceptors.request.use(function(config) {

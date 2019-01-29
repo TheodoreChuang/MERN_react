@@ -12,7 +12,10 @@ class AvatarUpload extends Component {
       const formData = new FormData();
       formData.append("image", this.state.file[0]);
       axios
-        .post("http://localhost:3000/profile/avatar-upload", formData)
+        .post(
+          "https://one-up-webapp.herokuapp.com/profile/avatar-upload",
+          formData
+        )
         .then(response => {
           console.log(response);
           // TODO: set user profile image with uploaded image
