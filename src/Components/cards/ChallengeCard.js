@@ -23,6 +23,7 @@ import { Link } from 'react-router-dom'
 import YTvideo from "../YTvideo";
 import { withRouter } from "react-router-dom";
 import LocalApi from "./../../apis/local";
+import VideoPlayer from "./../VideoPlayer";
 
 const styles = theme => ({
   card: {
@@ -120,7 +121,8 @@ class ChallengeCard extends React.Component {
           title={title}
           subheader={date_created}
         />
-            <YTvideo yt_id={yt_id} />
+          <VideoPlayer url={yt_id}/>
+            {/* <YTvideo yt_id={yt_id} /> */}
         <CardContent>
           <Typography component="p">
             {description}
