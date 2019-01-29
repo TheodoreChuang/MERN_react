@@ -51,15 +51,10 @@ const styles = theme => ({
 
 class NewsFeedPage extends Component {
   constructor(props) {
-    console.log("newsfeedpage constr");
     super(props);
     const { fetchChallenges, fetchSubmissions } = this.props;
     fetchChallenges();
     fetchSubmissions();
-  }
-
-  componentDidMount() {
-    console.log("mounted");
   }
 
   state = {
@@ -75,7 +70,6 @@ class NewsFeedPage extends Component {
   };
 
   render() {
-    console.log("newsfeed page rendered");
     const { challenges, submissions } = this.props;
     const { classes, theme } = this.props;
 
@@ -103,14 +97,13 @@ class NewsFeedPage extends Component {
             <TabContainer dir={theme.direction}>
               {submissions &&
                 submissions.map(function(submission) {
-                  console.log("submission feed", submission);
                   return (
                     <div
                       key={submission.submission_id}
                       className={classes.cardContainer}
                     >
                       <ChallengeCard
-                        id={submission.challenge_id}
+                        _id={submission.challenge_id}
                         user_id={submission.submission_user_id}
                         nickname={submission.submission_user_nickname}
                         profile_image={submission.submission_user_profile_image}
@@ -129,7 +122,7 @@ class NewsFeedPage extends Component {
                   return (
                     <div key={challenge._id} className={classes.cardContainer}>
                       <ChallengeCard
-                        id={challenge._id}
+                        _id={challenge._id}
                         user_id={challenge.user.creator_id}
                         nickname={challenge.user.nickname}
                         profile_image={challenge.user.profile_image}

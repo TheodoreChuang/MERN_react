@@ -5,13 +5,13 @@ import classnames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
+// import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Typography from "@material-ui/core/Typography";
 import red from "@material-ui/core/colors/red";
@@ -79,13 +79,16 @@ class ChallengeCard extends Component {
   };
 
   render() {
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const {
+      anchorEl
+      // , mobileMoreAnchorEl
+    } = this.state;
     const isMenuOpen = Boolean(anchorEl);
     const {
       classes,
-      history,
-      id,
-      user_id,
+      // history,
+      _id,
+      // user_id,
       nickname,
       profile_image,
       title,
@@ -104,14 +107,14 @@ class ChallengeCard extends Component {
       >
         <MenuItem
           component={Link}
-          to={`/challenges/${id}`}
+          to={`/challenges/${_id}`}
           onClick={this.handleMenuClose}
         >
           View More Challenge Details
         </MenuItem>
         <MenuItem
           component={Link}
-          to={`/challenges/${id}/submit`}
+          to={`/challenges/${_id}/submit`}
           onClick={this.handleMenuClose}
         >
           Join Challenge
@@ -120,13 +123,13 @@ class ChallengeCard extends Component {
     );
 
     return (
-      <div className={`${classes.root}`}>
+      <div>
         <Card className={classes.card}>
           <CardHeader
             avatar={
               <Avatar aria-label="avatar" className={classes.avatar}>
                 {(profile_image && (
-                  <img src={profile_image} alt="profile image" />
+                  <img src={profile_image} alt={`${nickname}'s profile`} />
                 )) ||
                   "1Up"}
               </Avatar>
@@ -154,7 +157,7 @@ class ChallengeCard extends Component {
               <FavoriteIcon />
             </IconButton>
             <IconButton aria-label="Share">
-              <SocialShareIcon id={id} />
+              <SocialShareIcon id={_id} />
             </IconButton>
             <IconButton
               className={classnames(classes.expand, {

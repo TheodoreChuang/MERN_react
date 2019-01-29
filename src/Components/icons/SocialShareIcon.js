@@ -68,7 +68,7 @@ class ShareSocialIcon extends React.Component {
                   class="resp-sharing-button__link"
                   href={`https://facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3001%2Fchallenges%2F${id}`}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   aria-label="Share on Facebook"
                 >
                   <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--large">
@@ -93,7 +93,7 @@ class ShareSocialIcon extends React.Component {
                   class="resp-sharing-button__link"
                   href={`https://twitter.com/intent/tweet/?text=Are%20you%20up%20for%20the%20challenge%3F&amp;url=http%3A%2F%2Flocalhost%3A3001%2Fchallenges%2F${id}`}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   aria-label="Share on Twitter"
                 >
                   <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--large">
@@ -118,7 +118,7 @@ class ShareSocialIcon extends React.Component {
                   class="resp-sharing-button__link"
                   href={`https://telegram.me/share/url?text=Are%20you%20up%20for%20the%20challenge%3F&amp;url=http%3A%2F%2Flocalhost%3A3001%2Fchallenges%2F${id}`}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   aria-label="Share on Telegram"
                 >
                   <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--large">
