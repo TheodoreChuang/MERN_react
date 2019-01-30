@@ -16,7 +16,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import TestPage from "./TestPage";
 
 function TabContainer({ children, dir }) {
   return (
@@ -51,16 +50,13 @@ const styles = theme => ({
 });
 
 class NewsFeedPage extends Component {
-  constructor(props) {
-    console.log("newsfeedpage constr");
-    super(props);
-    const { fetchChallenges, fetchSubmissions } = this.props;
-    fetchChallenges();
-    fetchSubmissions();
-  }
 
   componentDidMount() {
     console.log("mounted");
+    const { fetchChallenges, fetchSubmissions } = this.props;
+    fetchChallenges();
+    fetchSubmissions();
+    
   }
 
   state = {
@@ -77,7 +73,7 @@ class NewsFeedPage extends Component {
 
   render() {
     console.log("newsfeed page rendered");
-    const { challenges, submissions } = this.props;
+    const { challenges, subs } = this.props;
     const { classes, theme } = this.props;
 
     return (
@@ -101,29 +97,31 @@ class NewsFeedPage extends Component {
             index={this.state.value}
             onChangeIndex={this.handleChangeIndex}
           >
+             {/* submissions feed */}
             <TabContainer dir={theme.direction}>
-              {submissions &&
-                submissions.map(function(submission) {
-                  console.log("submission feed", submission);
+              {subs &&
+                subs.map(function(sub) {
                   return (
                     <div
-                      key={submission.submission_id}
+                      key={sub.submission_id}
                       className={classes.cardContainer}
                     >
                       <ChallengeCard
-                        id={submission.challenge_id}
-                        user_id={submission.submission_user_id}
-                        nickname={submission.submission_user_nickname}
-                        profile_image={submission.submission_user_profile_image}
-                        title={submission.submission_title}
-                        yt_id={submission.yt_id}
-                        description={submission.submission_description}
-                        date_created={submission.submission_createdAt}
+                        id={sub.challenge_id}
+                        user_id={sub.submission_user_id}
+                        nickname={sub.submission_user_nickname}
+                        profile_image={sub.submission_user_profile_image}
+                        title={sub.submission_title}
+                        yt_id={sub.yt_id}
+                        description={sub.submission_description}
+                        date_created={sub.submission_createdAt}
                       />
                     </div>
                   );
                 })}
             </TabContainer>
+
+            {/* challenges feed */}
             <TabContainer dir={theme.direction}>
               {challenges &&
                 challenges.map(function(challenge) {
@@ -143,7 +141,6 @@ class NewsFeedPage extends Component {
                   );
                 })}
             </TabContainer>
-            <TabContainer dir={theme.direction}>Item Three</TabContainer>
           </SwipeableViews>
         </div>
       </div>
@@ -154,7 +151,7 @@ class NewsFeedPage extends Component {
 const mapStateToProps = state => {
   return {
     challenges: state.challenges,
-    submissions: state.submissions
+    subs: state.subs
   };
 };
 

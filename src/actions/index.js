@@ -59,6 +59,7 @@ export const addChallenge = (cbOne, formValues, cbTwo) => {
 //submission
 export const fetchSubmissions = () => {
   return async (dispatch, getState) => {
+    console.log("fetching");
     const response = await LocalApi.get("/submissions");
 
     dispatch({

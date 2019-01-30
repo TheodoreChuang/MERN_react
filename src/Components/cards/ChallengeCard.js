@@ -171,11 +171,15 @@ class ChallengeCard extends Component {
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
         </Collapse>
+
+        {/* delete challenge button */}
         <button onClick={() => {
-           console.log(this.props);
-           console.log(id);
+          console.log(id);
+          confirm("Are you sure you want to delete this challenge?")
           LocalApi.delete(`/challenges/submissions/${id}`)
+          console.log("deleted");
         }}>Delete</button>
+
       </Card>
       {renderMenu}
       </div>

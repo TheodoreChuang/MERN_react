@@ -107,7 +107,7 @@ const WrappedSubmissionForm = reduxForm({
 
 const mapStateToProps = (state) => {
     return {
-        submissions: state.submissions
+        subs: state.submissions
     }
 }
 
