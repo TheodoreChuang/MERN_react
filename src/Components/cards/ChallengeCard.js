@@ -174,10 +174,13 @@ class ChallengeCard extends Component {
 
         {/* delete challenge button */}
         <button onClick={() => {
-          console.log(id);
-          confirm("Are you sure you want to delete this challenge?")
-          LocalApi.delete(`/challenges/submissions/${id}`)
-          console.log("deleted");
+          const r = window.confirm("Are you sure you want to delete this challenge?");
+          
+          if (r == true) {
+            LocalApi.delete(`/challenges/submissions/${id}`)
+            console.log("deleted");
+          }
+
         }}>Delete</button>
 
       </Card>
