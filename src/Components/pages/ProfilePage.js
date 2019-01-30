@@ -56,7 +56,6 @@ class ProfilePage extends Component {
             justify="center"
             alignItems="center"
           >
-            <Grid item xs={0} md={2} />
             <Grid item xs={12} md={8}>
               <div className={classes.cardContainer}>
                 <ProfileInfoCard {...user} />
@@ -84,7 +83,6 @@ class ProfilePage extends Component {
                   );
                 })}
             </Grid>
-            <Grid item xs={0} md={2} />
           </Grid>
         </div>
       </div>

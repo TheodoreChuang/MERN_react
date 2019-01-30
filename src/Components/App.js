@@ -19,34 +19,34 @@ class App extends Component {
     return (
       <div>
         <BrowserRouter>
-
           <div>
             <Switch>
+              <Route exact path="/landing" component={LandingPage} />
+              <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/register" component={RegisterPage} />
               <Route
                 exact
                 path="/termsandconditions"
                 component={TermsAndConditions}
               />
-              <Route exact path = "/updateinfo" component = {UpdateProfileInfoPage} />
-              <Route exact path="/landing" component={LandingPage} />
-              <Route exact path="/login" component={LoginPage} />
-              <Route exact path="/register" component={RegisterPage} />
+              <Route exact path="/" component={NewsFeedPage} />
               <Route exact path="/profile/:id" component={ProfilePage} />
+              <Route exact path="/challenges/:id" component={ChallengePage} />
+
               <PrivateRoute
                 exact
                 path="/profile"
                 component={ProfileCurrentPage}
               />
-              <PrivateRoute exact path="/" component={NewsFeedPage} />
+              <PrivateRoute
+                exact
+                path="/updateinfo"
+                component={UpdateProfileInfoPage}
+              />
               <PrivateRoute
                 exact
                 path="/newchallenge"
                 component={NewChallengePage}
-              />
-              <PrivateRoute
-                exact
-                path="/challenges/:id"
-                component={ChallengePage}
               />
               <PrivateRoute
                 exact

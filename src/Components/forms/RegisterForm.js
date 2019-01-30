@@ -26,12 +26,14 @@ const styles = theme => ({
     justifyContent: "center",
     alignItems: "center"
   },
-  input: {
+  button: {
     margin: theme.spacing.unit,
-    padding: "6px 0"
+    width: "250px",
+    borderRadius: "50px",
+    textTransform: "none"
   },
-  margin: {
-    width: "200px"
+  font: {
+    color: "white"
   },
   checkbox: {
     display: "flex",
@@ -49,7 +51,13 @@ const styles = theme => ({
   },
   signin: {
     margin: "10px",
-    padding: "20px"
+    padding: "20px",
+    color: "white"
+  },
+  link: {
+    margin: theme.spacing.unit,
+    color: "white",
+    textDecoration: "none"
   }
 });
 
@@ -149,8 +157,9 @@ class RegisterForm extends Component {
                 <Field
                   name="terms_conditions"
                   component={Checkbox}
-                  type="checkbox"
+                  className={classes.font}
                   color="primary"
+                  type="checkbox"
                 />
               </div>
               <CustomizedDialogDemo
@@ -172,14 +181,17 @@ class RegisterForm extends Component {
                   variant="extended"
                   color="primary"
                   aria-label="Add"
-                  className={classes.margin}
+                  className={classes.button}
                 >
                   Register
                 </Fab>
               </div>
-              <div className={classes.signin}>
-                <Typography>
-                  Already have an account? <Link to="/login">Sign in</Link>
+              <div>
+                <Typography className={classes.signin} component="caption">
+                  Already have an account?
+                  <Link to="/login" className={classes.link}>
+                    Sign in
+                  </Link>
                 </Typography>
               </div>
             </div>
