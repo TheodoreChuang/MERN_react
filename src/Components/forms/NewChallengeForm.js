@@ -7,12 +7,14 @@ import Button from '@material-ui/core/Button';
 import Loader from "./../Loader";
 import DateField from "./fields/DateField";
 import DateHelper from "./fields/DateHelper";
+import { withRouter } from "react-router-dom";
+import LocalApi from "./../../apis/local";
 
 class NewChallengeForm extends Component {
     state = { loading: false }
 
-    onUploadSubmit = (formValues) => {
-        const { addChallenge } = this.props;
+    onUploadSubmit = async (formValues) => {
+        const { addChallenge, history } = this.props;
         const { title, description, video, expiry_date } = formValues;
 
         const fd = new FormData();
@@ -25,16 +27,22 @@ class NewChallengeForm extends Component {
             fd.append("expiry_date", expiry_date);
         }
 
-        addChallenge(
-            // Callbacks added for loading animation
-            () => {
-                this.setState({ loading: true });
-            },
-            fd, 
-            () =>  {
-                this.setState({ loading: "success" });
-            }
-        )}
+        this.setState({ loading: true });
+        await LocalApi.post("/challenges/upload", fd);
+        history.push("/");
+    }
+
+
+        // addChallenge(
+        //     // Callbacks added for loading animation
+        //     () => {
+        //         this.setState({ loading: true });
+        //     },
+        //     fd, 
+        //     () =>  {
+        //         this.setState({ loading: "success" });
+        //     }
+        // )}
 
     render() {
         const { handleSubmit } = this.props;
@@ -144,4 +152,4 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     addChallenge
-})(WrappedNewChallengeForm);
+})(withRouter(WrappedNewChallengeForm));

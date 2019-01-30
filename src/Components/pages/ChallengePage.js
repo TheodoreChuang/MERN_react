@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { removeAuthToken, fetchChallenges } from "../../actions";
 import { connect } from "react-redux"; 
 import ChallengeCard from "./../cards/ChallengeCard";
+import NavBar from "../NavBar";
+
 
 class ChallengePage extends Component  {
     constructor(props) {
@@ -19,12 +21,13 @@ class ChallengePage extends Component  {
         });
         return (
             <div>
+                <NavBar />
                 <h2> Specific Challenge Page </h2>
                 <ChallengeCard {...challenge} />
                 <h2> Specific Challenge Submissions </h2>
                 {challenge && challenge.submissions.map((element) => {
                     return (
-                        <div>
+                        <div key={challenge._id}>
                             <ChallengeCard yt_id={element.yt_id} />
                         </div>
                     )

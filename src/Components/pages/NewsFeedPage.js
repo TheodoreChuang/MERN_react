@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import {
-  removeAuthToken,
-  fetchChallenges,
-  fetchSubmissions
-} from "../../actions";
+import { removeAuthToken } from "../../actions";
 import { connect } from "react-redux";
 import ChallengeCard from "./../cards/ChallengeCard";
 import NavBar from "../NavBar";
+import LocalApi from "./../../apis/local";
+import { withRouter } from "react-router-dom";
 
 // Materalize
 import PropTypes from 'prop-types';
@@ -50,18 +48,21 @@ const styles = theme => ({
 });
 
 class NewsFeedPage extends Component {
-
-  componentDidMount() {
-    console.log("mounted");
-    const { fetchChallenges, fetchSubmissions } = this.props;
-    fetchChallenges();
-    fetchSubmissions();
-    
-  }
-
   state = {
-    value: 0
+    value: 0,
+    challenges: [],
+    submissions: []
   };
+
+  async componentDidMount() {
+    console.log("mounted");
+
+    const response1 = await LocalApi.get("/challenges");
+    this.setState({ challenges : response1.data });
+
+    const response2 = await LocalApi.get("/challenges");
+    this.setState({ submissions : response2.data });    
+  }
 
   handleChange = (event, value) => {
     this.setState({ value });
@@ -72,9 +73,8 @@ class NewsFeedPage extends Component {
   };
 
   render() {
-    console.log("newsfeed page rendered");
-    const { challenges, subs } = this.props;
     const { classes, theme } = this.props;
+    const { challenges, submissions } = this.state;
 
     return (
       <div>
@@ -99,8 +99,8 @@ class NewsFeedPage extends Component {
           >
              {/* submissions feed */}
             <TabContainer dir={theme.direction}>
-              {subs &&
-                subs.map(function(sub) {
+              {submissions &&
+                submissions.map(function(sub) {
                   return (
                     <div
                       key={sub.submission_id}
@@ -148,20 +148,6 @@ class NewsFeedPage extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    challenges: state.challenges,
-    subs: state.subs
-  };
-};
-
-const Wrapped = connect(
-  mapStateToProps,
-  {
-    removeAuthToken,
-    fetchChallenges,
-    fetchSubmissions
-  }
-)(NewsFeedPage);
-
-export default withStyles(styles, { withTheme: true })(Wrapped);
+export default connect(null, {
+  removeAuthToken 
+})(withStyles(styles, { withTheme: true })(withRouter(NewsFeedPage)));
