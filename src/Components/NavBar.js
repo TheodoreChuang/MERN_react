@@ -155,7 +155,7 @@ class PrimarySearchAppBar extends Component {
         onClose={this.handleMobileMenuClose}
       >
         {!currentPath.includes("home") ? (
-          <MenuItem component={Link} to="/home">
+          <MenuItem component={Link} to="/">
             <IconButton color="inherit">
               <Home />
             </IconButton>
@@ -227,7 +227,7 @@ class PrimarySearchAppBar extends Component {
             <div className={classes.sectionDesktop}>
               {!currentPath.includes("home") ? (
                 <span>
-                  {/* <IconButton color="inherit" component={Link} to="/home">
+                  {/* <IconButton color="inherit" component={Link} to="/">
                     <Home />
                   </IconButton>
                   {currentUser._id && (
