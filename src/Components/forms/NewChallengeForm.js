@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
-import { connect } from "react-redux";
-import { addChallenge } from "./../../actions"
 import Button from '@material-ui/core/Button';
 import Loader from "./../Loader";
 import DateField from "./fields/DateField";
@@ -14,7 +12,7 @@ class NewChallengeForm extends Component {
     state = { loading: false }
 
     onUploadSubmit = async (formValues) => {
-        const { addChallenge, history } = this.props;
+        const { history } = this.props;
         const { title, description, video, expiry_date } = formValues;
 
         const fd = new FormData();
@@ -22,6 +20,7 @@ class NewChallengeForm extends Component {
         fd.append("title", title);
         fd.append("description", description);
         // fd.append("creator_id", creator_id);
+        
         // Conditional as expiry_date value might not be entered as it is not mandatory
         if (expiry_date) {
             fd.append("expiry_date", expiry_date);
@@ -31,18 +30,6 @@ class NewChallengeForm extends Component {
         await LocalApi.post("/challenges/upload", fd);
         history.push("/");
     }
-
-
-        // addChallenge(
-        //     // Callbacks added for loading animation
-        //     () => {
-        //         this.setState({ loading: true });
-        //     },
-        //     fd, 
-        //     () =>  {
-        //         this.setState({ loading: "success" });
-        //     }
-        // )}
 
     render() {
         const { handleSubmit } = this.props;
@@ -144,12 +131,4 @@ const WrappedNewChallengeForm = reduxForm({
     }
 })(NewChallengeForm);
 
-const mapStateToProps = (state) => {
-    return {
-        challenges: state.challenges
-    };
-}
-
-export default connect(mapStateToProps, {
-    addChallenge
-})(withRouter(WrappedNewChallengeForm));
+export default (withRouter(WrappedNewChallengeForm));
