@@ -1,8 +1,9 @@
 import LocalApi from "./../apis/local";
 
-// auth
-export const setAuthToken = token => {
+// auth, callback added to redirect to homepage
+export const setAuthToken = (token, cb) => {
   localStorage.setItem("token", token);
+  cb();
 
   return {
     type: "AUTH_TOKEN",

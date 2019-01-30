@@ -59,9 +59,10 @@ class LoginForm extends Component {
       const { email, password } = formValues;
 
         LocalApi.post("/login", {email, password})
-        .then(response => {
-            setAuthToken(response.data.token);
-            history.push("/");
+        // async below as redirection to root page requires auth token first
+        .then ( response => {
+            setAuthToken(response.data.token, 
+              () => history.push("/"));
         })
         .catch(err => console.log(err));
     }

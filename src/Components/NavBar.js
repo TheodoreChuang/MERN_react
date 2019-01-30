@@ -128,6 +128,7 @@ class PrimarySearchAppBar extends Component {
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const currentPath = window.location.pathname;
+    const { removeAuthToken } = this.props;
 
     const renderMenu = (
       <Menu
@@ -154,6 +155,7 @@ class PrimarySearchAppBar extends Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
+
         {!currentPath.includes("home") ? (
           <MenuItem component={Link} to="/home">
             <IconButton color="inherit">
@@ -200,9 +202,6 @@ class PrimarySearchAppBar extends Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer" onClick={this.handleProfileMenuOpen}>
-              <MenuIcon  />
-            </IconButton> */}
             <Typography
               className={classes.title}
               variant="h6"
@@ -211,37 +210,19 @@ class PrimarySearchAppBar extends Component {
             >
               1UP
             </Typography>
-            {/* <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-              />
-            </div> */}
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              {!currentPath.includes("home") ? (
-                <span>
-                  {/* <IconButton color="inherit" component={Link} to="/home">
-                    <Home />
-                  </IconButton>
-                  {currentUser._id && (
-                    <IconButton
-                      color="inherit"
-                      component={Link}
-                      to="/profile/edit"
-                    >
-                      <Edit />
-                    </IconButton> */}
-                  {/* )} */}
-                </span>
-              ) : null}
+            
+            {/* Add challenge section, render if admin */} 
+            {!currentPath.includes('newchallenge') ? 
+              <IconButton
+                color="inherit"
+                component={Link} 
+                to="/newchallenge" >
+                <Add />
+              </IconButton> : null }
 
+            {/* Home section */}
             {!currentPath.includes('home') ? 
               <IconButton
                 color="inherit"
@@ -250,18 +231,14 @@ class PrimarySearchAppBar extends Component {
                 <Home />
               </IconButton> : null }
 
-              {/* Only Admin can create challenge for MVP
-              {!currentPath.includes('newchallenge') ?  
-              <IconButton color="inherit" component={Link} to="/newchallenge">
-                <Add />
-              </IconButton> : null } */}
-
+              {/* Only Admin can create challenge for MVP */}
               {!currentPath.includes("profile") ? (
                 <IconButton color="inherit" component={Link} to="/profile">
                   <AccountCircle />
                 </IconButton>
               ) : null}
-
+              
+              {/*  Log out Section */}
               <IconButton
                 color="inherit"
                 component={Link}
@@ -303,7 +280,7 @@ const mapStateToProps = state => {
 
 const Wrapped = connect(
   mapStateToProps,
-  null
+  removeAuthToken
 )(PrimarySearchAppBar);
 
 export default withStyles(styles)(Wrapped);
