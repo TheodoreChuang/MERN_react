@@ -194,6 +194,4 @@ ChallengeCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const WrappedChallengeCard = withRouter(ChallengeCard);
-
-export default withStyles(styles)(WrappedChallengeCard);
+export default withStyles(styles)(withRouter(ChallengeCard));

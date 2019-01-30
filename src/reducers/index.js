@@ -8,7 +8,5 @@ import submissionReducer from "./submission_reducer";
 export default combineReducers({
   form: formReducer,
   auth: authReducer,
-  currentUser: currentUserReducer,
-  challenges: challengeReducer,
-  subs: submissionReducer
+  currentUser: currentUserReducer
 });

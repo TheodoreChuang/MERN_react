@@ -3,18 +3,21 @@ import { removeAuthToken, fetchChallenges } from "../../actions";
 import { connect } from "react-redux"; 
 import ChallengeCard from "./../cards/ChallengeCard";
 import NavBar from "../NavBar";
-
+import LocalApi from "./../../apis/local";
 
 class ChallengePage extends Component  {
-    constructor(props) {
-        super(props);
-        const { fetchChallenges } = this.props;
+    state = { 
+        challenges: [] 
+    }
 
-        fetchChallenges();
+    async componentDidMount() {
+        const response = await LocalApi.get("/challenges");
+        this.setState({ challenges : response.data });
     }
 
     render() {
-        const { match, challenges } = this.props;
+        const { match } = this.props;
+        const { challenges } = this.state;
 
         const challenge = challenges.find(function(element) {
             return (parseInt(element._id) === parseInt(match.params.id));
@@ -37,13 +40,7 @@ class ChallengePage extends Component  {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        challenges: state.challenges
-    };
-}
 
-export default connect(mapStateToProps, {
+export default connect(null, {
     removeAuthToken,
-    fetchChallenges
 })(ChallengePage);
