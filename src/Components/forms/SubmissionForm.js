@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
+import { connect } from "react-redux";
+import { addSubmission } from "./../../actions"
 import Button from '@material-ui/core/Button';
 import { withRouter } from "react-router-dom";
 import Loader from "./../Loader";
-import LocalApi from "./../../apis/local";
 
 class SubmissionForm extends Component {
     state = { loading: false }
 
-    onUploadSubmit = async (formValues) => {
+    onUploadSubmit = (formValues) => {
         const { title, description, video } = formValues;
-        const { match, history } = this.props;
+        const { addSubmission, match, history } = this.props;
         const fd = new FormData();
 
         fd.append("video", video[0]);
@@ -21,10 +22,17 @@ class SubmissionForm extends Component {
         if (description) {
             fd.append("description", description);
         }
-        
-        this.setState({ loading: true });
-        await LocalApi.post(`/challenges/${match.params.id}/submissions`, fd)
-        history.push("/");
+       
+        addSubmission(
+            () => {
+                this.setState({ loading: true });
+            },
+            fd, match.params.id,
+            () =>  {
+                this.setState({ loading: "success" });
+            });
+
+        // history.push(`/challenges/${match.params.id}`);
         }
 
     render() {
@@ -97,4 +105,12 @@ const WrappedSubmissionForm = reduxForm({
     }
 })(SubmissionForm);
 
-export default (withRouter(WrappedSubmissionForm));
+const mapStateToProps = (state) => {
+    return {
+        submissions: state.submissions
+    }
+}
+
+export default connect(mapStateToProps, {
+    addSubmission
+}) (withRouter(WrappedSubmissionForm));

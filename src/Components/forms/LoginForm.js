@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
 import LocalApi from "../../apis/local";
-import { setAuthToken, getCurrentUser } from "./../../actions";
+import { setAuthToken } from "./../../actions";
 import { connect } from "react-redux";
+import Checkbox from "./fields/CheckboxField";
 
 import { withStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
@@ -56,23 +57,19 @@ const styles = theme => ({
 });
 
 class LoginForm extends Component {
-  state = { error : "" }
-    
-    onLoginFormSubmit = (formValues) => {
-      const { history, getCurrentUser, setAuthToken } = this.props;
-      const { email, password } = formValues;
+  state = { error: "" };
 
-        LocalApi.post("/login", {email, password})
-        // async below as redirection to root page requires auth token first
-        .then (response => {
-            setAuthToken(response.data.token);
-            localStorage.setItem("token", response.data.token);
-            history.push("/");
-            getCurrentUser();
-            
-        })
-        .catch(err => console.log(err));
-    }
+  onLoginFormSubmit = formValues => {
+    const { history } = this.props;
+    const { email, password } = formValues;
+
+    LocalApi.post("/login", { email, password })
+      .then(response => {
+        setAuthToken(response.data.token);
+        history.push("/");
+      })
+      .catch(err => console.log(err));
+  };
 
   render() {
     const { classes } = this.props;
@@ -160,24 +157,25 @@ class LoginForm extends Component {
 }
 
 const WrappedRegisterForm = reduxForm({
-    form: "register",
-    validate: ({ email, password }) => {
-        const errors = {}
+  form: "register",
+  validate: ({ email, password }) => {
+    const errors = {};
 
-        if (!email) {
-            errors.email = "Required!"
-        }
-
-        if (!password) {
-            errors.password = "Required!"
-        }
-
-        return errors;
+    if (!email) {
+      errors.email = "Email is required!";
     }
-})(withStyles(styles)(LoginForm))
 
-export default connect(null, {
-    setAuthToken,
-    getCurrentUser
-}) (withRouter(WrappedRegisterForm));
+    if (!password) {
+      errors.password = "Password is required!";
+    }
 
+    return errors;
+  }
+})(withStyles(styles)(LoginForm));
+
+export default connect(
+  null,
+  {
+    setAuthToken
+  }
+)(withRouter(WrappedRegisterForm));
