@@ -80,11 +80,23 @@
     border-color: #2795e9;
   }
   
-  .resp-sharing-button--telegram {
-    background-color: #54A9EB;
+  .resp-sharing-button--tumblr {
+    background-color: #35465C
   }
   
-  .resp-sharing-button--telegram:hover {
-    background-color: #4B97D1;
+  .resp-sharing-button--tumblr:hover {
+    background-color: #222d3c
+  }
+  
+  
+  .resp-sharing-button--tumblr {
+    background-color: #35465C;
+    border-color: #35465C;
+  }
+  
+  .resp-sharing-button--tumblr:hover,
+  .resp-sharing-button--tumblr:active {
+    background-color: #222d3c;
+    border-color: #222d3c;
   }
   

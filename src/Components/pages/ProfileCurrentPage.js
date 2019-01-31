@@ -33,11 +33,10 @@ class ProfileCurrentPage extends Component {
 
   render() {
     const { classes, user } = this.props;
-    console.log(user.submissions);
 
     return (
       <div>
-        <NavBar />
+        <NavBar {...this.props} />
         <div className={classes.container}>
           <Grid
             container

@@ -65,10 +65,10 @@ class ShareSocialIcon extends React.Component {
             <List component="nav" className={classes.list}>
               <ListItem button>
                 <a
-                  className="resp-sharing-button__link"
-                  href={`https://facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3001%2Fchallenges%2F${id}`}
+                  class="resp-sharing-button__link"
+                  href={`https://facebook.com/sharer/sharer.php?u=http%3A%2F%2F1up-app.s3-website-ap-southeast-2.amazonaws.com%2Fchallenges%2F${id}`}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   aria-label="Share on Facebook"
                 >
                   <div className="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--large">
@@ -91,9 +91,9 @@ class ShareSocialIcon extends React.Component {
               <ListItem button>
                 <a
                   class="resp-sharing-button__link"
-                  href={`https://twitter.com/intent/tweet/?text=Are%20you%20up%20for%20the%20challenge%3F&amp;url=http%3A%2F%2Flocalhost%3A3001%2Fchallenges%2F${id}`}
+                  href={`https://twitter.com/intent/tweet/?text=Are%20you%20up%20for%20the%20challenge%3F&amp;url=http%3A%2F%2F1up-app.s3-website-ap-southeast-2.amazonaws.com%2Fchallenges%2F${id}`}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   aria-label="Share on Twitter"
                 >
                   <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--large">
@@ -116,12 +116,12 @@ class ShareSocialIcon extends React.Component {
               <ListItem button>
                 <a
                   class="resp-sharing-button__link"
-                  href={`https://telegram.me/share/url?text=Are%20you%20up%20for%20the%20challenge%3F&amp;url=http%3A%2F%2Flocalhost%3A3001%2Fchallenges%2F${id}`}
+                  href={`https://www.tumblr.com/widgets/share/tool?posttype=link&amp;title=Are%20you%20up%20for%20the%20challenge%3F&amp;caption=Are%20you%20up%20for%20the%20challenge%3F&amp;content=http%3A%2F%2F1up-app.s3-website-ap-southeast-2.amazonaws.com%2Fchallenges%2F${id}&amp;canonicalUrl=http%3A%2F%2F1up-app.s3-website-ap-southeast-2.amazonaws.com%2Fchallenges%2F${id}&amp;shareSource=tumblr_share_button`}
                   target="_blank"
-                  rel="noopener"
-                  aria-label="Share on Telegram"
+                  rel="noopener noreferrer"
+                  aria-label="Share on Tumblr"
                 >
-                  <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--large">
+                  <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--large">
                     <div
                       aria-hidden="true"
                       class="resp-sharing-button__icon resp-sharing-button__icon--solid"
@@ -130,10 +130,10 @@ class ShareSocialIcon extends React.Component {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                       >
-                        <path d="M.707 8.475C.275 8.64 0 9.508 0 9.508s.284.867.718 1.03l5.09 1.897 1.986 6.38a1.102 1.102 0 0 0 1.75.527l2.96-2.41a.405.405 0 0 1 .494-.013l5.34 3.87a1.1 1.1 0 0 0 1.046.135 1.1 1.1 0 0 0 .682-.803l3.91-18.795A1.102 1.102 0 0 0 22.5.075L.706 8.475z" />
+                        <path d="M13.5.5v5h5v4h-5V15c0 5 3.5 4.4 6 2.8v4.4c-6.7 3.2-12 0-12-4.2V9.5h-3V6.7c1-.3 2.2-.7 3-1.3.5-.5 1-1.2 1.4-2 .3-.7.6-1.7.7-3h3.8z" />
                       </svg>
                     </div>
-                    Share on Telegram
+                    Share on Tumblr
                   </div>
                 </a>
               </ListItem>

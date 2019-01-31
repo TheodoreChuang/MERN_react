@@ -4,6 +4,8 @@ import NavBar from "../NavBar";
 import LocalApi from "./../../apis/local";
 import { withRouter } from "react-router-dom";
 
+
+
 class NewsFeedPage extends Component {
   state = {
     submissions: []
