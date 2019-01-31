@@ -3,6 +3,7 @@ import SubmissionForm from "./../forms/SubmissionForm";
 import NavBar from "../NavBar";
 
 class SubmissionPage extends Component {
+
   render() {
     return (
       <div>
@@ -22,6 +23,7 @@ class SubmissionPage extends Component {
       </div>
     );
   }
+
 }
 
 export default SubmissionPage;

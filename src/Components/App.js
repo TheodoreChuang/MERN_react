@@ -13,6 +13,7 @@ import ChallengePage from "./pages/ChallengePage";
 import NewsFeedPage from "./pages/NewsFeedPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import UpdateProfileInfoPage from "./pages/UpdateProfileInfoPage";
+import ChallengeFeedPage from "./pages/ChallengeFeedPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 class App extends Component {
@@ -22,7 +23,6 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Switch>
-              <Route exact path="/landing" component={LandingPage} />
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/register" component={RegisterPage} />
               <Route
@@ -30,10 +30,54 @@ class App extends Component {
                 path="/termsandconditions"
                 component={TermsAndConditions}
               />
+              <Route 
+                exact 
+                path="/landing" 
+                component={LandingPage} 
               <Route exact path="/" component={NewsFeedPage} />
               <Route exact path="/profile/:id" component={ProfilePage} />
               <Route exact path="/challenges/:id" component={ChallengePage} />
-
+              <PrivateRoute
+                exact
+                path="/updateinfo"
+                component={UpdateProfileInfoPage}
+              />
+              <Route 
+                exact 
+                path="/login" 
+                component={LoginPage} 
+              />
+              <Route 
+                exact 
+                path="/register" 
+                component={RegisterPage} 
+              />
+              <Route 
+                exact 
+                path="/profile/:id" 
+                component={ProfilePage} 
+              />
+              <Route 
+                exact 
+                path="/" 
+                component={NewsFeedPage} 
+              />
+              <Route 
+                exact 
+                path="/resetpassword/:token" 
+                component={ResetPasswordPage} 
+              />
+              <Route 
+                exact 
+                path="/challenges" 
+                component={ChallengeFeedPage} 
+              />
+              {/* Private Routes */}
+              <PrivateRoute
+                exact
+                path="/challenges/:id/submit"
+                component={SubmissionPage}
+              />
               <PrivateRoute
                 exact
                 path="/profile"
@@ -41,22 +85,12 @@ class App extends Component {
               />
               <PrivateRoute
                 exact
-                path="/updateinfo"
-                component={UpdateProfileInfoPage}
-              />
-              <PrivateRoute
-                exact
                 path="/newchallenge"
                 component={NewChallengePage}
-              />
-              <PrivateRoute
-                exact
-                path="/challenges/:id/submit"
-                component={SubmissionPage}
+                admin={true}
               />
               <Route component={NotFoundPage} />
             </Switch>
-          </div>
         </BrowserRouter>
       </div>
     );

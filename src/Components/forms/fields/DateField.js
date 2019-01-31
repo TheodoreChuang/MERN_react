@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import currentDate from "./DateHelper";
 
 const styles = theme => ({
   container: {
@@ -26,7 +25,6 @@ function DatePickers(props) {
     <div className={classes.container} noValidate>
       <TextField
         {...otherInput}
-        // defaultValue={currentDate()}
         id="date"
         label={label}
         type="date"

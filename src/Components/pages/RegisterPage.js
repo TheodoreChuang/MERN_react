@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import RegisterForm from "./../forms/RegisterForm";
-
+import "./RegisterPage.css";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 

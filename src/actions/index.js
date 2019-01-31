@@ -1,6 +1,6 @@
 import LocalApi from "./../apis/local";
 
-// auth
+// auth, callback added to redirect to homepage
 export const setAuthToken = token => {
   localStorage.setItem("token", token);
 
@@ -28,66 +28,5 @@ export const getCurrentUser = () => {
       type: "CURRENT_USER",
       payload: response.data
     });
-  };
+  }
 };
-
-// challenges
-export const fetchChallenges = () => {
-  return async (dispatch, getState) => {
-    const response = await LocalApi.get("/challenges");
-
-        dispatch({
-            type: "CHALLENGES_LIST",
-            payload: response.data
-        });
-    };
-}
-
-export const addChallenge = (cbOne, formValues, cbTwo) => {
-    return async (dispatch, getState) => {
-        cbOne();
-        const response = await LocalApi.post("/challenges/upload", formValues)
-        cbTwo();
-
-        dispatch({
-            type: "CHALLENGES_LIST",
-            payload: response.data
-        })
-    }
-}
-
-//submission
-export const fetchSubmissions = () => {
-  return async (dispatch, getState) => {
-    const response = await LocalApi.get("/submissions");
-
-    dispatch({
-      type: "SUBMISSIONS_LIST",
-      payload: response.data
-    });
-  };
-};
-
-export const addSubmission = (cbOne, fd, id , cbTwo) => {
-    return async (dispatch, getState) => {
-        cbOne();
-        const response = await LocalApi.post(`/challenges/${id}/submissions`, fd)
-        cbTwo();
-
-    dispatch({
-      type: "SUBMISSIONS_LIST",
-      payload: response.data
-    });
-  };
-};
-
-export const deleteChallenge = () => {
-    return async (dispatch, getState) => {
-        const response = await LocalApi.delete("/challenges/submission/:id")
-
-        dispatch({
-            type: "CHALLENGE_LIST",
-            payload: response.data
-        })
-    }
-}

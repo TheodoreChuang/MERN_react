@@ -71,10 +71,10 @@ class ShareSocialIcon extends React.Component {
                   rel="noopener noreferrer"
                   aria-label="Share on Facebook"
                 >
-                  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--large">
+                  <div className="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--large">
                     <div
                       aria-hidden="true"
-                      class="resp-sharing-button__icon resp-sharing-button__icon--solid"
+                      className="resp-sharing-button__icon resp-sharing-button__icon--solid"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
