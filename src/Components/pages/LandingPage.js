@@ -40,6 +40,38 @@ class LandingPage extends Component {
   render() {
     const { classes } = this.props;
 
+        return (
+            <div className={classes.container}>
+                <h1> oneup </h1>
+                <p> Create challenges, share them with your friends and just have fun! </p>
+                <div>
+                    <div>
+                        <Button variant="outlined" className={classes.button} onClick = {
+                            () => this.props.history.push("/register")}>
+                            Sign up via email
+                        </Button>
+                    </div>
+                    <div>
+                        <Button variant="outlined" className={classes.button} onClick = {
+                            () => this.props.history.push("/facebook")}>
+                            Sign up via via Facebook
+                        </Button>
+                    </div>
+                </div>
+                <div>
+                    Already have an account?
+                        <Link to="/login"> Sign in
+                        </Link>
+                </div>
+            </div>
+        );
+    }
+}
+
+LandingPage.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
     return (
       <div className={classes.container}>
         <Typography className={classes.font} component="h1" variant="h3">
