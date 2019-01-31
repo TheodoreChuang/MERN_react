@@ -35,7 +35,7 @@ class ChallengePage extends Component {
     });
     return (
       <div>
-        <NavBar />
+        <NavBar {...this.props} />
         <Grid container direction="row" justify="center" alignItems="center">
           <Grid item xs={12} md={8}>
             <Typography className={classes.typography} variant="h5">

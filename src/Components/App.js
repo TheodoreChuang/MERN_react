@@ -13,6 +13,7 @@ import ChallengePage from "./pages/ChallengePage";
 import NewsFeedPage from "./pages/NewsFeedPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import UpdateProfileInfoPage from "./pages/UpdateProfileInfoPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 class App extends Component {
   render() {
@@ -53,6 +54,7 @@ class App extends Component {
                 path="/challenges/:id/submit"
                 component={SubmissionPage}
               />
+              <Route component={NotFoundPage} />
             </Switch>
           </div>
         </BrowserRouter>

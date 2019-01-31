@@ -48,7 +48,7 @@ class ProfilePage extends Component {
 
     return (
       <div>
-        <NavBar />
+        <NavBar {...this.props} />
         <div className={classes.container}>
           <Grid
             container
