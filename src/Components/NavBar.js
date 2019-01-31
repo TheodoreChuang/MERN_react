@@ -31,7 +31,7 @@ import { removeAuthToken } from "./../actions";
 
 const styles = theme => ({
   root: {
-    width: "100%"
+    width: "100%",
   },
   grow: {
     flexGrow: 1
@@ -146,6 +146,7 @@ class PrimarySearchAppBar extends Component {
       </Menu>
     );
 
+    // Mobile view
     const renderMobileMenu = (
       <Menu
         anchorEl={mobileMoreAnchorEl}
@@ -154,6 +155,15 @@ class PrimarySearchAppBar extends Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
+      
+        {!currentPath.includes("newchallenge") ? (
+                  <MenuItem component={Link} to="/newchallenge">
+                    <IconButton color="inherit">
+                      <Add />
+                    </IconButton>
+                    <p>Add Challenge</p>
+                  </MenuItem>
+                ) : null}
 
         {!currentPath.includes("home") ? (
           <MenuItem component={Link} to="/home">
@@ -163,7 +173,7 @@ class PrimarySearchAppBar extends Component {
             <p>Home</p>
           </MenuItem>
         ) : null}
-
+       
         {!currentPath.includes("profile") ? (
           <MenuItem component={Link} to="/profile">
             <IconButton color="inherit">
@@ -173,20 +183,9 @@ class PrimarySearchAppBar extends Component {
           </MenuItem>
         ) : null}
 
-        {currentPath.includes("profile") && currentUser._id && (
-          <MenuItem component={Link} to="/profile/edit">
-            <IconButton color="inherit">
-              <Edit />
-              <p>Edit Profile</p>
-            </IconButton>
-          </MenuItem>
-        )}
-
         <MenuItem
-          component={Link}
-          to="/landing"
           onClick={() => {
-            // removeAuthToken();
+            removeAuthToken();
           }}
         >
           <IconButton color="inherit">
@@ -227,7 +226,6 @@ class PrimarySearchAppBar extends Component {
                 to="/challenges" >
                 challenges
               </IconButton>
-
             
             {/* Add challenge section, render if admin */} 
             {!currentPath.includes('newchallenge') && currentUser.is_admin === true ? 

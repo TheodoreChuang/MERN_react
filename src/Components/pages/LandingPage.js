@@ -32,7 +32,6 @@ class LandingPage extends Component  {
         const { classes } = this.props;
 
         return (
-            
             <div className={classes.container}>
                 <h1> oneup </h1>
                 <p> Create challenges, share them with your friends and just have fun! </p>
@@ -60,8 +59,8 @@ class LandingPage extends Component  {
     }
 }
 
-// MainPage.propTypes = {
-//     classes: PropTypes.object.isRequired,
-//   };
+LandingPage.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
 
 export default withStyles(styles)(LandingPage);

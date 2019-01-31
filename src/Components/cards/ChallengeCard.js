@@ -93,9 +93,9 @@ class ChallengeCard extends Component {
       title,
       yt_id,
       description,
-      date_created
+      date_created,
+      viewMoreDetail
     } = this.props;
-
     const renderMenu = (
       <Menu
         anchorEl={anchorEl}
@@ -104,7 +104,10 @@ class ChallengeCard extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
+        {/* View More Challenge details hidden if currently on specific challenge page */}
+        {viewMoreDetail === true ? 
         <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>View More Challenge Details</MenuItem>
+        : null }
         <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Join Challenge</MenuItem>
       </Menu>
     );
@@ -177,14 +180,12 @@ class ChallengeCard extends Component {
           <button onClick={() => {
             const r = window.confirm("Are you sure you want to delete this challenge?");
             
-            if (r == true) {
+            if (r === true) {
               LocalApi.delete(`/challenges/submissions/${id}`)
-              console.log("deleted");
             }
-
           }}>Delete</button>
-          : null } 
-
+          : null }
+          
       </Card>
       {renderMenu}
       </div>

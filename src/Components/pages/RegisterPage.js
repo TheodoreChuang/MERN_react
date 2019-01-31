@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import RegisterForm from "./../forms/RegisterForm";
-import { Link } from "react-router-dom";
 import "./RegisterPage.css";
+
 class RegisterPage extends Component  {
     render() {
         return (

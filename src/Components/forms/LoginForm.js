@@ -4,7 +4,6 @@ import Input from "./fields/Input";
 import LocalApi from "../../apis/local";
 import { setAuthToken, getCurrentUser } from "./../../actions";
 import { connect } from "react-redux";
-import Checkbox from "./fields/CheckboxField";
 
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';

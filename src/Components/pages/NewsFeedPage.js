@@ -16,7 +16,6 @@ class NewsFeedPage extends Component {
 
   render() {
     const { submissions } = this.state;
-
     return (
       <div>
       <NavBar />
@@ -24,14 +23,14 @@ class NewsFeedPage extends Component {
         {submissions &&
           submissions.map(function(sub) {
             return (
-              <div key={sub._id} >
+              <div key={sub.submission_id} >
                 <ChallengeCard
                   id={sub.challenge_id}
                   user_id={sub.submission_user_id}
                   nickname={sub.submission_user_nickname}
                   profile_image={sub.submission_user_profile_image}
                   title={sub.submission_title}
-                  yt_id={sub.yt_id}
+                  yt_id={sub.submission_yt_id}
                   description={sub.submission_description}
                   date_created={sub.submission_createdAt}
                 />
