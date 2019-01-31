@@ -14,6 +14,7 @@ import NewsFeedPage from "./pages/NewsFeedPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import UpdateProfileInfoPage from "./pages/UpdateProfileInfoPage";
 import ChallengeFeedPage from "./pages/ChallengeFeedPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 class App extends Component {
   render() {
@@ -28,13 +29,17 @@ class App extends Component {
               />
               <Route 
                 exact 
-                path = "/updateinfo" 
-                component={UpdateProfileInfoPage} 
-              />
-              <Route 
-                exact 
                 path="/landing" 
                 component={LandingPage} 
+              <Route 
+                exact 
+                path="/challenges/:id" 
+                component={ChallengePage} 
+              />
+              <PrivateRoute
+                exact 
+                path="/updateinfo"
+                component={UpdateProfileInfoPage}
               />
               <Route 
                 exact 
@@ -56,11 +61,6 @@ class App extends Component {
                 path="/" 
                 component={NewsFeedPage} 
               />
-              <Route
-                exact
-                path="/challenges/:id"
-                component={ChallengePage}
-              />
               <Route 
                 exact 
                 path="/resetpassword/:token" 
@@ -71,7 +71,7 @@ class App extends Component {
                 path="/challenges" 
                 component={ChallengeFeedPage} 
               />
-              {/* Privat Routes */}
+              {/* Private Routes */}
               <PrivateRoute
                 exact
                 path="/challenges/:id/submit"
@@ -88,6 +88,7 @@ class App extends Component {
                 component={NewChallengePage}
                 admin={true}
               />
+              <Route component={NotFoundPage} />
             </Switch>
         </BrowserRouter>
       </div>

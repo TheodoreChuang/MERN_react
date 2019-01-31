@@ -104,6 +104,7 @@ class ChallengeCard extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
+
         {/* View More Challenge details hidden if currently on specific challenge page */}
         {viewMoreDetail === true ? 
         <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>View More Challenge Details</MenuItem>
@@ -140,35 +141,41 @@ class ChallengeCard extends Component {
           <CardContent>
             <Typography component="p">{title}</Typography>
           </CardContent>
-          <VideoPlayer url={yt_id}/>
-        <CardContent>
-          <Typography component="p">
-            {description}
-          </Typography>
-        </CardContent>
-        <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="Share">
+          <VideoPlayer url={yt_id} />
+          <CardContent>
+            <Typography component="p">{description}</Typography>
+          </CardContent>
+          <CardActions className={classes.actions} disableActionSpacing>
+            <IconButton aria-label="Add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+            <IconButton aria-label="Share">
               <SocialShareIcon id={id} />
             </IconButton>
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded,
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
-          >
-          </IconButton>
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded,
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
+            <IconButton
+              className={classnames(classes.expand, {
+                [classes.expandOpen]: this.state.expanded
+              })}
+              onClick={this.handleExpandClick}
+              aria-expanded={this.state.expanded}
+              aria-label="Show more"
+            />
+            <IconButton
+              className={classnames(classes.expand, {
+                [classes.expandOpen]: this.state.expanded
+              })}
+              onClick={this.handleExpandClick}
+              aria-expanded={this.state.expanded}
+              aria-label="Show more"
+            />
+          </CardActions>
+          <Collapse in={this.state.expanded} timeout="auto" unmountOnExit />
+          <button
+            onClick={() => {
+              console.log(this.props);
+              console.log(id);
+              LocalApi.delete(`/challenges/submissions/${id}`);
+            }}
           >
           </IconButton>
         </CardActions>
