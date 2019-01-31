@@ -211,6 +211,23 @@ class PrimarySearchAppBar extends Component {
             </Typography>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
+
+            {/* submissions feed button */}
+            <IconButton
+                color="inherit"
+                component={Link} 
+                to="/" >
+                newsfeed
+              </IconButton>
+
+            {/* challenges feed button */}
+              <IconButton
+                color="inherit"
+                component={Link} 
+                to="/challenges" >
+                challenges
+              </IconButton>
+
             
             {/* Add challenge section, render if admin */} 
             {!currentPath.includes('newchallenge') && currentUser.is_admin === true ? 

@@ -13,6 +13,7 @@ import ChallengePage from "./pages/ChallengePage";
 import NewsFeedPage from "./pages/NewsFeedPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import UpdateProfileInfoPage from "./pages/UpdateProfileInfoPage";
+import ChallengeFeedPage from "./pages/ChallengeFeedPage";
 
 class App extends Component {
   render() {
@@ -50,15 +51,36 @@ class App extends Component {
                 path="/profile/:id" 
                 component={ProfilePage} 
               />
-              <PrivateRoute
-                exact
-                path="/profile"
-                component={ProfileCurrentPage}
-              />
               <Route 
                 exact 
                 path="/" 
                 component={NewsFeedPage} 
+              />
+              <Route
+                exact
+                path="/challenges/:id"
+                component={ChallengePage}
+              />
+              <Route 
+                exact 
+                path="/resetpassword/:token" 
+                component={ResetPasswordPage} 
+              />
+              <Route 
+                exact 
+                path="/challenges" 
+                component={ChallengeFeedPage} 
+              />
+              {/* Privat Routes */}
+              <PrivateRoute
+                exact
+                path="/challenges/:id/submit"
+                component={SubmissionPage}
+              />
+              <PrivateRoute
+                exact
+                path="/profile"
+                component={ProfileCurrentPage}
               />
               <PrivateRoute
                 exact
@@ -66,20 +88,6 @@ class App extends Component {
                 component={NewChallengePage}
                 admin={true}
               />
-              <Route
-                exact
-                path="/challenges/:id"
-                component={ChallengePage}
-              />
-              <PrivateRoute
-                exact
-                path="/challenges/:id/submit"
-                component={SubmissionPage}
-              />
-              <Route 
-                exact 
-                path="/resetpassword/:token" 
-                component={ResetPasswordPage} />
             </Switch>
         </BrowserRouter>
       </div>
