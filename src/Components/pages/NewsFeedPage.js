@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { removeAuthToken } from "../../actions";
 import { connect } from "react-redux";
 import ChallengeCard from "./../cards/ChallengeCard";
 import NavBar from "../NavBar";
@@ -103,7 +102,7 @@ class NewsFeedPage extends Component {
                 submissions.map(function(sub) {
                   return (
                     <div
-                      key={sub.submission_id}
+                      key={sub._id}
                       className={classes.cardContainer}
                     >
                       <ChallengeCard
@@ -149,5 +148,5 @@ class NewsFeedPage extends Component {
 }
 
 export default connect(null, {
-  removeAuthToken 
+
 })(withStyles(styles, { withTheme: true })(withRouter(NewsFeedPage)));

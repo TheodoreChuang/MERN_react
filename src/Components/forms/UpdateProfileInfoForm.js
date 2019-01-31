@@ -197,15 +197,15 @@ const WrappedUpdateInfoForm = reduxForm({
         const errors = {}
 
         if (!first_name) {
-            errors.first_name = "First name is required!"
+            errors.first_name = "Required!"
         }
 
         if (!last_name) {
-            errors.last_name = "Last name is required!"
+            errors.last_name = "Required!"
         }
 
         if (!nickname) {
-            errors.nickname = "Nickname is required!"
+            errors.nickname = "Required!"
         }
 
         // if (!email) {

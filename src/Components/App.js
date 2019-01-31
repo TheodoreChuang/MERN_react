@@ -55,7 +55,7 @@ class App extends Component {
                 path="/profile"
                 component={ProfileCurrentPage}
               />
-              <PrivateRoute 
+              <Route 
                 exact 
                 path="/" 
                 component={NewsFeedPage} 
@@ -64,8 +64,9 @@ class App extends Component {
                 exact
                 path="/newchallenge"
                 component={NewChallengePage}
+                admin={true}
               />
-              <PrivateRoute
+              <Route
                 exact
                 path="/challenges/:id"
                 component={ChallengePage}

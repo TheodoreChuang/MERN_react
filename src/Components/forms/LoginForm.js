@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
 import LocalApi from "../../apis/local";
-import { setAuthToken } from "./../../actions";
+import { setAuthToken, getCurrentUser } from "./../../actions";
 import { connect } from "react-redux";
 import Checkbox from "./fields/CheckboxField";
 
@@ -55,14 +55,17 @@ class LoginForm extends Component {
   state = { error : "" }
     
     onLoginFormSubmit = (formValues) => {
-      const { history } = this.props;
+      const { history, getCurrentUser, setAuthToken } = this.props;
       const { email, password } = formValues;
 
         LocalApi.post("/login", {email, password})
         // async below as redirection to root page requires auth token first
-        .then ( response => {
-            setAuthToken(response.data.token, 
-              () => history.push("/"));
+        .then (response => {
+            setAuthToken(response.data.token);
+            localStorage.setItem("token", response.data.token);
+            history.push("/");
+            getCurrentUser();
+            
         })
         .catch(err => console.log(err));
     }
@@ -146,11 +149,11 @@ const WrappedRegisterForm = reduxForm({
         const errors = {}
 
         if (!email) {
-            errors.email = "Email is required!"
+            errors.email = "Required!"
         }
 
         if (!password) {
-            errors.password = "Password is required!"
+            errors.password = "Required!"
         }
 
         return errors;
@@ -158,5 +161,6 @@ const WrappedRegisterForm = reduxForm({
 })(withStyles(styles)(LoginForm))
 
 export default connect(null, {
-    setAuthToken
+    setAuthToken,
+    getCurrentUser
 }) (withRouter(WrappedRegisterForm));

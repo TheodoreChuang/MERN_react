@@ -7,9 +7,17 @@ import DateField from "./fields/DateField";
 import DateHelper from "./fields/DateHelper";
 import { withRouter } from "react-router-dom";
 import LocalApi from "./../../apis/local";
+import { connect } from "react-redux";
+import { getCurrentUser } from "./../../actions";
+
 
 class NewChallengeForm extends Component {
     state = { loading: false }
+
+    componentDidMount() {
+        const { getCurrentUser } = this.props; 
+        getCurrentUser();
+    }
 
     onUploadSubmit = async (formValues) => {
         const { history } = this.props;
@@ -122,7 +130,7 @@ const WrappedNewChallengeForm = reduxForm({
 
     if (video) {
         if (video.length < 1 ) {
-            errors.video = "Required"
+            errors.video = "Required!"
         }
     }
 
@@ -131,4 +139,13 @@ const WrappedNewChallengeForm = reduxForm({
     }
 })(NewChallengeForm);
 
-export default (withRouter(WrappedNewChallengeForm));
+const mapStateToProps = (state)  => {
+    return {
+        token: state.auth.token,
+        user: state.currentUser
+    };
+}
+
+export default connect(mapStateToProps, {
+    getCurrentUser
+})(withRouter(WrappedNewChallengeForm));

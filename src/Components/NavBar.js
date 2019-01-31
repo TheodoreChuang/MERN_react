@@ -124,11 +124,10 @@ class PrimarySearchAppBar extends Component {
 
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const { classes, currentUser } = this.props;
+    const { classes, currentUser, removeAuthToken } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const currentPath = window.location.pathname;
-    const { removeAuthToken } = this.props;
 
     const renderMenu = (
       <Menu
@@ -187,7 +186,7 @@ class PrimarySearchAppBar extends Component {
           component={Link}
           to="/landing"
           onClick={() => {
-            removeAuthToken();
+            // removeAuthToken();
           }}
         >
           <IconButton color="inherit">
@@ -214,7 +213,7 @@ class PrimarySearchAppBar extends Component {
             <div className={classes.sectionDesktop}>
             
             {/* Add challenge section, render if admin */} 
-            {!currentPath.includes('newchallenge') ? 
+            {!currentPath.includes('newchallenge') && currentUser.is_admin === true ? 
               <IconButton
                 color="inherit"
                 component={Link} 
@@ -278,9 +277,6 @@ const mapStateToProps = state => {
   };
 };
 
-const Wrapped = connect(
-  mapStateToProps,
+export default connect(mapStateToProps, {
   removeAuthToken
-)(PrimarySearchAppBar);
-
-export default withStyles(styles)(Wrapped);
+})(withStyles(styles)(PrimarySearchAppBar));

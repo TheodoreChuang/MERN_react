@@ -1,9 +1,8 @@
 import LocalApi from "./../apis/local";
 
 // auth, callback added to redirect to homepage
-export const setAuthToken = (token, cb) => {
+export const setAuthToken = token => {
   localStorage.setItem("token", token);
-  cb();
 
   return {
     type: "AUTH_TOKEN",
@@ -29,5 +28,5 @@ export const getCurrentUser = () => {
       type: "CURRENT_USER",
       payload: response.data
     });
-  };
+  }
 };

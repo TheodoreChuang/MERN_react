@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { removeAuthToken, fetchChallenges } from "../../actions";
 import { connect } from "react-redux"; 
 import ChallengeCard from "./../cards/ChallengeCard";
 import NavBar from "../NavBar";
@@ -41,6 +40,4 @@ class ChallengePage extends Component  {
 }
 
 
-export default connect(null, {
-    removeAuthToken,
-})(ChallengePage);
+export default ChallengePage;
