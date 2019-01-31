@@ -5,7 +5,7 @@ import LocalApi from "./../../apis/local";
 
 class ChallengeFeedPage extends Component {
     state = { 
-        challenges: [] 
+        challenges: [],
     }
 
     async componentDidMount() {
@@ -24,6 +24,8 @@ class ChallengeFeedPage extends Component {
                     return (
                         <div key={challenge._id} >
                             <ChallengeCard
+                                // passing down logged user for conditional render of "delete function"
+                                // logged_user={this.props.currentUser._id}
                                 id={challenge._id}
                                 user_id={challenge.user.creator_id}
                                 nickname={challenge.user.nickname}

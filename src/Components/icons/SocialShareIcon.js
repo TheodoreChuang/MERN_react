@@ -65,16 +65,16 @@ class ShareSocialIcon extends React.Component {
             <List component="nav" className={classes.list}>
               <ListItem button>
                 <a
-                  class="resp-sharing-button__link"
+                  className="resp-sharing-button__link"
                   href={`https://facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3001%2Fchallenges%2F${id}`}
                   target="_blank"
                   rel="noopener"
                   aria-label="Share on Facebook"
                 >
-                  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--large">
+                  <div className="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--large">
                     <div
                       aria-hidden="true"
-                      class="resp-sharing-button__icon resp-sharing-button__icon--solid"
+                      className="resp-sharing-button__icon resp-sharing-button__icon--solid"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

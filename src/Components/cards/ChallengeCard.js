@@ -21,6 +21,8 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import SocialShareIcon from "./../icons/SocialShareIcon";
 import LocalApi from "./../../apis/local";
 import VideoPlayer from "./../VideoPlayer";
+import { connect } from "react-redux";
+
 
 const styles = theme => ({
   card: {
@@ -83,7 +85,7 @@ class ChallengeCard extends Component {
     const isMenuOpen = Boolean(anchorEl);
     const {
       classes,
-      history,
+      currentUser,
       id,
       user_id,
       nickname,
@@ -104,8 +106,6 @@ class ChallengeCard extends Component {
       >
         <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>View More Challenge Details</MenuItem>
         <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Join Challenge</MenuItem>
-        {/* delete function */}
-        {/* <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Delete Challenge</MenuItem> */}
       </Menu>
     );
 
@@ -172,16 +172,18 @@ class ChallengeCard extends Component {
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
         </Collapse>
 
-        {/* delete challenge button */}
-        <button onClick={() => {
-          const r = window.confirm("Are you sure you want to delete this challenge?");
-          
-          if (r == true) {
-            LocalApi.delete(`/challenges/submissions/${id}`)
-            console.log("deleted");
-          }
+        {/* delete challenge button, conditional rendering - checks if current user (from redux store) is the creator of the challenge */}
+        {currentUser._id === user_id ?
+          <button onClick={() => {
+            const r = window.confirm("Are you sure you want to delete this challenge?");
+            
+            if (r == true) {
+              LocalApi.delete(`/challenges/submissions/${id}`)
+              console.log("deleted");
+            }
 
-        }}>Delete</button>
+          }}>Delete</button>
+          : null } 
 
       </Card>
       {renderMenu}
@@ -194,4 +196,10 @@ ChallengeCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(withRouter(ChallengeCard));
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  };
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(withRouter(ChallengeCard)));
