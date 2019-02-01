@@ -14,7 +14,9 @@ import {
   Typography,
   withStyles
 } from "@material-ui/core/";
+
 import { Edit, AccountCircle, HowToReg, ArrowBack } from "@material-ui/icons/";
+
 import MoreIcon from "@material-ui/icons/MoreVert";
 import LockIcon from "@material-ui/icons/Https";
 import Add from "@material-ui/icons/AddCircle";
@@ -102,16 +104,8 @@ class NavBar extends Component {
           </MenuItem>
         ) : null}
 
-{/* //     Commented this out on merge conflict - Tyson
-//         {currentPath.includes("profile") && currentUser._id && ( */}
-{/* //           <MenuItem component={Link} to="/updateinfo">
-//             <IconButton color="inherit">
-//               <Edit />
-//             </IconButton>
-//             <p>Edit Profile</p> */}
-
         {token && currentPath.includes("profile") ? (
-          <MenuItem component={Link} to="/profile/edit">
+          <MenuItem component={Link} to="/updateinfo">
             <ListItemIcon>
               <Edit />
             </ListItemIcon>
@@ -203,6 +197,7 @@ class NavBar extends Component {
 
             {/* Desktop Menu - Hidden on Mobile */}
             <div className={classes.sectionDesktop}>
+
               {/* Add Challenge - if admin  */}
               {!currentPath.includes("newchallenge") && admin === true ? (
                 <IconButton color="inherit" component={Link} to="/newchallenge">
@@ -218,7 +213,7 @@ class NavBar extends Component {
               ) : null}
 
               {token && currentPath.includes("profile") ? (
-                <IconButton color="inherit" component={Link} to="/profile/edit">
+                <IconButton color="inherit" component={Link} to="/updateinfo">
                   <Edit />
                 </IconButton>
               ) : null}
