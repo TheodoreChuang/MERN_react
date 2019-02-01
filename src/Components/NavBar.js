@@ -166,7 +166,7 @@ class NavBar extends Component {
           </MenuItem>
         ) : null}
        
-        {!currentPath.includes("profile") ? (
+        {/* {!currentPath.includes("profile") ? ( */}
 
         {/* Home Icon - always available */}
         <MenuItem component={Link} to="/">
@@ -286,7 +286,7 @@ class NavBar extends Component {
               </IconButton> : null }
 
               {/* Only Admin can create challenge for MVP */}
-              {!currentPath.includes("profile") ? (
+              {/* {!currentPath.includes("profile") ? (
 
             </Typography> */}
 

@@ -171,13 +171,14 @@ const WrappedRegisterForm = reduxForm({
         if (!password) {
             errors.password = "Required!"
         }
-
         return errors;
-    }
-})(withStyles(styles)(LoginForm))
+  }
+})(withStyles(styles)(LoginForm));
 
-export default connect(null, {
+export default connect(
+  null,
+  {
     setAuthToken,
     getCurrentUser
-}) (withRouter(WrappedRegisterForm));
-
+  }
+)(withRouter(WrappedRegisterForm));

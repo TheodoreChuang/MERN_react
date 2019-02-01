@@ -104,7 +104,6 @@ class ChallengeCard extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-
         {/* View More Challenge details hidden if currently on specific challenge page */}
         {viewMoreDetail === true ? 
         <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>View More Challenge Details</MenuItem>
@@ -169,18 +168,12 @@ class ChallengeCard extends Component {
               aria-label="Show more"
             />
           </CardActions>
-          <Collapse in={this.state.expanded} timeout="auto" unmountOnExit />
-          <button
-            onClick={() => {
-              console.log(this.props);
-              console.log(id);
-              LocalApi.delete(`/challenges/submissions/${id}`);
-            }}
-          >
+          {/* <Collapse in={this.state.expanded} timeout="auto" unmountOnExit />
+      
           </IconButton>
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-        </Collapse>
+        </Collapse> */}
 
         {/* delete challenge button, conditional rendering - checks if current user (from redux store) is the creator of the challenge */}
         {currentUser._id === user_id ?

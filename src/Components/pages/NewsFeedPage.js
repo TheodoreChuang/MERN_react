@@ -19,6 +19,8 @@ class NewsFeedPage extends Component {
     return (
       <div>
       <NavBar />
+      {/* <img src="/logo.png" /> */}
+      
         {/* submissions feed */}
         {submissions &&
           submissions.map(function(sub) {

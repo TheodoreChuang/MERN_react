@@ -31,16 +31,8 @@ class App extends Component {
                 exact 
                 path="/landing" 
                 component={LandingPage} 
-              <Route 
-                exact 
-                path="/challenges/:id" 
-                component={ChallengePage} 
               />
-              <PrivateRoute
-                exact 
-                path="/updateinfo"
-                component={UpdateProfileInfoPage}
-              />
+              <Route exact path="/challenges/:id" component={ChallengePage} />
               <Route 
                 exact 
                 path="/login" 
@@ -71,6 +63,7 @@ class App extends Component {
                 path="/challenges" 
                 component={ChallengeFeedPage} 
               />
+              <Route component={NotFoundPage} />
               {/* Private Routes */}
               <PrivateRoute
                 exact
@@ -88,7 +81,11 @@ class App extends Component {
                 component={NewChallengePage}
                 admin={true}
               />
-              <Route component={NotFoundPage} />
+              <PrivateRoute
+                exact
+                path="/updateinfo"
+                component={UpdateProfileInfoPage}
+              />
             </Switch>
         </BrowserRouter>
       </div>
