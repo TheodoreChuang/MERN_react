@@ -4,7 +4,11 @@ export default (state = defaultState, action) => {
   switch (action.type) {
     case "CURRENT_USER":
       return action.payload;
+    case "UPDATE_USER":
+      return action.payload;
     default:
       return state;
   }
 };
+
+

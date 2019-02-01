@@ -10,5 +10,5 @@ export default combineReducers({
   auth: authReducer,
   currentUser: currentUserReducer,
   challenges: challengeReducer,
-  submissions: submissionReducer
+  submissions: submissionReducer,
 });

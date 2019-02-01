@@ -37,7 +37,7 @@ class App extends Component {
                 path="/profile"
                 component={ProfileCurrentPage}
               />
-              <PrivateRoute exact path="/" component={NewsFeedPage} />
+              <PrivateRoute exact path="/home" component={NewsFeedPage} />
               <PrivateRoute
                 exact
                 path="/newchallenge"

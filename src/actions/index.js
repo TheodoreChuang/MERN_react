@@ -31,6 +31,18 @@ export const getCurrentUser = () => {
   };
 };
 
+// update user profile
+export const updateCurrentUser = (formValues) => {
+  return async (dispatch, getState) => {
+    const response = await LocalApi.patch("/profile", formValues);
+
+    dispatch({
+      type: "UPDATE_USER",
+      payload: response.data
+    });
+  };
+};
+
 // challenges
 export const fetchChallenges = () => {
   return async (dispatch, getState) => {

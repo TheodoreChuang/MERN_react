@@ -173,11 +173,11 @@ class PrimarySearchAppBar extends Component {
         ) : null}
 
         {currentPath.includes("profile") && currentUser._id && (
-          <MenuItem component={Link} to="/profile/edit">
+          <MenuItem component={Link} to="/updateinfo">
             <IconButton color="inherit">
               <Edit />
-              <p>Edit Profile</p>
             </IconButton>
+            <p>Edit Profile</p>
           </MenuItem>
         )}
 
@@ -225,20 +225,20 @@ class PrimarySearchAppBar extends Component {
             </div> */}
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              {!currentPath.includes("home") ? (
+              {currentPath.includes("profile") ? (
                 <span>
                   {/* <IconButton color="inherit" component={Link} to="/home">
                     <Home />
-                  </IconButton>
+                  </IconButton> */}
                   {currentUser._id && (
                     <IconButton
                       color="inherit"
                       component={Link}
-                      to="/profile/edit"
+                      to="/updateinfo"
                     >
                       <Edit />
-                    </IconButton> */}
-                  {/* )} */}
+                    </IconButton>
+                   )} 
                 </span>
               ) : null}
 
@@ -246,7 +246,7 @@ class PrimarySearchAppBar extends Component {
               <IconButton
                 color="inherit"
                 component={Link} 
-                to="/" >
+                to="/home" >
                 <Home />
               </IconButton> : null }
 

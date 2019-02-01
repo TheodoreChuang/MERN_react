@@ -61,7 +61,7 @@ class LoginForm extends Component {
         LocalApi.post("/login", {email, password})
         .then(response => {
             setAuthToken(response.data.token);
-            history.push("/");
+            history.push("/home");
         })
         .catch(err => console.log(err));
     }

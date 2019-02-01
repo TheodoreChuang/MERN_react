@@ -6,7 +6,7 @@ class UpdateProfileInfoPage extends Component {
 
     render() {
         const { match } = this.props;
-        console.log("rendered");
+
         return (
             <div>
                 <NavBar />
