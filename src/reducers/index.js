@@ -6,10 +6,7 @@ import currentUserReducer from "./current_user_reducer";
 export default combineReducers({
   form: formReducer,
   auth: authReducer,
-
-  currentUser: currentUserReducer,
-  challenges: challengeReducer,
-  submissions: submissionReducer,
   currentUser: currentUserReducer
+
 
 });

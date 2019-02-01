@@ -18,7 +18,8 @@ import {
   Edit,
   AccountCircle,
   HowToReg,
-  ArrowBack
+  ArrowBack,
+  Home
 } from "@material-ui/icons/";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import LockIcon from "@material-ui/icons/Https";
@@ -111,16 +112,8 @@ class NavBar extends Component {
           </MenuItem>
         ) : null}
 
-//     Commented this out on merge conflict - Tyson
-//         {currentPath.includes("profile") && currentUser._id && (
-//           <MenuItem component={Link} to="/updateinfo">
-//             <IconButton color="inherit">
-//               <Edit />
-//             </IconButton>
-//             <p>Edit Profile</p>
-
         {token && currentPath.includes("profile") ? (
-          <MenuItem component={Link} to="/profile/edit">
+          <MenuItem component={Link} to="/updateinfo">
             <ListItemIcon>
               <Edit />
             </ListItemIcon>
@@ -203,23 +196,6 @@ class NavBar extends Component {
             {/* Desktop Menu - Hidden on Mobile */}
             <div className={classes.sectionDesktop}>
 
-              {currentPath.includes("profile") ? (
-                <span>
-                  {/* <IconButton color="inherit" component={Link} to="/home">
-                    <Home />
-                  </IconButton> */}
-                  {currentUser._id && (
-                    <IconButton
-                      color="inherit"
-                      component={Link}
-                      to="/updateinfo"
-                    >
-                      <Edit />
-                    </IconButton>
-                   )} 
-                </span>
-              ) : null}
-
 
               {/* Add Challenge - if admin  */}
               {!currentPath.includes('newchallenge') 
@@ -247,7 +223,7 @@ class NavBar extends Component {
               ) : null}
 
               {token && currentPath.includes("profile") ? (
-                <IconButton color="inherit" component={Link} to="/profile/edit">
+                <IconButton color="inherit" component={Link} to="/updateinfo">
                   <Edit />
                 </IconButton>
               ) : null}

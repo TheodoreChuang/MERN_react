@@ -56,20 +56,6 @@ class UpdateProfileInfoForm extends Component {
         const { first_name, last_name, nickname, age, location, bio, gender } = formValues;
 
         this.props.updateCurrentUser( formValues );
-
-        // LocalApi.patch("/profile", {first_name, last_name, nickname})
-        // .then(response => {
-            
-        //     //acquring token
-        //     // setAuthToken(response.data.token);
-        //     //redirect
-        //     //this.props.history.push("/profile");
-        //     console.log(response.data.first_name);
-        //     console.log(response.data);
-        //     console.log(redux);
-        // })
-        // .catch(err => console.log(err));
-        // }
         }
 
         render() {
