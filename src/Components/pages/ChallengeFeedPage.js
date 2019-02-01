@@ -4,14 +4,14 @@ import NavBar from "../NavBar";
 import LocalApi from "./../../apis/local";
 
 class ChallengeFeedPage extends Component {
-    state = { 
-        challenges: [],
-    }
+  state = {
+    challenges: []
+  };
 
-    async componentDidMount() {
-        const response1 = await LocalApi.get("/challenges");
-        this.setState({ challenges : response1.data });
-      }
+  async componentDidMount() {
+    const response1 = await LocalApi.get("/challenges");
+    this.setState({ challenges: response1.data });
+  }
 
     render() {
         const { challenges } = this.state;
@@ -24,6 +24,7 @@ class ChallengeFeedPage extends Component {
                     return (
                         <div key={challenge._id} >
                             <ChallengeCard
+                                type="challenge"
                                 id={challenge._id}
                                 user_id={challenge.user.creator_id}
                                 nickname={challenge.user.nickname}
@@ -42,4 +43,3 @@ class ChallengeFeedPage extends Component {
 }
 
 export default ChallengeFeedPage;
-            

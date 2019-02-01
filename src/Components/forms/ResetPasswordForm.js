@@ -9,7 +9,7 @@ class ResetPasswordForm extends Component {
     state = { error: "" }
 
     onFormSubmit = (formValues) => {
-        const { history } = this.props;
+        const { history} = this.props;
         const { token } = this.props.match.params;
         const { password, confirm_password } = formValues;
 
@@ -23,8 +23,7 @@ class ResetPasswordForm extends Component {
             if (res.status === 200) {
                 console.log("200");
                 alert("Password succesfully updated!")
-                console.log("26");
-                return history.push("/login");
+                return history.push("/");
                 }
             })
         .catch(err => {

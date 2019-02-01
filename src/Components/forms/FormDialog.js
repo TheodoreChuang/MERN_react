@@ -1,15 +1,26 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import React, { Component } from "react";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Typography
+} from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
-export default class FormDialog extends React.Component {
+const styles = () => ({
+  buttonText: {
+    color: "white"
+  }
+});
+
+class FormDialog extends Component {
   state = {
-    open: false, email: ""
+    open: false,
+    email: ""
   };
 
   handleClickOpen = () => {
@@ -20,20 +31,35 @@ export default class FormDialog extends React.Component {
     this.setState({ open: false });
   };
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({ email: event.target.value });
-  }
-  
+  };
 
   render() {
-    const { buttonText, header, content, submitButtonText, action } = this.props;
+    const {
+      buttonText,
+      header,
+      content,
+      submitButtonText,
+      action,
+      classes
+    } = this.props;
 
     return (
       <div>
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}
-        style={{ border: "none", backgroundColor: "transparent", textTransform: "none" }}
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={this.handleClickOpen}
+          style={{
+            border: "none",
+            backgroundColor: "transparent",
+            textTransform: "none"
+          }}
         >
-          {buttonText}
+          <Typography variant="caption" className={classes.buttonText}>
+            {buttonText}
+          </Typography>
         </Button>
         <Dialog
           open={this.state.open}
@@ -42,9 +68,7 @@ export default class FormDialog extends React.Component {
         >
           <DialogTitle id="form-dialog-title">{header}</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              {content}
-            </DialogContentText>
+            <DialogContentText>{content}</DialogContentText>
             <TextField
               autoFocus
               margin="dense"
@@ -53,17 +77,22 @@ export default class FormDialog extends React.Component {
               type="email"
               name="email"
               onChange={this.handleChange}
+              style={{
+                width: "100%"
+              }}
             />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={
-              () => {
+            <Button
+              onClick={() => {
                 action(this.state.email);
-              this.handleClose();
-            }} color="primary">
+                this.handleClose();
+              }}
+              color="primary"
+            >
               {submitButtonText}
             </Button>
           </DialogActions>
@@ -72,3 +101,5 @@ export default class FormDialog extends React.Component {
     );
   }
 }
+
+export default withStyles(styles)(FormDialog);

@@ -1,34 +1,32 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import classnames from "classnames";
-import { withStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Typography from "@material-ui/core/Typography";
-import red from "@material-ui/core/colors/red";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import { connect } from "react-redux";
 import SocialShareIcon from "./../icons/SocialShareIcon";
 import LocalApi from "./../../apis/local";
 import VideoPlayer from "./../VideoPlayer";
-import { connect } from "react-redux";
 
+<<<<<<< HEAD
+=======
+import { withStyles } from "@material-ui/core/styles";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  Menu,
+  MenuItem,
+  Typography,
+  Avatar,
+  IconButton
+} from "@material-ui/core/";
+import red from "@material-ui/core/colors/red";
+import { MoreVert, Favorite, DeleteForever } from "@material-ui/icons";
 
+>>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
 const styles = theme => ({
   card: {
     minWidth: 275,
-    maxWidth: 600,
-    padding: "20px"
+    maxWidth: 600
   },
   menuButton: {
     marginLeft: -12,
@@ -59,8 +57,7 @@ const styles = theme => ({
 class ChallengeCard extends Component {
   state = {
     expanded: false,
-    anchorEl: null,
-    mobileMoreAnchorEl: null
+    anchorEl: null
   };
 
   handleProfileMenuOpen = event => {
@@ -73,18 +70,17 @@ class ChallengeCard extends Component {
 
   handleMenuClose = () => {
     this.setState({ anchorEl: null });
-    this.handleMobileMenuClose();
-  };
-
-  handleMobileMenuClose = () => {
-    this.setState({ mobileMoreAnchorEl: null });
   };
 
   render() {
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const { anchorEl } = this.state;
     const isMenuOpen = Boolean(anchorEl);
     const {
+      sub_id,
+      type,
       classes,
+      is_challenge,
+      viewMoreDetail,
       currentUser,
       id,
       user_id,
@@ -93,9 +89,15 @@ class ChallengeCard extends Component {
       title,
       yt_id,
       description,
+<<<<<<< HEAD
       date_created,
-      viewMoreDetail
+      hideMoreDetail,
+      history
+=======
+      date_created
+>>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
     } = this.props;
+
     const renderMenu = (
       <Menu
         anchorEl={anchorEl}
@@ -104,23 +106,47 @@ class ChallengeCard extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
+<<<<<<< HEAD
         {/* View More Challenge details hidden if currently on specific challenge page */}
-        {/* {viewMoreDetail === true ?  */}
+        {!hideMoreDetail ? 
+        
         <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>View More Challenge Details</MenuItem>
-        {/* // : null } */}
+        : null } 
         <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Join Challenge</MenuItem>
+=======
+        {/* Challenge details hidden if currently on specific challenge page */}
+        {viewMoreDetail !== false ? (
+          <MenuItem
+            component={Link}
+            to={`/challenges/${id}`}
+            onClick={this.handleMenuClose}
+          >
+            Challenge Details
+          </MenuItem>
+        ) : null}
+        <MenuItem
+          component={Link}
+          to={`/challenges/${id}/submit`}
+          onClick={this.handleMenuClose}
+        >
+          Join Challenge
+        </MenuItem>
+>>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
       </Menu>
     );
 
     return (
-      <div className={`${classes.root}`}>
+      <div className={classes.root}>
         <Card className={classes.card}>
           <CardHeader
             avatar={
-              <Avatar aria-label="avatar" className={classes.avatar}>
-                {(profile_image && (
-                  <img src={profile_image} alt="profile image" />
-                )) ||
+              <Avatar
+                component={Link}
+                to={`/profile/${user_id}`}
+                aria-label="avatar"
+                className={classes.avatar}
+              >
+                {(profile_image && <img src={profile_image} alt="profile" />) ||
                   "1Up"}
               </Avatar>
             }
@@ -131,7 +157,7 @@ class ChallengeCard extends Component {
                 aria-label="Open drawer"
                 onClick={this.handleProfileMenuOpen}
               >
-                <MoreVertIcon />
+                <MoreVert />
               </IconButton>
             }
             title={nickname}
@@ -144,58 +170,71 @@ class ChallengeCard extends Component {
           <CardContent>
             <Typography component="p">{description}</Typography>
           </CardContent>
+
           <CardActions className={classes.actions} disableActionSpacing>
             <IconButton aria-label="Add to favorites">
-              <FavoriteIcon />
+              <Favorite />
             </IconButton>
             <IconButton aria-label="Share">
               <SocialShareIcon id={id} />
             </IconButton>
-            <IconButton
-              className={classnames(classes.expand, {
-                [classes.expandOpen]: this.state.expanded
-              })}
-              onClick={this.handleExpandClick}
-              aria-expanded={this.state.expanded}
-              aria-label="Show more"
-            />
-            <IconButton
-              className={classnames(classes.expand, {
-                [classes.expandOpen]: this.state.expanded
-              })}
-              onClick={this.handleExpandClick}
-              aria-expanded={this.state.expanded}
-              aria-label="Show more"
-            />
-          </CardActions>
-          {/* <Collapse in={this.state.expanded} timeout="auto" unmountOnExit />
-      
-          </IconButton>
-        </CardActions>
-        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-        </Collapse> */}
 
-        {/* delete challenge button, conditional rendering - checks if current user (from redux store) is the creator of the challenge */}
-        {currentUser._id === user_id ?
-          <button onClick={() => {
+<<<<<<< HEAD
+        {/* Conditional rendering based on type of card */}
+        {/* for challenges */}
+        {type === "challenge" && currentUser._id === user_id  ? 
+          <button onClick={ () => {
             const r = window.confirm("Are you sure you want to delete this challenge?");
             
             if (r === true) {
               LocalApi.delete(`/challenges/submissions/${id}`)
+              .then(res => window.location.reload())
+              .catch(err => alert(err))
             }
-          }}>Delete</button>
+          }}> Chal Delete</button>
+          : null }
+        
+        {/* for submissions */}
+        {type === "submission" && currentUser._id === user_id ?
+          <button onClick={ () => {
+            const r = window.confirm("Are you sure you want to delete this challenge?");
+            
+            if (r === true) {
+              LocalApi.delete(`/challenges/${id}/submission/${sub_id}`)
+              .then (res => window.location.reload())
+              .catch (err => alert(err));
+              
+            }
+          }}>Sub Delete</button>
           : null }
           
       </Card>
       {renderMenu}
+=======
+            {/* delete button - checks if current user (from redux store) is the creator of the challenge */}
+            {is_challenge === true && currentUser.is_admin === true ? (
+              <IconButton aria-label="Delete Forever">
+                <DeleteForever
+                  onClick={() => {
+                    const r = window.confirm(
+                      "Are you sure you want to delete this challenge?"
+                    );
+                    console.log(r);
+                    if (r === true) {
+                      LocalApi.delete(`/challenges/submissions/${id}`);
+                    }
+                  }}
+                />
+              </IconButton>
+            ) : null}
+          </CardActions>
+        </Card>
+        {renderMenu}
+>>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
       </div>
     );
   }
 }
-
-ChallengeCard.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 const mapStateToProps = state => {
   return {
@@ -203,4 +242,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(withRouter(ChallengeCard)));
+export default connect(mapStateToProps)(
+  withStyles(styles)(withRouter(ChallengeCard))
+);

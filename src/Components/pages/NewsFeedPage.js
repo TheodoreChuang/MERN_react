@@ -10,8 +10,9 @@ class NewsFeedPage extends Component {
   };
 
   async componentDidMount() {
+    console.log("mounted");
     const response = await LocalApi.get("/submissions");
-    this.setState({ submissions : response.data });    
+    this.setState({ submissions: response.data });
   }
 
   render() {
@@ -19,14 +20,16 @@ class NewsFeedPage extends Component {
     return (
       <div>
       <NavBar {...this.props}/>
-      {/* <img src="/logo.png" /> */}
       
         {/* submissions feed */}
         {submissions &&
           submissions.map(function(sub) {
+            console.log(submissions);
             return (
-              <div key={sub.submission_id} >
+              <div key={sub.submission_id}>
                 <ChallengeCard
+                  type="submission"
+                  sub_id={sub.submission_id}
                   id={sub.challenge_id}
                   user_id={sub.submission_user_id}
                   nickname={sub.submission_user_nickname}
@@ -44,4 +47,4 @@ class NewsFeedPage extends Component {
   }
 }
 
-export default (withRouter(NewsFeedPage));
+export default withRouter(NewsFeedPage);
