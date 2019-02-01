@@ -5,6 +5,8 @@ import SocialShareIcon from "./../icons/SocialShareIcon";
 import LocalApi from "./../../apis/local";
 import VideoPlayer from "./../VideoPlayer";
 
+<<<<<<< HEAD
+=======
 import { withStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -20,6 +22,7 @@ import {
 import red from "@material-ui/core/colors/red";
 import { MoreVert, Favorite, DeleteForever } from "@material-ui/icons";
 
+>>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
 const styles = theme => ({
   card: {
     minWidth: 275,
@@ -86,9 +89,13 @@ class ChallengeCard extends Component {
       title,
       yt_id,
       description,
+<<<<<<< HEAD
       date_created,
       hideMoreDetail,
       history
+=======
+      date_created
+>>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
     } = this.props;
 
     const renderMenu = (
@@ -99,12 +106,32 @@ class ChallengeCard extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
+<<<<<<< HEAD
         {/* View More Challenge details hidden if currently on specific challenge page */}
         {!hideMoreDetail ? 
         
         <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>View More Challenge Details</MenuItem>
         : null } 
         <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Join Challenge</MenuItem>
+=======
+        {/* Challenge details hidden if currently on specific challenge page */}
+        {viewMoreDetail !== false ? (
+          <MenuItem
+            component={Link}
+            to={`/challenges/${id}`}
+            onClick={this.handleMenuClose}
+          >
+            Challenge Details
+          </MenuItem>
+        ) : null}
+        <MenuItem
+          component={Link}
+          to={`/challenges/${id}/submit`}
+          onClick={this.handleMenuClose}
+        >
+          Join Challenge
+        </MenuItem>
+>>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
       </Menu>
     );
 
@@ -151,8 +178,8 @@ class ChallengeCard extends Component {
             <IconButton aria-label="Share">
               <SocialShareIcon id={id} />
             </IconButton>
-          </CardActions>
 
+<<<<<<< HEAD
         {/* Conditional rendering based on type of card */}
         {/* for challenges */}
         {type === "challenge" && currentUser._id === user_id  ? 
@@ -183,6 +210,27 @@ class ChallengeCard extends Component {
           
       </Card>
       {renderMenu}
+=======
+            {/* delete button - checks if current user (from redux store) is the creator of the challenge */}
+            {is_challenge === true && currentUser.is_admin === true ? (
+              <IconButton aria-label="Delete Forever">
+                <DeleteForever
+                  onClick={() => {
+                    const r = window.confirm(
+                      "Are you sure you want to delete this challenge?"
+                    );
+                    console.log(r);
+                    if (r === true) {
+                      LocalApi.delete(`/challenges/submissions/${id}`);
+                    }
+                  }}
+                />
+              </IconButton>
+            ) : null}
+          </CardActions>
+        </Card>
+        {renderMenu}
+>>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
       </div>
     );
   }

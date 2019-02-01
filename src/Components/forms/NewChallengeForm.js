@@ -21,7 +21,7 @@ class NewChallengeForm extends Component {
         fd.append("video", video[0]);
         fd.append("title", title);
         fd.append("description", description);
-        // fd.append("creator_id", creator_id);
+        fd.append("creator_id", creator_id);
         // Conditional as expiry_date value might not be entered as it is not mandatory
         if (expiry_date) {
             fd.append("expiry_date", expiry_date);
@@ -62,14 +62,14 @@ class NewChallengeForm extends Component {
                         multiline
                         />
                     </div>
-                    {/* <div>
+                    <div>
                         <Field
                         name="creator_id"
                         component={Input}
                         placeholder="Creator id"
                         type="text"
                         />
-                    </div> */}
+                    </div>
                     <div>
                         <Field
                         name="expiry_date"

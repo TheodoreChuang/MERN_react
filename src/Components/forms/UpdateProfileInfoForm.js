@@ -8,6 +8,12 @@ import { withStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import Typography from "@material-ui/core/Typography";
 
+import { withStyles } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
+import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
+import { updateCurrentUser } from "./../../actions";
+
 const styles = theme => ({
   body: {
     margin: "0 25px 0 10px"

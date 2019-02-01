@@ -5,7 +5,13 @@ import { Field, reduxForm } from "redux-form";
 import AuthInput from "./fields/AuthInput";
 import FormDialog from "./FormDialog";
 import LocalApi from "../../apis/local";
+<<<<<<< HEAD
 import { setAuthToken } from "./../../actions";
+import { connect } from "react-redux";
+=======
+import { setAuthToken, getCurrentUser } from "./../../actions";
+>>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
+
 import { withStyles } from "@material-ui/core/styles";
 import { Fab, Typography } from "@material-ui/core";
 
@@ -53,6 +59,7 @@ const styles = theme => ({
 });
 
 class LoginForm extends Component {
+<<<<<<< HEAD
   state = { error : "" }
     
     onLoginFormSubmit = (formValues) => {
@@ -68,6 +75,24 @@ class LoginForm extends Component {
         })
         .catch(err => console.log(err));
     }
+=======
+  state = { error: "" };
+
+  onLoginFormSubmit = formValues => {
+    const { history, getCurrentUser, setAuthToken } = this.props;
+    const { email, password } = formValues;
+
+    LocalApi.post("/login", { email, password })
+      // async below as redirection to root page requires auth token first
+      .then(response => {
+        setAuthToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
+        history.push("/");
+        getCurrentUser();
+      })
+      .catch(err => console.log(err));
+  };
+>>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
 
   render() {
     const { classes } = this.props;
