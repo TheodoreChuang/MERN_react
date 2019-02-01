@@ -1,34 +1,29 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import classnames from "classnames";
-import { withStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Typography from "@material-ui/core/Typography";
-import red from "@material-ui/core/colors/red";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import { connect } from "react-redux";
 import SocialShareIcon from "./../icons/SocialShareIcon";
-
-import YTvideo from "../YTvideo";
 import LocalApi from "./../../apis/local";
 import VideoPlayer from "./../VideoPlayer";
+
+import { withStyles } from "@material-ui/core/styles";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  Menu,
+  MenuItem,
+  Typography,
+  Avatar,
+  IconButton
+} from "@material-ui/core/";
+import red from "@material-ui/core/colors/red";
+import { MoreVert, Favorite, DeleteForever } from "@material-ui/icons";
 
 const styles = theme => ({
   card: {
     minWidth: 275,
-    maxWidth: 600,
-    padding: "20px"
+    maxWidth: 600
   },
   menuButton: {
     marginLeft: -12,
@@ -59,8 +54,7 @@ const styles = theme => ({
 class ChallengeCard extends Component {
   state = {
     expanded: false,
-    anchorEl: null,
-    mobileMoreAnchorEl: null
+    anchorEl: null
   };
 
   handleProfileMenuOpen = event => {
@@ -73,19 +67,18 @@ class ChallengeCard extends Component {
 
   handleMenuClose = () => {
     this.setState({ anchorEl: null });
-    this.handleMobileMenuClose();
-  };
-
-  handleMobileMenuClose = () => {
-    this.setState({ mobileMoreAnchorEl: null });
   };
 
   render() {
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const { anchorEl } = this.state;
     const isMenuOpen = Boolean(anchorEl);
     const {
+      sub_id,
+      type,
       classes,
-      history,
+      is_challenge,
+      viewMoreDetail,
+      currentUser,
       id,
       user_id,
       nickname,
@@ -93,7 +86,9 @@ class ChallengeCard extends Component {
       title,
       yt_id,
       description,
-      date_created
+      date_created,
+      hideMoreDetail,
+      history
     } = this.props;
 
     const renderMenu = (
@@ -104,22 +99,27 @@ class ChallengeCard extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
+        {/* View More Challenge details hidden if currently on specific challenge page */}
+        {!hideMoreDetail ? 
+        
         <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>View More Challenge Details</MenuItem>
+        : null } 
         <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Join Challenge</MenuItem>
-        {/* delete function */}
-        {/* <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Delete Challenge</MenuItem> */}
       </Menu>
     );
 
     return (
-      <div className={`${classes.root}`}>
+      <div className={classes.root}>
         <Card className={classes.card}>
           <CardHeader
             avatar={
-              <Avatar aria-label="avatar" className={classes.avatar}>
-                {(profile_image && (
-                  <img src={profile_image} alt="profile image" />
-                )) ||
+              <Avatar
+                component={Link}
+                to={`/profile/${user_id}`}
+                aria-label="avatar"
+                className={classes.avatar}
+              >
+                {(profile_image && <img src={profile_image} alt="profile" />) ||
                   "1Up"}
               </Avatar>
             }
@@ -130,7 +130,7 @@ class ChallengeCard extends Component {
                 aria-label="Open drawer"
                 onClick={this.handleProfileMenuOpen}
               >
-                <MoreVertIcon />
+                <MoreVert />
               </IconButton>
             }
             title={nickname}
@@ -139,45 +139,48 @@ class ChallengeCard extends Component {
           <CardContent>
             <Typography component="p">{title}</Typography>
           </CardContent>
-          <VideoPlayer url={yt_id}/>
-        <CardContent>
-          <Typography component="p">
-            {description}
-          </Typography>
-        </CardContent>
-        <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="Share">
+          <VideoPlayer url={yt_id} />
+          <CardContent>
+            <Typography component="p">{description}</Typography>
+          </CardContent>
+
+          <CardActions className={classes.actions} disableActionSpacing>
+            <IconButton aria-label="Add to favorites">
+              <Favorite />
+            </IconButton>
+            <IconButton aria-label="Share">
               <SocialShareIcon id={id} />
             </IconButton>
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded,
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
-          >
-          </IconButton>
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded,
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
-          >
-          </IconButton>
-        </CardActions>
-        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-        </Collapse>
-        <button onClick={() => {
-           console.log(this.props);
-           console.log(id);
-          LocalApi.delete(`/challenges/submissions/${id}`)
-        }}>Delete</button>
+          </CardActions>
+
+        {/* Conditional rendering based on type of card */}
+        {/* for challenges */}
+        {type === "challenge" && currentUser._id === user_id  ? 
+          <button onClick={ () => {
+            const r = window.confirm("Are you sure you want to delete this challenge?");
+            
+            if (r === true) {
+              LocalApi.delete(`/challenges/submissions/${id}`)
+              .then(res => window.location.reload())
+              .catch(err => alert(err))
+            }
+          }}> Chal Delete</button>
+          : null }
+        
+        {/* for submissions */}
+        {type === "submission" && currentUser._id === user_id ?
+          <button onClick={ () => {
+            const r = window.confirm("Are you sure you want to delete this challenge?");
+            
+            if (r === true) {
+              LocalApi.delete(`/challenges/${id}/submission/${sub_id}`)
+              .then (res => window.location.reload())
+              .catch (err => alert(err));
+              
+            }
+          }}>Sub Delete</button>
+          : null }
+          
       </Card>
       {renderMenu}
       </div>
@@ -185,10 +188,12 @@ class ChallengeCard extends Component {
   }
 }
 
-ChallengeCard.propTypes = {
-  classes: PropTypes.object.isRequired
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  };
 };
 
-const WrappedChallengeCard = withRouter(ChallengeCard);
-
-export default withStyles(styles)(WrappedChallengeCard);
+export default connect(mapStateToProps)(
+  withStyles(styles)(withRouter(ChallengeCard))
+);

@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
-import LocalApi from "../../apis/local";
-import { setAuthToken } from "./../../actions";
 import { connect } from "react-redux";
+import { updateCurrentUser } from "./../../actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import Typography from "@material-ui/core/Typography";
-// import { Link } from "react-router-dom";
 
 const styles = theme => ({
   body: {
@@ -51,17 +49,17 @@ const styles = theme => ({
 
 class UpdateProfileInfoForm extends Component {
   updateUserFormSubmit = formValues => {
-    const { first_name, last_name, nickname } = formValues;
-    const { setAuthToken } = this.props;
+    const {
+      first_name,
+      last_name,
+      nickname,
+      age,
+      location,
+      bio,
+      gender
+    } = formValues;
 
-    LocalApi.patch("/profile", { first_name, last_name, nickname })
-      .then(response => {
-        //acquring token
-        setAuthToken(response.data.token);
-        //redirect
-        this.props.history.push("/profile");
-      })
-      .catch(err => console.log(err));
+    this.props.updateCurrentUser(formValues);
   };
 
   render() {
@@ -76,7 +74,7 @@ class UpdateProfileInfoForm extends Component {
               Update Profile Information
             </Typography>
           </div>
-          <form onSubmit={handleSubmit(this.updateUserFormSubmit)}>
+          <form onSubmit={handleSubmit(this.updateUserFormSubmit.bind(this))}>
             <Field
               name="first_name"
               component={Input}
@@ -136,7 +134,6 @@ class UpdateProfileInfoForm extends Component {
               placeholder="Bio"
               multiline
               className={classes.textField}
-              margin="normal"
               variant="outlined"
             />
             <div className={classes.gender}>
@@ -146,7 +143,7 @@ class UpdateProfileInfoForm extends Component {
               <div>
                 <Typography color="inherit">
                   <Field
-                    name="sex"
+                    name="gender"
                     component="input"
                     type="radio"
                     value="male"
@@ -155,7 +152,7 @@ class UpdateProfileInfoForm extends Component {
                 </Typography>
                 <Typography color="inherit">
                   <Field
-                    name="sex"
+                    name="gender"
                     component="input"
                     type="radio"
                     value="female"
@@ -164,7 +161,7 @@ class UpdateProfileInfoForm extends Component {
                 </Typography>
                 <Typography color="inherit">
                   <Field
-                    name="sex"
+                    name="gender"
                     component="input"
                     type="radio"
                     value="gender-neutral"
@@ -195,20 +192,20 @@ class UpdateProfileInfoForm extends Component {
 
 const WrappedUpdateInfoForm = reduxForm({
   form: "register",
-  validate: ({ first_name, last_name, nickname }) => {
+  validate: ({ first_name }) => {
     const errors = {};
 
     if (!first_name) {
       errors.first_name = "First name is required!";
     }
 
-    if (!last_name) {
-      errors.last_name = "Last name is required!";
-    }
+    // if (!last_name) {
+    //     errors.last_name = "Last name is required!"
+    // }
 
-    if (!nickname) {
-      errors.nickname = "Nickname is required!";
-    }
+    // if (!nickname) {
+    //     errors.nickname = "Nickname is required!"
+    // }
 
     // if (!email) {
     //     errors.email = "Email is required!"
@@ -226,9 +223,15 @@ const WrappedUpdateInfoForm = reduxForm({
   }
 })(withStyles(styles)(UpdateProfileInfoForm));
 
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   {
-    setAuthToken
+    updateCurrentUser
   }
 )(WrappedUpdateInfoForm);

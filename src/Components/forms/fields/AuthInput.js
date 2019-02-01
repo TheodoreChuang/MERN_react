@@ -10,11 +10,12 @@ const styles = theme => ({
   },
   input: {
     margin: theme.spacing.unit,
+    color: "white",
     borderBottom: "2px solid white"
   }
 });
 
-class Inputs extends Component {
+class AuthInputs extends Component {
   state = { current: "" };
 
   onChange = event => {
@@ -52,12 +53,12 @@ class Inputs extends Component {
           value={other.type === "file" ? current : value}
           onChange={this.onChange}
         />
-        <div style={{ color: "red", marginLeft: "10px" }}>
-          {touched && error}{" "}
+        <div style={{ color: "grey", marginLeft: "10px" }}>
+          {touched && error}
         </div>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(Inputs);
+export default withStyles(styles)(AuthInputs);

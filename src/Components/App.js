@@ -11,33 +11,55 @@ import ProfileCurrentPage from "./pages/ProfileCurrentPage";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import ChallengePage from "./pages/ChallengePage";
 import NewsFeedPage from "./pages/NewsFeedPage";
+import ChallengeFeedPage from "./pages/ChallengeFeedPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import UpdateProfileInfoPage from "./pages/UpdateProfileInfoPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import { connect } from "react-redux";
+import { getCurrentUser } from "./../actions";
 
 class App extends Component {
+  
+  componentDidMount() {
+    const { getCurrentUser, token } = this.props;
+    
+    // If there is token value in redux, then also get current user details. Current user details is now always available to all components even when refreshed
+    if (token) {
+      getCurrentUser();
+    }
+  }
+
   render() {
+
     return (
       <div>
         <BrowserRouter>
-
           <div>
             <Switch>
+              <Route exact path="/landing" component={LandingPage} />
+              <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/register" component={RegisterPage} />
               <Route
                 exact
                 path="/termsandconditions"
                 component={TermsAndConditions}
               />
-              <Route exact path = "/updateinfo" component = {UpdateProfileInfoPage} />
-              <Route exact path="/landing" component={LandingPage} />
-              <Route exact path="/login" component={LoginPage} />
-              <Route exact path="/register" component={RegisterPage} />
+              <Route exact path="/" component={NewsFeedPage} />
+              <Route exact path="/challenges" component={ChallengeFeedPage} />
               <Route exact path="/profile/:id" component={ProfilePage} />
+              <Route exact path="/challenges/:id" component={ChallengePage} />
+              <Route exact path="/resetpassword/:token" component={ResetPasswordPage} />
               <PrivateRoute
                 exact
                 path="/profile"
                 component={ProfileCurrentPage}
               />
-              <PrivateRoute exact path="/" component={NewsFeedPage} />
+
+              <PrivateRoute
+                exact
+                path="/updateinfo"
+                component={UpdateProfileInfoPage}
+              />
               <PrivateRoute
                 exact
                 path="/newchallenge"
@@ -45,14 +67,10 @@ class App extends Component {
               />
               <PrivateRoute
                 exact
-                path="/challenges/:id"
-                component={ChallengePage}
-              />
-              <PrivateRoute
-                exact
                 path="/challenges/:id/submit"
                 component={SubmissionPage}
               />
+              <Route component={NotFoundPage} />
             </Switch>
           </div>
         </BrowserRouter>
@@ -61,4 +79,13 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    token: state.auth.token,
+    currentUser: state.currentUser
+  }
+}
+
+export default connect(mapStateToProps, {
+  getCurrentUser
+})(App);

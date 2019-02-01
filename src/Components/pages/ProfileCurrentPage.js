@@ -29,15 +29,15 @@ class ProfileCurrentPage extends Component {
     super(props);
     const { getCurrentUser } = this.props;
     getCurrentUser();
+    
   }
 
   render() {
     const { classes, user } = this.props;
-    console.log(user.submissions);
 
     return (
       <div>
-        <NavBar />
+        <NavBar {...this.props} />
         <div className={classes.container}>
           <Grid
             container

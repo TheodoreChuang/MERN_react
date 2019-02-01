@@ -5,6 +5,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import IconButton from '@material-ui/core/IconButton';
 
 const styles = theme => ({
   card: {
@@ -25,7 +27,7 @@ const styles = theme => ({
   typography: {
     textAlign: "center"
 
-  }
+  },
 });
 
 class ProfileInfoCard extends Component {
