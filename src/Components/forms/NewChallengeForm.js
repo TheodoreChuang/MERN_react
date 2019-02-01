@@ -1,16 +1,23 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
-import { connect } from "react-redux";
 import Button from '@material-ui/core/Button';
 import Loader from "./../Loader";
 import DateField from "./fields/DateField";
 import DateHelper from "./fields/DateHelper";
 import { withRouter } from "react-router-dom";
 import LocalApi from "./../../apis/local";
+import { connect } from "react-redux";
+import { getCurrentUser } from "./../../actions";
+
 
 class NewChallengeForm extends Component {
     state = { loading: false }
+
+    componentDidMount() {
+        const { getCurrentUser } = this.props; 
+        getCurrentUser();
+    }
 
     onUploadSubmit = async (formValues) => {
         const { history } = this.props;
@@ -20,27 +27,24 @@ class NewChallengeForm extends Component {
         fd.append("video", video[0]);
         fd.append("title", title);
         fd.append("description", description);
+        // fd.append("creator_id", creator_id);
+        
         // Conditional as expiry_date value might not be entered as it is not mandatory
         if (expiry_date) {
             fd.append("expiry_date", expiry_date);
         }
-            // Callbacks added for loading animation
-            // () => {
-            //     this.setState({ loading: true });
-            // },
-            // fd, 
-            // () =>  {
-            //     this.setState({ loading: "success" });
-            // }
-        }
+
+        this.setState({ loading: true });
+        await LocalApi.post("/challenges/upload", fd);
+        history.push("/challenges");
+    }
 
     render() {
         const { handleSubmit } = this.props;
 
         return (
             <div>
-                <form onSubmit= {handleSubmit(this.onUploadSubmit)} encType="multipart/form-data"
-                style={{ color: "black"}}>
+                <form onSubmit= {handleSubmit(this.onUploadSubmit)} encType="multipart/form-data">
                     <div>
                         <Field
                         name="title"
@@ -58,14 +62,14 @@ class NewChallengeForm extends Component {
                         multiline
                         />
                     </div>
-                    <div>
+                    {/* <div>
                         <Field
                         name="creator_id"
                         component={Input}
                         placeholder="Creator id"
                         type="text"
                         />
-                    </div>
+                    </div> */}
                     <div>
                         <Field
                         name="expiry_date"
@@ -126,7 +130,7 @@ const WrappedNewChallengeForm = reduxForm({
 
     if (video) {
         if (video.length < 1 ) {
-            errors.video = "Required"
+            errors.video = "Required!"
         }
     }
 
@@ -135,4 +139,13 @@ const WrappedNewChallengeForm = reduxForm({
     }
 })(NewChallengeForm);
 
-export default (withRouter(WrappedNewChallengeForm));
+const mapStateToProps = (state)  => {
+    return {
+        token: state.auth.token,
+        user: state.currentUser
+    };
+}
+
+export default connect(mapStateToProps, {
+    getCurrentUser
+})(withRouter(WrappedNewChallengeForm));

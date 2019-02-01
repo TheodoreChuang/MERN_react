@@ -75,7 +75,6 @@ class ChallengeCard extends Component {
       sub_id,
       type,
       classes,
-      is_challenge,
       viewMoreDetail,
       currentUser,
       id,
@@ -166,7 +165,7 @@ class ChallengeCard extends Component {
           : null }
         
         {/* for submissions */}
-        {type === "submission" && currentUser._id === user_id ?
+        {/* {type === "submission" && currentUser._id === user_id ?
           <button onClick={ () => {
             const r = window.confirm("Are you sure you want to delete this challenge?");
             
@@ -177,7 +176,7 @@ class ChallengeCard extends Component {
               
             }
           }}>Sub Delete</button>
-          : null }
+          : null } */}
           
       </Card>
       {renderMenu}
