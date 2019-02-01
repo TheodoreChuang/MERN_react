@@ -1,17 +1,14 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
-import Input from "./fields/Input";
-import LocalApi from "../../apis/local";
-import { setAuthToken } from "./../../actions";
 import { connect } from "react-redux";
-import Checkbox from "./fields/CheckboxField";
+import { Link, withRouter } from "react-router-dom";
+import { Field, reduxForm } from "redux-form";
+import AuthInput from "./fields/AuthInput";
+import FormDialog from "./FormDialog";
+import LocalApi from "../../apis/local";
+import { setAuthToken, getCurrentUser } from "./../../actions";
 
 import { withStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
-import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
-import FormDialog from "./FormDialog";
+import { Fab, Typography } from "@material-ui/core";
 
 const styles = theme => ({
   container: {
@@ -60,13 +57,16 @@ class LoginForm extends Component {
   state = { error: "" };
 
   onLoginFormSubmit = formValues => {
-    const { history } = this.props;
+    const { history, getCurrentUser, setAuthToken } = this.props;
     const { email, password } = formValues;
 
     LocalApi.post("/login", { email, password })
+      // async below as redirection to root page requires auth token first
       .then(response => {
         setAuthToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
         history.push("/");
+        getCurrentUser();
       })
       .catch(err => console.log(err));
   };
@@ -80,7 +80,7 @@ class LoginForm extends Component {
         <form onSubmit={handleSubmit(this.onLoginFormSubmit)}>
           <Field
             name="email"
-            component={Input}
+            component={AuthInput}
             placeholder="Email"
             className={classes.input}
             fullWidth
@@ -90,7 +90,7 @@ class LoginForm extends Component {
           />
           <Field
             name="password"
-            component={Input}
+            component={AuthInput}
             placeholder="Password"
             type="password"
             className={classes.input}
@@ -176,6 +176,7 @@ const WrappedRegisterForm = reduxForm({
 export default connect(
   null,
   {
-    setAuthToken
+    setAuthToken,
+    getCurrentUser
   }
 )(withRouter(WrappedRegisterForm));

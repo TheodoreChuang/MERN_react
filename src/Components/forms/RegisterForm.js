@@ -1,17 +1,15 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
-import Input from "./fields/Input";
 import LocalApi from "../../apis/local";
 import { setAuthToken } from "./../../actions";
-import { connect } from "react-redux";
-
+import CustomizedDialogDemo from "./../PopUp";
+import AuthInput from "./fields/AuthInput";
 import Checkbox from "./fields/CheckboxField";
 
 import { withStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
-import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
-import CustomizedDialogDemo from "./../PopUp";
+import { Fab, Typography } from "@material-ui/core/";
 
 const styles = theme => ({
   body: {
@@ -34,14 +32,6 @@ const styles = theme => ({
   },
   font: {
     color: "white"
-  },
-  checkbox: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    margin: "10px",
-    maxWidth: "360px",
-    alignItems: "center"
   },
   checkboxButton: {
     display: "flex",
@@ -101,7 +91,7 @@ class RegisterForm extends Component {
           <form onSubmit={handleSubmit(this.onRegisterFormSubmit)}>
             <Field
               name="first_name"
-              component={Input}
+              component={AuthInput}
               placeholder="First Name"
               className={classes.input}
               fullWidth
@@ -112,7 +102,7 @@ class RegisterForm extends Component {
             />
             <Field
               name="last_name"
-              component={Input}
+              component={AuthInput}
               placeholder="Last Name"
               className={classes.input}
               fullWidth
@@ -122,7 +112,7 @@ class RegisterForm extends Component {
             />
             <Field
               name="nickname"
-              component={Input}
+              component={AuthInput}
               placeholder="Nick Name"
               className={classes.input}
               fullWidth
@@ -132,7 +122,7 @@ class RegisterForm extends Component {
             />
             <Field
               name="email"
-              component={Input}
+              component={AuthInput}
               placeholder="Email"
               className={classes.input}
               fullWidth
@@ -143,7 +133,7 @@ class RegisterForm extends Component {
             />
             <Field
               name="password"
-              component={Input}
+              component={AuthInput}
               placeholder="Password"
               className={classes.input}
               fullWidth
@@ -152,6 +142,7 @@ class RegisterForm extends Component {
               }}
               type="password"
             />
+
             <div className={classes.checkboxButton}>
               <div className={classes.checkbox}>
                 <Field
@@ -175,27 +166,28 @@ class RegisterForm extends Component {
                 is likely to disrupt our service in any way; or
                 advocates, promotes or assists any unlawful act such as (by way of example only) copyright infringement or computer misuse."
               />
-              <div>
-                <Fab
-                  type="submit"
-                  variant="extended"
-                  color="primary"
-                  aria-label="Add"
-                  className={classes.button}
-                >
-                  Register
-                </Fab>
-              </div>
-              <div>
-                <Typography className={classes.signin} component="caption">
-                  Already have an account?
-                  <Link to="/login" className={classes.link}>
-                    Sign in
-                  </Link>
-                </Typography>
-              </div>
+            </div>
+            <div>
+              <Fab
+                type="submit"
+                variant="extended"
+                color="primary"
+                aria-label="Add"
+                className={classes.button}
+              >
+                Register
+              </Fab>
             </div>
           </form>
+        </div>
+
+        <div>
+          <Typography className={classes.signin} component="caption">
+            Already have an account?
+            <Link to="/login" className={classes.link}>
+              Sign in
+            </Link>
+          </Typography>
         </div>
       </div>
     );

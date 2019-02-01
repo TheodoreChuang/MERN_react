@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Input from "@material-ui/core/Input";
 import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
 
 const styles = theme => ({
   container: {
@@ -11,7 +10,6 @@ const styles = theme => ({
   },
   input: {
     margin: theme.spacing.unit,
-    color: "white",
     borderBottom: "2px solid white"
   }
 });
@@ -61,9 +59,5 @@ class Inputs extends Component {
     );
   }
 }
-
-Inputs.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 export default withStyles(styles)(Inputs);
