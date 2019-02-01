@@ -8,8 +8,12 @@ import { connect } from "react-redux";
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
+<<<<<<< HEAD
+import { Link } from 'react-router-dom';
+=======
 import { updateCurrentUser } from "./../../actions";
 
+>>>>>>> 0ddde1e1bfbf7b336e69db5e811092e0075ccd06
 
 const styles = theme => ({
     body: {
@@ -204,7 +208,7 @@ const WrappedUpdateInfoForm = reduxForm({
         const errors = {}
 
         if (!first_name) {
-            errors.first_name = "Required!"
+            errors.first_name = "First name is required!"
         }
 
 

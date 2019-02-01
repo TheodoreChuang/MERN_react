@@ -1,6 +1,6 @@
 import LocalApi from "./../apis/local";
 
-// auth, callback added to redirect to homepage
+// auth
 export const setAuthToken = token => {
   localStorage.setItem("token", token);
 
@@ -28,7 +28,7 @@ export const getCurrentUser = () => {
       type: "CURRENT_USER",
       payload: response.data
     });
-  }
+  };
 };
 
 
@@ -104,4 +104,7 @@ export const deleteChallenge = () => {
         })
     }
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 0ddde1e1bfbf7b336e69db5e811092e0075ccd06

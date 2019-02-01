@@ -14,23 +14,14 @@ import {
   Typography,
   withStyles
 } from "@material-ui/core/";
-import {
-  Edit,
-  AccountCircle,
-  HowToReg,
-  ArrowBack
-} from "@material-ui/icons/";
+import { Edit, AccountCircle, HowToReg, ArrowBack } from "@material-ui/icons/";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import LockIcon from "@material-ui/icons/Https";
-
-// import SearchIcon from "@material-ui/icons/Search";
-// import InputBase from "@material-ui/core/InputBase";
-// import { fade } from "@material-ui/core/styles/colorManipulator";
 import Add from "@material-ui/icons/AddCircle";
 
 const styles = theme => ({
   root: {
-    width: "100%",
+    width: "100%"
   },
   grow: {
     flexGrow: 1
@@ -89,20 +80,18 @@ class NavBar extends Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
-
         {/* !!!! */}
         {!currentPath.includes("newchallenge") ? (
           <MenuItem component={Link} to="/newchallenge">
-          <ListItemIcon>
-            <Add />
-          </ListItemIcon>
-          <ListItemText primary="New Challenge" />
-        </MenuItem>
+            <ListItemIcon>
+              <Add />
+            </ListItemIcon>
+            <ListItemText primary="New Challenge" />
+          </MenuItem>
         ) : null}
-       
+
         {/* Profile OR Profile Edit - only available if logged in */}
         {token && !currentPath.includes("profile") ? (
-
           <MenuItem component={Link} to="/profile">
             <ListItemIcon>
               <AccountCircle />
@@ -159,7 +148,6 @@ class NavBar extends Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-      
             {/* Back Icon - always available */}
             <IconButton
               color="inherit"
@@ -183,61 +171,25 @@ class NavBar extends Component {
             <div className={classes.sectionDesktop} /> */}
 
             {/* submissions feed button */}
-            <IconButton
-                color="inherit"
-                component={Link} 
-                to="/" >
-                newsfeed
-              </IconButton>
+            <IconButton color="inherit" component={Link} to="/">
+              newsfeed
+            </IconButton>
 
             {/* challenges feed button */}
-              <IconButton
-                color="inherit"
-                component={Link} 
-                to="/challenges" >
-                challenges
-              </IconButton>
+            <IconButton color="inherit" component={Link} to="/challenges">
+              challenges
+            </IconButton>
 
             <div className={classes.grow} />
 
             {/* Desktop Menu - Hidden on Mobile */}
             <div className={classes.sectionDesktop}>
-
-              {currentPath.includes("profile") ? (
-                <span>
-                  {/* <IconButton color="inherit" component={Link} to="/home">
-                    <Home />
-                  </IconButton> */}
-                  {currentUser._id && (
-                    <IconButton
-                      color="inherit"
-                      component={Link}
-                      to="/updateinfo"
-                    >
-                      <Edit />
-                    </IconButton>
-                   )} 
-                </span>
-              ) : null}
-
-
               {/* Add Challenge - if admin  */}
-              {!currentPath.includes('newchallenge') 
-                && admin === true ? 
-              <IconButton
-                color="inherit"
-                component={Link} 
-
-                to="/home" >
-                <Home />
-              </IconButton> : null }
-
-              {/* Only Admin can create challenge for MVP
-              {!currentPath.includes('newchallenge') ?  
-              <IconButton color="inherit" component={Link} to="/newchallenge">
-                to="/newchallenge" >
-                <Add />
-              </IconButton> : null }
+              {!currentPath.includes("newchallenge") && admin === true ? (
+                <IconButton color="inherit" component={Link} to="/newchallenge">
+                  <Add />
+                </IconButton>
+              ) : null}
 
               {/* Profile OR Profile Edit - only available if logged in */}
               {token && !currentPath.includes("profile") ? (
@@ -270,7 +222,6 @@ class NavBar extends Component {
                   <HowToReg />
                 </IconButton>
               ) : null}
-
             </div>
 
             {/* For expanding hidden menu on mobile */}
@@ -299,8 +250,10 @@ const mapStateToProps = state => {
 };
 
 const Wrapped = connect(
-  mapStateToProps, {
-  removeAuthToken
-})(NavBar);
+  mapStateToProps,
+  {
+    removeAuthToken
+  }
+)(NavBar);
 
 export default withStyles(styles)(Wrapped);
