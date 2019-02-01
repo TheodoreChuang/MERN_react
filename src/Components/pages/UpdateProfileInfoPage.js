@@ -3,6 +3,7 @@ import UpdateProfileInfoForm from "./../forms/UpdateProfileInfoForm";
 import NavBar from "../NavBar";
 
 class UpdateProfileInfoPage extends Component {
+
   render() {
     const { match } = this.props;
     console.log("rendered");

@@ -70,6 +70,7 @@ class LoginForm extends Component {
             history.push("/");
             getCurrentUser();
             
+
         })
         .catch(err => console.log(err));
     }

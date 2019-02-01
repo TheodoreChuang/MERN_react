@@ -111,12 +111,21 @@ class NavBar extends Component {
           </MenuItem>
         ) : null}
 
+//     Commented this out on merge conflict - Tyson
+//         {currentPath.includes("profile") && currentUser._id && (
+//           <MenuItem component={Link} to="/updateinfo">
+//             <IconButton color="inherit">
+//               <Edit />
+//             </IconButton>
+//             <p>Edit Profile</p>
+
         {token && currentPath.includes("profile") ? (
           <MenuItem component={Link} to="/profile/edit">
             <ListItemIcon>
               <Edit />
             </ListItemIcon>
             <ListItemText primary="Edit Profile" />
+
           </MenuItem>
         ) : null}
 
@@ -194,12 +203,38 @@ class NavBar extends Component {
             {/* Desktop Menu - Hidden on Mobile */}
             <div className={classes.sectionDesktop}>
 
+              {currentPath.includes("profile") ? (
+                <span>
+                  {/* <IconButton color="inherit" component={Link} to="/home">
+                    <Home />
+                  </IconButton> */}
+                  {currentUser._id && (
+                    <IconButton
+                      color="inherit"
+                      component={Link}
+                      to="/updateinfo"
+                    >
+                      <Edit />
+                    </IconButton>
+                   )} 
+                </span>
+              ) : null}
+
+
               {/* Add Challenge - if admin  */}
               {!currentPath.includes('newchallenge') 
                 && admin === true ? 
               <IconButton
                 color="inherit"
                 component={Link} 
+
+                to="/home" >
+                <Home />
+              </IconButton> : null }
+
+              {/* Only Admin can create challenge for MVP
+              {!currentPath.includes('newchallenge') ?  
+              <IconButton color="inherit" component={Link} to="/newchallenge">
                 to="/newchallenge" >
                 <Add />
               </IconButton> : null }
