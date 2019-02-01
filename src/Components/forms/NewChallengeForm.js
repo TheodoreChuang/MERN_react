@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
 import { connect } from "react-redux";
-import { addChallenge } from "./../../actions"
 import Button from '@material-ui/core/Button';
 import Loader from "./../Loader";
 import DateField from "./fields/DateField";
@@ -21,22 +20,19 @@ class NewChallengeForm extends Component {
         fd.append("video", video[0]);
         fd.append("title", title);
         fd.append("description", description);
-        fd.append("creator_id", creator_id);
         // Conditional as expiry_date value might not be entered as it is not mandatory
         if (expiry_date) {
             fd.append("expiry_date", expiry_date);
         }
-
-        addChallenge(
             // Callbacks added for loading animation
-            () => {
-                this.setState({ loading: true });
-            },
-            fd, 
-            () =>  {
-                this.setState({ loading: "success" });
-            }
-        )}
+            // () => {
+            //     this.setState({ loading: true });
+            // },
+            // fd, 
+            // () =>  {
+            //     this.setState({ loading: "success" });
+            // }
+        }
 
     render() {
         const { handleSubmit } = this.props;
