@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import Input from "./fields/Input";
 import LocalApi from "../../apis/local";
-import { setAuthToken, getCurrentUser } from "./../../actions";
+import { setAuthToken } from "./../../actions";
 import { connect } from "react-redux";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -59,7 +59,7 @@ class LoginForm extends Component {
   state = { error : "" }
     
     onLoginFormSubmit = (formValues) => {
-      const { history, getCurrentUser, setAuthToken } = this.props;
+      const { history, setAuthToken } = this.props;
       const { email, password } = formValues;
 
         LocalApi.post("/login", {email, password})
@@ -67,9 +67,7 @@ class LoginForm extends Component {
         .then (response => {
             setAuthToken(response.data.token);
             localStorage.setItem("token", response.data.token);
-            history.push("/");
-            getCurrentUser();
-            
+            history.push("/");            
         })
         .catch(err => console.log(err));
     }
@@ -178,7 +176,6 @@ const WrappedRegisterForm = reduxForm({
 export default connect(
   null,
   {
-    setAuthToken,
-    getCurrentUser
+    setAuthToken
   }
 )(withRouter(WrappedRegisterForm));

@@ -23,7 +23,6 @@ import LocalApi from "./../../apis/local";
 import VideoPlayer from "./../VideoPlayer";
 import { connect } from "react-redux";
 
-
 const styles = theme => ({
   card: {
     minWidth: 275,
@@ -84,6 +83,8 @@ class ChallengeCard extends Component {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
     const isMenuOpen = Boolean(anchorEl);
     const {
+      sub_id,
+      type,
       classes,
       currentUser,
       id,
@@ -94,7 +95,8 @@ class ChallengeCard extends Component {
       yt_id,
       description,
       date_created,
-      viewMoreDetail
+      hideMoreDetail,
+      history
     } = this.props;
     const renderMenu = (
       <Menu
@@ -105,9 +107,10 @@ class ChallengeCard extends Component {
         onClose={this.handleMenuClose}
       >
         {/* View More Challenge details hidden if currently on specific challenge page */}
-        {/* {viewMoreDetail === true ?  */}
+        {!hideMoreDetail ? 
+        
         <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>View More Challenge Details</MenuItem>
-        {/* // : null } */}
+        : null } 
         <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Join Challenge</MenuItem>
       </Menu>
     );
@@ -175,15 +178,32 @@ class ChallengeCard extends Component {
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
         </Collapse> */}
 
-        {/* delete challenge button, conditional rendering - checks if current user (from redux store) is the creator of the challenge */}
-        {currentUser._id === user_id ?
-          <button onClick={() => {
+        {/* Conditional rendering based on type of card */}
+        {/* for challenges */}
+        {type === "challenge" && currentUser._id === user_id  ? 
+          <button onClick={ () => {
             const r = window.confirm("Are you sure you want to delete this challenge?");
             
             if (r === true) {
               LocalApi.delete(`/challenges/submissions/${id}`)
+              .then(res => window.location.reload())
+              .catch(err => alert(err))
             }
-          }}>Delete</button>
+          }}> Chal Delete</button>
+          : null }
+        
+        {/* for submissions */}
+        {type === "submission" && currentUser._id === user_id ?
+          <button onClick={ () => {
+            const r = window.confirm("Are you sure you want to delete this challenge?");
+            
+            if (r === true) {
+              LocalApi.delete(`/challenges/${id}/submission/${sub_id}`)
+              .then (res => window.location.reload())
+              .catch (err => alert(err));
+              
+            }
+          }}>Sub Delete</button>
           : null }
           
       </Card>

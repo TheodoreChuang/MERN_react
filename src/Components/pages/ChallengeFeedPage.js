@@ -24,6 +24,7 @@ class ChallengeFeedPage extends Component {
                     return (
                         <div key={challenge._id} >
                             <ChallengeCard
+                                type="challenge"
                                 id={challenge._id}
                                 user_id={challenge.user.creator_id}
                                 nickname={challenge.user.nickname}

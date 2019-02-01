@@ -31,6 +31,8 @@ import Add from "@material-ui/icons/AddCircle";
 const styles = theme => ({
   root: {
     width: "100%",
+    // position: "fixed",
+    // zIndex: "99"
   },
   grow: {
     flexGrow: 1
@@ -90,15 +92,16 @@ class NavBar extends Component {
         onClose={this.handleMobileMenuClose}
       >
 
-        {/* !!!! */}
-        {!currentPath.includes("newchallenge") ? (
+        {/* Render add challenge button - if admin */}
+        {!currentPath.includes('newchallenge') 
+          && admin === true ? 
           <MenuItem component={Link} to="/newchallenge">
           <ListItemIcon>
             <Add />
           </ListItemIcon>
           <ListItemText primary="New Challenge" />
         </MenuItem>
-        ) : null}
+        : null}
        
         {/* Profile OR Profile Edit - only available if logged in */}
         {token && !currentPath.includes("profile") ? (
@@ -149,8 +152,7 @@ class NavBar extends Component {
     return (
       <div className={classes.root}>
         <AppBar position="static">
-          <Toolbar>
-      
+          <Toolbar className={classes.custom}>
             {/* Back Icon - always available */}
             <IconButton
               color="inherit"
@@ -160,24 +162,31 @@ class NavBar extends Component {
             >
               <ArrowBack />
             </IconButton>
-
-            {/* <Typography
-              className={classes.title}
-              variant="h6"
-              color="inherit"
-              noWrap
-            >
-              1UP
-
-            </Typography> */}
             {/* <div className={classes.grow} />
             <div className={classes.sectionDesktop} /> */}
-
+            <img src="/logo.png" 
+              height="20px"
+              width="20px"
+              padding="100px"
+            />
+            
             {/* submissions feed button */}
+            <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center"
+            }}>
+
             <IconButton
                 color="inherit"
                 component={Link} 
-                to="/" >
+                to="/" 
+                style={{
+                  backgroundColor: "transparent"
+                }}
+                >
                 newsfeed
               </IconButton>
 
@@ -185,10 +194,14 @@ class NavBar extends Component {
               <IconButton
                 color="inherit"
                 component={Link} 
-                to="/challenges" >
+                to="/challenges"
+                style={{
+                  backgroundColor: "transparent"
+                }} 
+                >
                 challenges
               </IconButton>
-
+            </div>
             <div className={classes.grow} />
 
             {/* Desktop Menu - Hidden on Mobile */}

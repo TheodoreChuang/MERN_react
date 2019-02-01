@@ -27,7 +27,8 @@ class ChallengePage extends Component  {
                 <h2> Specific Challenge Page </h2>
                 {challenge && 
                     <ChallengeCard 
-                    viewMoreDetail={false}
+                    type="challenge"
+                    hideMoreDetail={true}
                     user_id={challenge.user.creator_id}
                     nickname={challenge.user.nickname}
                     profile_image={challenge.user.profile_image}
@@ -40,10 +41,14 @@ class ChallengePage extends Component  {
                 <h2> Specific Challenge Submissions </h2>
                 {challenge && 
                     challenge.submissions.map((sub) => {
+                        console.log("44");
+                        console.log(sub);
                         return (
                             <div key={sub.yt_id}>
                                 <ChallengeCard 
-                                viewMoreDetail={false}
+                                type="submission"
+                                hideMoreDetail={true}
+                                sub_id={sub._id}
                                 nickname={sub.user.nickname}
                                 user_id={sub.user.id} 
                                 profile_image={sub.user.profile_image}

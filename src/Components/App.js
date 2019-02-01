@@ -15,9 +15,22 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import UpdateProfileInfoPage from "./pages/UpdateProfileInfoPage";
 import ChallengeFeedPage from "./pages/ChallengeFeedPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import { connect } from "react-redux";
+import { getCurrentUser } from "./../actions";
 
 class App extends Component {
+  
+  componentDidMount() {
+    const { getCurrentUser, token } = this.props;
+    
+    // If there is token value in redux, then also get current user details. Current user details is now always available to all components even when refreshed
+    if (token) {
+      getCurrentUser();
+    }
+  }
+
   render() {
+
     return (
       <div>
         <BrowserRouter>
@@ -94,4 +107,13 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    token: state.auth.token,
+    currentUser: state.currentUser
+  }
+}
+
+export default connect(mapStateToProps, {
+  getCurrentUser
+})(App);
