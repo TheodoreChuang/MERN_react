@@ -82,18 +82,16 @@ class NavBar extends Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
-
         {/* Render add challenge button - if admin */}
-        {!currentPath.includes('newchallenge') 
-          && admin === true ? 
+        {!currentPath.includes("newchallenge") && admin === true ? (
           <MenuItem component={Link} to="/newchallenge">
-          <ListItemIcon>
-            <Add />
-          </ListItemIcon>
-          <ListItemText primary="New Challenge" />
-        </MenuItem>
-        : null}
-       
+            <ListItemIcon>
+              <Add />
+            </ListItemIcon>
+            <ListItemText primary="New Challenge" />
+          </MenuItem>
+        ) : null}
+
         {/* Profile OR Profile Edit - only available if logged in */}
         {token && !currentPath.includes("profile") ? (
           <MenuItem component={Link} to="/profile">
@@ -110,7 +108,6 @@ class NavBar extends Component {
               <Edit />
             </ListItemIcon>
             <ListItemText primary="Edit Profile" />
-
           </MenuItem>
         ) : null}
 
@@ -155,41 +152,37 @@ class NavBar extends Component {
             </IconButton>
             {/* <div className={classes.grow} />
             <div className={classes.sectionDesktop} /> */}
-            <img src="/logo.png" 
-              height="20px"
-              width="20px"
-              padding="100px"
-            />
-            
+            <img src="/logo.png" height="20px" width="20px" padding="100px" />
+
             {/* submissions feed button */}
             <div
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "center"
-            }}>
-
-            <IconButton
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center"
+              }}
+            >
+              <IconButton
                 color="inherit"
-                component={Link} 
-                to="/" 
+                component={Link}
+                to="/"
                 style={{
                   backgroundColor: "transparent"
                 }}
-                >
+              >
                 newsfeed
               </IconButton>
 
-            {/* challenges feed button */}
+              {/* challenges feed button */}
               <IconButton
                 color="inherit"
-                component={Link} 
+                component={Link}
                 to="/challenges"
                 style={{
                   backgroundColor: "transparent"
-                }} 
-                >
+                }}
+              >
                 challenges
               </IconButton>
             </div>
@@ -197,7 +190,6 @@ class NavBar extends Component {
 
             {/* Desktop Menu - Hidden on Mobile */}
             <div className={classes.sectionDesktop}>
-
               {/* Add Challenge - if admin  */}
               {!currentPath.includes("newchallenge") && admin === true ? (
                 <IconButton color="inherit" component={Link} to="/newchallenge">

@@ -11,6 +11,7 @@ import ProfileCurrentPage from "./pages/ProfileCurrentPage";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import ChallengePage from "./pages/ChallengePage";
 import NewsFeedPage from "./pages/NewsFeedPage";
+import ChallengeFeedPage from "./pages/ChallengeFeedPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import UpdateProfileInfoPage from "./pages/UpdateProfileInfoPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -44,6 +45,7 @@ class App extends Component {
                 component={TermsAndConditions}
               />
               <Route exact path="/" component={NewsFeedPage} />
+              <Route exact path="/challenges" component={ChallengeFeedPage} />
               <Route exact path="/profile/:id" component={ProfilePage} />
               <Route exact path="/challenges/:id" component={ChallengePage} />
               <Route exact path="/resetpassword/:token" component={ResetPasswordPage} />
