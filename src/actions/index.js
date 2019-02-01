@@ -1,6 +1,6 @@
 import LocalApi from "./../apis/local";
 
-// auth
+// auth, callback added to redirect to homepage
 export const setAuthToken = token => {
   localStorage.setItem("token", token);
 
@@ -28,8 +28,9 @@ export const getCurrentUser = () => {
       type: "CURRENT_USER",
       payload: response.data
     });
-  };
+  }
 };
+
 
 // update user profile
 export const updateCurrentUser = (formValues) => {
@@ -103,3 +104,4 @@ export const deleteChallenge = () => {
         })
     }
 }
+

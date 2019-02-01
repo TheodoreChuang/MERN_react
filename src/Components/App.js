@@ -13,48 +13,82 @@ import ChallengePage from "./pages/ChallengePage";
 import NewsFeedPage from "./pages/NewsFeedPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import UpdateProfileInfoPage from "./pages/UpdateProfileInfoPage";
+import ChallengeFeedPage from "./pages/ChallengeFeedPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 class App extends Component {
   render() {
     return (
       <div>
         <BrowserRouter>
-
-          <div>
             <Switch>
               <Route
                 exact
                 path="/termsandconditions"
                 component={TermsAndConditions}
               />
-              <Route exact path = "/updateinfo" component = {UpdateProfileInfoPage} />
-              <Route exact path="/landing" component={LandingPage} />
-              <Route exact path="/login" component={LoginPage} />
-              <Route exact path="/register" component={RegisterPage} />
-              <Route exact path="/profile/:id" component={ProfilePage} />
-              <PrivateRoute
-                exact
-                path="/profile"
-                component={ProfileCurrentPage}
+              <Route 
+                exact 
+                path="/landing" 
+                component={LandingPage} 
               />
-              <PrivateRoute exact path="/home" component={NewsFeedPage} />
-              <PrivateRoute
-                exact
-                path="/newchallenge"
-                component={NewChallengePage}
+              <Route exact path="/challenges/:id" component={ChallengePage} />
+              <Route 
+                exact 
+                path="/login" 
+                component={LoginPage} 
               />
-              <PrivateRoute
-                exact
-                path="/challenges/:id"
-                component={ChallengePage}
+              <Route 
+                exact 
+                path="/register" 
+                component={RegisterPage} 
               />
+              <Route 
+                exact 
+                path="/profile/:id" 
+                component={ProfilePage} 
+              />
+              <Route 
+                exact 
+                path="/" 
+                component={NewsFeedPage} 
+              />
+              <Route 
+                exact 
+                path="/resetpassword/:token" 
+                component={ResetPasswordPage} 
+              />
+              <Route 
+                exact 
+                path="/challenges" 
+                component={ChallengeFeedPage} 
+              />
+              {/* Private Routes */}
               <PrivateRoute
                 exact
                 path="/challenges/:id/submit"
                 component={SubmissionPage}
               />
+              <Route
+                exact
+                path="/profile"
+                component={ProfileCurrentPage}
+              />
+
+              <PrivateRoute
+                exact
+                path="/newchallenge"
+                component={NewChallengePage}
+                admin={true}
+              />
+              <PrivateRoute
+                exact
+                path="/updateinfo"
+                component={UpdateProfileInfoPage}
+              />
+              {/* Default last component */}
+              <Route component={NotFoundPage} />
             </Switch>
-          </div>
         </BrowserRouter>
       </div>
     );

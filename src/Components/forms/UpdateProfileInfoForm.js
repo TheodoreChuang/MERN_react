@@ -10,6 +10,7 @@ import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
 import { updateCurrentUser } from "./../../actions";
 
+
 const styles = theme => ({
     body: {
         margin: '0 25px 0 10px',
@@ -203,8 +204,9 @@ const WrappedUpdateInfoForm = reduxForm({
         const errors = {}
 
         if (!first_name) {
-            errors.first_name = "First name is required!"
+            errors.first_name = "Required!"
         }
+
 
         // if (!last_name) {
         //     errors.last_name = "Last name is required!"
@@ -213,6 +215,7 @@ const WrappedUpdateInfoForm = reduxForm({
         // if (!nickname) {
         //     errors.nickname = "Nickname is required!"
         // }
+
 
         // if (!email) {
         //     errors.email = "Email is required!"

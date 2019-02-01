@@ -1,88 +1,44 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import { removeAuthToken } from "./../actions";
 
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Badge from "@material-ui/core/Badge";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import { fade } from "@material-ui/core/styles/colorManipulator";
-import { withStyles } from "@material-ui/core/styles";
-
-import Icon from "@material-ui/core/Icon";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import InputBase from "@material-ui/core/InputBase";
-import SearchIcon from "@material-ui/icons/Search";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import Home from "@material-ui/icons/Home";
-import Edit from "@material-ui/icons/Edit";
-import Add from "@material-ui/icons/AddCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import {
+  AppBar,
+  Toolbar,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  ListItemText,
+  IconButton,
+  Typography,
+  withStyles
+} from "@material-ui/core/";
+import {
+  Edit,
+  AccountCircle,
+  HowToReg,
+  ArrowBack
+} from "@material-ui/icons/";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import LockIcon from "@material-ui/icons/Https";
-import UnlockIcon from "@material-ui/icons/LockOpen";
 
-import { removeAuthToken } from "./../actions";
+// import SearchIcon from "@material-ui/icons/Search";
+// import InputBase from "@material-ui/core/InputBase";
+// import { fade } from "@material-ui/core/styles/colorManipulator";
+import Add from "@material-ui/icons/AddCircle";
 
 const styles = theme => ({
   root: {
-    width: "100%"
+    width: "100%",
   },
   grow: {
     flexGrow: 1
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
   },
   title: {
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block"
-    }
-  },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
-    },
-    marginRight: theme.spacing.unit * 2,
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing.unit * 3,
-      width: "auto"
-    }
-  },
-  searchIcon: {
-    width: theme.spacing.unit * 9,
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  inputRoot: {
-    color: "inherit",
-    width: "100%"
-  },
-  inputInput: {
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: 200
     }
   },
   sectionDesktop: {
@@ -99,14 +55,9 @@ const styles = theme => ({
   }
 });
 
-class PrimarySearchAppBar extends Component {
+class NavBar extends Component {
   state = {
-    anchorEl: null,
     mobileMoreAnchorEl: null
-  };
-
-  handleProfileMenuOpen = event => {
-    this.setState({ anchorEl: event.currentTarget });
   };
 
   handleMenuClose = () => {
@@ -124,28 +75,12 @@ class PrimarySearchAppBar extends Component {
 
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const { classes, currentUser } = this.props;
+    const { classes, admin, removeAuthToken, token, history } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const currentPath = window.location.pathname;
 
-    const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        <MenuItem component={Link} to="/" onClick={this.handleMenuClose}>
-          Home
-        </MenuItem>
-        <MenuItem component={Link} to="/profile" onClick={this.handleMenuClose}>
-          Profile
-        </MenuItem>
-      </Menu>
-    );
-
+    // Mobile view
     const renderMobileMenu = (
       <Menu
         anchorEl={mobileMoreAnchorEl}
@@ -154,45 +89,69 @@ class PrimarySearchAppBar extends Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
-        {!currentPath.includes("home") ? (
-          <MenuItem component={Link} to="/home">
-            <IconButton color="inherit">
-              <Home />
-            </IconButton>
-            <p>Home</p>
-          </MenuItem>
-        ) : null}
 
-        {!currentPath.includes("profile") ? (
-          <MenuItem component={Link} to="/profile">
-            <IconButton color="inherit">
-              <AccountCircle />
-            </IconButton>
-            <p>Profile</p>
-          </MenuItem>
-        ) : null}
-
-        {currentPath.includes("profile") && currentUser._id && (
-          <MenuItem component={Link} to="/updateinfo">
-            <IconButton color="inherit">
-              <Edit />
-            </IconButton>
-            <p>Edit Profile</p>
-          </MenuItem>
-        )}
-
-        <MenuItem
-          component={Link}
-          to="/landing"
-          onClick={() => {
-            removeAuthToken();
-          }}
-        >
-          <IconButton color="inherit">
-            <LockIcon />
-          </IconButton>
-          <p>Log Out</p>
+        {/* !!!! */}
+        {!currentPath.includes("newchallenge") ? (
+          <MenuItem component={Link} to="/newchallenge">
+          <ListItemIcon>
+            <Add />
+          </ListItemIcon>
+          <ListItemText primary="New Challenge" />
         </MenuItem>
+        ) : null}
+       
+        {/* Profile OR Profile Edit - only available if logged in */}
+        {token && !currentPath.includes("profile") ? (
+
+          <MenuItem component={Link} to="/profile">
+            <ListItemIcon>
+              <AccountCircle />
+            </ListItemIcon>
+            <ListItemText primary="Profile" />
+          </MenuItem>
+        ) : null}
+
+//     Commented this out on merge conflict - Tyson
+//         {currentPath.includes("profile") && currentUser._id && (
+//           <MenuItem component={Link} to="/updateinfo">
+//             <IconButton color="inherit">
+//               <Edit />
+//             </IconButton>
+//             <p>Edit Profile</p>
+
+        {token && currentPath.includes("profile") ? (
+          <MenuItem component={Link} to="/profile/edit">
+            <ListItemIcon>
+              <Edit />
+            </ListItemIcon>
+            <ListItemText primary="Edit Profile" />
+
+          </MenuItem>
+        ) : null}
+
+        {/* Log out OR Sign in - always available */}
+        {token ? (
+          <MenuItem
+            component={Link}
+            to="/landing"
+            onClick={() => {
+              removeAuthToken();
+            }}
+          >
+            <ListItemIcon>
+              <LockIcon />
+            </ListItemIcon>
+            <ListItemText primary="Log Out" />
+          </MenuItem>
+        ) : null}
+        {!token ? (
+          <MenuItem component={Link} to="/landing">
+            <ListItemIcon>
+              <HowToReg />
+            </ListItemIcon>
+            <ListItemText primary="Log In" />
+          </MenuItem>
+        ) : null}
       </Menu>
     );
 
@@ -200,31 +159,50 @@ class PrimarySearchAppBar extends Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer" onClick={this.handleProfileMenuOpen}>
-              <MenuIcon  />
-            </IconButton> */}
-            <Typography
+      
+            {/* Back Icon - always available */}
+            <IconButton
+              color="inherit"
+              onClick={() => {
+                history.goBack();
+              }}
+            >
+              <ArrowBack />
+            </IconButton>
+
+            {/* <Typography
               className={classes.title}
               variant="h6"
               color="inherit"
               noWrap
             >
               1UP
-            </Typography>
-            {/* <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-              />
-            </div> */}
+
+            </Typography> */}
+            {/* <div className={classes.grow} />
+            <div className={classes.sectionDesktop} /> */}
+
+            {/* submissions feed button */}
+            <IconButton
+                color="inherit"
+                component={Link} 
+                to="/" >
+                newsfeed
+              </IconButton>
+
+            {/* challenges feed button */}
+              <IconButton
+                color="inherit"
+                component={Link} 
+                to="/challenges" >
+                challenges
+              </IconButton>
+
             <div className={classes.grow} />
+
+            {/* Desktop Menu - Hidden on Mobile */}
             <div className={classes.sectionDesktop}>
+
               {currentPath.includes("profile") ? (
                 <span>
                   {/* <IconButton color="inherit" component={Link} to="/home">
@@ -242,10 +220,14 @@ class PrimarySearchAppBar extends Component {
                 </span>
               ) : null}
 
-            {!currentPath.includes('home') ? 
+
+              {/* Add Challenge - if admin  */}
+              {!currentPath.includes('newchallenge') 
+                && admin === true ? 
               <IconButton
                 color="inherit"
                 component={Link} 
+
                 to="/home" >
                 <Home />
               </IconButton> : null }
@@ -253,26 +235,45 @@ class PrimarySearchAppBar extends Component {
               {/* Only Admin can create challenge for MVP
               {!currentPath.includes('newchallenge') ?  
               <IconButton color="inherit" component={Link} to="/newchallenge">
+                to="/newchallenge" >
                 <Add />
-              </IconButton> : null } */}
+              </IconButton> : null }
 
-              {!currentPath.includes("profile") ? (
+              {/* Profile OR Profile Edit - only available if logged in */}
+              {token && !currentPath.includes("profile") ? (
                 <IconButton color="inherit" component={Link} to="/profile">
                   <AccountCircle />
                 </IconButton>
               ) : null}
 
-              <IconButton
-                color="inherit"
-                component={Link}
-                to="/landing"
-                onClick={() => {
-                  removeAuthToken();
-                }}
-              >
-                <LockIcon />
-              </IconButton>
+              {token && currentPath.includes("profile") ? (
+                <IconButton color="inherit" component={Link} to="/profile/edit">
+                  <Edit />
+                </IconButton>
+              ) : null}
+
+              {/* Log out OR Sign in - always available */}
+              {token ? (
+                <IconButton
+                  color="inherit"
+                  component={Link}
+                  to="/landing"
+                  onClick={() => {
+                    removeAuthToken();
+                  }}
+                >
+                  <LockIcon />
+                </IconButton>
+              ) : null}
+              {!token ? (
+                <IconButton color="inherit" component={Link} to="/landing">
+                  <HowToReg />
+                </IconButton>
+              ) : null}
+
             </div>
+
+            {/* For expanding hidden menu on mobile */}
             <div className={classes.sectionMobile}>
               <IconButton
                 aria-haspopup="true"
@@ -284,26 +285,22 @@ class PrimarySearchAppBar extends Component {
             </div>
           </Toolbar>
         </AppBar>
-        {renderMenu}
         {renderMobileMenu}
       </div>
     );
   }
 }
 
-PrimarySearchAppBar.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser
+    token: state.auth.token,
+    admin: state.currentUser.is_admin
   };
 };
 
 const Wrapped = connect(
-  mapStateToProps,
-  null
-)(PrimarySearchAppBar);
+  mapStateToProps, {
+  removeAuthToken
+})(NavBar);
 
 export default withStyles(styles)(Wrapped);

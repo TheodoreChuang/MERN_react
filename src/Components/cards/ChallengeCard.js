@@ -19,10 +19,10 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import SocialShareIcon from "./../icons/SocialShareIcon";
-
-import YTvideo from "../YTvideo";
 import LocalApi from "./../../apis/local";
 import VideoPlayer from "./../VideoPlayer";
+import { connect } from "react-redux";
+
 
 const styles = theme => ({
   card: {
@@ -85,7 +85,7 @@ class ChallengeCard extends Component {
     const isMenuOpen = Boolean(anchorEl);
     const {
       classes,
-      history,
+      currentUser,
       id,
       user_id,
       nickname,
@@ -93,9 +93,9 @@ class ChallengeCard extends Component {
       title,
       yt_id,
       description,
-      date_created
+      date_created,
+      viewMoreDetail
     } = this.props;
-
     const renderMenu = (
       <Menu
         anchorEl={anchorEl}
@@ -104,10 +104,11 @@ class ChallengeCard extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
+        {/* View More Challenge details hidden if currently on specific challenge page */}
+        {/* {viewMoreDetail === true ?  */}
         <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>View More Challenge Details</MenuItem>
+        {/* // : null } */}
         <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Join Challenge</MenuItem>
-        {/* delete function */}
-        {/* <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Delete Challenge</MenuItem> */}
       </Menu>
     );
 
@@ -139,45 +140,52 @@ class ChallengeCard extends Component {
           <CardContent>
             <Typography component="p">{title}</Typography>
           </CardContent>
-          <VideoPlayer url={yt_id}/>
-        <CardContent>
-          <Typography component="p">
-            {description}
-          </Typography>
-        </CardContent>
-        <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="Share">
+          <VideoPlayer url={yt_id} />
+          <CardContent>
+            <Typography component="p">{description}</Typography>
+          </CardContent>
+          <CardActions className={classes.actions} disableActionSpacing>
+            <IconButton aria-label="Add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+            <IconButton aria-label="Share">
               <SocialShareIcon id={id} />
             </IconButton>
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded,
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
-          >
-          </IconButton>
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded,
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
-          >
+            <IconButton
+              className={classnames(classes.expand, {
+                [classes.expandOpen]: this.state.expanded
+              })}
+              onClick={this.handleExpandClick}
+              aria-expanded={this.state.expanded}
+              aria-label="Show more"
+            />
+            <IconButton
+              className={classnames(classes.expand, {
+                [classes.expandOpen]: this.state.expanded
+              })}
+              onClick={this.handleExpandClick}
+              aria-expanded={this.state.expanded}
+              aria-label="Show more"
+            />
+          </CardActions>
+          {/* <Collapse in={this.state.expanded} timeout="auto" unmountOnExit />
+      
           </IconButton>
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-        </Collapse>
-        <button onClick={() => {
-           console.log(this.props);
-           console.log(id);
-          LocalApi.delete(`/challenges/submissions/${id}`)
-        }}>Delete</button>
+        </Collapse> */}
+
+        {/* delete challenge button, conditional rendering - checks if current user (from redux store) is the creator of the challenge */}
+        {currentUser._id === user_id ?
+          <button onClick={() => {
+            const r = window.confirm("Are you sure you want to delete this challenge?");
+            
+            if (r === true) {
+              LocalApi.delete(`/challenges/submissions/${id}`)
+            }
+          }}>Delete</button>
+          : null }
+          
       </Card>
       {renderMenu}
       </div>
@@ -189,6 +197,10 @@ ChallengeCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const WrappedChallengeCard = withRouter(ChallengeCard);
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  };
+};
 
-export default withStyles(styles)(WrappedChallengeCard);
+export default connect(mapStateToProps)(withStyles(styles)(withRouter(ChallengeCard)));
