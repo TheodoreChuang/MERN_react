@@ -104,7 +104,3 @@ export const deleteChallenge = () => {
         })
     }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 0ddde1e1bfbf7b336e69db5e811092e0075ccd06

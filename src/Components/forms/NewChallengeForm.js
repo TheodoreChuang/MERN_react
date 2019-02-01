@@ -7,30 +7,21 @@ import Button from '@material-ui/core/Button';
 import Loader from "./../Loader";
 import DateField from "./fields/DateField";
 import DateHelper from "./fields/DateHelper";
-<<<<<<< HEAD
 import { withRouter } from "react-router-dom";
 import LocalApi from "./../../apis/local";
-=======
->>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
 
 class NewChallengeForm extends Component {
     state = { loading: false }
 
-<<<<<<< HEAD
     onUploadSubmit = async (formValues) => {
         const { history } = this.props;
         const { title, description, video, expiry_date } = formValues;
-=======
-    onUploadSubmit = (formValues) => {
-        const { addChallenge } = this.props;
-        const { title, description, video, creator_id, expiry_date } = formValues;
->>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
 
         const fd = new FormData();
         fd.append("video", video[0]);
         fd.append("title", title);
         fd.append("description", description);
-        fd.append("creator_id", creator_id);
+        // fd.append("creator_id", creator_id);
         // Conditional as expiry_date value might not be entered as it is not mandatory
         if (expiry_date) {
             fd.append("expiry_date", expiry_date);
@@ -71,14 +62,14 @@ class NewChallengeForm extends Component {
                         multiline
                         />
                     </div>
-                    <div>
+                    {/* <div>
                         <Field
                         name="creator_id"
                         component={Input}
                         placeholder="Creator id"
                         type="text"
                         />
-                    </div>
+                    </div> */}
                     <div>
                         <Field
                         name="expiry_date"
@@ -148,16 +139,4 @@ const WrappedNewChallengeForm = reduxForm({
     }
 })(NewChallengeForm);
 
-<<<<<<< HEAD
 export default (withRouter(WrappedNewChallengeForm));
-=======
-const mapStateToProps = (state) => {
-    return {
-        challenges: state.challenges
-    };
-}
-
-export default connect(mapStateToProps, {
-    addChallenge
-})(WrappedNewChallengeForm);
->>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
