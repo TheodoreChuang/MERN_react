@@ -63,14 +63,13 @@ class App extends Component {
                 path="/challenges" 
                 component={ChallengeFeedPage} 
               />
-              <Route component={NotFoundPage} />
               {/* Private Routes */}
               <PrivateRoute
                 exact
                 path="/challenges/:id/submit"
                 component={SubmissionPage}
               />
-              <PrivateRoute
+              <Route
                 exact
                 path="/profile"
                 component={ProfileCurrentPage}
@@ -86,6 +85,8 @@ class App extends Component {
                 path="/updateinfo"
                 component={UpdateProfileInfoPage}
               />
+              {/* Default last component */}
+              <Route component={NotFoundPage} />
             </Switch>
         </BrowserRouter>
       </div>

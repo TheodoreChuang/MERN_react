@@ -15,7 +15,6 @@ import {
   withStyles
 } from "@material-ui/core/";
 import {
-  Home,
   Edit,
   AccountCircle,
   HowToReg,
@@ -27,7 +26,7 @@ import LockIcon from "@material-ui/icons/Https";
 // import SearchIcon from "@material-ui/icons/Search";
 // import InputBase from "@material-ui/core/InputBase";
 // import { fade } from "@material-ui/core/styles/colorManipulator";
-// import Add from "@material-ui/icons/AddCircle";
+import Add from "@material-ui/icons/AddCircle";
 
 const styles = theme => ({
   root: {
@@ -54,46 +53,6 @@ const styles = theme => ({
       display: "none"
     }
   }
-  // --- For Search Bar - Future Feature
-  // search: {
-  //   position: "relative",
-  //   borderRadius: theme.shape.borderRadius,
-  //   backgroundColor: fade(theme.palette.common.white, 0.15),
-  //   "&:hover": {
-  //     backgroundColor: fade(theme.palette.common.white, 0.25)
-  //   },
-  //   marginRight: theme.spacing.unit * 2,
-  //   marginLeft: 0,
-  //   width: "100%",
-  //   [theme.breakpoints.up("sm")]: {
-  //     marginLeft: theme.spacing.unit * 3,
-  //     width: "auto"
-  //   }
-  // },
-  // searchIcon: {
-  //   width: theme.spacing.unit * 9,
-  //   height: "100%",
-  //   position: "absolute",
-  //   pointerEvents: "none",
-  //   display: "flex",
-  //   alignItems: "center",
-  //   justifyContent: "center"
-  // },
-  // inputRoot: {
-  //   color: "inherit",
-  //   width: "100%"
-  // },
-  // inputInput: {
-  //   paddingTop: theme.spacing.unit,
-  //   paddingRight: theme.spacing.unit,
-  //   paddingBottom: theme.spacing.unit,
-  //   paddingLeft: theme.spacing.unit * 10,
-  //   transition: theme.transitions.create("width"),
-  //   width: "100%",
-  //   [theme.breakpoints.up("md")]: {
-  //     width: 200
-  //   }
-  // }
 });
 
 class NavBar extends Component {
@@ -116,27 +75,10 @@ class NavBar extends Component {
 
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const { classes, currentUser, removeAuthToken, token } = this.props;
+    const { classes, admin, removeAuthToken, token, history } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const currentPath = window.location.pathname;
-
-    const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        <MenuItem component={Link} to="/" onClick={this.handleMenuClose}>
-          Home
-        </MenuItem>
-        <MenuItem component={Link} to="/profile" onClick={this.handleMenuClose}>
-          Profile
-        </MenuItem>
-      </Menu>
-    );
 
     // Mobile view
     const renderMobileMenu = (
@@ -147,35 +89,17 @@ class NavBar extends Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
-      
-        {!currentPath.includes("newchallenge") ? (
-                  <MenuItem component={Link} to="/newchallenge">
-                    <IconButton color="inherit">
-                      <Add />
-                    </IconButton>
-                    <p>Add Challenge</p>
-                  </MenuItem>
-                ) : null}
 
-        {!currentPath.includes("home") ? (
-          <MenuItem component={Link} to="/home">
-            <IconButton color="inherit">
-              <Home />
-            </IconButton>
-            <p>Home</p>
-          </MenuItem>
+        {/* !!!! */}
+        {!currentPath.includes("newchallenge") ? (
+          <MenuItem component={Link} to="/newchallenge">
+          <ListItemIcon>
+            <Add />
+          </ListItemIcon>
+          <ListItemText primary="New Challenge" />
+        </MenuItem>
         ) : null}
        
-        {/* {!currentPath.includes("profile") ? ( */}
-
-        {/* Home Icon - always available */}
-        <MenuItem component={Link} to="/">
-          <ListItemIcon>
-            <Home />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </MenuItem>
-
         {/* Profile OR Profile Edit - only available if logged in */}
         {token && !currentPath.includes("profile") ? (
 
@@ -231,9 +155,7 @@ class NavBar extends Component {
             <IconButton
               color="inherit"
               onClick={() => {
-                this.props.history.goBack();
-                console.log(this.props.history);
-                console.log(this.props.history.length);
+                history.goBack();
               }}
             >
               <ArrowBack />
@@ -247,9 +169,9 @@ class NavBar extends Component {
             >
               1UP
 
-            </Typography>
-            <div className={classes.grow} />
-            <div className={classes.sectionDesktop}>
+            </Typography> */}
+            {/* <div className={classes.grow} />
+            <div className={classes.sectionDesktop} /> */}
 
             {/* submissions feed button */}
             <IconButton
@@ -266,9 +188,15 @@ class NavBar extends Component {
                 to="/challenges" >
                 challenges
               </IconButton>
-            
-            {/* Add challenge section, render if admin */} 
-            {!currentPath.includes('newchallenge') && currentUser.is_admin === true ? 
+
+            <div className={classes.grow} />
+
+            {/* Desktop Menu - Hidden on Mobile */}
+            <div className={classes.sectionDesktop}>
+
+              {/* Add Challenge - if admin  */}
+              {!currentPath.includes('newchallenge') 
+                && admin === true ? 
               <IconButton
                 color="inherit"
                 component={Link} 
@@ -276,75 +204,18 @@ class NavBar extends Component {
                 <Add />
               </IconButton> : null }
 
-            {/* Home section */}
-            {!currentPath.includes('home') ? 
-              <IconButton
-                color="inherit"
-                component={Link} 
-                to="/" >
-                <Home />
-              </IconButton> : null }
-
-              {/* Only Admin can create challenge for MVP */}
-              {/* {!currentPath.includes("profile") ? (
-
-            </Typography> */}
-
-            {/* For Search Bar - Future Feature
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-              />
-            </div> */}
-
-            <div className={classes.grow} />
-
-            {/* Desktop Menu - Hidden on Mobile */}
-            <div className={classes.sectionDesktop}>
-              {/* Home Icon - always available */}
-              <IconButton color="inherit" component={Link} to="/">
-                <Home />
-              </IconButton>
-
               {/* Profile OR Profile Edit - only available if logged in */}
               {token && !currentPath.includes("profile") ? (
-
                 <IconButton color="inherit" component={Link} to="/profile">
                   <AccountCircle />
                 </IconButton>
               ) : null}
-              
-              {/*  Log out Section */}
-              <IconButton
-                color="inherit"
-                component={Link}
-                to="/landing"
-                onClick={() => {
-                  removeAuthToken();
-                }}
-              >
-                <LockIcon />
-              </IconButton>
 
               {token && currentPath.includes("profile") ? (
                 <IconButton color="inherit" component={Link} to="/profile/edit">
                   <Edit />
                 </IconButton>
               ) : null}
-
-              {/* Only Admin can create challenge for MVP
-              {!currentPath.includes("newchallenge") ? (
-                <IconButton color="inherit" component={Link} to="/newchallenge">
-                  <Add />
-                </IconButton>
-              ) : null} */}
 
               {/* Log out OR Sign in - always available */}
               {token ? (
@@ -387,14 +258,14 @@ class NavBar extends Component {
 
 const mapStateToProps = state => {
   return {
-    token: state.auth.token
+    token: state.auth.token,
+    admin: state.currentUser.is_admin
   };
 };
 
-
 const Wrapped = connect(
-  mapStateToProps,
-  null
-)(NavBar);
+  mapStateToProps, {
+  removeAuthToken
+})(NavBar);
 
 export default withStyles(styles)(Wrapped);

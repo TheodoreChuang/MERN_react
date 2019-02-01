@@ -18,7 +18,7 @@ class NewsFeedPage extends Component {
     const { submissions } = this.state;
     return (
       <div>
-      <NavBar />
+      <NavBar {...this.props}/>
       {/* <img src="/logo.png" /> */}
       
         {/* submissions feed */}

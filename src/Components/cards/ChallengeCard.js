@@ -105,9 +105,9 @@ class ChallengeCard extends Component {
         onClose={this.handleMenuClose}
       >
         {/* View More Challenge details hidden if currently on specific challenge page */}
-        {viewMoreDetail === true ? 
+        {/* {viewMoreDetail === true ?  */}
         <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>View More Challenge Details</MenuItem>
-        : null }
+        {/* // : null } */}
         <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Join Challenge</MenuItem>
       </Menu>
     );
