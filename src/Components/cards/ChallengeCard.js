@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import SocialShareIcon from "./../icons/SocialShareIcon";
 import LocalApi from "./../../apis/local";
 import VideoPlayer from "./../VideoPlayer";
-
 import { withStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -76,7 +75,6 @@ class ChallengeCard extends Component {
       sub_id,
       type,
       classes,
-      is_challenge,
       viewMoreDetail,
       currentUser,
       id,
@@ -152,7 +150,6 @@ class ChallengeCard extends Component {
               <SocialShareIcon id={id} />
             </IconButton>
           </CardActions>
-
         {/* Conditional rendering based on type of card */}
         {/* for challenges */}
         {type === "challenge" && currentUser._id === user_id  ? 
@@ -168,7 +165,7 @@ class ChallengeCard extends Component {
           : null }
         
         {/* for submissions */}
-        {type === "submission" && currentUser._id === user_id ?
+        {/* {type === "submission" && currentUser._id === user_id ?
           <button onClick={ () => {
             const r = window.confirm("Are you sure you want to delete this challenge?");
             
@@ -179,7 +176,7 @@ class ChallengeCard extends Component {
               
             }
           }}>Sub Delete</button>
-          : null }
+          : null } */}
           
       </Card>
       {renderMenu}

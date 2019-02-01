@@ -60,10 +60,16 @@ class ProfileCurrentPage extends Component {
               {user &&
                 user.submissions &&
                 user.submissions.map(submission => {
+                  console.log("63");
+                  console.log(user);
+                  console.log(submission);
                   return (
                     <div key={submission._id} className={classes.cardContainer}>
                       <ChallengeCard
+                        user_sub_id={user}
+                        type="submission"
                         id={submission.challengeId}
+                        sub_id={submission._id} //
                         user_id={user._id}
                         nickname="You"
                         profile_image={user.profile_image}

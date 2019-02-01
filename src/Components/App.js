@@ -48,7 +48,7 @@ class App extends Component {
               <Route exact path="/challenges" component={ChallengeFeedPage} />
               <Route exact path="/profile/:id" component={ProfilePage} />
               <Route exact path="/challenges/:id" component={ChallengePage} />
-              <Route exact path="/resetpassword/:token" component={ResetPasswordPage} />
+
               <PrivateRoute
                 exact
                 path="/profile"

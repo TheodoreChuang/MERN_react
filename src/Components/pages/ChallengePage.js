@@ -29,6 +29,7 @@ class ChallengePage extends Component  {
                     <ChallengeCard 
                     type="challenge"
                     hideMoreDetail={true}
+                    id={challenge._id}
                     user_id={challenge.user.creator_id}
                     nickname={challenge.user.nickname}
                     profile_image={challenge.user.profile_image}
