@@ -29,6 +29,7 @@ class ProfileCurrentPage extends Component {
     super(props);
     const { getCurrentUser } = this.props;
     getCurrentUser();
+    
   }
 
   render() {

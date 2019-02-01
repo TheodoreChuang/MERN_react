@@ -14,25 +14,14 @@ import {
   Typography,
   withStyles
 } from "@material-ui/core/";
-import {
-  Edit,
-  AccountCircle,
-  HowToReg,
-  ArrowBack
-} from "@material-ui/icons/";
+import { Edit, AccountCircle, HowToReg, ArrowBack } from "@material-ui/icons/";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import LockIcon from "@material-ui/icons/Https";
-
-// import SearchIcon from "@material-ui/icons/Search";
-// import InputBase from "@material-ui/core/InputBase";
-// import { fade } from "@material-ui/core/styles/colorManipulator";
 import Add from "@material-ui/icons/AddCircle";
 
 const styles = theme => ({
   root: {
-    width: "100%",
-    // position: "fixed",
-    // zIndex: "99"
+    width: "100%"
   },
   grow: {
     flexGrow: 1
@@ -105,7 +94,6 @@ class NavBar extends Component {
        
         {/* Profile OR Profile Edit - only available if logged in */}
         {token && !currentPath.includes("profile") ? (
-
           <MenuItem component={Link} to="/profile">
             <ListItemIcon>
               <AccountCircle />
@@ -114,12 +102,21 @@ class NavBar extends Component {
           </MenuItem>
         ) : null}
 
+{/* //     Commented this out on merge conflict - Tyson
+//         {currentPath.includes("profile") && currentUser._id && ( */}
+{/* //           <MenuItem component={Link} to="/updateinfo">
+//             <IconButton color="inherit">
+//               <Edit />
+//             </IconButton>
+//             <p>Edit Profile</p> */}
+
         {token && currentPath.includes("profile") ? (
           <MenuItem component={Link} to="/profile/edit">
             <ListItemIcon>
               <Edit />
             </ListItemIcon>
             <ListItemText primary="Edit Profile" />
+
           </MenuItem>
         ) : null}
 
@@ -206,16 +203,12 @@ class NavBar extends Component {
 
             {/* Desktop Menu - Hidden on Mobile */}
             <div className={classes.sectionDesktop}>
-
               {/* Add Challenge - if admin  */}
-              {!currentPath.includes('newchallenge') 
-                && admin === true ? 
-              <IconButton
-                color="inherit"
-                component={Link} 
-                to="/newchallenge" >
-                <Add />
-              </IconButton> : null }
+              {!currentPath.includes("newchallenge") && admin === true ? (
+                <IconButton color="inherit" component={Link} to="/newchallenge">
+                  <Add />
+                </IconButton>
+              ) : null}
 
               {/* Profile OR Profile Edit - only available if logged in */}
               {token && !currentPath.includes("profile") ? (
@@ -248,7 +241,6 @@ class NavBar extends Component {
                   <HowToReg />
                 </IconButton>
               ) : null}
-
             </div>
 
             {/* For expanding hidden menu on mobile */}
@@ -277,8 +269,10 @@ const mapStateToProps = state => {
 };
 
 const Wrapped = connect(
-  mapStateToProps, {
-  removeAuthToken
-})(NavBar);
+  mapStateToProps,
+  {
+    removeAuthToken
+  }
+)(NavBar);
 
 export default withStyles(styles)(Wrapped);

@@ -1,16 +1,19 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
-import Input from "./fields/Input";
+import AuthInput from "./fields/AuthInput";
+import FormDialog from "./FormDialog";
 import LocalApi from "../../apis/local";
+<<<<<<< HEAD
 import { setAuthToken } from "./../../actions";
 import { connect } from "react-redux";
+=======
+import { setAuthToken, getCurrentUser } from "./../../actions";
+>>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
 
 import { withStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
-import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
-import FormDialog from "./FormDialog";
+import { Fab, Typography } from "@material-ui/core";
 
 const styles = theme => ({
   container: {
@@ -56,6 +59,7 @@ const styles = theme => ({
 });
 
 class LoginForm extends Component {
+<<<<<<< HEAD
   state = { error : "" }
     
     onLoginFormSubmit = (formValues) => {
@@ -71,6 +75,24 @@ class LoginForm extends Component {
         })
         .catch(err => console.log(err));
     }
+=======
+  state = { error: "" };
+
+  onLoginFormSubmit = formValues => {
+    const { history, getCurrentUser, setAuthToken } = this.props;
+    const { email, password } = formValues;
+
+    LocalApi.post("/login", { email, password })
+      // async below as redirection to root page requires auth token first
+      .then(response => {
+        setAuthToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
+        history.push("/");
+        getCurrentUser();
+      })
+      .catch(err => console.log(err));
+  };
+>>>>>>> bd1db06e6b60193d26254e7f1394c241d406d115
 
   render() {
     const { classes } = this.props;
@@ -81,7 +103,7 @@ class LoginForm extends Component {
         <form onSubmit={handleSubmit(this.onLoginFormSubmit)}>
           <Field
             name="email"
-            component={Input}
+            component={AuthInput}
             placeholder="Email"
             className={classes.input}
             fullWidth
@@ -91,7 +113,7 @@ class LoginForm extends Component {
           />
           <Field
             name="password"
-            component={Input}
+            component={AuthInput}
             placeholder="Password"
             type="password"
             className={classes.input}
@@ -158,18 +180,19 @@ class LoginForm extends Component {
 }
 
 const WrappedRegisterForm = reduxForm({
-    form: "register",
-    validate: ({ email, password }) => {
-        const errors = {}
+  form: "register",
+  validate: ({ email, password }) => {
+    const errors = {};
 
-        if (!email) {
-            errors.email = "Required!"
-        }
+    if (!email) {
+      errors.email = "Email is required!";
+    }
 
-        if (!password) {
-            errors.password = "Required!"
-        }
-        return errors;
+    if (!password) {
+      errors.password = "Password is required!";
+    }
+
+    return errors;
   }
 })(withStyles(styles)(LoginForm));
 
