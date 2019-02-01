@@ -39,6 +39,7 @@ class App extends Component {
                 path="/profile"
                 component={ProfileCurrentPage}
               />
+
               <PrivateRoute
                 exact
                 path="/updateinfo"

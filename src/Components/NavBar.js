@@ -100,12 +100,21 @@ class NavBar extends Component {
           </MenuItem>
         ) : null}
 
+//     Commented this out on merge conflict - Tyson
+//         {currentPath.includes("profile") && currentUser._id && (
+//           <MenuItem component={Link} to="/updateinfo">
+//             <IconButton color="inherit">
+//               <Edit />
+//             </IconButton>
+//             <p>Edit Profile</p>
+
         {token && currentPath.includes("profile") ? (
           <MenuItem component={Link} to="/profile/edit">
             <ListItemIcon>
               <Edit />
             </ListItemIcon>
             <ListItemText primary="Edit Profile" />
+
           </MenuItem>
         ) : null}
 

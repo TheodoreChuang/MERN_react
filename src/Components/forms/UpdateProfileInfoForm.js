@@ -8,7 +8,12 @@ import { connect } from "react-redux";
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Typography from '@material-ui/core/Typography';
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
+=======
+import { updateCurrentUser } from "./../../actions";
+
+>>>>>>> 0ddde1e1bfbf7b336e69db5e811092e0075ccd06
 
 const styles = theme => ({
     body: {
@@ -52,22 +57,29 @@ const styles = theme => ({
 class UpdateProfileInfoForm extends Component {
     
     updateUserFormSubmit = (formValues) => {
-        const { first_name, last_name, nickname } = formValues;
-        const { setAuthToken } = this.props;
+        const { first_name, last_name, nickname, age, location, bio, gender } = formValues;
 
-        LocalApi.patch("/profile", {first_name, last_name, nickname})
-        .then(response => {
-            //acquring token
-            // setAuthToken(response.data.token);
-            //redirect
-            //this.props.history.push("/profile");
-        })
-        .catch(err => console.log(err));
+        this.props.updateCurrentUser( formValues );
+
+        // LocalApi.patch("/profile", {first_name, last_name, nickname})
+        // .then(response => {
+            
+        //     //acquring token
+        //     // setAuthToken(response.data.token);
+        //     //redirect
+        //     //this.props.history.push("/profile");
+        //     console.log(response.data.first_name);
+        //     console.log(response.data);
+        //     console.log(redux);
+        // })
+        // .catch(err => console.log(err));
+        // }
         }
 
         render() {
             const { classes } = this.props;
             const { handleSubmit } = this.props;
+
             
             return (
             <div className={classes.body}>
@@ -75,7 +87,7 @@ class UpdateProfileInfoForm extends Component {
                 <div className={classes.title}>
                  <Typography variant="h4" gutterBottom >Update Profile Information</Typography>
                 </div>
-                <form onSubmit = {handleSubmit(this.updateUserFormSubmit)}>
+                <form onSubmit = {handleSubmit(this.updateUserFormSubmit.bind(this))}>
                 <Field
                   name="first_name"
                   component={Input}
@@ -136,7 +148,6 @@ class UpdateProfileInfoForm extends Component {
                   placeholder="Bio"
                   multiline
                   className={classes.textField}
-                  margin="normal"
                   variant="outlined"
                 />
                 <div className={classes.gender}>
@@ -146,7 +157,7 @@ class UpdateProfileInfoForm extends Component {
                 <div>
                   <Typography color="inherit">
                     <Field
-                      name="sex"
+                      name="gender"
                       component="input"
                       type="radio"
                       value="male"
@@ -155,7 +166,7 @@ class UpdateProfileInfoForm extends Component {
                   </Typography>
                   <Typography color="inherit">
                     <Field
-                      name="sex"
+                      name="gender"
                       component="input"
                       type="radio"
                       value="female"
@@ -164,19 +175,19 @@ class UpdateProfileInfoForm extends Component {
                     </Typography>
                     <Typography color="inherit">
                     <Field
-                      name="sex"
+                      name="gender"
                       component="input"
                       type="radio"
-                      value="Rather not say"
+                      value="gender-neutral"
                     />{' '}
-                    Rather not say
+                    Gender-neutral
                     </Typography>
                 </div>
             </div>
                 <div className={classes.checkboxButton} >
                 
                 <div>
-                <Fab type="submit" variant="extended" color="primary" aria-label="Add" className={classes.margin}>
+                <Fab type="submit" variant="extended" color="primary" aria-label="Add" className={classes.margin}  >
                     Update
                 </Fab>
                 </div>
@@ -193,20 +204,22 @@ class UpdateProfileInfoForm extends Component {
 
 const WrappedUpdateInfoForm = reduxForm({
     form: "register",
-    validate: ({ first_name, last_name, nickname }) => {
+    validate: ({ first_name }) => {
         const errors = {}
 
         if (!first_name) {
             errors.first_name = "First name is required!"
         }
 
-        if (!last_name) {
-            errors.last_name = "Last name is required!"
-        }
 
-        if (!nickname) {
-            errors.nickname = "Nickname is required!"
-        }
+        // if (!last_name) {
+        //     errors.last_name = "Last name is required!"
+        // }
+
+        // if (!nickname) {
+        //     errors.nickname = "Nickname is required!"
+        // }
+
 
         // if (!email) {
         //     errors.email = "Email is required!"
@@ -225,7 +238,13 @@ const WrappedUpdateInfoForm = reduxForm({
 
 })(withStyles(styles)(UpdateProfileInfoForm))
 
+const mapStateToProps = state => {
 
-export default connect(null, {
-    setAuthToken
+  return {
+    currentUser: state.currentUser
+  };
+}
+
+export default connect(mapStateToProps, {
+    updateCurrentUser
 })(WrappedUpdateInfoForm);
