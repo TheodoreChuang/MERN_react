@@ -46,7 +46,8 @@ const styles = theme => ({
     transform: "rotate(180deg)"
   },
   avatar: {
-    backgroundColor: red[500]
+    backgroundColor: red[500],
+    border: "2px solid hsl(212, 12%, 72%)"
   }
 });
 
@@ -98,16 +99,27 @@ class ChallengeCard extends Component {
         onClose={this.handleMenuClose}
       >
         {/* View More Challenge details hidden if currently on specific challenge page */}
-        {!hideMoreDetail ? 
-        
-        <MenuItem component={Link} to={`/challenges/${id}`} onClick={this.handleMenuClose}>View More Challenge Details</MenuItem>
-        : null } 
-        <MenuItem component={Link} to={`/challenges/${id}/submit`} onClick={this.handleMenuClose}>Join Challenge</MenuItem>
+        {!hideMoreDetail ? (
+          <MenuItem
+            component={Link}
+            to={`/challenges/${id}`}
+            onClick={this.handleMenuClose}
+          >
+            View More Challenge Details
+          </MenuItem>
+        ) : null}
+        <MenuItem
+          component={Link}
+          to={`/challenges/${id}/submit`}
+          onClick={this.handleMenuClose}
+        >
+          Join Challenge
+        </MenuItem>
       </Menu>
     );
 
     return (
-      <div className={classes.root}>
+      <div>
         <Card className={classes.card}>
           <CardHeader
             avatar={
@@ -143,29 +155,36 @@ class ChallengeCard extends Component {
           </CardContent>
 
           <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton aria-label="Add to favorites">
+            {/* <IconButton aria-label="Add to favorites">
               <Favorite />
-            </IconButton>
+            </IconButton> */}
             <IconButton aria-label="Share">
               <SocialShareIcon id={id} />
             </IconButton>
           </CardActions>
-        {/* Conditional rendering based on type of card */}
-        {/* for challenges */}
-        {type === "challenge" && currentUser._id === user_id  ? 
-          <button onClick={ () => {
-            const r = window.confirm("Are you sure you want to delete this challenge?");
-            
-            if (r === true) {
-              LocalApi.delete(`/challenges/submissions/${id}`)
-              .then(res => window.location.reload())
-              .catch(err => alert(err))
-            }
-          }}> Chal Delete</button>
-          : null }
-        
-        {/* for submissions */}
-        {/* {type === "submission" && currentUser._id === user_id ?
+          {/* Conditional rendering based on type of card */}
+          {/* for challenges */}
+          {type === "challenge" && currentUser._id === user_id ? (
+            <button
+              onClick={() => {
+                const r = window.confirm(
+                  "Are you sure you want to delete this challenge?"
+                );
+
+                if (r === true) {
+                  LocalApi.delete(`/challenges/submissions/${id}`)
+                    .then(res => window.location.reload())
+                    .catch(err => alert(err));
+                }
+              }}
+            >
+              {" "}
+              Chal Delete
+            </button>
+          ) : null}
+
+          {/* for submissions */}
+          {/* {type === "submission" && currentUser._id === user_id ?
           <button onClick={ () => {
             const r = window.confirm("Are you sure you want to delete this challenge?");
             
@@ -177,9 +196,8 @@ class ChallengeCard extends Component {
             }
           }}>Sub Delete</button>
           : null } */}
-          
-      </Card>
-      {renderMenu}
+        </Card>
+        {renderMenu}
       </div>
     );
   }

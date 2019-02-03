@@ -19,6 +19,9 @@ const styles = theme => ({
     backgroundPosition: "center center",
     backgroundSize: "cover"
   },
+  logo: {
+    marginTop: "60px"
+  },
   font: {
     color: "white"
   }
@@ -30,9 +33,18 @@ class LoginPage extends Component {
 
     return (
       <div className={classes.container}>
-        <Typography className={classes.font} component="h1" variant="h3">
-          oneup
-        </Typography>
+        <div className={classes.logo}>
+          <img
+            src="/images/logo.png"
+            height="50px"
+            width="50px"
+            alt="1Up Logo"
+          />
+          <Typography className={classes.font} component="h1" variant="h4">
+            oneup
+          </Typography>
+        </div>
+
         <LoginForm />
       </div>
     );
