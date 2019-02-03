@@ -5,10 +5,9 @@ import { connect } from "react-redux";
 import { updateCurrentUser } from "./../../actions";
 
 import { withStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
-import Typography from "@material-ui/core/Typography";
+import { Fab, Typography } from "@material-ui/core/";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   body: {
@@ -71,11 +70,6 @@ class UpdateProfileInfoForm extends Component {
     return (
       <div className={classes.body}>
         <div className={classes.container} onSubmit={this.updateUserFormSubmit}>
-          <div className={classes.title}>
-            <Typography variant="h4" gutterBottom>
-              Update Profile Information
-            </Typography>
-          </div>
           <form onSubmit={handleSubmit(this.updateUserFormSubmit.bind(this))}>
             <Field
               name="first_name"

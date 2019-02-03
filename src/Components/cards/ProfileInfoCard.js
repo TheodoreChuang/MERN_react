@@ -1,33 +1,29 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import CardMedia from "@material-ui/core/CardMedia";
-import Grid from "@material-ui/core/Grid";
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import IconButton from '@material-ui/core/IconButton';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography
+} from "@material-ui/core/";
 
 const styles = theme => ({
   card: {
-    minWidth: 275,
-    maxWidth: 600,
+    minWidth: 235,
+    maxWidth: 560,
     padding: "20px"
   },
-  grid: {
-    flexGrow: 1
-  },
   media: {
-
     height: "100px",
     width: "100px",
     borderRadius: "50%",
-    marginBottom: "20px"
+    marginBottom: "20px",
+    border: "2px solid hsl(212, 12%, 72%)"
   },
   typography: {
     textAlign: "center"
-
-  },
+  }
 });
 
 class ProfileInfoCard extends Component {
@@ -47,7 +43,7 @@ class ProfileInfoCard extends Component {
     return (
       <Card>
         <CardContent className={classes.card}>
-          <Grid className={classes.grid} container>
+          <Grid container>
             <Grid item xs={4} />
             <Grid item xs={4} container justify="center">
               <CardMedia
