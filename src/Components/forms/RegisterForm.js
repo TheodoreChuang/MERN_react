@@ -78,7 +78,7 @@ class RegisterForm extends Component {
         //acquring token
         setAuthToken(response.data.token);
         // Alert box and redirect
-        swal("Success", "Registered!", "success", {
+        swal("Success!", "Registered!", "success", {
           button: false,
           timer: 2000
         });

@@ -4,6 +4,7 @@ import LocalApi from "./../../apis/local";
 import { withRouter } from "react-router-dom";
 import Input from "./fields/Input";
 import Button from '@material-ui/core/Button';
+import swal from 'sweetalert';
 
 class ResetPasswordForm extends Component {
     state = { error: "" }
@@ -14,41 +15,42 @@ class ResetPasswordForm extends Component {
         const { password, confirm_password } = formValues;
 
         if (password !== confirm_password) {
-            return alert("Passwords don't match");
-        }
+            return swal(":(", "Passwords did not match!", "error", {
+                button: false,
+                timer: 2000
+            });
+        };
 
         LocalApi.put(`/resetpassword/${token}`, {password})
         .then(res => {
-
             if (res.status === 200) {
-                console.log("200");
-                alert("Password succesfully updated!")
-                return history.push("/");
-                }
+                    swal("Success!", "Password updated!", "success", {
+                      button: false,
+                      timer: 2000
+                    });
+                    setTimeout(() => history.push("/"), 2000);
+                };
             })
         .catch(err => {
             this.setState({ error: true });
-                return alert(err);
-            })
-    }
+                return swal(":(", err, "error");
+            });
+    };
     
     async componentDidMount() {
-        console.log("mounted"); 
         await LocalApi.get(`/resetpassword/${this.props.match.params.token}`)
         .then(res => {
-
             if (res.status === 200) {
                 return this.setState({ error: false });
             }
         })
         .catch(err => {
-            console.log(this.props.match.params);   
             this.setState({ error: true });
             let error = "";
             for(let i in err.response.data) {
               error += `${err.response.data[i]} \r\n`;
             }
-            return alert(error);
+            return swal(":(", error, "error");
           })
     }
 

@@ -120,8 +120,12 @@ class LoginForm extends Component {
                     })
                       .then(res => {
                         if (res.status === 200) {
-                          return alert("Email succesfully sent!");
-                        }
+                          return swal("Success!", "Email sent!", "success",
+                          {
+                            button: false,
+                            timer: 2000
+                          });
+                        };
                       })
                       .catch(err => {
                         let error = "";
@@ -129,7 +133,6 @@ class LoginForm extends Component {
                           error += `${err.response.data[i]} \r\n`;
                         }
                         return swal(":(", error, "error");
-
                       });
                   }}
                 />
