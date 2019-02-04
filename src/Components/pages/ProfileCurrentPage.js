@@ -12,20 +12,19 @@ import Grid from "@material-ui/core/Grid";
 
 const styles = theme => ({
   container: {
-    // Photo by
-    backgroundImage: `url(https://freedesignfile.com/upload/2015/05/White-decorative-pattern-vector-background-01.jpg)`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center center",
-    backgroundSize: "cover",
+    backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-white-abstract.jpg)`,
+    backgroundRepeat: "repeat",
+    backgroundSize: "contain",
     backgroundAttachment: "fixed",
-    boxShadow: "inset 0 0 0 2000px rgba(255, 255, 255, 0.90)"
+    boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.90)"
   },
   cardContainer: {
     margin: "30px"
   },
   typography: {
     textAlign: "center",
-    margin: "30px"
+    margin: "30px",
+    color: "grey"
   }
 });
 

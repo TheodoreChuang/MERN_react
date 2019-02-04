@@ -34,7 +34,7 @@ const styles = theme => ({
   },
   link: {
     margin: theme.spacing.unit,
-    color: "white",
+    color: theme.palette.primary.main,
     textDecoration: "none"
   }
 });

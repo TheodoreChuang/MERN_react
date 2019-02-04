@@ -48,27 +48,27 @@ const styles = theme => ({
   },
   link: {
     margin: theme.spacing.unit,
-    color: "white",
+    color: theme.palette.primary.main,
     textDecoration: "none"
   }
 });
 
 class LoginForm extends Component {
-  state = { error : "" }
-    
-    onLoginFormSubmit = (formValues) => {
-      const { history, setAuthToken } = this.props;
-      const { email, password } = formValues;
+  state = { error: "" };
 
-        LocalApi.post("/login", {email, password})
-        // async below as redirection to root page requires auth token first
-        .then (response => {
-            setAuthToken(response.data.token);
-            localStorage.setItem("token", response.data.token);
-            history.push("/");            
-        })
-        .catch(err => console.log(err));
-    }
+  onLoginFormSubmit = formValues => {
+    const { history, setAuthToken } = this.props;
+    const { email, password } = formValues;
+
+    LocalApi.post("/login", { email, password })
+      // async below as redirection to root page requires auth token first
+      .then(response => {
+        setAuthToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
+        history.push("/");
+      })
+      .catch(err => console.log(err));
+  };
 
   render() {
     const { classes } = this.props;
