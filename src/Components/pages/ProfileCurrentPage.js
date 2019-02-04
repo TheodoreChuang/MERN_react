@@ -12,8 +12,13 @@ import Grid from "@material-ui/core/Grid";
 
 const styles = theme => ({
   container: {
-    backgroundColor: theme.palette.background.paper,
-    flexGrow: 1
+    // Photo by
+    backgroundImage: `url(https://freedesignfile.com/upload/2015/05/White-decorative-pattern-vector-background-01.jpg)`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center center",
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed",
+    boxShadow: "inset 0 0 0 2000px rgba(255, 255, 255, 0.90)"
   },
   cardContainer: {
     margin: "30px"
@@ -44,7 +49,6 @@ class ProfileCurrentPage extends Component {
             justify="center"
             alignItems="center"
           >
-            <Grid item xs={0} md={2} />
             <Grid item xs={12} md={8}>
               <div className={classes.cardContainer}>
                 <ProfileInfoCard {...user} />
@@ -78,7 +82,6 @@ class ProfileCurrentPage extends Component {
                   );
                 })}
             </Grid>
-            <Grid item xs={0} md={2} />
           </Grid>
         </div>
       </div>

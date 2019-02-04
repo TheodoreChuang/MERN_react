@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
-import Input from "./fields/Input";
 import { connect } from "react-redux";
+import Input from "./fields/Input";
 import { updateCurrentUser } from "./../../actions";
 
 import { withStyles } from "@material-ui/core/styles";
-import { Fab, Typography } from "@material-ui/core/";
-
-import { Link } from "react-router-dom";
+import { Card, Fab, Typography } from "@material-ui/core/";
 
 const styles = theme => ({
   body: {
-    margin: "0 25px 0 10px"
+    minWidth: 235,
+    maxWidth: 560,
+    padding: theme.spacing.unit * 2
   },
   container: {
     display: "flex",
@@ -68,7 +68,7 @@ class UpdateProfileInfoForm extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div className={classes.body}>
+      <Card className={classes.body}>
         <div className={classes.container} onSubmit={this.updateUserFormSubmit}>
           <form onSubmit={handleSubmit(this.updateUserFormSubmit.bind(this))}>
             <Field
@@ -181,7 +181,7 @@ class UpdateProfileInfoForm extends Component {
             </div>
           </form>
         </div>
-      </div>
+      </Card>
     );
   }
 }
@@ -191,9 +191,9 @@ const WrappedUpdateInfoForm = reduxForm({
   validate: ({ first_name }) => {
     const errors = {};
 
-    if (!first_name) {
-      errors.first_name = "First name is required!";
-    }
+    // if (!first_name) {
+    //   errors.first_name = "First name is required!";
+    // }
 
     // if (!last_name) {
     //     errors.last_name = "Last name is required!"

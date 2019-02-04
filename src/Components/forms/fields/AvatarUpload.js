@@ -3,13 +3,22 @@ import { connect } from "react-redux";
 import { updateCurrentUserAvatar } from "./../../../actions";
 
 import { withStyles } from "@material-ui/core/styles";
-import { Card, CardContent, CardMedia } from "@material-ui/core/";
+import { Card, CardContent, CardMedia, Grid, Button } from "@material-ui/core/";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
 const styles = theme => ({
-  card: {
+  container: {
     minWidth: 235,
     maxWidth: 560,
-    padding: "20px"
+    padding: theme.spacing.unit * 2
+  },
+  form: {
+    marginLeft: theme.spacing.unit * 4,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    wrap: "wrap"
   },
   media: {
     height: "100px",
@@ -20,6 +29,16 @@ const styles = theme => ({
   },
   typography: {
     textAlign: "center"
+  },
+  button: {
+    margin: theme.spacing.unit
+  },
+  input: {
+    marginBottom: theme.spacing.unit
+    // display: "none"
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit
   }
 });
 
@@ -47,20 +66,44 @@ class AvatarUpload extends Component {
     const { classes, currentUser } = this.props;
 
     return (
-      <Card>
-        <CardContent className={classes.card}>
+      <Card className={classes.container}>
+        <Grid container direction="row" alignItems="center" justify="center">
           <CardMedia
             className={classes.media}
             image={currentUser.profile_image}
             title="Profile Picture"
           />
-          <img src={currentUser.profile_image} className={classes.media} />
 
-          <form onSubmit={this.onSubmit}>
-            <input label="image" type="file" onChange={this.onChange} />
-            <button type="submit">Send</button>
+          <form onSubmit={this.onSubmit} className={classes.form}>
+            <input
+              accept="image/*"
+              label="image"
+              className={classes.input}
+              type="file"
+              onChange={this.onChange}
+            />
+            <Button raised type="submit">
+              Upload Photo <CloudUploadIcon className={classes.rightIcon} />
+            </Button>
+
+            {/* 
+            FIXME: does not submit
+            <input
+              accept="image/*"
+              label="image"
+              className={classes.input}
+              id="raised-button-file"
+              type="file"
+              onChange={this.onChange}
+            />
+            <label htmlFor="raised-button-file">
+              <Button raised component="span" className={classes.button}>
+                Upload Photo
+              </Button>
+              <CloudUploadIcon className={classes.rightIcon}/>
+            </label> */}
           </form>
-        </CardContent>
+        </Grid>
       </Card>
     );
   }

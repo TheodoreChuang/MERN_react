@@ -16,7 +16,7 @@ class SubmissionPage extends Component {
             flexDirection: "column"
           }}
         >
-          <h1> Submit challenge </h1>
+          <h1> Join the challenge </h1>
           <SubmissionForm />
         </div>
       </div>
