@@ -28,7 +28,7 @@ const styles = theme => ({
     color: "grey"
   },
   typographyBG: {
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    backgroundColor: "rgba(255, 255, 255, 0.30)",
     borderRadius: "40%",
     padding: theme.spacing.unit * 2
   }

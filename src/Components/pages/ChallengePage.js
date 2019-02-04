@@ -20,11 +20,11 @@ const styles = theme => ({
   },
   typography: {
     textAlign: "center",
-    marginTop: "30px",
+    margin: "30px 0 10px 0",
     color: "grey"
   },
   typographyBG: {
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    backgroundColor: "rgba(255, 255, 255, 0.30)",
     borderRadius: "40%",
     padding: theme.spacing.unit * 2
   }
@@ -84,13 +84,13 @@ class ChallengePage extends Component {
               )}
 
               <Typography
-                component="h1"
-                variant="h5"
-                gutterBottom
                 className={classes.typography}
+                component="h2"
+                variant="h5"
               >
                 <span className={classes.typographyBG}>The Challengers</span>
               </Typography>
+
               {challenge &&
                 challenge.submissions.map(sub => {
                   return (

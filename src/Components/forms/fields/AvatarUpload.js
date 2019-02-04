@@ -18,7 +18,8 @@ const styles = theme => ({
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "center",
-    wrap: "wrap"
+    wrap: "wrap",
+    color: "grey"
   },
   media: {
     height: "100px",
