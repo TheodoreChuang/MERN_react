@@ -37,11 +37,11 @@ class ChallengeFeedPage extends Component {
               {/* challenges feed */}
               {challenges &&
                 challenges.map(function(challenge) {
+                  console.log(challenges);
                   return (
-                    <div className={classes.cardContainer}>
+                    <div className={classes.cardContainer} key={challenge._id}>
                       <ChallengeCard
-                        key={challenge._id}
-                        type="challenge"
+                          type="challenge"
                         id={challenge._id}
                         user_id={challenge.user.creator_id}
                         nickname={challenge.user.nickname}

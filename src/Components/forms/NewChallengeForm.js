@@ -9,6 +9,7 @@ import { withRouter } from "react-router-dom";
 import LocalApi from "./../../apis/local";
 import { connect } from "react-redux";
 import { getCurrentUser } from "./../../actions";
+import { CheckCircle } from "@material-ui/icons";
 
 
 class NewChallengeForm extends Component {
@@ -91,6 +92,7 @@ class NewChallengeForm extends Component {
                         type="submit">
                         Upload Challenge
                         </Button>
+                        {/* <CheckCircle /> */}
                     </div>
                 </form>
                 <div>

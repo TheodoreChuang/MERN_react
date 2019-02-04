@@ -15,15 +15,16 @@ import {
   withStyles
 } from "@material-ui/core/";
 
+import { ExitToApp, ControlPoint } from "@material-ui/icons";
+
 import { Edit, AccountCircle, HowToReg, ArrowBack } from "@material-ui/icons/";
 
 import MoreIcon from "@material-ui/icons/MoreVert";
-import LockIcon from "@material-ui/icons/Https";
-import Add from "@material-ui/icons/AddCircle";
 
 const styles = theme => ({
   root: {
-    width: "100%"
+    width: "100%",
+    marginBottom: "60px"
   },
   grow: {
     flexGrow: 1
@@ -86,7 +87,8 @@ class NavBar extends Component {
         {!currentPath.includes("newchallenge") && admin === true ? (
           <MenuItem component={Link} to="/newchallenge">
             <ListItemIcon>
-              <Add />
+              <ControlPoint />
+          
             </ListItemIcon>
             <ListItemText primary="New Challenge" />
           </MenuItem>
@@ -121,7 +123,7 @@ class NavBar extends Component {
             }}
           >
             <ListItemIcon>
-              <LockIcon />
+              <ExitToApp />
             </ListItemIcon>
             <ListItemText primary="Log Out" />
           </MenuItem>
@@ -139,7 +141,7 @@ class NavBar extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="fixed" color="primary">
           <Toolbar className={classes.custom}>
             {/* Back Icon - always available */}
             <IconButton
@@ -152,12 +154,12 @@ class NavBar extends Component {
             </IconButton>
             {/* <div className={classes.grow} />
             <div className={classes.sectionDesktop} /> */}
-            <img
+            {/* <img
               src="/images/logo.png"
               height="20px"
               width="20px"
               padding="100px"
-            />
+            /> */}
 
             {/* submissions feed button */}
             <div
@@ -198,7 +200,7 @@ class NavBar extends Component {
               {/* Add Challenge - if admin  */}
               {!currentPath.includes("newchallenge") && admin === true ? (
                 <IconButton color="inherit" component={Link} to="/newchallenge">
-                  <Add />
+                  <ControlPoint />
                 </IconButton>
               ) : null}
 
@@ -225,7 +227,7 @@ class NavBar extends Component {
                     removeAuthToken();
                   }}
                 >
-                  <LockIcon />
+                  <ExitToApp />
                 </IconButton>
               ) : null}
               {!token ? (
@@ -252,6 +254,7 @@ class NavBar extends Component {
     );
   }
 }
+
 
 const mapStateToProps = state => {
   return {

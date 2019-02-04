@@ -17,7 +17,7 @@ import {
   IconButton
 } from "@material-ui/core/";
 import red from "@material-ui/core/colors/red";
-import { MoreVert, Favorite, DeleteForever } from "@material-ui/icons";
+import { MoreVert, Favorite, DeleteForever, Share } from "@material-ui/icons";
 
 const styles = theme => ({
   card: {
@@ -161,11 +161,10 @@ class ChallengeCard extends Component {
             <IconButton aria-label="Share">
               <SocialShareIcon id={id} />
             </IconButton>
-          </CardActions>
-          {/* Conditional rendering based on type of card */}
-          {/* for challenges */}
-          {type === "challenge" && currentUser._id === user_id ? (
-            <button
+            {/* Conditional rendering based on type of card */}
+            {/* for challenges */}
+            {type === "challenge" && currentUser._id === user_id ? (
+            <IconButton aria-label="Delete"
               onClick={() => {
                 const r = window.confirm(
                   "Are you sure you want to delete this challenge?"
@@ -178,10 +177,12 @@ class ChallengeCard extends Component {
                 }
               }}
             >
-              {" "}
-              Chal Delete
-            </button>
-          ) : null}
+              <DeleteForever 
+              style={{ marginTop: "-5px" }} />
+            </IconButton>
+            ) : null}
+          </CardActions>
+
 
           {/* for submissions */}
           {/* {type === "submission" && currentUser._id === user_id ?
