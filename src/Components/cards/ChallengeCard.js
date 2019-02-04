@@ -20,6 +20,7 @@ import red from "@material-ui/core/colors/red";
 import { MoreVert, Favorite, Delete, Share } from "@material-ui/icons";
 import "./ChallengeCard.css";
 import moment from "moment";
+import swal from 'sweetalert';
 
 const styles = theme => ({
   card: {
@@ -178,15 +179,37 @@ class ChallengeCard extends Component {
             {type === "challenge" && currentUser._id === user_id ? (
             <IconButton aria-label="Delete"
               onClick={() => {
-                const r = window.confirm(
-                  "Are you sure you want to delete this challenge?"
-                );
+                swal({
+                  title: "Are you sure?",
+                  text: "Once deleted, this challenge and any associated submissions will be deleted.",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                    LocalApi.delete(`/challenges/submissions/${id}`)
+                    .then(res => {
+                      swal("The challenge has been deleted!", {
+                        icon: "success"
+                    });
+                    window.location.reload();
+                  })
+                    .catch(err => swal(err))
+                    
+                  } else {
+                    swal("Your challenge is safe!");
+                  }
+                });
+                // const r = window.confirm(
+                //   "Are you sure you want to delete this challenge?"
+                // );
 
-                if (r === true) {
-                  LocalApi.delete(`/challenges/submissions/${id}`)
-                    .then(res => window.location.reload())
-                    .catch(err => alert(err));
-                }
+                // if (r === true) {
+                //   LocalApi.delete(`/challenges/submissions/${id}`)
+                //     .then(res => window.location.reload())
+                //     .catch(err => alert(err));
+                // }
               }}
             >
               <Delete 

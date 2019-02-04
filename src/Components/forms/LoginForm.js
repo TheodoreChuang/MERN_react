@@ -7,6 +7,7 @@ import FormDialog from "./FormDialog";
 import LocalApi from "../../apis/local";
 import { setAuthToken } from "./../../actions";
 import { getCurrentUser } from "./../../actions";
+import swal from 'sweetalert';
 
 import { withStyles } from "@material-ui/core/styles";
 import { Fab, Typography } from "@material-ui/core";
@@ -100,6 +101,7 @@ class LoginForm extends Component {
               "aria-label": "Description"
             }}
           />
+
           <div className={classes.checkbox}>
             <div className={classes.checkboxButton}>
               <div>
@@ -126,7 +128,8 @@ class LoginForm extends Component {
                         for (let i in err.response.data) {
                           error += `${err.response.data[i]} \r\n`;
                         }
-                        return alert(error);
+                        return swal(":(", error, "error");
+
                       });
                   }}
                 />
@@ -141,17 +144,20 @@ class LoginForm extends Component {
                 Log In
               </Fab>
             </div>
-            <div>
+              <div>
               <Typography className={classes.signin} component="caption">
                 Dont have an account?
                 <Link to="/register" className={classes.link}>
                   Sign Up
                 </Link>
               </Typography>
+              </div>
             </div>
-          </div>
+          <div>
+        </div>
         </form>
         {"Success" && this.state.error === "success"}
+        <button onClick={() => swal("Hello world!") }>Alert</button>
       </div>
     );
   }

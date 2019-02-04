@@ -9,6 +9,7 @@ import { withRouter } from "react-router-dom";
 import LocalApi from "./../../apis/local";
 import { connect } from "react-redux";
 import { getCurrentUser } from "./../../actions";
+import swal from 'sweetalert';
 
 class NewChallengeForm extends Component {
   state = { loading: false };
@@ -33,8 +34,17 @@ class NewChallengeForm extends Component {
     }
 
     this.setState({ loading: true });
-    await LocalApi.post("/challenges/upload", fd);
-    history.push("/challenges");
+    await LocalApi.post("/challenges/upload", fd)
+    .then(res => {
+      // Hide button, and remove alert box after 2s
+      swal("Success", "File uploaded!", "success", {
+        button: false,
+        timer: 2000
+      });
+      // Redirect after 2s
+      setTimeout(() => history.push("/challenges"), 2000);
+    })
+    .catch(error => swal(":(", error, "error"))
   };
 
   render() {
