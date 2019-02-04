@@ -157,7 +157,6 @@ class LoginForm extends Component {
         </div>
         </form>
         {"Success" && this.state.error === "success"}
-        <button onClick={() => swal("Hello world!") }>Alert</button>
       </div>
     );
   }

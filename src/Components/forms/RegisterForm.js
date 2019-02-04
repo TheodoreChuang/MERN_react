@@ -7,9 +7,11 @@ import { setAuthToken } from "./../../actions";
 import CustomizedDialogDemo from "./../PopUp";
 import AuthInput from "./fields/AuthInput";
 import Checkbox from "./fields/CheckboxField";
+import { withRouter } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core/styles";
 import { Fab, Typography } from "@material-ui/core/";
+import swal from 'sweetalert';
 
 const styles = theme => ({
   body: {
@@ -59,7 +61,8 @@ class RegisterForm extends Component {
       nickname,
       email,
       password,
-      terms_conditions
+      terms_conditions,
+      history
     } = formValues;
     const { setAuthToken } = this.props;
 
@@ -74,10 +77,15 @@ class RegisterForm extends Component {
       .then(response => {
         //acquring token
         setAuthToken(response.data.token);
-        //redirect
-        this.props.history.push("/");
+        // Alert box and redirect
+        swal("Success", "Registered!", "success", {
+          button: false,
+          timer: 2000
+        });
+        // Redirect after 2s
+        setTimeout(() => history.push("/"), 2000);
       })
-      .catch(err => console.log(err));
+      .catch(error => swal(":(", error, "error"))
   };
 
   render() {
@@ -239,4 +247,4 @@ export default connect(
   {
     setAuthToken
   }
-)(WrappedRegisterForm);
+)(withRouter(WrappedRegisterForm));
