@@ -56,7 +56,7 @@ class NewsFeedPage extends Component {
                     nickname={sub.submission_user_nickname}
                     profile_image={sub.submission_user_profile_image}
                     title={sub.submission_title}
-                    yt_id={sub.submission_yt_id}
+                    video_url={sub.submission_video_url}
                     description={sub.submission_description}
                     date_created={sub.submission_createdAt}
                   />

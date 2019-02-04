@@ -56,7 +56,6 @@ const styles = theme => ({
   }
 });
 
-
 class ChallengeCard extends Component {
   state = {
     expanded: false,
@@ -76,12 +75,12 @@ class ChallengeCard extends Component {
   };
 
   // Function to parse raw date data from database to a readable format
-  dateParser = (string) => {
+  dateParser = string => {
     const ms = Date.parse(string);
     const formattedDate = moment(ms).format("DD MMM, YYYY");
-    
+
     return formattedDate;
-  }
+  };
 
   render() {
     const { anchorEl } = this.state;
@@ -97,7 +96,7 @@ class ChallengeCard extends Component {
       nickname,
       profile_image,
       title,
-      yt_id,
+      video_url,
       description,
       date_created,
       hideMoreDetail,
@@ -137,7 +136,7 @@ class ChallengeCard extends Component {
         <Card className={`${classes.card} custom`}>
           <CardHeader
             avatar={
-              <Avatar 
+              <Avatar
                 component={Link}
                 to={`/profile/${user_id}`}
                 aria-label="avatar"
@@ -163,7 +162,7 @@ class ChallengeCard extends Component {
           <CardContent>
             <Typography component="p">{title}</Typography>
           </CardContent>
-            <VideoPlayer url={yt_id} />
+          <VideoPlayer url={video_url} />
           <CardContent>
             <Typography component="p">{description}</Typography>
           </CardContent>

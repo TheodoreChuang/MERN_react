@@ -21,13 +21,18 @@ import NotFoundPage from "./pages/NotFoundPage";
 
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import theme from "./theme";
-import WebFont from 'webfontloader';
+import { withStyles } from "@material-ui/core/styles";
+import WebFont from "webfontloader";
 
 // Module to help import google fonts
 WebFont.load({
   google: {
-    families: ['Muli', 'sans-serif']
+    families: ["Muli", "sans-serif"]
   }
+});
+
+const styles = theme => ({
+  root: { margin: "-9px" }
 });
 
 class App extends Component {
@@ -41,8 +46,9 @@ class App extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
-      <div>
+      <div className={classes.root}>
         <MuiThemeProvider theme={theme}>
           <BrowserRouter>
             <div>
@@ -57,13 +63,13 @@ class App extends Component {
                 />
                 <Route exact path="/" component={NewsFeedPage} />
                 <Route exact path="/challenges" component={ChallengeFeedPage} />
-                <Route exact path="/profile/:id" component={ProfilePage} />
                 <Route exact path="/challenges/:id" component={ChallengePage} />
                 <Route
                 exact
                 path="/resetpassword/:token"
                 component={ResetPasswordPage}
               />
+                <Route exact path="/profile/:id" component={ProfilePage} />
                 <PrivateRoute
                   exact
                   path="/profile"
@@ -75,6 +81,18 @@ class App extends Component {
                   path="/updateinfo"
                   component={UpdateProfileInfoPage}
                 />
+                <PrivateRoute
+                  exact
+                  path="/resetpassword/:token"
+                  component={ResetPasswordPage}
+                />
+                {/* TODO
+                 <PrivateRoute
+                  exact
+                  path="/changepassword"
+                  component={}
+                />
+                */}
                 <PrivateRoute
                   exact
                   path="/newchallenge"
@@ -102,9 +120,11 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
+const Wrapped = connect(
   mapStateToProps,
   {
     getCurrentUser
   }
 )(App);
+
+export default withStyles(styles)(Wrapped);
