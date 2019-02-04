@@ -4,22 +4,24 @@ import ProfileInfoCard from "../cards/ProfileInfoCard";
 import ChallengeCard from "./../cards/ChallengeCard";
 import LocalApi from "./../../apis/local";
 
-import "./../App.css";
+import { Grid, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 
 const styles = theme => ({
   container: {
-    backgroundColor: theme.palette.background.paper,
-    flexGrow: 1
+    backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-white-abstract.jpg)`,
+    backgroundRepeat: "repeat",
+    backgroundSize: "contain",
+    backgroundAttachment: "fixed",
+    boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.90)"
   },
   cardContainer: {
     margin: "30px"
   },
   typography: {
     textAlign: "center",
-    margin: "30px"
+    marginTop: "30px",
+    color: "grey"
   }
 });
 

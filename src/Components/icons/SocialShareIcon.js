@@ -21,7 +21,7 @@ function getModalStyle() {
 const styles = theme => ({
   modal: {
     position: "absolute",
-    width: theme.spacing.unit * 50,
+    width: theme.spacing.unit * 30,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     outline: "none",

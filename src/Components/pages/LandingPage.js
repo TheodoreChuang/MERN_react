@@ -20,6 +20,9 @@ const styles = theme => ({
     backgroundPosition: "center center",
     backgroundSize: "cover"
   },
+  logo: {
+    marginTop: "60px"
+  },
   font: {
     color: "white"
   },
@@ -31,7 +34,7 @@ const styles = theme => ({
   },
   link: {
     margin: theme.spacing.unit,
-    color: "white",
+    color: theme.palette.primary.main,
     textDecoration: "none"
   }
 });
@@ -42,9 +45,18 @@ class LandingPage extends Component {
 
     return (
       <div className={classes.container}>
-        <Typography className={classes.font} component="h1" variant="h3">
-          oneup
-        </Typography>
+        <div className={classes.logo}>
+          <img
+            src="/images/logo.png"
+            height="50px"
+            width="50px"
+            alt="1Up Logo"
+          />
+          <Typography className={classes.font} component="h1" variant="h4">
+            oneup
+          </Typography>
+        </div>
+
         <Typography className={classes.font} component="h4">
           Create challenges, share them with your friends
           <div> and just have fun!</div>

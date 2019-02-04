@@ -152,7 +152,12 @@ class NavBar extends Component {
             </IconButton>
             {/* <div className={classes.grow} />
             <div className={classes.sectionDesktop} /> */}
-            <img src="/logo.png" height="20px" width="20px" padding="100px" />
+            <img
+              src="/images/logo.png"
+              height="20px"
+              width="20px"
+              padding="100px"
+            />
 
             {/* submissions feed button */}
             <div

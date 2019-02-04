@@ -57,7 +57,7 @@ class SubmissionForm extends Component {
         </div>
         <div>
           <Button style={{ textTransform: "none" }} type="submit">
-            Join Challenge
+            Join
           </Button>
         </div>
         <div>{this.state.loading === true && <Loader />}</div>

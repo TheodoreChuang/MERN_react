@@ -42,3 +42,15 @@ export const updateCurrentUser = formValues => {
     });
   };
 };
+
+// update user profile image
+export const updateCurrentUserAvatar = formData => {
+  return async (dispatch, getState) => {
+    const response = await LocalApi.post("/profile", formData);
+
+    dispatch({
+      type: "UPDATE_USER",
+      payload: response.data
+    });
+  };
+};

@@ -46,7 +46,7 @@ const styles = theme => ({
   },
   link: {
     margin: theme.spacing.unit,
-    color: "white",
+    color: theme.palette.primary.main,
     textDecoration: "none"
   }
 });
@@ -172,7 +172,7 @@ class RegisterForm extends Component {
                 type="submit"
                 variant="extended"
                 color="primary"
-                aria-label="Add"
+                aria-label="Register"
                 className={classes.button}
               >
                 Register

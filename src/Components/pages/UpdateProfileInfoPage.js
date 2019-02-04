@@ -1,20 +1,62 @@
 import React, { Component } from "react";
-import UpdateProfileInfoForm from "./../forms/UpdateProfileInfoForm";
 import NavBar from "../NavBar";
+import AvatarUpload from "./../forms/fields/AvatarUpload";
+import UpdateProfileInfoForm from "./../forms/UpdateProfileInfoForm";
+
+import { Typography, Grid } from "@material-ui/core/";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+  container: {
+    backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-white-abstract.jpg)`,
+    backgroundRepeat: "repeat",
+    backgroundSize: "contain",
+    backgroundAttachment: "fixed",
+    boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.90)"
+  },
+  title: {
+    margin: "30px 0px 10px 0px",
+    textAlign: "center"
+  },
+  gridItem: {
+    margin: "20px"
+  }
+});
 
 class UpdateProfileInfoPage extends Component {
-
   render() {
-    const { match } = this.props;
-    console.log("rendered");
+    const { match, classes } = this.props;
+
     return (
       <div>
         <NavBar {...this.props} />
-        {/* <h1> Update Profile Information </h1> */}
-        <UpdateProfileInfoForm match={match} />
+        <div className={classes.container}>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item xs={12} md={8}>
+              <div className={classes.title}>
+                <Typography variant="h4" gutterBottom>
+                  Update Profile Information
+                </Typography>
+              </div>
+
+              <div className={classes.gridItem}>
+                <AvatarUpload />
+              </div>
+
+              <div className={classes.gridItem}>
+                <UpdateProfileInfoForm match={match} />
+              </div>
+            </Grid>
+          </Grid>
+        </div>
       </div>
     );
   }
 }
 
-export default UpdateProfileInfoPage;
+export default withStyles(styles)(UpdateProfileInfoPage);

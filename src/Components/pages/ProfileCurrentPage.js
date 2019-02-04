@@ -12,15 +12,19 @@ import Grid from "@material-ui/core/Grid";
 
 const styles = theme => ({
   container: {
-    backgroundColor: theme.palette.background.paper,
-    flexGrow: 1
+    backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-white-abstract.jpg)`,
+    backgroundRepeat: "repeat",
+    backgroundSize: "contain",
+    backgroundAttachment: "fixed",
+    boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.90)"
   },
   cardContainer: {
     margin: "30px"
   },
   typography: {
     textAlign: "center",
-    margin: "30px"
+    margin: "30px",
+    color: "grey"
   }
 });
 
@@ -29,7 +33,6 @@ class ProfileCurrentPage extends Component {
     super(props);
     const { getCurrentUser } = this.props;
     getCurrentUser();
-    
   }
 
   render() {
@@ -45,7 +48,6 @@ class ProfileCurrentPage extends Component {
             justify="center"
             alignItems="center"
           >
-            <Grid item xs={0} md={2} />
             <Grid item xs={12} md={8}>
               <div className={classes.cardContainer}>
                 <ProfileInfoCard {...user} />
@@ -60,16 +62,13 @@ class ProfileCurrentPage extends Component {
               {user &&
                 user.submissions &&
                 user.submissions.map(submission => {
-                  console.log("63");
-                  console.log(user);
-                  console.log(submission);
                   return (
                     <div key={submission._id} className={classes.cardContainer}>
                       <ChallengeCard
                         user_sub_id={user}
                         type="submission"
                         id={submission.challengeId}
-                        sub_id={submission._id} //
+                        sub_id={submission._id}
                         user_id={user._id}
                         nickname="You"
                         profile_image={user.profile_image}
@@ -82,7 +81,6 @@ class ProfileCurrentPage extends Component {
                   );
                 })}
             </Grid>
-            <Grid item xs={0} md={2} />
           </Grid>
         </div>
       </div>
