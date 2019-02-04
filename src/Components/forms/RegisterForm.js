@@ -7,9 +7,14 @@ import { setAuthToken } from "./../../actions";
 import CustomizedDialogDemo from "./../PopUp";
 import AuthInput from "./fields/AuthInput";
 import Checkbox from "./fields/CheckboxField";
-
+import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import { Fab, Typography } from "@material-ui/core/";
+import swal from 'sweetalert';
+import PermIdentity from "@material-ui/icons/PermIdentity";
+import Email from "@material-ui/icons/Email";
+import LockOutlined from "@material-ui/icons/LockOutlined";
+import FaceOutlined from "@material-ui/icons/FaceOutlined";
 
 const styles = theme => ({
   body: {
@@ -59,7 +64,8 @@ class RegisterForm extends Component {
       nickname,
       email,
       password,
-      terms_conditions
+      terms_conditions,
+      history
     } = formValues;
     const { setAuthToken } = this.props;
 
@@ -74,10 +80,15 @@ class RegisterForm extends Component {
       .then(response => {
         //acquring token
         setAuthToken(response.data.token);
-        //redirect
-        this.props.history.push("/");
+        // Alert box and redirect
+        swal("Success!", "Registered!", "success", {
+          button: false,
+          timer: 2000
+        });
+        // Redirect after 2s
+        setTimeout(() => history.push("/"), 2000);
       })
-      .catch(err => console.log(err));
+      .catch(error => swal(":(", error, "error"))
   };
 
   render() {
@@ -90,6 +101,7 @@ class RegisterForm extends Component {
         <div className={classes.container} onSubmit={this.onRegisterFormSubmit}>
           <form onSubmit={handleSubmit(this.onRegisterFormSubmit)}>
             <Field
+              startAdornment={<PermIdentity />}
               name="first_name"
               component={AuthInput}
               placeholder="First Name"
@@ -101,6 +113,7 @@ class RegisterForm extends Component {
               }}
             />
             <Field
+              startAdornment={<PermIdentity />}
               name="last_name"
               component={AuthInput}
               placeholder="Last Name"
@@ -111,9 +124,10 @@ class RegisterForm extends Component {
               }}
             />
             <Field
+              startAdornment={<FaceOutlined />}
               name="nickname"
               component={AuthInput}
-              placeholder="Nick Name"
+              placeholder="Nickname"
               className={classes.input}
               fullWidth
               inputProps={{
@@ -121,6 +135,7 @@ class RegisterForm extends Component {
               }}
             />
             <Field
+              startAdornment={<Email />}
               name="email"
               component={AuthInput}
               placeholder="Email"
@@ -132,6 +147,7 @@ class RegisterForm extends Component {
               type="email"
             />
             <Field
+              startAdornment={<LockOutlined />}
               name="password"
               component={AuthInput}
               placeholder="Password"
@@ -239,4 +255,4 @@ export default connect(
   {
     setAuthToken
   }
-)(WrappedRegisterForm);
+)(withRouter(WrappedRegisterForm));

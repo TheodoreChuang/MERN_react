@@ -7,9 +7,12 @@ import FormDialog from "./FormDialog";
 import LocalApi from "../../apis/local";
 import { setAuthToken } from "./../../actions";
 import { getCurrentUser } from "./../../actions";
+import swal from 'sweetalert';
 
 import { withStyles } from "@material-ui/core/styles";
 import { Fab, Typography } from "@material-ui/core";
+import Email from "@material-ui/icons/Email";
+import LockOutlined from "@material-ui/icons/LockOutlined";
 
 const styles = theme => ({
   container: {
@@ -80,6 +83,7 @@ class LoginForm extends Component {
       <div className={classes.container} onSubmit={this.onRegisterFormSubmit}>
         <form onSubmit={handleSubmit(this.onLoginFormSubmit)}>
           <Field
+            startAdornment={<Email />}
             name="email"
             component={AuthInput}
             placeholder="Email"
@@ -90,6 +94,7 @@ class LoginForm extends Component {
             }}
           />
           <Field
+            startAdornment={<LockOutlined />}
             name="password"
             component={AuthInput}
             placeholder="Password"
@@ -100,6 +105,7 @@ class LoginForm extends Component {
               "aria-label": "Description"
             }}
           />
+
           <div className={classes.checkbox}>
             <div className={classes.checkboxButton}>
               <div>
@@ -118,15 +124,19 @@ class LoginForm extends Component {
                     })
                       .then(res => {
                         if (res.status === 200) {
-                          return alert("Email succesfully sent!");
-                        }
+                          return swal("Success!", "Email sent!", "success",
+                          {
+                            button: false,
+                            timer: 2000
+                          });
+                        };
                       })
                       .catch(err => {
                         let error = "";
                         for (let i in err.response.data) {
                           error += `${err.response.data[i]} \r\n`;
                         }
-                        return alert(error);
+                        return swal(":(", error, "error");
                       });
                   }}
                 />
@@ -141,15 +151,17 @@ class LoginForm extends Component {
                 Log In
               </Fab>
             </div>
-            <div>
+              <div>
               <Typography className={classes.signin} component="caption">
                 Dont have an account?
                 <Link to="/register" className={classes.link}>
                   Sign Up
                 </Link>
               </Typography>
+              </div>
             </div>
-          </div>
+          <div>
+        </div>
         </form>
         {"Success" && this.state.error === "success"}
       </div>

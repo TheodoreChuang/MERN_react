@@ -20,6 +20,7 @@ import red from "@material-ui/core/colors/red";
 import { MoreVert, Favorite, Delete, Share } from "@material-ui/icons";
 import "./ChallengeCard.css";
 import moment from "moment";
+import swal from 'sweetalert';
 
 const styles = theme => ({
   card: {
@@ -73,6 +74,7 @@ class ChallengeCard extends Component {
     this.setState({ anchorEl: null });
   };
 
+  // Function to parse raw date data from database to a readable format
   dateParser = string => {
     const ms = Date.parse(string);
     const formattedDate = moment(ms).format("DD MMM, YYYY");
@@ -175,22 +177,37 @@ class ChallengeCard extends Component {
             {/* Conditional rendering based on type of card */}
             {/* for challenges */}
             {type === "challenge" && currentUser._id === user_id ? (
-              <IconButton
-                aria-label="Delete"
-                onClick={() => {
-                  const r = window.confirm(
-                    "Are you sure you want to delete this challenge?"
-                  );
-
-                  if (r === true) {
-                    LocalApi.delete(`/challenges/${id}`)
-                      .then(res => window.location.reload())
-                      .catch(err => alert(err));
+            <IconButton aria-label="Delete"
+              onClick={() => {
+                swal({
+                  title: "Are you sure?",
+                  text: "Once deleted, this challenge and any associated submissions will be deleted.",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                    LocalApi.delete(`/challenges/submissions/${id}`)
+                    .then(res => {
+                      swal("The challenge has been deleted!", {
+                        icon: "success",
+                        button: false,
+                        timer: 2000
+                    });
+                    setTimeout(() => window.location.reload());
+                  })
+                    .catch(error => swal(":(", error, "error"));
+                    
+                  } else {
+                    swal("Your challenge is safe!");
                   }
-                }}
-              >
-                <Delete style={{ marginTop: "-5px" }} />
-              </IconButton>
+                });
+              }}
+            >
+              <Delete 
+              style={{ marginTop: "-5px" }} />
+            </IconButton>
             ) : null}
           </CardActions>
         </Card>
