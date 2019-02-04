@@ -12,15 +12,25 @@ import Grid from "@material-ui/core/Grid";
 
 const styles = theme => ({
   container: {
-    backgroundColor: theme.palette.background.paper,
-    flexGrow: 1
+    minHeight: "100vh",
+    backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-white-abstract.jpg)`,
+    backgroundRepeat: "repeat",
+    backgroundSize: "contain",
+    backgroundAttachment: "fixed",
+    boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.90)"
   },
   cardContainer: {
     margin: "30px"
   },
   typography: {
     textAlign: "center",
-    margin: "30px"
+    margin: "30px",
+    color: "grey"
+  },
+  typographyBG: {
+    backgroundColor: "rgba(255, 255, 255, 0.30)",
+    borderRadius: "40%",
+    padding: theme.spacing.unit * 2
   }
 });
 
@@ -44,16 +54,17 @@ class ProfileCurrentPage extends Component {
             justify="center"
             alignItems="center"
           >
-            <Grid item xs={0} md={2} />
             <Grid item xs={12} md={8}>
               <div className={classes.cardContainer}>
                 <ProfileInfoCard {...user} />
               </div>
 
               <Typography className={classes.typography} variant="h5">
-                completed{" "}
-                {(user && user.submissions && user.submissions.length) || 0}{" "}
-                challenges
+                <span className={classes.typographyBG}>
+                  completed{" "}
+                  {(user && user.submissions && user.submissions.length) || 0}{" "}
+                  challenges
+                </span>
               </Typography>
 
               {user &&
@@ -78,7 +89,6 @@ class ProfileCurrentPage extends Component {
                   );
                 })}
             </Grid>
-            <Grid item xs={0} md={2} />
           </Grid>
         </div>
       </div>

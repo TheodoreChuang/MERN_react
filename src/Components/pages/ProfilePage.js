@@ -9,17 +9,25 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   container: {
-    backgroundColor: theme.palette.background.paper,
-    margin: "0px"
+    minHeight: "100vh",
+    backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-white-abstract.jpg)`,
+    backgroundRepeat: "repeat",
+    backgroundSize: "contain",
+    backgroundAttachment: "fixed",
+    boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.90)"
   },
   cardContainer: {
-    // marginTop: "30px"
-    margin: "0px"
+    margin: "30px"
   },
   typography: {
     textAlign: "center",
     marginTop: "30px",
     color: "grey"
+  },
+  typographyBG: {
+    backgroundColor: "rgba(255, 255, 255, 0.30)",
+    borderRadius: "40%",
+    padding: theme.spacing.unit * 2
   }
 });
 
@@ -50,14 +58,21 @@ class ProfilePage extends Component {
       <div>
         <NavBar {...this.props} />
         <div className={classes.container}>
-          <Grid container direction="row" justify="center" alignItems="center">
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
             <Grid item xs={12} md={8}>
               <div className={classes.cardContainer}>
                 <ProfileInfoCard {...user} />
               </div>
 
               <Typography className={classes.typography} variant="h5">
-                completed {(user && user.submissions.length) || 0} challenges
+                <span className={classes.typographyBG}>
+                  completed {(user && user.submissions.length) || 0} challenges
+                </span>
               </Typography>
 
               {user &&

@@ -10,7 +10,7 @@ import {
 
 const styles = theme => ({
   card: {
-    minWidth: 235,
+    minWidth: 260,
     maxWidth: 560,
     padding: "20px"
   },
