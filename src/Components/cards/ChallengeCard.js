@@ -18,9 +18,13 @@ import {
 } from "@material-ui/core/";
 import red from "@material-ui/core/colors/red";
 import { MoreVert, Favorite, DeleteForever, Share } from "@material-ui/icons";
+import "./ChallengeCard.css";
+import moment from "moment";
 
 const styles = theme => ({
   card: {
+    // width: "375px",
+    // height: "auto"
     minWidth: 275,
     maxWidth: 600
   },
@@ -51,6 +55,7 @@ const styles = theme => ({
   }
 });
 
+
 class ChallengeCard extends Component {
   state = {
     expanded: false,
@@ -68,6 +73,13 @@ class ChallengeCard extends Component {
   handleMenuClose = () => {
     this.setState({ anchorEl: null });
   };
+
+  dateParser = (string) => {
+    const ms = Date.parse(string);
+    const formattedDate = moment(ms).format("DD MMM, YYYY");
+    
+    return formattedDate;
+  }
 
   render() {
     const { anchorEl } = this.state;
@@ -120,10 +132,10 @@ class ChallengeCard extends Component {
 
     return (
       <div>
-        <Card className={classes.card}>
+        <Card className={`${classes.card} custom`}>
           <CardHeader
             avatar={
-              <Avatar
+              <Avatar 
                 component={Link}
                 to={`/profile/${user_id}`}
                 aria-label="avatar"
@@ -144,12 +156,12 @@ class ChallengeCard extends Component {
               </IconButton>
             }
             title={nickname}
-            subheader={date_created}
+            subheader={`Created: ${this.dateParser(date_created)}`}
           />
           <CardContent>
             <Typography component="p">{title}</Typography>
           </CardContent>
-          <VideoPlayer url={yt_id} />
+            <VideoPlayer url={yt_id} />
           <CardContent>
             <Typography component="p">{description}</Typography>
           </CardContent>
@@ -182,21 +194,6 @@ class ChallengeCard extends Component {
             </IconButton>
             ) : null}
           </CardActions>
-
-
-          {/* for submissions */}
-          {/* {type === "submission" && currentUser._id === user_id ?
-          <button onClick={ () => {
-            const r = window.confirm("Are you sure you want to delete this challenge?");
-            
-            if (r === true) {
-              LocalApi.delete(`/challenges/${id}/submission/${sub_id}`)
-              .then (res => window.location.reload())
-              .catch (err => alert(err));
-              
-            }
-          }}>Sub Delete</button>
-          : null } */}
         </Card>
         {renderMenu}
       </div>

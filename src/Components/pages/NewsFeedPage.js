@@ -10,8 +10,12 @@ import { withStyles } from "@material-ui/core/styles";
 const styles = theme => ({
   container: {
     backgroundColor: theme.palette.background.paper,
-    flexGrow: 1,
-    margin: "0px"
+    // flexGrow: 1,
+    // margin: "0px",
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    border: "1px solid grey"
   },
   cardContainer: {
     marginTop: "20px"
@@ -35,8 +39,8 @@ class NewsFeedPage extends Component {
       <div>
         <NavBar {...this.props} />
         <div className={classes.container}>
-          <Grid container direction="row" justify="center" alignItems="center">
-            <Grid item xs={12} md={8}>
+          {/* <Grid container direction="row" justify="center" alignItems="center">
+            <Grid item xs={12} md={8}> */}
               {/* submissions feed */}
               {submissions &&
                 submissions.map(function(sub) {
@@ -61,8 +65,8 @@ class NewsFeedPage extends Component {
                     </div>
                   );
                 })}
-            </Grid>
-          </Grid>
+            {/* </Grid>
+          </Grid> */}
         </div>
       </div>
     );
