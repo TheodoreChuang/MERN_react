@@ -20,6 +20,16 @@ const styles = theme => ({
   },
   gridItem: {
     margin: "20px"
+  },
+  typography: {
+    textAlign: "center",
+    margin: "30px 0 10px 0",
+    color: "grey"
+  },
+  typographyBG: {
+    backgroundColor: "rgba(255, 255, 255, 0.30)",
+    borderRadius: "40%",
+    padding: theme.spacing.unit * 2
   }
 });
 
@@ -39,8 +49,14 @@ class UpdateProfileInfoPage extends Component {
           >
             <Grid item xs={12} md={8}>
               <div className={classes.title}>
-                <Typography variant="h4" gutterBottom>
-                  Update Profile Information
+                <Typography
+                  variant="h4"
+                  gutterBottom
+                  className={classes.typography}
+                >
+                  <span className={classes.typographyBG}>
+                    Update Your Profile
+                  </span>
                 </Typography>
               </div>
 

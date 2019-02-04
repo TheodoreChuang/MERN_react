@@ -152,12 +152,12 @@ class NavBar extends Component {
             </IconButton>
             {/* <div className={classes.grow} />
             <div className={classes.sectionDesktop} /> */}
-            <img
+            {/* <img
               src="/images/logo.png"
               height="20px"
               width="20px"
               padding="100px"
-            />
+            /> */}
 
             {/* submissions feed button */}
             <div
@@ -203,13 +203,13 @@ class NavBar extends Component {
               ) : null}
 
               {/* Profile OR Profile Edit - only available if logged in */}
-              {token && !currentPath.includes("profile") ? (
+              {token && !currentPath.match(/^\/profile$/) ? (
                 <IconButton color="inherit" component={Link} to="/profile">
                   <AccountCircle />
                 </IconButton>
               ) : null}
 
-              {token && currentPath.includes("profile") ? (
+              {token && currentPath.match(/^\/profile$/) ? (
                 <IconButton color="inherit" component={Link} to="/updateinfo">
                   <Edit />
                 </IconButton>
