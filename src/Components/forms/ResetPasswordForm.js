@@ -6,6 +6,13 @@ import Input from "./fields/Input";
 import Button from '@material-ui/core/Button';
 import swal from 'sweetalert';
 
+const styles = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh"
+}
+
 class ResetPasswordForm extends Component {
     state = { error: "" }
 
@@ -37,30 +44,31 @@ class ResetPasswordForm extends Component {
             });
     };
     
-    async componentDidMount() {
-        await LocalApi.get(`/resetpassword/${this.props.match.params.token}`)
-        .then(res => {
-            if (res.status === 200) {
-                return this.setState({ error: false });
-            }
-        })
-        .catch(err => {
-            this.setState({ error: true });
-            let error = "";
-            for(let i in err.response.data) {
-              error += `${err.response.data[i]} \r\n`;
-            }
-            return swal(":(", error, "error");
-          })
-    }
+    // async componentDidMount() {
+    //     await LocalApi.get(`/resetpassword/${this.props.match.params.token}`)
+    //     .then(res => {
+    //         if (res.status === 200) {
+    //             return this.setState({ error: false });
+    //         }
+    //     })
+    //     .catch(err => {
+    //         this.setState({ error: true });
+    //         let error = "";
+    //         for(let i in err.response.data) {
+    //           error += `${err.response.data[i]} \r\n`;
+    //         }
+    //         return swal(":(", error, "error");
+    //       })
+    // }
 
     render() {
         console.log("rendered");
         const { handleSubmit } = this.props;
 
         return (
-            <div>
-                {this.state.error === false && <form onSubmit= {handleSubmit(this.onFormSubmit)}>
+            <div style={styles}>
+                {/* {this.state.error === false &&  */}
+                <form onSubmit= {handleSubmit(this.onFormSubmit)}>
                     <div>
                         <Field
                         placeholder="new password"
