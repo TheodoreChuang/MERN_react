@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import Input from "./fields/Input";
 import Button from '@material-ui/core/Button';
 import swal from 'sweetalert';
+import Lock from "@material-ui/icons/Lock";
 
 const styles = {
     display: "flex",
@@ -43,23 +44,6 @@ class ResetPasswordForm extends Component {
                 return swal(":(", err, "error");
             });
     };
-    
-    // async componentDidMount() {
-    //     await LocalApi.get(`/resetpassword/${this.props.match.params.token}`)
-    //     .then(res => {
-    //         if (res.status === 200) {
-    //             return this.setState({ error: false });
-    //         }
-    //     })
-    //     .catch(err => {
-    //         this.setState({ error: true });
-    //         let error = "";
-    //         for(let i in err.response.data) {
-    //           error += `${err.response.data[i]} \r\n`;
-    //         }
-    //         return swal(":(", error, "error");
-    //       })
-    // }
 
     render() {
         console.log("rendered");
@@ -67,11 +51,12 @@ class ResetPasswordForm extends Component {
 
         return (
             <div style={styles}>
-                {/* {this.state.error === false &&  */}
+                {this.state.error === false && 
                 <form onSubmit= {handleSubmit(this.onFormSubmit)}>
                     <div>
                         <Field
-                        placeholder="new password"
+                        startAdornment={<Lock />}
+                        placeholder= "new password"
                         name="password"
                         component={Input}
                         type="password"
@@ -79,6 +64,7 @@ class ResetPasswordForm extends Component {
                     </div>
                     <div>
                         <Field
+                        startAdornment={<Lock />}
                         placeholder="confirm new password"
                         name="confirm_password"
                         component={Input}
