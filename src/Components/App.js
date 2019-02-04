@@ -21,6 +21,16 @@ import NotFoundPage from "./pages/NotFoundPage";
 
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import theme from "./theme";
+import { connect } from "react-redux";
+import { getCurrentUser } from "./../actions";
+import WebFont from 'webfontloader';
+
+// Module to help import google fonts
+WebFont.load({
+  google: {
+    families: ['Muli', 'sans-serif']
+  }
+});
 
 class App extends Component {
   componentDidMount() {
@@ -51,7 +61,11 @@ class App extends Component {
                 <Route exact path="/challenges" component={ChallengeFeedPage} />
                 <Route exact path="/profile/:id" component={ProfilePage} />
                 <Route exact path="/challenges/:id" component={ChallengePage} />
-
+                <PrivateRoute
+                exact
+                path="/resetpassword/:token"
+                component={ResetPasswordPage}
+              />
                 <PrivateRoute
                   exact
                   path="/profile"
