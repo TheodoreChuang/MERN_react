@@ -42,6 +42,7 @@ class ResetPasswordForm extends Component {
             }
         })
         .catch(err => {
+            console.log(this.props.match.params);   
             this.setState({ error: true });
             let error = "";
             for(let i in err.response.data) {
