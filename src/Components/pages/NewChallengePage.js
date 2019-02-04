@@ -9,7 +9,7 @@ class NewChallengePage extends Component {
       <div>
         <NavBar {...this.props} />
         <div className="container">
-          <h1> Create New Challenge </h1>
+          <h2> New Challenge </h2>
           <NewChallengeForm />
         </div>
       </div>

@@ -9,8 +9,6 @@ import { withRouter } from "react-router-dom";
 import LocalApi from "./../../apis/local";
 import { connect } from "react-redux";
 import { getCurrentUser } from "./../../actions";
-import { CheckCircle } from "@material-ui/icons";
-
 
 class NewChallengeForm extends Component {
     state = { loading: false }
@@ -84,13 +82,14 @@ class NewChallengeForm extends Component {
                         name="video"
                         component={Input}
                         type="file"
+                        id="upload-file"
                         />
                     </div>
                     <div>
                         <Button
                         style={{textTransform: "none"}}
                         type="submit">
-                        Upload Challenge
+                        Upload
                         </Button>
                         {/* <CheckCircle /> */}
                     </div>

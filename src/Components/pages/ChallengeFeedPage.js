@@ -12,7 +12,11 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   container: {
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    border: "1px solid grey"
   },
   cardContainer: {
     marginTop: "20px"
@@ -36,30 +40,26 @@ class ChallengeFeedPage extends Component {
       <div>
         <NavBar {...this.props} />
         <div className={classes.container}>
-          <Grid container direction="row" justify="center" alignItems="center">
-            <Grid item xs={12} md={8}>
-              {/* challenges feed */}
-              {challenges &&
-                challenges.map(function(challenge) {
-                  console.log(challenges);
-                  return (
-                    <div className={classes.cardContainer} key={challenge._id}>
-                      <ChallengeCard
-                          type="challenge"
-                        id={challenge._id}
-                        user_id={challenge.user.creator_id}
-                        nickname={challenge.user.nickname}
-                        profile_image={challenge.user.profile_image}
-                        title={challenge.title}
-                        yt_id={challenge.yt_id}
-                        description={challenge.description}
-                        date_created={challenge.createdAt}
-                      />
-                    </div>
-                  );
-                })}
-            </Grid>
-          </Grid>
+          {/* challenges feed */}
+          {challenges &&
+            challenges.map(function(challenge) {
+              console.log(challenges);
+              return (
+                <div className={classes.cardContainer} key={challenge._id}>
+                  <ChallengeCard
+                      type="challenge"
+                    id={challenge._id}
+                    user_id={challenge.user.creator_id}
+                    nickname={challenge.user.nickname}
+                    profile_image={challenge.user.profile_image}
+                    title={challenge.title}
+                    yt_id={challenge.yt_id}
+                    description={challenge.description}
+                    date_created={challenge.createdAt}
+                  />
+                </div>
+              );
+            })}
         </div>
       </div>
     );

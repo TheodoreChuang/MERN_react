@@ -17,6 +17,14 @@ import UpdateProfileInfoPage from "./pages/UpdateProfileInfoPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { connect } from "react-redux";
 import { getCurrentUser } from "./../actions";
+import WebFont from 'webfontloader';
+
+// Module to help import google fonts
+WebFont.load({
+  google: {
+    families: ['Muli', 'sans-serif']
+  }
+});
 
 class App extends Component {
   
@@ -32,7 +40,7 @@ class App extends Component {
   render() {
 
     return (
-      <div>
+      <div >
         <BrowserRouter>
           <div>
             <Switch>

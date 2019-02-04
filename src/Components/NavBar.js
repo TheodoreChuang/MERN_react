@@ -171,6 +171,7 @@ class NavBar extends Component {
               }}
             >
               <IconButton
+                disableRipple
                 color="inherit"
                 component={Link}
                 to="/"
@@ -178,11 +179,12 @@ class NavBar extends Component {
                   backgroundColor: "transparent"
                 }}
               >
-                newsfeed
+                Newsfeed
               </IconButton>
 
               {/* challenges feed button */}
               <IconButton
+                isableRipple
                 color="inherit"
                 component={Link}
                 to="/challenges"
@@ -190,8 +192,9 @@ class NavBar extends Component {
                   backgroundColor: "transparent"
                 }}
               >
-                challenges
+                Challenges
               </IconButton>
+
             </div>
             <div className={classes.grow} />
 
