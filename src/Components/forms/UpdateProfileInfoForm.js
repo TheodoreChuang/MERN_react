@@ -3,9 +3,15 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import Input from "./fields/Input";
 import { updateCurrentUser } from "./../../actions";
-
 import { withStyles } from "@material-ui/core/styles";
 import { Card, Fab, Typography } from "@material-ui/core/";
+import PermIdentity from "@material-ui/icons/PermIdentity";
+import Email from "@material-ui/icons/Email";
+import MyLocationOutlined from "@material-ui/icons/MyLocationOutlined";
+import NaturePeopleOutlined from "@material-ui/icons/NaturePeopleOutlined";
+import ChildCareOutlined from "@material-ui/icons/ChildCareOutlined";
+import FaceOutlined from "@material-ui/icons/FaceOutlined";
+
 
 const styles = theme => ({
   body: {
@@ -72,6 +78,7 @@ class UpdateProfileInfoForm extends Component {
         <div className={classes.container} onSubmit={this.updateUserFormSubmit}>
           <form onSubmit={handleSubmit(this.updateUserFormSubmit.bind(this))}>
             <Field
+              startAdornment={<PermIdentity />}
               name="first_name"
               component={Input}
               placeholder="First Name"
@@ -83,6 +90,7 @@ class UpdateProfileInfoForm extends Component {
               }}
             />
             <Field
+              startAdornment={<PermIdentity />}
               name="last_name"
               component={Input}
               placeholder="Last Name"
@@ -93,6 +101,7 @@ class UpdateProfileInfoForm extends Component {
               }}
             />
             <Field
+              startAdornment={<FaceOutlined />}
               name="nickname"
               component={Input}
               placeholder="Nickname"
@@ -103,6 +112,7 @@ class UpdateProfileInfoForm extends Component {
               }}
             />
             <Field
+              startAdornment={<ChildCareOutlined />}
               name="age"
               component={Input}
               placeholder="Age"
@@ -113,6 +123,7 @@ class UpdateProfileInfoForm extends Component {
               }}
             />
             <Field
+              startAdornment={<MyLocationOutlined />}
               name="location"
               component={Input}
               placeholder="Location"
@@ -123,6 +134,7 @@ class UpdateProfileInfoForm extends Component {
               }}
             />
             <Field
+              startAdornment={<NaturePeopleOutlined />}
               name="bio"
               component={Input}
               id="outlined-textarea"

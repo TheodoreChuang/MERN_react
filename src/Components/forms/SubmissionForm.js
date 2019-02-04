@@ -6,6 +6,8 @@ import { withRouter } from "react-router-dom";
 import Loader from "./../Loader";
 import LocalApi from "./../../apis/local";
 import swal from 'sweetalert';
+import DescriptionOutlined from "@material-ui/icons/DescriptionOutlined";
+import GavelOutlined from "@material-ui/icons/GavelOutlined";
 
 class SubmissionForm extends Component {
   state = { loading: false };
@@ -47,6 +49,7 @@ class SubmissionForm extends Component {
       >
         <div>
           <Field
+            startAdornment={<GavelOutlined />}
             name="title"
             component={Input}
             placeholder="Title"
@@ -55,6 +58,7 @@ class SubmissionForm extends Component {
         </div>
         <div>
           <Field
+            startAdornment={<DescriptionOutlined />}
             name="description"
             component={Input}
             placeholder="Description of submission"

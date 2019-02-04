@@ -14,6 +14,7 @@ import swal from 'sweetalert';
 import PermIdentity from "@material-ui/icons/PermIdentity";
 import Email from "@material-ui/icons/Email";
 import LockOutlined from "@material-ui/icons/LockOutlined";
+import FaceOutlined from "@material-ui/icons/FaceOutlined";
 
 const styles = theme => ({
   body: {
@@ -123,7 +124,7 @@ class RegisterForm extends Component {
               }}
             />
             <Field
-              startAdornment={<PermIdentity />}
+              startAdornment={<FaceOutlined />}
               name="nickname"
               component={AuthInput}
               placeholder="Nickname"

@@ -10,6 +10,10 @@ import LocalApi from "./../../apis/local";
 import { connect } from "react-redux";
 import { getCurrentUser } from "./../../actions";
 import swal from 'sweetalert';
+import DescriptionOutlined from "@material-ui/icons/DescriptionOutlined";
+import GavelOutlined from "@material-ui/icons/GavelOutlined";
+import CalendarTodayOutlined from "@material-ui/icons/CalendarTodayOutlined";
+
 
 class NewChallengeForm extends Component {
   state = { loading: false };
@@ -58,6 +62,7 @@ class NewChallengeForm extends Component {
         >
           <div>
             <Field
+              startAdornment={<GavelOutlined />}
               name="title"
               component={Input}
               placeholder="Title of challenge"
@@ -66,6 +71,7 @@ class NewChallengeForm extends Component {
           </div>
           <div>
             <Field
+              startAdornment={<DescriptionOutlined />}
               name="description"
               component={Input}
               placeholder="Description of challenge"
@@ -82,7 +88,10 @@ class NewChallengeForm extends Component {
             />
           </div>
           <div>
-            <Field name="video" component={Input} type="file" />
+            <Field 
+              name="video" 
+              component={Input} 
+              type="file" />
           </div>
           <div>
             <Button style={{ textTransform: "none" }} type="submit">
