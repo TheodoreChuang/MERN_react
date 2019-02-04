@@ -9,6 +9,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   container: {
+    minHeight: "100vh",
     backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-white-abstract.jpg)`,
     backgroundRepeat: "repeat",
     backgroundSize: "contain",
@@ -22,6 +23,11 @@ const styles = theme => ({
     textAlign: "center",
     marginTop: "30px",
     color: "grey"
+  },
+  typographyBG: {
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    borderRadius: "40%",
+    padding: theme.spacing.unit * 2
   }
 });
 
@@ -64,7 +70,9 @@ class ProfilePage extends Component {
               </div>
 
               <Typography className={classes.typography} variant="h5">
-                completed {(user && user.submissions.length) || 0} challenges
+                <span className={classes.typographyBG}>
+                  completed {(user && user.submissions.length) || 0} challenges
+                </span>
               </Typography>
 
               {user &&

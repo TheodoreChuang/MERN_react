@@ -12,6 +12,7 @@ import Grid from "@material-ui/core/Grid";
 
 const styles = theme => ({
   container: {
+    minHeight: "100vh",
     backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-white-abstract.jpg)`,
     backgroundRepeat: "repeat",
     backgroundSize: "contain",
@@ -25,6 +26,11 @@ const styles = theme => ({
     textAlign: "center",
     margin: "30px",
     color: "grey"
+  },
+  typographyBG: {
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    borderRadius: "40%",
+    padding: theme.spacing.unit * 2
   }
 });
 
@@ -54,9 +60,11 @@ class ProfileCurrentPage extends Component {
               </div>
 
               <Typography className={classes.typography} variant="h5">
-                completed{" "}
-                {(user && user.submissions && user.submissions.length) || 0}{" "}
-                challenges
+                <span className={classes.typographyBG}>
+                  completed{" "}
+                  {(user && user.submissions && user.submissions.length) || 0}{" "}
+                  challenges
+                </span>
               </Typography>
 
               {user &&
