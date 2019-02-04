@@ -62,6 +62,11 @@ class App extends Component {
                 path="/profile"
                 component={ProfileCurrentPage}
               />
+              <PrivateRoute
+                exact
+                path="/resetpassword/:token"
+                component={ResetPasswordPage}
+              />
 
               <PrivateRoute
                 exact
