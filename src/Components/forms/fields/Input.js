@@ -2,17 +2,16 @@ import React, { Component } from "react";
 import Input from "@material-ui/core/Input";
 import { withStyles } from "@material-ui/core/styles";
 
-
 const styles = theme => ({
-  // container: {
-  //   display: "flex",
-  //   flexDirection: "column",
-  //   flexWrap: "wrap"
-  // },
-  // input: {
-  //   margin: theme.spacing.unit,
-  //   borderBottom: "2px solid white"
-  // }
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap"
+  },
+  input: {
+    margin: theme.spacing.unit,
+    borderBottom: "2px solid white"
+  }
 });
 
 class Inputs extends Component {
@@ -47,7 +46,6 @@ class Inputs extends Component {
     return (
       <div className={classes.container}>
         <Input
-          // startAdornment={<Lock />}
           {...other}
           {...otherInput}
           className={classes.input}

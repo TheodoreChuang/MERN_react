@@ -95,7 +95,7 @@ class UpdateProfileInfoForm extends Component {
             <Field
               name="nickname"
               component={Input}
-              placeholder="Nick Name"
+              placeholder="Nickname"
               className={classes.input}
               fullWidth
               inputProps={{

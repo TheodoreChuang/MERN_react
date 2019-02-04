@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import Input from "./fields/Input";
 import Button from '@material-ui/core/Button';
 import swal from 'sweetalert';
-import Lock from "@material-ui/icons/Lock";
+import LockOutlined from "@material-ui/icons/LockOutlined";
 
 const styles = {
     display: "flex",
@@ -55,7 +55,7 @@ class ResetPasswordForm extends Component {
                 <form onSubmit= {handleSubmit(this.onFormSubmit)}>
                     <div>
                         <Field
-                        startAdornment={<Lock />}
+                        startAdornment={<LockOutlined />}
                         placeholder= "new password"
                         name="password"
                         component={Input}
@@ -64,7 +64,7 @@ class ResetPasswordForm extends Component {
                     </div>
                     <div>
                         <Field
-                        startAdornment={<Lock />}
+                        startAdornment={<LockOutlined />}
                         placeholder="confirm new password"
                         name="confirm_password"
                         component={Input}

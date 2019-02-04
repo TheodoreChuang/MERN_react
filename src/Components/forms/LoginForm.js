@@ -11,6 +11,8 @@ import swal from 'sweetalert';
 
 import { withStyles } from "@material-ui/core/styles";
 import { Fab, Typography } from "@material-ui/core";
+import Email from "@material-ui/icons/Email";
+import LockOutlined from "@material-ui/icons/LockOutlined";
 
 const styles = theme => ({
   container: {
@@ -81,6 +83,7 @@ class LoginForm extends Component {
       <div className={classes.container} onSubmit={this.onRegisterFormSubmit}>
         <form onSubmit={handleSubmit(this.onLoginFormSubmit)}>
           <Field
+            startAdornment={<Email />}
             name="email"
             component={AuthInput}
             placeholder="Email"
@@ -91,6 +94,7 @@ class LoginForm extends Component {
             }}
           />
           <Field
+            startAdornment={<LockOutlined />}
             name="password"
             component={AuthInput}
             placeholder="Password"
