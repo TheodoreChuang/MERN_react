@@ -6,6 +6,7 @@ import AuthInput from "./fields/AuthInput";
 import FormDialog from "./FormDialog";
 import LocalApi from "../../apis/local";
 import { setAuthToken } from "./../../actions";
+import { getCurrentUser } from "./../../actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import { Fab, Typography } from "@material-ui/core";
@@ -57,7 +58,7 @@ class LoginForm extends Component {
   state = { error : "" }
     
     onLoginFormSubmit = (formValues) => {
-      const { history, setAuthToken } = this.props;
+      const { history, setAuthToken, getCurrentUser } = this.props;
       const { email, password } = formValues;
 
         LocalApi.post("/login", {email, password})
@@ -65,6 +66,7 @@ class LoginForm extends Component {
         .then (response => {
             setAuthToken(response.data.token);
             localStorage.setItem("token", response.data.token);
+            getCurrentUser();
             history.push("/");            
         })
         .catch(err => console.log(err));
@@ -175,6 +177,7 @@ const WrappedRegisterForm = reduxForm({
 export default connect(
   null,
   {
-    setAuthToken
+    setAuthToken,
+    getCurrentUser
   }
 )(withRouter(WrappedRegisterForm));
