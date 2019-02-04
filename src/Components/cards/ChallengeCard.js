@@ -55,7 +55,6 @@ const styles = theme => ({
   }
 });
 
-
 class ChallengeCard extends Component {
   state = {
     expanded: false,
@@ -74,12 +73,12 @@ class ChallengeCard extends Component {
     this.setState({ anchorEl: null });
   };
 
-  dateParser = (string) => {
+  dateParser = string => {
     const ms = Date.parse(string);
     const formattedDate = moment(ms).format("DD MMM, YYYY");
-    
+
     return formattedDate;
-  }
+  };
 
   render() {
     const { anchorEl } = this.state;
@@ -95,7 +94,7 @@ class ChallengeCard extends Component {
       nickname,
       profile_image,
       title,
-      yt_id,
+      video_url,
       description,
       date_created,
       hideMoreDetail,
@@ -135,7 +134,7 @@ class ChallengeCard extends Component {
         <Card className={`${classes.card} custom`}>
           <CardHeader
             avatar={
-              <Avatar 
+              <Avatar
                 component={Link}
                 to={`/profile/${user_id}`}
                 aria-label="avatar"
@@ -161,7 +160,7 @@ class ChallengeCard extends Component {
           <CardContent>
             <Typography component="p">{title}</Typography>
           </CardContent>
-            <VideoPlayer url={yt_id} />
+          <VideoPlayer url={video_url} />
           <CardContent>
             <Typography component="p">{description}</Typography>
           </CardContent>
@@ -176,22 +175,22 @@ class ChallengeCard extends Component {
             {/* Conditional rendering based on type of card */}
             {/* for challenges */}
             {type === "challenge" && currentUser._id === user_id ? (
-            <IconButton aria-label="Delete"
-              onClick={() => {
-                const r = window.confirm(
-                  "Are you sure you want to delete this challenge?"
-                );
+              <IconButton
+                aria-label="Delete"
+                onClick={() => {
+                  const r = window.confirm(
+                    "Are you sure you want to delete this challenge?"
+                  );
 
-                if (r === true) {
-                  LocalApi.delete(`/challenges/submissions/${id}`)
-                    .then(res => window.location.reload())
-                    .catch(err => alert(err));
-                }
-              }}
-            >
-              <Delete 
-              style={{ marginTop: "-5px" }} />
-            </IconButton>
+                  if (r === true) {
+                    LocalApi.delete(`/challenges/${id}`)
+                      .then(res => window.location.reload())
+                      .catch(err => alert(err));
+                  }
+                }}
+              >
+                <Delete style={{ marginTop: "-5px" }} />
+              </IconButton>
             ) : null}
           </CardActions>
         </Card>

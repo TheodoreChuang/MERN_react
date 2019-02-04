@@ -53,7 +53,7 @@ class ChallengeFeedPage extends Component {
                     nickname={challenge.user.nickname}
                     profile_image={challenge.user.profile_image}
                     title={challenge.title}
-                    yt_id={challenge.yt_id}
+                    video_url={challenge.video_url}
                     description={challenge.description}
                     date_created={challenge.createdAt}
                   />

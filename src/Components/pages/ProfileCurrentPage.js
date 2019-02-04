@@ -81,7 +81,7 @@ class ProfileCurrentPage extends Component {
                         nickname="You"
                         profile_image={user.profile_image}
                         title={submission.challengeTitle}
-                        yt_id={submission.yt_id}
+                        video_url={submission.video_url}
                         description={submission.description}
                         date_created={submission.createdAt}
                       />

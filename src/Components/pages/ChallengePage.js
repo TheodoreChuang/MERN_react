@@ -77,7 +77,7 @@ class ChallengePage extends Component {
                   nickname={challenge.user.nickname}
                   profile_image={challenge.user.profile_image}
                   title={challenge.title}
-                  yt_id={challenge.yt_id}
+                  video_url={challenge.video_url}
                   description={challenge.description}
                   date_created={challenge.createdAt}
                 />
@@ -94,7 +94,7 @@ class ChallengePage extends Component {
               {challenge &&
                 challenge.submissions.map(sub => {
                   return (
-                    <div key={sub.yt_id}>
+                    <div key={sub.video_url}>
                       <ChallengeCard
                         type="submission"
                         hideMoreDetail={true}
@@ -103,7 +103,7 @@ class ChallengePage extends Component {
                         user_id={sub.user.id}
                         profile_image={sub.user.profile_image}
                         title={sub.title}
-                        yt_id={sub.yt_id}
+                        video_url={sub.video_url}
                         description={sub.description}
                         date_created={sub.createdAt}
                       />
