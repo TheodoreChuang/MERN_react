@@ -75,6 +75,7 @@ class ChallengeCard extends Component {
     this.setState({ anchorEl: null });
   };
 
+  // Function to parse raw date data from database to a readable format
   dateParser = (string) => {
     const ms = Date.parse(string);
     const formattedDate = moment(ms).format("DD MMM, YYYY");
@@ -191,25 +192,18 @@ class ChallengeCard extends Component {
                     LocalApi.delete(`/challenges/submissions/${id}`)
                     .then(res => {
                       swal("The challenge has been deleted!", {
-                        icon: "success"
+                        icon: "success",
+                        button: false,
+                        timer: 2000
                     });
-                    window.location.reload();
+                    setTimeout(() => window.location.reload());
                   })
-                    .catch(err => swal(err))
+                    .catch(error => swal(":(", error, "error"));
                     
                   } else {
                     swal("Your challenge is safe!");
                   }
                 });
-                // const r = window.confirm(
-                //   "Are you sure you want to delete this challenge?"
-                // );
-
-                // if (r === true) {
-                //   LocalApi.delete(`/challenges/submissions/${id}`)
-                //     .then(res => window.location.reload())
-                //     .catch(err => alert(err));
-                // }
               }}
             >
               <Delete 
