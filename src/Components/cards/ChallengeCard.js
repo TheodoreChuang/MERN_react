@@ -7,6 +7,7 @@ import VideoPlayer from "./../VideoPlayer";
 import moment from "moment";
 import swal from "sweetalert";
 import { randomEmojis } from "./../../data/emoji";
+import "./ChallengeCard.css";
 
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -23,12 +24,17 @@ import {
 import { MoreVert, Favorite, Delete } from "@material-ui/icons";
 import "./ChallengeCard.css";
 
+const size = {
+  iPad: 768
+}
+
 const styles = theme => ({
   card: {
     // width: "375px",
     // height: "auto"
-    minWidth: 275,
-    maxWidth: 600
+    // minWidth: 275,
+    // maxWidth: 600
+    // width: "80vw",
   },
   header: {
     borderBottom: "1px solid hsl(212, 12%, 72%)"
@@ -141,7 +147,7 @@ class ChallengeCard extends Component {
 
     return (
       <div>
-        <Card className={classes.card}>
+        <Card className={"custom"}>
           <CardHeader
             className={classes.header}
             avatar={

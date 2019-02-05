@@ -40,7 +40,7 @@ class NewChallengeForm extends Component {
       .then(res => {
         // Hide button, and remove alert box after 2s
         if (res.status === 200) {
-          swal("Success!", "File uploaded!", "success", {
+          swal("Success!", "Challenge Created!", "success", {
             button: false,
             timer: 2000
           });

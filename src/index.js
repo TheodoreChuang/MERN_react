@@ -6,8 +6,6 @@ import { Provider } from "react-redux";
 import store from "./store";
 import WebFont from 'webfontloader';
 
-
-
 WebFont.load({
     google: {
       families: ['Anton', 'sans-serif']

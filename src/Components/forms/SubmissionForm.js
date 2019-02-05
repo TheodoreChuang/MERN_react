@@ -72,8 +72,11 @@ class SubmissionForm extends Component {
           <Field name="video" component={Input} type="file" />
         </div>
         <div>
-          <Button style={{ textTransform: "none" }} type="submit">
-            Join
+          <Button
+            style={{ textTransform: "none", color: "primary" }}
+            type="submit"
+          >
+            Submit
           </Button>
         </div>
         <div>{this.state.loading === true && <Loader />}</div>
