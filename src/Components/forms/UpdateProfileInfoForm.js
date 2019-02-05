@@ -26,7 +26,6 @@ const styles = theme => ({
     position: "center",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center"
   },
   input: {
     margin: theme.spacing.unit,

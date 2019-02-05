@@ -67,7 +67,7 @@ class RegisterForm extends Component {
       terms_conditions
     } = formValues;
     const { setAuthToken, history } = this.props;
-
+console.log("here");
     LocalApi.post("/register", {
       first_name,
       last_name,
@@ -96,7 +96,7 @@ class RegisterForm extends Component {
 
     return (
       <div className={classes.body}>
-        <div className={classes.container} onSubmit={this.onRegisterFormSubmit}>
+        <div className={classes.container}>
           <form onSubmit={handleSubmit(this.onRegisterFormSubmit)}>
             <Field
               startAdornment={<PermIdentity />}

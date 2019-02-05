@@ -83,7 +83,7 @@ class LoginForm extends Component {
     const { hasError } = this.state;
 
     return (
-      <div className={classes.container} onSubmit={this.onRegisterFormSubmit}>
+      <div className={classes.container}>
         <form onSubmit={handleSubmit(this.onLoginFormSubmit)}>
           <Field
             startAdornment={<Email />}
