@@ -7,13 +7,15 @@ import Button from '@material-ui/core/Button';
 import swal from 'sweetalert';
 import LockOutlined from "@material-ui/icons/LockOutlined";
 import { connect } from "react-redux";
+import { Card, withStyles } from "@material-ui/core/";
 
-const styles = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh"
-}
+const styles = theme => ({
+    container: {
+      minWidth: 235,
+      maxWidth: 560,
+      padding: theme.spacing.unit * 2
+    }
+})
 
 class ChangePasswordForm extends Component {
 
@@ -45,10 +47,11 @@ class ChangePasswordForm extends Component {
     };
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, classes } = this.props;
 
         return (
-            <div style={styles}>
+            // <div style={styles}>
+                  <Card className={classes.container}>
                 <form onSubmit= {handleSubmit(this.onFormSubmit)}>
                 <div>
                         <Field
@@ -85,7 +88,8 @@ class ChangePasswordForm extends Component {
                         </Button>
                     </div>
                 </form>
-            </div>
+                </Card>
+            // </div>
         )
     }
 }
@@ -98,6 +102,6 @@ const mapStateToProps = state => {
 
 const WrappedChangePasswordForm = reduxForm({
     form: "changepassword"
-})(ChangePasswordForm);
+})(withStyles(styles)(ChangePasswordForm));
 
 export default connect(mapStateToProps)(withRouter(WrappedChangePasswordForm));

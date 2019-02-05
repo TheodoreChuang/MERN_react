@@ -70,7 +70,7 @@ class UpdateProfileInfoPage extends Component {
 
               <div className={classes.gridItem}>
                 <UpdateProfileInfoForm match={match} />
-              </div>
+              </div>  
             </Grid>
           </Grid>
         </div>
