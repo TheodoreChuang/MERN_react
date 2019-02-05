@@ -87,13 +87,12 @@ class RegisterForm extends Component {
         // Redirect after 2s
         setTimeout(() => history.push("/"), 2000);
       })
-      .catch(error => swal(":(", error, "error"));
+      .catch(error => swal(":(", `${error}`, "error"));
   };
 
   render() {
     const { classes } = this.props;
     const { handleSubmit } = this.props;
-    console.log(this.props);
 
     return (
       <div className={classes.body}>
@@ -223,23 +222,35 @@ const WrappedRegisterForm = reduxForm({
 
     if (!first_name) {
       errors.first_name = "Required!";
+    } else if (first_name.length > 20) {
+      errors.first_name = "Must be 20 characters or less";
     }
 
     if (!last_name) {
       errors.last_name = "Required!";
+    } else if (last_name.length > 20) {
+      errors.last_name = "Must be 20 characters or less";
     }
 
     if (!nickname) {
       errors.nickname = "Required!";
+    } else if (nickname.length > 20) {
+      errors.nickname = "Must be 20 characters or less";
     }
 
     if (!email) {
-      errors.email = "Required!";
+      errors.email = "Required";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      errors.email = "Invalid email address";
     }
 
     if (!password) {
       errors.password = "Required!";
     }
+    // FIXME
+    // else if (password.length < 6 && password.length > 40) {
+    //   errors.password = "Must be between 6 and 40 characters";
+    // }
 
     if (!terms_conditions) {
       errors.terms_conditions = "Required!";

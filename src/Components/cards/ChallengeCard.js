@@ -218,7 +218,7 @@ class ChallengeCard extends Component {
                           });
                           setTimeout(() => window.location.reload());
                         })
-                        .catch(error => swal(":(", error, "error"));
+                        .catch(error => swal(":(", `${error}`, "error"));
                     } else {
                       swal("Your challenge is safe!");
                     }

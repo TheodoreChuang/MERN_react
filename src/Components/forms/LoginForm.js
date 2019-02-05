@@ -7,7 +7,7 @@ import FormDialog from "./FormDialog";
 import LocalApi from "../../apis/local";
 import { setAuthToken } from "./../../actions";
 import { getCurrentUser } from "./../../actions";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 import { withStyles } from "@material-ui/core/styles";
 import { Fab, Typography } from "@material-ui/core";
@@ -54,30 +54,33 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     color: theme.palette.primary.main,
     textDecoration: "none"
-  }
+  },
+  hasError: { color: theme.palette.secondary.main }
 });
 
 class LoginForm extends Component {
-  state = { error : "" }
-    
-    onLoginFormSubmit = (formValues) => {
-      const { history, setAuthToken, getCurrentUser } = this.props;
-      const { email, password } = formValues;
+  state = { error: "", hasError: false };
 
-        LocalApi.post("/login", {email, password})
-        // async below as redirection to root page requires auth token first
-        .then (response => {
-            setAuthToken(response.data.token);
-            localStorage.setItem("token", response.data.token);
-            getCurrentUser();
-            history.push("/");            
-        })
-        .catch(err => console.log(err));
-    }
+  onLoginFormSubmit = formValues => {
+    const { history, setAuthToken, getCurrentUser } = this.props;
+    const { email, password } = formValues;
+
+    LocalApi.post("/login", { email, password })
+      // async below as redirection to root page requires auth token first
+      .then(response => {
+        setAuthToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
+        getCurrentUser();
+        history.push("/");
+      })
+      .catch(err => {
+        this.setState({ hasError: true });
+      });
+  };
 
   render() {
-    const { classes } = this.props;
-    const { handleSubmit } = this.props;
+    const { classes, handleSubmit } = this.props;
+    const { hasError } = this.state;
 
     return (
       <div className={classes.container} onSubmit={this.onRegisterFormSubmit}>
@@ -105,6 +108,11 @@ class LoginForm extends Component {
               "aria-label": "Description"
             }}
           />
+          {hasError ? (
+            <Typography variant="caption" className={classes.hasError}>
+              Incorrect email or password
+            </Typography>
+          ) : null}
 
           <div className={classes.checkbox}>
             <div className={classes.checkboxButton}>
@@ -124,19 +132,18 @@ class LoginForm extends Component {
                     })
                       .then(res => {
                         if (res.status === 200) {
-                          return swal("Success!", "Email sent!", "success",
-                          {
+                          return swal("Success!", "Email sent!", "success", {
                             button: false,
                             timer: 2000
                           });
-                        };
+                        }
                       })
                       .catch(err => {
                         let error = "";
                         for (let i in err.response.data) {
                           error += `${err.response.data[i]} \r\n`;
                         }
-                        return swal(":(", error, "error");
+                        return swal(":(", `${error}`, "error");
                       });
                   }}
                 />
@@ -151,17 +158,16 @@ class LoginForm extends Component {
                 Log In
               </Fab>
             </div>
-              <div>
+            <div>
               <Typography className={classes.signin} component="caption">
                 Dont have an account?
                 <Link to="/register" className={classes.link}>
                   Sign Up
                 </Link>
               </Typography>
-              </div>
             </div>
-          <div>
-        </div>
+          </div>
+          <div />
         </form>
         {"Success" && this.state.error === "success"}
       </div>

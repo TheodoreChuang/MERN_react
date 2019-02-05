@@ -214,20 +214,34 @@ class UpdateProfileInfoForm extends Component {
 
 const WrappedUpdateInfoForm = reduxForm({
   form: "updateUser",
-  validate: ({ first_name }) => {
+  validate: ({ first_name, last_name, nickname, bio, age, location }) => {
     const errors = {};
 
-    // if (!first_name) {
-    //   errors.first_name = "First name is required!";
-    // }
+    if (first_name && first_name.length > 20) {
+      errors.first_name = "Must be 20 characters or less";
+    }
 
-    // if (!last_name) {
-    //     errors.last_name = "Last name is required!"
-    // }
+    if (last_name && last_name.length > 20) {
+      errors.last_name = "Must be 20 characters or less";
+    }
 
-    // if (!nickname) {
-    //     errors.nickname = "Nickname is required!"
-    // }
+    if (nickname && nickname.length > 20) {
+      errors.nickname = "Must be 20 characters or less";
+    }
+
+    if (bio && bio.length > 300) {
+      errors.bio = "Must be 300 characters or less";
+    }
+
+    if (age && (parseInt(age) < 0 || parseInt(age) > 150)) {
+      errors.age = "Must between 0 and 150";
+    } else if (age && isNaN(parseInt(age))) {
+      errors.age = "Must a number";
+    }
+
+    if (location && location.length > 30) {
+      errors.location = "Must be 30 characters or less";
+    }
 
     return errors;
   }
