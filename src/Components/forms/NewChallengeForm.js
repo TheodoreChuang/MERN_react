@@ -41,7 +41,7 @@ class NewChallengeForm extends Component {
     await LocalApi.post("/challenges/upload", fd)
     .then(res => {
       // Hide button, and remove alert box after 2s
-      swal("Success!", "File uploaded!", "success", {
+      swal("Success!", "Challenge created!", "success", {
         button: false,
         timer: 2000
       });

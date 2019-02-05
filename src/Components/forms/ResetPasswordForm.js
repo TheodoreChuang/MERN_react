@@ -26,11 +26,7 @@ class ResetPasswordForm extends Component {
         })
         .catch(err => {
             this.setState({ error: true });
-            let error = "";
-            for(let i in err.response.data) {
-              error += `${err.response.data[i]} \r\n`;
-            }
-            return swal(":(", error, "error");
+            return swal(":(", err.response.data, "error");
           })
     }
 
@@ -38,8 +34,6 @@ class ResetPasswordForm extends Component {
         const { history} = this.props;
         const { token } = this.props.match.params;
         const { password, confirm_password } = formValues;
-        console.log("reset form");
-        console.log(token);
 
         if (password !== confirm_password) {
             return swal(":(", "Passwords did not match!", "error", {
@@ -55,7 +49,7 @@ class ResetPasswordForm extends Component {
                       button: false,
                       timer: 2000
                     });
-                    setTimeout(() => history.push("/"), 2000);
+                    setTimeout(() => history.push("/login"), 2000);
                 };
             })
         .catch(err => {
@@ -65,7 +59,6 @@ class ResetPasswordForm extends Component {
     };
 
     render() {
-        console.log("rendered");
         const { handleSubmit } = this.props;
 
         return (

@@ -29,7 +29,7 @@ class SubmissionForm extends Component {
     await LocalApi.post(`/challenges/${match.params.id}/submissions`, fd)
     .then(res => {
       // Hide button, and remove alert box after 2s
-      swal("Success!", "File uploaded!", "success", {
+      swal("Success!", "Submitted!", "success", {
         button: false,
         timer: 2000
       });
@@ -70,8 +70,8 @@ class SubmissionForm extends Component {
           <Field name="video" component={Input} type="file" />
         </div>
         <div>
-          <Button style={{ textTransform: "none" }} type="submit">
-            Join
+          <Button style={{ textTransform: "none", color: "primary" }} type="submit">
+            Submit
           </Button>
         </div>
         <div>{this.state.loading === true && <Loader />}</div>
