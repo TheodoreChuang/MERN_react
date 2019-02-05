@@ -6,49 +6,31 @@ import Input from "./fields/Input";
 import Button from '@material-ui/core/Button';
 import swal from 'sweetalert';
 import LockOutlined from "@material-ui/icons/LockOutlined";
+import { connect } from "react-redux";
+import { Card, withStyles } from "@material-ui/core/";
 
-const styles = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh"
-}
-
-class ResetPasswordForm extends Component {
-    state = { error: "" }
-
-    async componentDidMount() {
-        await LocalApi.get(`/resetpassword/${this.props.match.params.token}`)
-        .then(res => {
-            if (res.status === 200) {
-                return this.setState({ error: false });
-            }
-        })
-        .catch(err => {
-            this.setState({ error: true });
-            let error = "";
-            for(let i in err.response.data) {
-              error += `${err.response.data[i]} \r\n`;
-            }
-            return swal(":(", error, "error");
-          })
+const styles = theme => ({
+    container: {
+      minWidth: 235,
+      maxWidth: 560,
+      padding: theme.spacing.unit * 2
     }
+})
+
+class ChangePasswordForm extends Component {
 
     onFormSubmit = (formValues) => {
-        const { history} = this.props;
-        const { token } = this.props.match.params;
-        const { password, confirm_password } = formValues;
-        console.log("reset form");
-        console.log(token);
-
-        if (password !== confirm_password) {
+        const { history, email } = this.props;
+        const { password, new_password, confirm_password } = formValues;
+       
+        if (new_password !== confirm_password) {
             return swal(":(", "Passwords did not match!", "error", {
                 button: false,
                 timer: 2000
             });
         };
 
-        LocalApi.put(`/resetpassword/${token}`, {password})
+        LocalApi.put(`/changepassword`, {password, new_password, email})
         .then(res => {
             if (res.status === 200) {
                     swal("Success!", "Password updated!", "success", {
@@ -65,18 +47,26 @@ class ResetPasswordForm extends Component {
     };
 
     render() {
-        console.log("rendered");
-        const { handleSubmit } = this.props;
+        const { handleSubmit, classes } = this.props;
 
         return (
-            <div style={styles}>
-                {this.state.error === false && 
+            // <div style={styles}>
+                  <Card className={classes.container}>
                 <form onSubmit= {handleSubmit(this.onFormSubmit)}>
+                <div>
+                        <Field
+                        startAdornment={<LockOutlined />}
+                        placeholder= "current password"
+                        name="password"
+                        component={Input}
+                        type="password"
+                        />
+                    </div>
                     <div>
                         <Field
                         startAdornment={<LockOutlined />}
                         placeholder= "new password"
-                        name="password"
+                        name="new_password"
                         component={Input}
                         type="password"
                         />
@@ -97,14 +87,21 @@ class ResetPasswordForm extends Component {
                         Change Password
                         </Button>
                     </div>
-                </form> }
-            </div>
+                </form>
+                </Card>
+            // </div>
         )
     }
 }
 
-const WrappedNewChallengeForm = reduxForm({
-    form: "resetpassword"
-})(ResetPasswordForm);
+const mapStateToProps = state => {
+    return {
+      email: state.currentUser.email
+    };
+  };
 
-export default withRouter(WrappedNewChallengeForm);
+const WrappedChangePasswordForm = reduxForm({
+    form: "changepassword"
+})(withStyles(styles)(ChangePasswordForm));
+
+export default connect(mapStateToProps)(withRouter(WrappedChangePasswordForm));

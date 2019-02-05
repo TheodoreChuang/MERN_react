@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NavBar from "../NavBar";
 import AvatarUpload from "./../forms/fields/AvatarUpload";
 import UpdateProfileInfoForm from "./../forms/UpdateProfileInfoForm";
-
+import ChangePasswordForm from "./../forms/ChangePasswordForm";
 import { Typography, Grid } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -65,8 +65,12 @@ class UpdateProfileInfoPage extends Component {
               </div>
 
               <div className={classes.gridItem}>
-                <UpdateProfileInfoForm match={match} />
+                <ChangePasswordForm />
               </div>
+
+              <div className={classes.gridItem}>
+                <UpdateProfileInfoForm match={match} />
+              </div>  
             </Grid>
           </Grid>
         </div>

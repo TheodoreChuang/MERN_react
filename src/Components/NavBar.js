@@ -169,7 +169,7 @@ class NavBar extends Component {
 
               {/* challenges feed button */}
               <IconButton
-                isableRipple
+                disableRipple
                 color="inherit"
                 component={Link}
                 to="/challenges"
