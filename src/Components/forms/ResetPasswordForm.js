@@ -17,10 +17,29 @@ const styles = {
 class ResetPasswordForm extends Component {
     state = { error: "" }
 
+    async componentDidMount() {
+        await LocalApi.get(`/resetpassword/${this.props.match.params.token}`)
+        .then(res => {
+            if (res.status === 200) {
+                return this.setState({ error: false });
+            }
+        })
+        .catch(err => {
+            this.setState({ error: true });
+            let error = "";
+            for(let i in err.response.data) {
+              error += `${err.response.data[i]} \r\n`;
+            }
+            return swal(":(", error, "error");
+          })
+    }
+
     onFormSubmit = (formValues) => {
         const { history} = this.props;
         const { token } = this.props.match.params;
         const { password, confirm_password } = formValues;
+        console.log("reset form");
+        console.log(token);
 
         if (password !== confirm_password) {
             return swal(":(", "Passwords did not match!", "error", {

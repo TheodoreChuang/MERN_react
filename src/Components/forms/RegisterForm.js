@@ -65,9 +65,8 @@ class RegisterForm extends Component {
       email,
       password,
       terms_conditions,
-      history
     } = formValues;
-    const { setAuthToken } = this.props;
+    const { setAuthToken, history } = this.props;
 
     LocalApi.post("/register", {
       first_name,
