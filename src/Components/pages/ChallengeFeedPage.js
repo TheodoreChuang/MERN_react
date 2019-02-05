@@ -3,7 +3,6 @@ import ChallengeCard from "./../cards/ChallengeCard";
 import NavBar from "../NavBar";
 import LocalApi from "./../../apis/local";
 
-import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 // const mobStyle = {
@@ -15,8 +14,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     display: "flex",
     alignItems: "center",
-    flexDirection: "column",
-    border: "1px solid grey"
+    flexDirection: "column"
   },
   cardContainer: {
     marginTop: "20px"

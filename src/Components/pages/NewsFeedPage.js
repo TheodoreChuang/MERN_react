@@ -4,18 +4,14 @@ import NavBar from "../NavBar";
 import LocalApi from "./../../apis/local";
 import { withRouter } from "react-router-dom";
 
-import { Grid } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   container: {
     backgroundColor: theme.palette.background.paper,
-    // flexGrow: 1,
-    // margin: "0px",
     display: "flex",
     alignItems: "center",
-    flexDirection: "column",
-    border: "1px solid grey"
+    flexDirection: "column"
   },
   cardContainer: {
     marginTop: "20px"
@@ -65,5 +61,4 @@ class NewsFeedPage extends Component {
   }
 }
 
-// export default withRouter(NewsFeedPage);
 export default withStyles(styles)(withRouter(NewsFeedPage));

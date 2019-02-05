@@ -44,8 +44,8 @@ class ProfileInfoCard extends Component {
       <Card>
         <CardContent className={classes.card}>
           <Grid container>
-            <Grid item xs={4} />
-            <Grid item xs={4} container justify="center">
+            <Grid item xs={1} />
+            <Grid item xs={6} container justify="center" alignItems="center">
               <CardMedia
                 className={classes.media}
                 image={profile_image}
@@ -54,7 +54,7 @@ class ProfileInfoCard extends Component {
             </Grid>
             <Grid
               item
-              xs={4}
+              xs={5}
               container
               direction="column"
               justify="center"
