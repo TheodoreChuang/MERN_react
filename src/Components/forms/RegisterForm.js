@@ -10,7 +10,7 @@ import Checkbox from "./fields/CheckboxField";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import { Fab, Typography } from "@material-ui/core/";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 import PermIdentity from "@material-ui/icons/PermIdentity";
 import Email from "@material-ui/icons/Email";
 import LockOutlined from "@material-ui/icons/LockOutlined";
@@ -64,10 +64,9 @@ class RegisterForm extends Component {
       nickname,
       email,
       password,
-      terms_conditions,
-      history
+      terms_conditions
     } = formValues;
-    const { setAuthToken } = this.props;
+    const { setAuthToken, history } = this.props;
 
     LocalApi.post("/register", {
       first_name,
@@ -88,7 +87,7 @@ class RegisterForm extends Component {
         // Redirect after 2s
         setTimeout(() => history.push("/"), 2000);
       })
-      .catch(error => swal(":(", error, "error"))
+      .catch(error => swal(":(", error, "error"));
   };
 
   render() {

@@ -17,7 +17,7 @@ import {
   IconButton
 } from "@material-ui/core/";
 import red from "@material-ui/core/colors/red";
-import { MoreVert, Favorite, Delete, Share } from "@material-ui/icons";
+import { MoreVert, Favorite, Delete } from "@material-ui/icons";
 import "./ChallengeCard.css";
 import moment from "moment";
 import swal from 'sweetalert';
@@ -89,7 +89,6 @@ class ChallengeCard extends Component {
       sub_id,
       type,
       classes,
-      viewMoreDetail,
       currentUser,
       id,
       user_id,
@@ -99,8 +98,7 @@ class ChallengeCard extends Component {
       video_url,
       description,
       date_created,
-      hideMoreDetail,
-      history
+      hideMoreDetail
     } = this.props;
 
     const renderMenu = (

@@ -13,11 +13,11 @@ import Grid from "@material-ui/core/Grid";
 const styles = theme => ({
   container: {
     minHeight: "100vh",
-    backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-white-abstract.jpg)`,
+    backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-abstract.png)`,
     backgroundRepeat: "repeat",
     backgroundSize: "contain",
     backgroundAttachment: "fixed",
-    boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.90)"
+    boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.97)"
   },
   cardContainer: {
     margin: "30px"

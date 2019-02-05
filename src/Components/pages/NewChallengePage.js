@@ -12,17 +12,22 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-white-abstract.jpg)`,
+    backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-abstract.png)`,
     backgroundRepeat: "repeat",
     backgroundSize: "contain",
     backgroundAttachment: "fixed",
-    boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.90)"
+    boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.97)"
   },
   card: {
     minWidth: 360,
     maxWidth: 600,
     marginTop: "15vh",
-    padding: theme.spacing.unit * 4
+    [theme.breakpoints.down("sm")]: {
+      padding: `${theme.spacing.unit * 4} 0px ${theme.spacing.unit * 4} 0px`
+    },
+    [theme.breakpoints.up("md")]: {
+      padding: theme.spacing.unit * 4
+    }
   },
   title: {
     textAlign: "center"

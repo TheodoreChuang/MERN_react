@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 import { getCurrentUser } from "./../actions";
 import PrivateRoute from "./PrivateRoute";
 
-import LandingPage from "./pages/LandingPage";
+// import LandingPage from "./pages/LandingPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import NewChallengePage from "./pages/NewChallengePage";
 import SubmissionPage from "./pages/SubmissionPage";
 import ProfilePage from "./pages/ProfilePage";
 import ProfileCurrentPage from "./pages/ProfileCurrentPage";
-import TermsAndConditions from "./pages/TermsAndConditions";
+// import TermsAndConditions from "./pages/TermsAndConditions";
 import ChallengePage from "./pages/ChallengePage";
 import NewsFeedPage from "./pages/NewsFeedPage";
 import ChallengeFeedPage from "./pages/ChallengeFeedPage";
@@ -19,6 +19,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import UpdateProfileInfoPage from "./pages/UpdateProfileInfoPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
+//// Theme to override default styling
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import theme from "./theme";
 import { withStyles } from "@material-ui/core/styles";
@@ -53,23 +54,26 @@ class App extends Component {
           <BrowserRouter>
             <div>
               <Switch>
-                <Route exact path="/landing" component={LandingPage} />
+                {/* <Route exact path="/landing" component={LandingPage} /> */}
                 <Route exact path="/login" component={LoginPage} />
                 <Route exact path="/register" component={RegisterPage} />
-                <Route
-                  exact
-                  path="/termsandconditions"
-                  component={TermsAndConditions}
-                />
+                {/* <Route exact path="/termsandconditions" component={TermsAndConditions} /> */}
                 <Route exact path="/" component={NewsFeedPage} />
                 <Route exact path="/challenges" component={ChallengeFeedPage} />
                 <Route exact path="/challenges/:id" component={ChallengePage} />
                 <Route
-                exact
-                path="/resetpassword/:token"
-                component={ResetPasswordPage}
-              />
+                  exact
+                  path="/resetpassword/:token"
+                  component={ResetPasswordPage}
+                />
                 <Route exact path="/profile/:id" component={ProfilePage} />
+                <Route
+                  exact
+                  path="/newchallenge"
+                  component={NewChallengePage}
+                />
+
+                {/*** Private Routes - Require JWT to access ***/}
                 <PrivateRoute
                   exact
                   path="/profile"
@@ -93,11 +97,6 @@ class App extends Component {
                   component={}
                 />
                 */}
-                <PrivateRoute
-                  exact
-                  path="/newchallenge"
-                  component={NewChallengePage}
-                />
                 <PrivateRoute
                   exact
                   path="/challenges/:id/submit"

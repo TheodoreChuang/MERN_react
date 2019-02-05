@@ -11,14 +11,17 @@ import {
   ListItemIcon,
   ListItemText,
   IconButton,
-  Typography,
   withStyles
 } from "@material-ui/core/";
 
-import { ExitToApp, ControlPoint } from "@material-ui/icons";
-
-import { Edit, AccountCircle, HowToReg, ArrowBack } from "@material-ui/icons/";
-
+import {
+  Edit,
+  AccountCircle,
+  HowToReg,
+  ArrowBack,
+  ExitToApp,
+  ControlPoint
+} from "@material-ui/icons";
 import MoreIcon from "@material-ui/icons/MoreVert";
 
 const styles = theme => ({
@@ -26,13 +29,10 @@ const styles = theme => ({
     width: "100%",
     marginBottom: "60px"
   },
-  grow: {
-    flexGrow: 1
-  },
-  title: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block"
+  toolbar: {
+    display: "flex",
+    [theme.breakpoints.down("sm")]: {
+      padding: "0px"
     }
   },
   sectionDesktop: {
@@ -46,17 +46,20 @@ const styles = theme => ({
     [theme.breakpoints.up("md")]: {
       display: "none"
     }
+  },
+  feeds: {
+    display: "flex",
+    justifyContent: "space-around",
+    flexGrow: 1
+  },
+  feedButton: {
+    backgroundColor: "transparent"
   }
 });
 
 class NavBar extends Component {
   state = {
     mobileMoreAnchorEl: null
-  };
-
-  handleMenuClose = () => {
-    this.setState({ anchorEl: null });
-    this.handleMobileMenuClose();
   };
 
   handleMobileMenuOpen = event => {
@@ -68,13 +71,12 @@ class NavBar extends Component {
   };
 
   render() {
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const { mobileMoreAnchorEl } = this.state;
     const { classes, admin, removeAuthToken, token, history } = this.props;
-    const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const currentPath = window.location.pathname;
 
-    // Mobile view
+    /*** Mobile Menu - hidden but expandable ***/
     const renderMobileMenu = (
       <Menu
         anchorEl={mobileMoreAnchorEl}
@@ -84,15 +86,14 @@ class NavBar extends Component {
         onClose={this.handleMobileMenuClose}
       >
         {/* Render add challenge button - if admin */}
-        {!currentPath.includes("newchallenge") && admin === true ? (
-          <MenuItem component={Link} to="/newchallenge">
-            <ListItemIcon>
-              <ControlPoint />
-          
-            </ListItemIcon>
-            <ListItemText primary="New Challenge" />
-          </MenuItem>
-        ) : null}
+        {/* {!currentPath.includes("newchallenge") && admin === true ? ( */}
+        <MenuItem component={Link} to="/newchallenge">
+          <ListItemIcon>
+            <ControlPoint />
+          </ListItemIcon>
+          <ListItemText primary="New Challenge" />
+        </MenuItem>
+        {/* ) : null} */}
 
         {/* Profile OR Profile Edit - only available if logged in */}
         {token && !currentPath.includes("profile") ? (
@@ -117,7 +118,7 @@ class NavBar extends Component {
         {token ? (
           <MenuItem
             component={Link}
-            to="/landing"
+            to="/login"
             onClick={() => {
               removeAuthToken();
             }}
@@ -129,7 +130,7 @@ class NavBar extends Component {
           </MenuItem>
         ) : null}
         {!token ? (
-          <MenuItem component={Link} to="/landing">
+          <MenuItem component={Link} to="/login">
             <ListItemIcon>
               <HowToReg />
             </ListItemIcon>
@@ -140,9 +141,10 @@ class NavBar extends Component {
     );
 
     return (
+      //***  This section always visible ***/
       <div className={classes.root}>
         <AppBar position="fixed" color="primary">
-          <Toolbar className={classes.custom}>
+          <Toolbar className={classes.toolbar}>
             {/* Back Icon - always available */}
             <IconButton
               color="inherit"
@@ -152,32 +154,15 @@ class NavBar extends Component {
             >
               <ArrowBack />
             </IconButton>
-            {/* <div className={classes.grow} />
-            <div className={classes.sectionDesktop} /> */}
-            {/* <img
-              src="/images/logo.png"
-              height="20px"
-              width="20px"
-              padding="100px"
-            /> */}
 
             {/* submissions feed button */}
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center"
-              }}
-            >
+            <div className={classes.feeds}>
               <IconButton
                 disableRipple
                 color="inherit"
                 component={Link}
                 to="/"
-                style={{
-                  backgroundColor: "transparent"
-                }}
+                className={classes.feedButton}
               >
                 Newsfeed
               </IconButton>
@@ -188,24 +173,20 @@ class NavBar extends Component {
                 color="inherit"
                 component={Link}
                 to="/challenges"
-                style={{
-                  backgroundColor: "transparent"
-                }}
+                className={classes.feedButton}
               >
                 Challenges
               </IconButton>
-
             </div>
-            <div className={classes.grow} />
 
-            {/* Desktop Menu - Hidden on Mobile */}
+            {/*** Desktop Menu - Hidden on Mobile ***/}
             <div className={classes.sectionDesktop}>
               {/* Add Challenge - if admin  */}
-              {!currentPath.includes("newchallenge") && admin === true ? (
-                <IconButton color="inherit" component={Link} to="/newchallenge">
-                  <ControlPoint />
-                </IconButton>
-              ) : null}
+              {/* {!currentPath.includes("newchallenge") && admin === true ? ( */}
+              <IconButton color="inherit" component={Link} to="/newchallenge">
+                <ControlPoint />
+              </IconButton>
+              {/* ) : null} */}
 
               {/* Profile OR Profile Edit - only available if logged in */}
               {token && !currentPath.match(/^\/profile$/) ? (
@@ -225,7 +206,7 @@ class NavBar extends Component {
                 <IconButton
                   color="inherit"
                   component={Link}
-                  to="/landing"
+                  to="/login"
                   onClick={() => {
                     removeAuthToken();
                   }}
@@ -234,13 +215,13 @@ class NavBar extends Component {
                 </IconButton>
               ) : null}
               {!token ? (
-                <IconButton color="inherit" component={Link} to="/landing">
+                <IconButton color="inherit" component={Link} to="/login">
                   <HowToReg />
                 </IconButton>
               ) : null}
             </div>
 
-            {/* For expanding hidden menu on mobile */}
+            {/*** For expanding hidden menu on mobile ***/}
             <div className={classes.sectionMobile}>
               <IconButton
                 aria-haspopup="true"
@@ -257,7 +238,6 @@ class NavBar extends Component {
     );
   }
 }
-
 
 const mapStateToProps = state => {
   return {

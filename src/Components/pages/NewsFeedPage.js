@@ -42,12 +42,8 @@ class NewsFeedPage extends Component {
           {/* submissions feed */}
           {submissions &&
             submissions.map(function(sub) {
-              console.log(submissions);
               return (
-                <div
-                  key={sub.submission_id}
-                  className={classes.cardContainer}
-                >
+                <div key={sub.submission_id} className={classes.cardContainer}>
                   <ChallengeCard
                     type="submission"
                     sub_id={sub.submission_id}
