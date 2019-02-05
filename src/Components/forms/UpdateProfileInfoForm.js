@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+// import swal from "sweetalert";
 import Input from "./fields/Input";
 import { updateCurrentUser } from "./../../actions";
 
 import { Card, Fab, Typography } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
 import PermIdentity from "@material-ui/icons/PermIdentity";
-import Email from "@material-ui/icons/Email";
 import MyLocationOutlined from "@material-ui/icons/MyLocationOutlined";
 import NaturePeopleOutlined from "@material-ui/icons/NaturePeopleOutlined";
 import ChildCareOutlined from "@material-ui/icons/ChildCareOutlined";
@@ -21,7 +22,7 @@ const styles = theme => ({
   },
   container: {
     display: "flex",
-    margin: "50px auto 0 auto",
+    margin: "30px auto 0 auto",
     position: "center",
     flexDirection: "column",
     justifyContent: "center",
@@ -56,17 +57,30 @@ const styles = theme => ({
 
 class UpdateProfileInfoForm extends Component {
   updateUserFormSubmit = formValues => {
-    const {
-      first_name,
-      last_name,
-      nickname,
-      age,
-      location,
-      bio,
-      gender
-    } = formValues;
-
     this.props.updateCurrentUser(formValues);
+    this.props.history.push("/profile");
+
+    // Action does update but no visual response for user
+    // FIXME - handle response both success and failure
+    // updateUserFormSubmit = (formValues, dispatch) => {
+    //   const { updateCurrentUser, history } = this.props;
+
+    //   updateCurrentUser(formValues)
+    //     .then(res => {
+    //       console.log(res);
+    //       if (res.status === 200) {
+    //         swal("Success!", "Details updated!", "success", {
+    //           button: false,
+    //           timer: 2000
+    //         });
+    //       }
+    //       setTimeout(() => history.push("/profile"), 2000);
+    //       dispatch(reset("updateUser"));
+    //     })
+    //     .catch(err => {
+    //       this.setState({ error: true });
+    //       return swal(":(", err, "error");
+    //     });
   };
 
   render() {
@@ -199,7 +213,7 @@ class UpdateProfileInfoForm extends Component {
 }
 
 const WrappedUpdateInfoForm = reduxForm({
-  form: "register",
+  form: "updateUser",
   validate: ({ first_name }) => {
     const errors = {};
 
@@ -230,4 +244,4 @@ export default connect(
   {
     updateCurrentUser
   }
-)(WrappedUpdateInfoForm);
+)(withRouter(WrappedUpdateInfoForm));

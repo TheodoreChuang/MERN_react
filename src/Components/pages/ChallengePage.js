@@ -22,11 +22,6 @@ const styles = theme => ({
     textAlign: "center",
     margin: "30px 0 10px 0",
     color: "grey"
-  },
-  typographyBG: {
-    backgroundColor: "rgba(255, 255, 255, 0.30)",
-    borderRadius: "40%",
-    padding: theme.spacing.unit * 2
   }
 });
 class ChallengePage extends Component {
@@ -64,9 +59,7 @@ class ChallengePage extends Component {
                 gutterBottom
                 className={classes.typography}
               >
-                <span className={classes.typographyBG}>
-                  {challenge && challenge.title} Challenge
-                </span>
+                {challenge && challenge.title} Challenge
               </Typography>
               {challenge && (
                 <ChallengeCard
@@ -88,7 +81,7 @@ class ChallengePage extends Component {
                 component="h2"
                 variant="h5"
               >
-                <span className={classes.typographyBG}>The Challengers</span>
+                The Challengers
               </Typography>
 
               {challenge &&

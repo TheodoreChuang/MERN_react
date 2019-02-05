@@ -25,11 +25,6 @@ const styles = theme => ({
     textAlign: "center",
     margin: "30px 0 10px 0",
     color: "grey"
-  },
-  typographyBG: {
-    backgroundColor: "rgba(255, 255, 255, 0.30)",
-    borderRadius: "40%",
-    padding: theme.spacing.unit * 2
   }
 });
 
@@ -54,9 +49,7 @@ class UpdateProfileInfoPage extends Component {
                   gutterBottom
                   className={classes.typography}
                 >
-                  <span className={classes.typographyBG}>
-                    Update Your Profile
-                  </span>
+                  Update Your Profile
                 </Typography>
               </div>
 

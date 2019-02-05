@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, reset } from "redux-form";
 import LocalApi from "./../../apis/local";
 import { withRouter } from "react-router-dom";
 import Input from "./fields/Input";
@@ -20,7 +20,7 @@ const styles = theme => ({
 class ChangePasswordForm extends Component {
   state = { error: "" };
 
-  onFormSubmit = formValues => {
+  onFormSubmit = (formValues, dispatch) => {
     const { history } = this.props;
     const { password, new_password, confirm_password } = formValues;
 
@@ -39,6 +39,7 @@ class ChangePasswordForm extends Component {
             timer: 2000
           });
           setTimeout(() => history.push("/updateinfo"), 2000);
+          dispatch(reset("changepassword"));
         }
       })
       .catch(err => {

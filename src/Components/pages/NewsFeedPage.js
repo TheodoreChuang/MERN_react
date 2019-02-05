@@ -8,7 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   container: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.light,
     display: "flex",
     alignItems: "center",
     flexDirection: "column"

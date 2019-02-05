@@ -30,6 +30,12 @@ const styles = theme => ({
     minWidth: 275,
     maxWidth: 600
   },
+  header: {
+    borderBottom: "1px solid hsl(212, 12%, 72%)"
+  },
+  avatar: {
+    border: "1px solid hsl(212, 12%, 72%)"
+  },
   menuButton: {
     marginLeft: -12,
     marginRight: 20
@@ -38,8 +44,15 @@ const styles = theme => ({
     height: 0,
     paddingTop: "56.25%" // 16:9
   },
+  text: {
+    padding: `${theme.spacing.unit * 0.5}px ${theme.spacing.unit * 2}px ${theme
+      .spacing.unit * 0.5}px ${theme.spacing.unit * 2}px`
+  },
   actions: {
     display: "flex"
+  },
+  actionButton: {
+    padding: `${theme.spacing.unit}px`
   },
   expand: {
     transform: "rotate(0deg)",
@@ -50,9 +63,6 @@ const styles = theme => ({
   },
   expandOpen: {
     transform: "rotate(180deg)"
-  },
-  avatar: {
-    border: "1px solid hsl(212, 12%, 72%)"
   }
 });
 
@@ -133,6 +143,7 @@ class ChallengeCard extends Component {
       <div>
         <Card className={classes.card}>
           <CardHeader
+            className={classes.header}
             avatar={
               <Avatar
                 component={Link}
@@ -158,19 +169,22 @@ class ChallengeCard extends Component {
             title={nickname}
             subheader={`Created: ${this.dateParser(date_created)}`}
           />
-          <CardContent>
-            <Typography component="p">{title}</Typography>
-          </CardContent>
           <VideoPlayer url={video_url} />
-          <CardContent>
-            <Typography component="p">{description}</Typography>
-          </CardContent>
 
           <CardActions className={classes.actions} disableActionSpacing>
-            {/* <IconButton aria-label="Add to favorites">
-              <Favorite />
-            </IconButton> */}
-            <IconButton aria-label="Share">
+            <IconButton aria-label="Like this" className={classes.actionButton}>
+              <Favorite
+                onClick={() => {
+                  swal({
+                    title: "Thank you for the like!",
+                    text: "Stay tune for this future feature!",
+                    icon: "info",
+                    buttons: { text: "OK" }
+                  });
+                }}
+              />
+            </IconButton>
+            <IconButton aria-label="Share" className={classes.actionButton}>
               <SocialShareIcon id={id} />
             </IconButton>
             {/* Conditional rendering based on type of card */}
@@ -178,6 +192,7 @@ class ChallengeCard extends Component {
             {type === "challenge" && currentUser._id === user_id ? (
               <IconButton
                 aria-label="Delete"
+                className={classes.actionButton}
                 onClick={() => {
                   swal({
                     title: "Are you sure?",
@@ -208,6 +223,15 @@ class ChallengeCard extends Component {
               </IconButton>
             ) : null}
           </CardActions>
+
+          <CardContent className={classes.text}>
+            <Typography variant="body1">{title} </Typography>
+          </CardContent>
+          {description && (
+            <CardContent className={classes.text}>
+              <Typography variant="body2">{description}</Typography>
+            </CardContent>
+          )}
         </Card>
         {renderMenu}
       </div>

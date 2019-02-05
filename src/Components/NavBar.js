@@ -11,6 +11,7 @@ import {
   ListItemIcon,
   ListItemText,
   IconButton,
+  Button,
   withStyles
 } from "@material-ui/core/";
 
@@ -52,8 +53,8 @@ const styles = theme => ({
     justifyContent: "space-around",
     flexGrow: 1
   },
-  feedButton: {
-    backgroundColor: "transparent"
+  buttonDisable: {
+    borderBottom: `1px solid ${theme.palette.secondary.main}`
   }
 });
 
@@ -72,7 +73,7 @@ class NavBar extends Component {
 
   render() {
     const { mobileMoreAnchorEl } = this.state;
-    const { classes, admin, removeAuthToken, token, history } = this.props;
+    const { classes, removeAuthToken, token, history } = this.props;
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const currentPath = window.location.pathname;
 
@@ -85,15 +86,15 @@ class NavBar extends Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
-        {/* Render add challenge button - if admin */}
-        {/* {!currentPath.includes("newchallenge") && admin === true ? ( */}
-        <MenuItem component={Link} to="/newchallenge">
-          <ListItemIcon>
-            <ControlPoint />
-          </ListItemIcon>
-          <ListItemText primary="New Challenge" />
-        </MenuItem>
-        {/* ) : null} */}
+        {/* Render add challenge button - only available if logged in */}
+        {token && (
+          <MenuItem component={Link} to="/newchallenge">
+            <ListItemIcon>
+              <ControlPoint />
+            </ListItemIcon>
+            <ListItemText primary="New Challenge" />
+          </MenuItem>
+        )}
 
         {/* Profile OR Profile Edit - only available if logged in */}
         {token && !currentPath.includes("profile") ? (
@@ -157,36 +158,49 @@ class NavBar extends Component {
 
             {/* submissions feed button */}
             <div className={classes.feeds}>
-              <IconButton
-                disableRipple
-                color="inherit"
-                component={Link}
-                to="/"
-                className={classes.feedButton}
-              >
-                Newsfeed
-              </IconButton>
+              {currentPath.match(/^\/$/) ? (
+                <Button
+                  disableRipple
+                  color="inherit"
+                  className={classes.buttonDisable}
+                >
+                  Newsfeed
+                </Button>
+              ) : (
+                <Button disableRipple color="inherit" component={Link} to="/">
+                  Newsfeed
+                </Button>
+              )}
 
               {/* challenges feed button */}
-              <IconButton
-                disableRipple
-                color="inherit"
-                component={Link}
-                to="/challenges"
-                className={classes.feedButton}
-              >
-                Challenges
-              </IconButton>
+              {currentPath.match(/^\/challenges$/) ? (
+                <Button
+                  disableRipple
+                  color="inherit"
+                  className={classes.buttonDisable}
+                >
+                  Challenges
+                </Button>
+              ) : (
+                <Button
+                  disableRipple
+                  color="inherit"
+                  component={Link}
+                  to="/challenges"
+                >
+                  Challenges
+                </Button>
+              )}
             </div>
 
             {/*** Desktop Menu - Hidden on Mobile ***/}
             <div className={classes.sectionDesktop}>
-              {/* Add Challenge - if admin  */}
-              {/* {!currentPath.includes("newchallenge") && admin === true ? ( */}
-              <IconButton color="inherit" component={Link} to="/newchallenge">
-                <ControlPoint />
-              </IconButton>
-              {/* ) : null} */}
+              {/* Add Challenge - only available if logged in   */}
+              {token && (
+                <IconButton color="inherit" component={Link} to="/newchallenge">
+                  <ControlPoint />
+                </IconButton>
+              )}
 
               {/* Profile OR Profile Edit - only available if logged in */}
               {token && !currentPath.match(/^\/profile$/) ? (
@@ -241,8 +255,7 @@ class NavBar extends Component {
 
 const mapStateToProps = state => {
   return {
-    token: state.auth.token,
-    admin: state.currentUser.is_admin
+    token: state.auth.token
   };
 };
 

@@ -23,11 +23,6 @@ const styles = theme => ({
     textAlign: "center",
     marginTop: "30px",
     color: "grey"
-  },
-  typographyBG: {
-    backgroundColor: "rgba(255, 255, 255, 0.30)",
-    borderRadius: "40%",
-    padding: theme.spacing.unit * 2
   }
 });
 
@@ -65,9 +60,7 @@ class ProfilePage extends Component {
               </div>
 
               <Typography className={classes.typography} variant="h5">
-                <span className={classes.typographyBG}>
-                  completed {(user && user.submissions.length) || 0} challenges
-                </span>
+                completed {(user && user.submissions.length) || 0} challenges
               </Typography>
 
               {user &&

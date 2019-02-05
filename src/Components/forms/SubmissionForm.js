@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import { withRouter } from "react-router-dom";
 import Loader from "./../Loader";
 import LocalApi from "./../../apis/local";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 import DescriptionOutlined from "@material-ui/icons/DescriptionOutlined";
 import GavelOutlined from "@material-ui/icons/GavelOutlined";
 
@@ -27,16 +27,18 @@ class SubmissionForm extends Component {
 
     this.setState({ loading: true });
     await LocalApi.post(`/challenges/${match.params.id}/submissions`, fd)
-    .then(res => {
-      // Hide button, and remove alert box after 2s
-      swal("Success!", "File uploaded!", "success", {
-        button: false,
-        timer: 2000
-      });
-      // Redirect after 2s
-      setTimeout(() => history.push("/"), 2000);
-    })
-    .catch(error => swal(":(", error, "error"))
+      .then(res => {
+        // if (res.status === 200) {
+        //   // Hide button, and remove alert box after 2s
+        //   swal("Success!", "File uploaded!", "success", {
+        //     button: false,
+        //     timer: 2000
+        //   });
+        // }
+        // Redirect after 2s
+        setTimeout(() => history.push("/"), 2000);
+      })
+      .catch(error => swal(":(", error, "error"));
   };
 
   render() {
