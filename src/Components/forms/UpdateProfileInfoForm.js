@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+// import swal from "sweetalert";
 import Input from "./fields/Input";
 import { updateCurrentUser } from "./../../actions";
 
-import { withStyles } from "@material-ui/core/styles";
 import { Card, Fab, Typography } from "@material-ui/core/";
+import { withStyles } from "@material-ui/core/styles";
+import PermIdentity from "@material-ui/icons/PermIdentity";
+import MyLocationOutlined from "@material-ui/icons/MyLocationOutlined";
+import NaturePeopleOutlined from "@material-ui/icons/NaturePeopleOutlined";
+import ChildCareOutlined from "@material-ui/icons/ChildCareOutlined";
+import FaceOutlined from "@material-ui/icons/FaceOutlined";
 
 const styles = theme => ({
   body: {
@@ -15,7 +22,7 @@ const styles = theme => ({
   },
   container: {
     display: "flex",
-    margin: "50px auto 0 auto",
+    margin: "30px auto 0 auto",
     position: "center",
     flexDirection: "column",
     justifyContent: "center",
@@ -50,17 +57,30 @@ const styles = theme => ({
 
 class UpdateProfileInfoForm extends Component {
   updateUserFormSubmit = formValues => {
-    const {
-      first_name,
-      last_name,
-      nickname,
-      age,
-      location,
-      bio,
-      gender
-    } = formValues;
-
     this.props.updateCurrentUser(formValues);
+    this.props.history.push("/profile");
+
+    // Action does update but no visual response for user
+    // FIXME - handle response both success and failure
+    // updateUserFormSubmit = (formValues, dispatch) => {
+    //   const { updateCurrentUser, history } = this.props;
+
+    //   updateCurrentUser(formValues)
+    //     .then(res => {
+    //       console.log(res);
+    //       if (res.status === 200) {
+    //         swal("Success!", "Details updated!", "success", {
+    //           button: false,
+    //           timer: 2000
+    //         });
+    //       }
+    //       setTimeout(() => history.push("/profile"), 2000);
+    //       dispatch(reset("updateUser"));
+    //     })
+    //     .catch(err => {
+    //       this.setState({ error: true });
+    //       return swal(":(", err, "error");
+    //     });
   };
 
   render() {
@@ -72,6 +92,7 @@ class UpdateProfileInfoForm extends Component {
         <div className={classes.container} onSubmit={this.updateUserFormSubmit}>
           <form onSubmit={handleSubmit(this.updateUserFormSubmit.bind(this))}>
             <Field
+              startAdornment={<PermIdentity />}
               name="first_name"
               component={Input}
               placeholder="First Name"
@@ -83,6 +104,7 @@ class UpdateProfileInfoForm extends Component {
               }}
             />
             <Field
+              startAdornment={<PermIdentity />}
               name="last_name"
               component={Input}
               placeholder="Last Name"
@@ -93,9 +115,10 @@ class UpdateProfileInfoForm extends Component {
               }}
             />
             <Field
+              startAdornment={<FaceOutlined />}
               name="nickname"
               component={Input}
-              placeholder="Nick Name"
+              placeholder="Nickname"
               className={classes.input}
               fullWidth
               inputProps={{
@@ -103,6 +126,7 @@ class UpdateProfileInfoForm extends Component {
               }}
             />
             <Field
+              startAdornment={<ChildCareOutlined />}
               name="age"
               component={Input}
               placeholder="Age"
@@ -113,6 +137,7 @@ class UpdateProfileInfoForm extends Component {
               }}
             />
             <Field
+              startAdornment={<MyLocationOutlined />}
               name="location"
               component={Input}
               placeholder="Location"
@@ -123,6 +148,7 @@ class UpdateProfileInfoForm extends Component {
               }}
             />
             <Field
+              startAdornment={<NaturePeopleOutlined />}
               name="bio"
               component={Input}
               id="outlined-textarea"
@@ -187,7 +213,7 @@ class UpdateProfileInfoForm extends Component {
 }
 
 const WrappedUpdateInfoForm = reduxForm({
-  form: "register",
+  form: "updateUser",
   validate: ({ first_name }) => {
     const errors = {};
 
@@ -201,18 +227,6 @@ const WrappedUpdateInfoForm = reduxForm({
 
     // if (!nickname) {
     //     errors.nickname = "Nickname is required!"
-    // }
-
-    // if (!email) {
-    //     errors.email = "Email is required!"
-    // }
-
-    // if (!password) {
-    //     errors.password = "Password is required!"
-    // }
-
-    // if (!terms_conditions) {
-    //     errors.terms_conditions = "Please confirm your agreement to Terms & Conditions!"
     // }
 
     return errors;
@@ -230,4 +244,4 @@ export default connect(
   {
     updateCurrentUser
   }
-)(WrappedUpdateInfoForm);
+)(withRouter(WrappedUpdateInfoForm));

@@ -4,6 +4,11 @@ import { connect } from "react-redux";
 import SocialShareIcon from "./../icons/SocialShareIcon";
 import LocalApi from "./../../apis/local";
 import VideoPlayer from "./../VideoPlayer";
+import moment from "moment";
+import swal from "sweetalert";
+import { randomEmojis } from "./../../data/emoji";
+import "./ChallengeCard.css";
+
 import { withStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -16,13 +21,26 @@ import {
   Avatar,
   IconButton
 } from "@material-ui/core/";
-import red from "@material-ui/core/colors/red";
-import { MoreVert, Favorite, DeleteForever } from "@material-ui/icons";
+import { MoreVert, Favorite, Delete } from "@material-ui/icons";
+import "./ChallengeCard.css";
+
+const size = {
+  iPad: 768
+}
 
 const styles = theme => ({
   card: {
-    minWidth: 275,
-    maxWidth: 600
+    // width: "375px",
+    // height: "auto"
+    // minWidth: 275,
+    // maxWidth: 600
+    // width: "80vw",
+  },
+  header: {
+    borderBottom: "1px solid hsl(212, 12%, 72%)"
+  },
+  avatar: {
+    border: "1px solid hsl(212, 12%, 72%)"
   },
   menuButton: {
     marginLeft: -12,
@@ -32,8 +50,15 @@ const styles = theme => ({
     height: 0,
     paddingTop: "56.25%" // 16:9
   },
+  text: {
+    padding: `${theme.spacing.unit * 0.5}px ${theme.spacing.unit * 2}px ${theme
+      .spacing.unit * 0.5}px ${theme.spacing.unit * 2}px`
+  },
   actions: {
     display: "flex"
+  },
+  actionButton: {
+    padding: `${theme.spacing.unit}px`
   },
   expand: {
     transform: "rotate(0deg)",
@@ -44,10 +69,6 @@ const styles = theme => ({
   },
   expandOpen: {
     transform: "rotate(180deg)"
-  },
-  avatar: {
-    backgroundColor: red[500],
-    border: "2px solid hsl(212, 12%, 72%)"
   }
 });
 
@@ -69,6 +90,14 @@ class ChallengeCard extends Component {
     this.setState({ anchorEl: null });
   };
 
+  // Function to parse raw date data from database to a readable format
+  dateParser = string => {
+    const ms = Date.parse(string);
+    const formattedDate = moment(ms).format("DD MMM, YYYY");
+
+    return formattedDate;
+  };
+
   render() {
     const { anchorEl } = this.state;
     const isMenuOpen = Boolean(anchorEl);
@@ -76,18 +105,16 @@ class ChallengeCard extends Component {
       sub_id,
       type,
       classes,
-      viewMoreDetail,
       currentUser,
       id,
       user_id,
       nickname,
       profile_image,
       title,
-      yt_id,
+      video_url,
       description,
       date_created,
-      hideMoreDetail,
-      history
+      hideMoreDetail
     } = this.props;
 
     const renderMenu = (
@@ -120,18 +147,20 @@ class ChallengeCard extends Component {
 
     return (
       <div>
-        <Card className={classes.card}>
+        <Card className={"custom"}>
           <CardHeader
+            className={classes.header}
             avatar={
               <Avatar
                 component={Link}
                 to={`/profile/${user_id}`}
                 aria-label="avatar"
                 className={classes.avatar}
-              >
-                {(profile_image && <img src={profile_image} alt="profile" />) ||
-                  "1Up"}
-              </Avatar>
+                src={
+                  profile_image ||
+                  randomEmojis[Math.floor(Math.random() * randomEmojis.length)]
+                }
+              />
             }
             action={
               <IconButton
@@ -144,58 +173,71 @@ class ChallengeCard extends Component {
               </IconButton>
             }
             title={nickname}
-            subheader={date_created}
+            subheader={`Created: ${this.dateParser(date_created)}`}
           />
-          <CardContent>
-            <Typography component="p">{title}</Typography>
-          </CardContent>
-          <VideoPlayer url={yt_id} />
-          <CardContent>
-            <Typography component="p">{description}</Typography>
-          </CardContent>
+          <VideoPlayer url={video_url} />
 
           <CardActions className={classes.actions} disableActionSpacing>
-            {/* <IconButton aria-label="Add to favorites">
-              <Favorite />
-            </IconButton> */}
-            <IconButton aria-label="Share">
+            <IconButton aria-label="Like this" className={classes.actionButton}>
+              <Favorite
+                onClick={() => {
+                  swal({
+                    title: "Thank you for the like!",
+                    text: "Stay tune for this future feature!",
+                    icon: "info",
+                    buttons: { text: "OK" }
+                  });
+                }}
+              />
+            </IconButton>
+            <IconButton aria-label="Share" className={classes.actionButton}>
               <SocialShareIcon id={id} />
             </IconButton>
+            {/* Conditional rendering based on type of card */}
+            {/* for challenges */}
+            {type === "challenge" && currentUser._id === user_id ? (
+              <IconButton
+                aria-label="Delete"
+                className={classes.actionButton}
+                onClick={() => {
+                  swal({
+                    title: "Are you sure?",
+                    text:
+                      "Once deleted, this challenge and any associated submissions will be deleted.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                  }).then(willDelete => {
+                    if (willDelete) {
+                      LocalApi.delete(`/challenges/submissions/${id}`)
+                        .then(res => {
+                          swal("The challenge has been deleted!", {
+                            icon: "success",
+                            button: false,
+                            timer: 2000
+                          });
+                          setTimeout(() => window.location.reload());
+                        })
+                        .catch(error => swal(":(", error, "error"));
+                    } else {
+                      swal("Your challenge is safe!");
+                    }
+                  });
+                }}
+              >
+                <Delete style={{ marginTop: "-5px" }} />
+              </IconButton>
+            ) : null}
           </CardActions>
-          {/* Conditional rendering based on type of card */}
-          {/* for challenges */}
-          {type === "challenge" && currentUser._id === user_id ? (
-            <button
-              onClick={() => {
-                const r = window.confirm(
-                  "Are you sure you want to delete this challenge?"
-                );
 
-                if (r === true) {
-                  LocalApi.delete(`/challenges/submissions/${id}`)
-                    .then(res => window.location.reload())
-                    .catch(err => alert(err));
-                }
-              }}
-            >
-              {" "}
-              Chal Delete
-            </button>
-          ) : null}
-
-          {/* for submissions */}
-          {/* {type === "submission" && currentUser._id === user_id ?
-          <button onClick={ () => {
-            const r = window.confirm("Are you sure you want to delete this challenge?");
-            
-            if (r === true) {
-              LocalApi.delete(`/challenges/${id}/submission/${sub_id}`)
-              .then (res => window.location.reload())
-              .catch (err => alert(err));
-              
-            }
-          }}>Sub Delete</button>
-          : null } */}
+          <CardContent className={classes.text}>
+            <Typography variant="body1">{title} </Typography>
+          </CardContent>
+          {description && (
+            <CardContent className={classes.text}>
+              <Typography variant="body2">{description}</Typography>
+            </CardContent>
+          )}
         </Card>
         {renderMenu}
       </div>

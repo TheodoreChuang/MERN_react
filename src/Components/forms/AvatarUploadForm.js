@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateCurrentUserAvatar } from "./../../../actions";
+import { updateCurrentUserAvatar } from "../../actions";
+import { randomEmojis } from "../../data/emoji";
 
 import { withStyles } from "@material-ui/core/styles";
-import { Card, CardContent, CardMedia, Grid, Button } from "@material-ui/core/";
+import { Card, CardMedia, Grid, Button } from "@material-ui/core/";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
 const styles = theme => ({
@@ -36,14 +37,13 @@ const styles = theme => ({
   },
   input: {
     marginBottom: theme.spacing.unit
-    // display: "none"
   },
   rightIcon: {
     marginLeft: theme.spacing.unit
   }
 });
 
-class AvatarUpload extends Component {
+class AvatarUploadForm extends Component {
   state = {
     file: null
   };
@@ -56,6 +56,7 @@ class AvatarUpload extends Component {
       formData.append("image", this.state.file[0]);
 
       updateCurrentUserAvatar(formData);
+      event.target.querySelector("input").value = null;
     }
   };
 
@@ -71,7 +72,10 @@ class AvatarUpload extends Component {
         <Grid container direction="row" alignItems="center" justify="center">
           <CardMedia
             className={classes.media}
-            image={currentUser.profile_image}
+            image={
+              currentUser.profile_image ||
+              randomEmojis[Math.floor(Math.random() * randomEmojis.length)]
+            }
             title="Profile Picture"
           />
 
@@ -86,23 +90,6 @@ class AvatarUpload extends Component {
             <Button raised type="submit">
               Upload Photo <CloudUploadIcon className={classes.rightIcon} />
             </Button>
-
-            {/* 
-            FIXME: does not submit
-            <input
-              accept="image/*"
-              label="image"
-              className={classes.input}
-              id="raised-button-file"
-              type="file"
-              onChange={this.onChange}
-            />
-            <label htmlFor="raised-button-file">
-              <Button raised component="span" className={classes.button}>
-                Upload Photo
-              </Button>
-              <CloudUploadIcon className={classes.rightIcon}/>
-            </label> */}
           </form>
         </Grid>
       </Card>
@@ -119,4 +106,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { updateCurrentUserAvatar }
-)(withStyles(styles)(AvatarUpload));
+)(withStyles(styles)(AvatarUploadForm));

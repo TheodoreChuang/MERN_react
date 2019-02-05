@@ -13,11 +13,12 @@ const styles = theme => ({
     height: "100vh",
     textTransform: "none",
     textAlign: "center",
-    // Photo by Carlos Hevia on Unsplash
-    backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/splash-image.jpeg)`,
+    backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-auth.png)`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center center",
-    backgroundSize: "cover"
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed",
+    boxShadow: "inset 0 0 0 3000px rgba(0, 0, 0, 0.70)"
   },
   logo: {
     marginTop: "60px"

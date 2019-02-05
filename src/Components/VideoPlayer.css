@@ -1,0 +1,14 @@
+ .player-wrapper {
+  position: relative;
+  padding-top: 10px;
+  /* padding-top: 56.25%  */
+ }
+ 
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+} 
+/* video {
+  object-fit: cover;
+} */

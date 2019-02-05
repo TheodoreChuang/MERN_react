@@ -9,6 +9,9 @@ import { withRouter } from "react-router-dom";
 import LocalApi from "./../../apis/local";
 import { connect } from "react-redux";
 import { getCurrentUser } from "./../../actions";
+import swal from "sweetalert";
+import DescriptionOutlined from "@material-ui/icons/DescriptionOutlined";
+import GavelOutlined from "@material-ui/icons/GavelOutlined";
 
 class NewChallengeForm extends Component {
   state = { loading: false };
@@ -33,8 +36,20 @@ class NewChallengeForm extends Component {
     }
 
     this.setState({ loading: true });
-    await LocalApi.post("/challenges/upload", fd);
-    history.push("/challenges");
+    await LocalApi.post("/challenges/upload", fd)
+      .then(res => {
+        // Hide button, and remove alert box after 2s
+        if (res.status === 200) {
+          swal("Success!", "Challenge Created!", "success", {
+            button: false,
+            timer: 2000
+          });
+        }
+        // Redirect after 2s
+        setTimeout(() => history.push("/challenges"), 2000);
+      })
+      // TODO test error path
+      .catch(error => swal(":(", error, "error"));
   };
 
   render() {
@@ -48,6 +63,7 @@ class NewChallengeForm extends Component {
         >
           <div>
             <Field
+              startAdornment={<GavelOutlined />}
               name="title"
               component={Input}
               placeholder="Title of challenge"
@@ -56,6 +72,7 @@ class NewChallengeForm extends Component {
           </div>
           <div>
             <Field
+              startAdornment={<DescriptionOutlined />}
               name="description"
               component={Input}
               placeholder="Description of challenge"
@@ -91,12 +108,8 @@ class NewChallengeForm extends Component {
 
 const WrappedNewChallengeForm = reduxForm({
   form: "upload",
-  validate: ({ title, description, creator_id, video, expiry_date }) => {
+  validate: ({ title, description, video, expiry_date }) => {
     const errors = {};
-
-    if (!creator_id) {
-      errors.creator_id = "Required!";
-    }
 
     if (!title) {
       errors.title = "Required!";

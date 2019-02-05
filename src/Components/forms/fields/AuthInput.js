@@ -10,8 +10,12 @@ const styles = theme => ({
   },
   input: {
     margin: theme.spacing.unit,
-    color: "white",
-    borderBottom: "2px solid white"
+    color: theme.palette.primary.contrastText,
+    borderBottom: `2px solid ${theme.palette.primary.contrastText}`
+  },
+  error: {
+    color: theme.palette.primary.light,
+    marginLeft: "10px"
   }
 });
 
@@ -53,9 +57,7 @@ class AuthInputs extends Component {
           value={other.type === "file" ? current : value}
           onChange={this.onChange}
         />
-        <div style={{ color: "grey", marginLeft: "10px" }}>
-          {touched && error}
-        </div>
+        <div className={classes.error}>{touched && error}</div>
       </div>
     );
   }

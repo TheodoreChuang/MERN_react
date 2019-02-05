@@ -1,0 +1,40 @@
+.custom {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 80vw;
+    margin: 5vw;
+    padding: 0px 20px;
+    /* border: 2px solid purple; */
+    border-radius: 20px;
+}
+
+.custom:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+/* media queries */
+@media only screen and (min-width: 768px ) {
+    .custom {
+        width: 60vw;
+        /* margin: 10vw 10vw 10vw 10vw; */
+    }
+}
+
+@media only screen and (min-width: 1024px ) {
+    .custom {
+        width: 30vw;
+        /* margin-bottom: 15vw; */
+    }
+}
+/* 
+@media only screen and (min-width: 1440px ) {
+    .custom {
+        width: 30vw;
+        margin: 5vw;
+
+    }
+} */
+/* 
+video {
+    object-fit: cover;
+} */

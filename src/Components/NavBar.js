@@ -11,27 +11,29 @@ import {
   ListItemIcon,
   ListItemText,
   IconButton,
-  Typography,
+  Button,
   withStyles
 } from "@material-ui/core/";
 
-import { Edit, AccountCircle, HowToReg, ArrowBack } from "@material-ui/icons/";
-
+import {
+  Edit,
+  AccountCircle,
+  HowToReg,
+  ArrowBack,
+  ExitToApp,
+  ControlPoint
+} from "@material-ui/icons";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import LockIcon from "@material-ui/icons/Https";
-import Add from "@material-ui/icons/AddCircle";
 
 const styles = theme => ({
   root: {
-    width: "100%"
+    width: "100%",
+    marginBottom: "60px"
   },
-  grow: {
-    flexGrow: 1
-  },
-  title: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block"
+  toolbar: {
+    display: "flex",
+    [theme.breakpoints.down("sm")]: {
+      padding: "0px"
     }
   },
   sectionDesktop: {
@@ -45,17 +47,20 @@ const styles = theme => ({
     [theme.breakpoints.up("md")]: {
       display: "none"
     }
+  },
+  feeds: {
+    display: "flex",
+    justifyContent: "space-around",
+    flexGrow: 1
+  },
+  buttonDisable: {
+    borderBottom: `1px solid ${theme.palette.secondary.main}`
   }
 });
 
 class NavBar extends Component {
   state = {
     mobileMoreAnchorEl: null
-  };
-
-  handleMenuClose = () => {
-    this.setState({ anchorEl: null });
-    this.handleMobileMenuClose();
   };
 
   handleMobileMenuOpen = event => {
@@ -67,13 +72,12 @@ class NavBar extends Component {
   };
 
   render() {
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const { classes, admin, removeAuthToken, token, history } = this.props;
-    const isMenuOpen = Boolean(anchorEl);
+    const { mobileMoreAnchorEl } = this.state;
+    const { classes, removeAuthToken, token, history } = this.props;
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const currentPath = window.location.pathname;
 
-    // Mobile view
+    /*** Mobile Menu - hidden but expandable ***/
     const renderMobileMenu = (
       <Menu
         anchorEl={mobileMoreAnchorEl}
@@ -82,15 +86,15 @@ class NavBar extends Component {
         open={isMobileMenuOpen}
         onClose={this.handleMobileMenuClose}
       >
-        {/* Render add challenge button - if admin */}
-        {!currentPath.includes("newchallenge") && admin === true ? (
+        {/* Render add challenge button - only available if logged in */}
+        {token && (
           <MenuItem component={Link} to="/newchallenge">
             <ListItemIcon>
-              <Add />
+              <ControlPoint />
             </ListItemIcon>
             <ListItemText primary="New Challenge" />
           </MenuItem>
-        ) : null}
+        )}
 
         {/* Profile OR Profile Edit - only available if logged in */}
         {token && !currentPath.includes("profile") ? (
@@ -115,19 +119,19 @@ class NavBar extends Component {
         {token ? (
           <MenuItem
             component={Link}
-            to="/landing"
+            to="/login"
             onClick={() => {
               removeAuthToken();
             }}
           >
             <ListItemIcon>
-              <LockIcon />
+              <ExitToApp />
             </ListItemIcon>
             <ListItemText primary="Log Out" />
           </MenuItem>
         ) : null}
         {!token ? (
-          <MenuItem component={Link} to="/landing">
+          <MenuItem component={Link} to="/login">
             <ListItemIcon>
               <HowToReg />
             </ListItemIcon>
@@ -138,9 +142,10 @@ class NavBar extends Component {
     );
 
     return (
+      //***  This section always visible ***/
       <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar className={classes.custom}>
+        <AppBar position="fixed" color="primary">
+          <Toolbar className={classes.toolbar}>
             {/* Back Icon - always available */}
             <IconButton
               color="inherit"
@@ -150,57 +155,52 @@ class NavBar extends Component {
             >
               <ArrowBack />
             </IconButton>
-            {/* <div className={classes.grow} />
-            <div className={classes.sectionDesktop} /> */}
-            {/* <img
-              src="/images/logo.png"
-              height="20px"
-              width="20px"
-              padding="100px"
-            /> */}
 
             {/* submissions feed button */}
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center"
-              }}
-            >
-              <IconButton
-                color="inherit"
-                component={Link}
-                to="/"
-                style={{
-                  backgroundColor: "transparent"
-                }}
-              >
-                newsfeed
-              </IconButton>
+            <div className={classes.feeds}>
+              {currentPath.match(/^\/$/) ? (
+                <Button
+                  disableRipple
+                  color="inherit"
+                  className={classes.buttonDisable}
+                >
+                  Newsfeed
+                </Button>
+              ) : (
+                <Button disableRipple color="inherit" component={Link} to="/">
+                  Newsfeed
+                </Button>
+              )}
 
               {/* challenges feed button */}
-              <IconButton
-                color="inherit"
-                component={Link}
-                to="/challenges"
-                style={{
-                  backgroundColor: "transparent"
-                }}
-              >
-                challenges
-              </IconButton>
+              {currentPath.match(/^\/challenges$/) ? (
+                <Button
+                  disableRipple
+                  color="inherit"
+                  className={classes.buttonDisable}
+                >
+                  Challenges
+                </Button>
+              ) : (
+                <Button
+                  disableRipple
+                  color="inherit"
+                  component={Link}
+                  to="/challenges"
+                >
+                  Challenges
+                </Button>
+              )}
             </div>
-            <div className={classes.grow} />
 
-            {/* Desktop Menu - Hidden on Mobile */}
+            {/*** Desktop Menu - Hidden on Mobile ***/}
             <div className={classes.sectionDesktop}>
-              {/* Add Challenge - if admin  */}
-              {!currentPath.includes("newchallenge") && admin === true ? (
+              {/* Add Challenge - only available if logged in   */}
+              {token && (
                 <IconButton color="inherit" component={Link} to="/newchallenge">
-                  <Add />
+                  <ControlPoint />
                 </IconButton>
-              ) : null}
+              )}
 
               {/* Profile OR Profile Edit - only available if logged in */}
               {token && !currentPath.match(/^\/profile$/) ? (
@@ -220,22 +220,22 @@ class NavBar extends Component {
                 <IconButton
                   color="inherit"
                   component={Link}
-                  to="/landing"
+                  to="/login"
                   onClick={() => {
                     removeAuthToken();
                   }}
                 >
-                  <LockIcon />
+                  <ExitToApp />
                 </IconButton>
               ) : null}
               {!token ? (
-                <IconButton color="inherit" component={Link} to="/landing">
+                <IconButton color="inherit" component={Link} to="/login">
                   <HowToReg />
                 </IconButton>
               ) : null}
             </div>
 
-            {/* For expanding hidden menu on mobile */}
+            {/*** For expanding hidden menu on mobile ***/}
             <div className={classes.sectionMobile}>
               <IconButton
                 aria-haspopup="true"
@@ -255,8 +255,7 @@ class NavBar extends Component {
 
 const mapStateToProps = state => {
   return {
-    token: state.auth.token,
-    admin: state.currentUser.is_admin
+    token: state.auth.token
   };
 };
 

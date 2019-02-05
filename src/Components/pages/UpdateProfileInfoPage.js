@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import NavBar from "../NavBar";
-import AvatarUpload from "./../forms/fields/AvatarUpload";
+import AvatarUploadForm from "../forms/AvatarUploadForm";
+import ChangePasswordForm from "./../forms/ChangePasswordForm";
 import UpdateProfileInfoForm from "./../forms/UpdateProfileInfoForm";
-
 import { Typography, Grid } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   container: {
-    backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-white-abstract.jpg)`,
+    backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-abstract.png)`,
     backgroundRepeat: "repeat",
     backgroundSize: "contain",
     backgroundAttachment: "fixed",
-    boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.90)"
+    boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.97)"
   },
   title: {
     margin: "30px 0px 10px 0px",
@@ -25,11 +25,6 @@ const styles = theme => ({
     textAlign: "center",
     margin: "30px 0 10px 0",
     color: "grey"
-  },
-  typographyBG: {
-    backgroundColor: "rgba(255, 255, 255, 0.30)",
-    borderRadius: "40%",
-    padding: theme.spacing.unit * 2
   }
 });
 
@@ -54,14 +49,16 @@ class UpdateProfileInfoPage extends Component {
                   gutterBottom
                   className={classes.typography}
                 >
-                  <span className={classes.typographyBG}>
-                    Update Your Profile
-                  </span>
+                  Update Your Profile
                 </Typography>
               </div>
 
               <div className={classes.gridItem}>
-                <AvatarUpload />
+                <AvatarUploadForm />
+              </div>
+
+              <div className={classes.gridItem}>
+                <ChangePasswordForm />
               </div>
 
               <div className={classes.gridItem}>
