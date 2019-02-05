@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { randomEmojis } from "./../../data/emoji";
+
 import { withStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -10,7 +12,10 @@ import {
 
 const styles = theme => ({
   card: {
-    minWidth: 260,
+    minWidth: 280,
+    [theme.breakpoints.up("sm")]: {
+      minWidth: 560
+    },
     maxWidth: 560,
     padding: "20px"
   },
@@ -44,23 +49,34 @@ class ProfileInfoCard extends Component {
       <Card>
         <CardContent className={classes.card}>
           <Grid container>
-            <Grid item xs={1} />
-            <Grid item xs={6} container justify="center" alignItems="center">
+            <Grid item xs={1} sm={4} />
+            <Grid
+              item
+              xs={6}
+              sm={4}
+              container
+              justify="center"
+              alignItems="center"
+            >
               <CardMedia
                 className={classes.media}
-                image={profile_image}
+                image={
+                  profile_image ||
+                  randomEmojis[Math.floor(Math.random() * randomEmojis.length)]
+                }
                 title="Profile Picture"
               />
             </Grid>
             <Grid
               item
               xs={5}
+              sm={4}
               container
               direction="column"
               justify="center"
               alignItems="flex-start"
             >
-              <Typography className={classes.typography} variant="button">
+              <Typography className={classes.typography} variant="overline">
                 {gender}
               </Typography>
               <Typography className={classes.typography} variant="caption">

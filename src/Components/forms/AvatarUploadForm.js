@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateCurrentUserAvatar } from "./../../../actions";
+import { updateCurrentUserAvatar } from "../../actions";
+import { randomEmojis } from "../../data/emoji";
 
 import { withStyles } from "@material-ui/core/styles";
 import { Card, CardContent, CardMedia, Grid, Button } from "@material-ui/core/";
@@ -43,7 +44,7 @@ const styles = theme => ({
   }
 });
 
-class AvatarUpload extends Component {
+class AvatarUploadForm extends Component {
   state = {
     file: null
   };
@@ -71,7 +72,10 @@ class AvatarUpload extends Component {
         <Grid container direction="row" alignItems="center" justify="center">
           <CardMedia
             className={classes.media}
-            image={currentUser.profile_image}
+            image={
+              currentUser.profile_image ||
+              randomEmojis[Math.floor(Math.random() * randomEmojis.length)]
+            }
             title="Profile Picture"
           />
 
@@ -119,4 +123,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { updateCurrentUserAvatar }
-)(withStyles(styles)(AvatarUpload));
+)(withStyles(styles)(AvatarUploadForm));

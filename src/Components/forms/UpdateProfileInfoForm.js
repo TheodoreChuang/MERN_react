@@ -3,15 +3,15 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import Input from "./fields/Input";
 import { updateCurrentUser } from "./../../actions";
-import { withStyles } from "@material-ui/core/styles";
+
 import { Card, Fab, Typography } from "@material-ui/core/";
+import { withStyles } from "@material-ui/core/styles";
 import PermIdentity from "@material-ui/icons/PermIdentity";
 import Email from "@material-ui/icons/Email";
 import MyLocationOutlined from "@material-ui/icons/MyLocationOutlined";
 import NaturePeopleOutlined from "@material-ui/icons/NaturePeopleOutlined";
 import ChildCareOutlined from "@material-ui/icons/ChildCareOutlined";
 import FaceOutlined from "@material-ui/icons/FaceOutlined";
-
 
 const styles = theme => ({
   body: {
@@ -213,18 +213,6 @@ const WrappedUpdateInfoForm = reduxForm({
 
     // if (!nickname) {
     //     errors.nickname = "Nickname is required!"
-    // }
-
-    // if (!email) {
-    //     errors.email = "Email is required!"
-    // }
-
-    // if (!password) {
-    //     errors.password = "Password is required!"
-    // }
-
-    // if (!terms_conditions) {
-    //     errors.terms_conditions = "Please confirm your agreement to Terms & Conditions!"
     // }
 
     return errors;

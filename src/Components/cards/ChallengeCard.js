@@ -4,6 +4,10 @@ import { connect } from "react-redux";
 import SocialShareIcon from "./../icons/SocialShareIcon";
 import LocalApi from "./../../apis/local";
 import VideoPlayer from "./../VideoPlayer";
+import moment from "moment";
+import swal from "sweetalert";
+import { randomEmojis } from "./../../data/emoji";
+
 import { withStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -16,11 +20,8 @@ import {
   Avatar,
   IconButton
 } from "@material-ui/core/";
-import red from "@material-ui/core/colors/red";
 import { MoreVert, Favorite, Delete } from "@material-ui/icons";
 import "./ChallengeCard.css";
-import moment from "moment";
-import swal from 'sweetalert';
 
 const styles = theme => ({
   card: {
@@ -51,8 +52,7 @@ const styles = theme => ({
     transform: "rotate(180deg)"
   },
   avatar: {
-    backgroundColor: red[500],
-    border: "2px solid hsl(212, 12%, 72%)"
+    border: "1px solid hsl(212, 12%, 72%)"
   }
 });
 
@@ -131,7 +131,7 @@ class ChallengeCard extends Component {
 
     return (
       <div>
-        <Card className={`${classes.card} custom`}>
+        <Card className={classes.card}>
           <CardHeader
             avatar={
               <Avatar
@@ -139,10 +139,11 @@ class ChallengeCard extends Component {
                 to={`/profile/${user_id}`}
                 aria-label="avatar"
                 className={classes.avatar}
-              >
-                {(profile_image && <img src={profile_image} alt="profile" />) ||
-                  "1Up"}
-              </Avatar>
+                src={
+                  profile_image ||
+                  randomEmojis[Math.floor(Math.random() * randomEmojis.length)]
+                }
+              />
             }
             action={
               <IconButton
@@ -175,37 +176,36 @@ class ChallengeCard extends Component {
             {/* Conditional rendering based on type of card */}
             {/* for challenges */}
             {type === "challenge" && currentUser._id === user_id ? (
-            <IconButton aria-label="Delete"
-              onClick={() => {
-                swal({
-                  title: "Are you sure?",
-                  text: "Once deleted, this challenge and any associated submissions will be deleted.",
-                  icon: "warning",
-                  buttons: true,
-                  dangerMode: true,
-                })
-                .then((willDelete) => {
-                  if (willDelete) {
-                    LocalApi.delete(`/challenges/submissions/${id}`)
-                    .then(res => {
-                      swal("The challenge has been deleted!", {
-                        icon: "success",
-                        button: false,
-                        timer: 2000
-                    });
-                    setTimeout(() => window.location.reload());
-                  })
-                    .catch(error => swal(":(", error, "error"));
-                    
-                  } else {
-                    swal("Your challenge is safe!");
-                  }
-                });
-              }}
-            >
-              <Delete 
-              style={{ marginTop: "-5px" }} />
-            </IconButton>
+              <IconButton
+                aria-label="Delete"
+                onClick={() => {
+                  swal({
+                    title: "Are you sure?",
+                    text:
+                      "Once deleted, this challenge and any associated submissions will be deleted.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                  }).then(willDelete => {
+                    if (willDelete) {
+                      LocalApi.delete(`/challenges/submissions/${id}`)
+                        .then(res => {
+                          swal("The challenge has been deleted!", {
+                            icon: "success",
+                            button: false,
+                            timer: 2000
+                          });
+                          setTimeout(() => window.location.reload());
+                        })
+                        .catch(error => swal(":(", error, "error"));
+                    } else {
+                      swal("Your challenge is safe!");
+                    }
+                  });
+                }}
+              >
+                <Delete style={{ marginTop: "-5px" }} />
+              </IconButton>
             ) : null}
           </CardActions>
         </Card>

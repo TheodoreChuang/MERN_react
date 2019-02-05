@@ -48,12 +48,7 @@ class ProfileCurrentPage extends Component {
       <div>
         <NavBar {...this.props} />
         <div className={classes.container}>
-          <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-          >
+          <Grid container direction="column" alignItems="center">
             <Grid item xs={12} md={8}>
               <div className={classes.cardContainer}>
                 <ProfileInfoCard {...user} />
