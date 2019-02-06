@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import ChallengeCard from "./../cards/ChallengeCard";
 import NavBar from "../NavBar";
 import LocalApi from "./../../apis/local";
-
 import { Grid, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import Loader from "./../Loader";
 
 const styles = theme => ({
   container: {
@@ -28,18 +28,19 @@ const styles = theme => ({
 });
 class ChallengePage extends Component {
   state = {
-    challenges: []
+    challenges: [],
+    loading: true
   };
 
   async componentDidMount() {
     const response = await LocalApi.get("/challenges");
-    this.setState({ challenges: response.data });
+    this.setState({ challenges: response.data, loading: false   });
   }
 
   render() {
     const { match, classes } = this.props;
 
-    const { challenges } = this.state;
+    const { challenges, loading } = this.state;
 
     // Function to dynamically return specific challenge page off the url params
     const challenge = challenges.find(function(chal) {
@@ -48,6 +49,18 @@ class ChallengePage extends Component {
     return (
       <div>
         <NavBar history={this.props.history} />
+
+        {/* Loading animation */}
+        <div
+          style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)"
+        }}> 
+          { loading === true && <Loader /> } 
+        </div>
+
         <div className={classes.container}>
           <Grid
             container

@@ -3,14 +3,14 @@ import NavBar from "./../NavBar";
 import ProfileInfoCard from "../cards/ProfileInfoCard";
 import ChallengeCard from "./../cards/ChallengeCard";
 import LocalApi from "./../../apis/local";
-
+import Loader from "./../Loader";
 import { Grid, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   container: {
     minHeight: "100vh",
-    margin: "-20px 0px 0px -2vw",
+    // margin: "-20px 0px 0px -2vw",
     paddingTop: "20px",
     backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-abstract.png)`,
     backgroundRepeat: "repeat",
@@ -33,7 +33,8 @@ const styles = theme => ({
 
 class ProfilePage extends Component {
   state = {
-    user: null
+    user: null,
+    loading: true
   };
 
   componentDidMount() {
@@ -44,7 +45,7 @@ class ProfilePage extends Component {
     const { match } = this.props;
     try {
       const response = await LocalApi.get(`/profile/${match.params.id}`);
-      this.setState({ user: response.data });
+      this.setState({ user: response.data, loading: false });
     } catch (error) {
       console.warn(error);
     }
@@ -52,11 +53,23 @@ class ProfilePage extends Component {
 
   render() {
     const { classes } = this.props;
-    const { user } = this.state;
+    const { user, loading } = this.state;
 
     return (
       <div>
         <NavBar history={this.props.history} />
+
+        {/* Loading animation */}
+        <div
+          style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)"
+        }}> 
+          { loading === true && <Loader /> } 
+        </div>
+
         <div className={classes.container}>
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12} md={8}>

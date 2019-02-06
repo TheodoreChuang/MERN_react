@@ -8,11 +8,12 @@ import ChallengeCard from "./../cards/ChallengeCard";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import Loader from "./../Loader";
 
 const styles = theme => ({
   container: {
     minHeight: "100vh",
-    margin: "-20px 0px 0px -2vw",
+    // margin: "-20px 0px 0px -2vw",
     paddingTop: "20px",
     backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-abstract.png)`,
     backgroundRepeat: "repeat",
@@ -37,15 +38,33 @@ class ProfileCurrentPage extends Component {
   constructor(props) {
     super(props);
     const { getCurrentUser } = this.props;
-    getCurrentUser();
+    getCurrentUser()
+    .then(res => this.setState({ loading: false }))
   }
+
+  state = {
+    loading: true
+  };
 
   render() {
     const { classes, user } = this.props;
+    const { loading } = this.state;
 
     return (
       <div>
         <NavBar history={this.props.history} />
+
+          {/* Loading animation */}
+          <div
+          style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)"
+        }}> 
+          { loading === true && <Loader /> } 
+        </div>
+
         <div className={classes.container}>
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12} md={8}>

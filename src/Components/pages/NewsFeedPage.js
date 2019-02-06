@@ -3,8 +3,8 @@ import ChallengeCard from "./../cards/ChallengeCard";
 import NavBar from "../NavBar";
 import LocalApi from "./../../apis/local";
 import { withRouter } from "react-router-dom";
-
 import { withStyles } from "@material-ui/core/styles";
+import Loader from "./../Loader";
 
 const styles = theme => ({
   container: {
@@ -21,21 +21,34 @@ const styles = theme => ({
 });
 class NewsFeedPage extends Component {
   state = {
-    submissions: []
+    submissions: [],
+    loading: true
   };
 
   async componentDidMount() {
     const response = await LocalApi.get("/submissions");
-    this.setState({ submissions: response.data });
+    this.setState({ submissions: response.data, loading: false });
   }
 
   render() {
     const { classes } = this.props;
-    const { submissions } = this.state;
+    const { submissions, loading } = this.state;
 
     return (
       <div>
         <NavBar history={this.props.history} />
+
+        {/* Loading animation */}
+        <div
+          style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)"
+        }}> 
+          { loading === true && <Loader /> } 
+        </div>
+
         <div className={classes.container}>
           {/* submissions feed */}
           {submissions &&
