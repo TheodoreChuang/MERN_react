@@ -87,7 +87,9 @@ console.log("here");
         // Redirect after 2s
         setTimeout(() => history.push("/"), 2000);
       })
-      .catch(error => swal(":(", `${error}`, "error"));
+      .catch(error => {
+        swal(":(", `${error.response.data}`, "error");
+      })
   };
 
   render() {
