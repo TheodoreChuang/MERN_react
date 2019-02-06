@@ -65,16 +65,16 @@ class ShareSocialIcon extends React.Component {
             <List component="nav" className={classes.list}>
               <ListItem button>
                 <a
-                  class="resp-sharing-button__link"
+                  className="resp-sharing-button__link"
                   href={`https://facebook.com/sharer/sharer.php?u=http%3A%2F%2F1up-app.s3-website-ap-southeast-2.amazonaws.com%2Fchallenges%2F${id}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Share on Facebook"
                 >
-                  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--large">
+                  <div className="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--large">
                     <div
                       aria-hidden="true"
-                      class="resp-sharing-button__icon resp-sharing-button__icon--solid"
+                      className="resp-sharing-button__icon resp-sharing-button__icon--solid"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -90,16 +90,16 @@ class ShareSocialIcon extends React.Component {
 
               <ListItem button>
                 <a
-                  class="resp-sharing-button__link"
+                  className="resp-sharing-button__link"
                   href={`https://twitter.com/intent/tweet/?text=Are%20you%20up%20for%20the%20challenge%3F&amp;url=http%3A%2F%2F1up-app.s3-website-ap-southeast-2.amazonaws.com%2Fchallenges%2F${id}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Share on Twitter"
                 >
-                  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--large">
+                  <div className="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--large">
                     <div
                       aria-hidden="true"
-                      class="resp-sharing-button__icon resp-sharing-button__icon--solid"
+                      className="resp-sharing-button__icon resp-sharing-button__icon--solid"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -115,16 +115,16 @@ class ShareSocialIcon extends React.Component {
 
               <ListItem button>
                 <a
-                  class="resp-sharing-button__link"
+                  className="resp-sharing-button__link"
                   href={`https://www.tumblr.com/widgets/share/tool?posttype=link&amp;title=Are%20you%20up%20for%20the%20challenge%3F&amp;caption=Are%20you%20up%20for%20the%20challenge%3F&amp;content=http%3A%2F%2F1up-app.s3-website-ap-southeast-2.amazonaws.com%2Fchallenges%2F${id}&amp;canonicalUrl=http%3A%2F%2F1up-app.s3-website-ap-southeast-2.amazonaws.com%2Fchallenges%2F${id}&amp;shareSource=tumblr_share_button`}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Share on Tumblr"
                 >
-                  <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--large">
+                  <div className="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--large">
                     <div
                       aria-hidden="true"
-                      class="resp-sharing-button__icon resp-sharing-button__icon--solid"
+                      className="resp-sharing-button__icon resp-sharing-button__icon--solid"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

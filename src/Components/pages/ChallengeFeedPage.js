@@ -35,7 +35,7 @@ class ChallengeFeedPage extends Component {
 
     return (
       <div>
-        <NavBar {...this.props} />
+        <NavBar history={this.props.history} />
         <div className={classes.container}>
           {/* challenges feed */}
           {challenges &&

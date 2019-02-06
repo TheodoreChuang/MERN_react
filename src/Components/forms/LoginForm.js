@@ -47,11 +47,11 @@ const styles = theme => ({
   },
   signin: {
     margin: "10px",
-    padding: "20px",
-    color: "white"
+    padding: "20px 0px 20px 0px",
+    color: theme.palette.primary.contrastText
   },
   link: {
-    margin: theme.spacing.unit,
+    marginLeft: theme.spacing.unit,
     color: theme.palette.primary.main,
     textDecoration: "none"
   },
@@ -157,8 +157,8 @@ class LoginForm extends Component {
               </Fab>
             </div>
             <div>
-              <Typography className={classes.signin} component="caption">
-                Don't have an account?
+              <Typography className={classes.signin} variant="caption">
+                Dont have an account?
                 <Link to="/register" className={classes.link}>
                   Sign Up
                 </Link>
@@ -180,10 +180,14 @@ const WrappedRegisterForm = reduxForm({
 
     if (!email) {
       errors.email = "Email is required!";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      errors.email = "Invalid email address";
     }
 
     if (!password) {
       errors.password = "Password is required!";
+    } else if (password.length < 6 || password.length > 40) {
+      errors.password = "Must be between 6 and 40 characters";
     }
 
     return errors;

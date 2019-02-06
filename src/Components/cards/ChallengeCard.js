@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import SocialShareIcon from "./../icons/SocialShareIcon";
 import LocalApi from "./../../apis/local";
@@ -23,10 +23,6 @@ import {
 } from "@material-ui/core/";
 import { MoreVert, Favorite, Delete } from "@material-ui/icons";
 import "./ChallengeCard.css";
-
-const size = {
-  iPad: 768
-}
 
 const styles = theme => ({
   card: {
@@ -102,7 +98,6 @@ class ChallengeCard extends Component {
     const { anchorEl } = this.state;
     const isMenuOpen = Boolean(anchorEl);
     const {
-      sub_id,
       type,
       classes,
       currentUser,
@@ -196,9 +191,7 @@ class ChallengeCard extends Component {
             {/* Conditional rendering based on type of card */}
             {/* for challenges */}
             {type === "challenge" && currentUser._id === user_id ? (
-              <IconButton
-                aria-label="Delete"
-                className={classes.actionButton}
+              <span
                 onClick={() => {
                   swal({
                     title: "Are you sure?",
@@ -225,8 +218,13 @@ class ChallengeCard extends Component {
                   });
                 }}
               >
-                <Delete style={{ marginTop: "-5px" }} />
-              </IconButton>
+                <IconButton
+                  aria-label="Delete"
+                  className={classes.actionButton}
+                >
+                  <Delete style={{ marginTop: "-5px" }} />
+                </IconButton>
+              </span>
             ) : null}
           </CardActions>
 
@@ -251,6 +249,14 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(
-  withStyles(styles)(withRouter(ChallengeCard))
-);
+// withRouter required???
+// export default withRouter(
+//   connect(mapStateToProps)(withStyles(styles)(ChallengeCard))
+// );
+
+const Wrapped = connect(
+  mapStateToProps,
+  {}
+)(ChallengeCard);
+
+export default withStyles(styles)(Wrapped);

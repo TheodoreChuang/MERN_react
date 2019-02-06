@@ -198,7 +198,7 @@ console.log("here");
         </div>
 
         <div>
-          <Typography className={classes.signin} component="caption">
+          <Typography className={classes.signin} variant="caption">
             Already have an account?
             <Link to="/login" className={classes.link}>
               Sign in
@@ -248,15 +248,16 @@ const WrappedRegisterForm = reduxForm({
 
     if (!password) {
       errors.password = "Required!";
+    } else if (password.length < 6 || password.length > 40) {
+      errors.password = "Must be between 6 and 40 characters";
     }
-    // FIXME
-    // else if (password.length < 6 && password.length > 40) {
-    //   errors.password = "Must be between 6 and 40 characters";
-    // }
 
-    if (!terms_conditions) {
-      errors.terms_conditions = "Required!";
-    }
+    // FIXME
+    // if (!terms_conditions) {
+    //   errors.terms_conditions = "Required!";
+    // } else if (terms_conditions !== "checked") {
+    //   errors.terms_conditions = "Accept!";
+    // }
 
     return errors;
   }

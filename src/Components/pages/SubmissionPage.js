@@ -35,7 +35,7 @@ class SubmissionPage extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <NavBar {...this.props} />
+        <NavBar history={this.props.history} />
         <div className={classes.container}>
           <Card className={classes.card}>
             <Typography
