@@ -78,7 +78,7 @@ class CustomizedDialogDemo extends Component {
         <Button
           size="small"
           color="primary"
-          disableRipple="true"
+          disableRipple
           style={{
             backgroundColor: "transparent",
             textTransform: "none",

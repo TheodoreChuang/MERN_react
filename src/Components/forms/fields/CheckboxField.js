@@ -20,7 +20,6 @@ class CheckboxLabels extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { classes, input, meta, ...other } = this.props;
     const { onChange, value, ...otherInput } = input;
 

@@ -33,7 +33,7 @@ class NewsFeedPage extends Component {
 
     return (
       <div>
-        <NavBar {...this.props} />
+        <NavBar history={this.props.history} />
         <div className={classes.container}>
           {/* submissions feed */}
           {submissions &&

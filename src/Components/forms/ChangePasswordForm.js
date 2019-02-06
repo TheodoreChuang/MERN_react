@@ -44,7 +44,7 @@ class ChangePasswordForm extends Component {
       })
       .catch(err => {
         this.setState({ error: true });
-        return swal(":(", err, "error");
+        return swal(":(", `${err}`, "error");
       });
   };
 
@@ -99,10 +99,14 @@ const WrappedChangePasswordForm = reduxForm({
 
     if (!password) {
       errors.password = "Current password is required!";
+    } else if (password.length < 6 || password.length > 40) {
+      errors.password = "Must be between 6 and 40 characters";
     }
 
     if (!new_password) {
       errors.new_password = "New password is required!";
+    } else if (password.length < 6 || password.length > 40) {
+      errors.password = "Must be between 6 and 40 characters";
     }
 
     if (new_password !== confirm_password) {

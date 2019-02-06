@@ -79,7 +79,7 @@ class UpdateProfileInfoForm extends Component {
     //     })
     //     .catch(err => {
     //       this.setState({ error: true });
-    //       return swal(":(", err, "error");
+    //       return swal(":(", `${err}`, "error");
     //     });
   };
 

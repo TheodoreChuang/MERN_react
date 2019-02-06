@@ -36,15 +36,16 @@ class ChallengePage extends Component {
 
   render() {
     const { match, classes } = this.props;
+
     const { challenges } = this.state;
 
     // Function to dynamically return specific challenge page off the url params
     const challenge = challenges.find(function(chal) {
-      return parseInt(chal._id) === parseInt(match.params.id);
+      return chal._id === match.params.id;
     });
     return (
       <div>
-        <NavBar {...this.props} />
+        <NavBar history={this.props.history} />
         <div className={classes.container}>
           <Grid
             container
@@ -63,6 +64,7 @@ class ChallengePage extends Component {
               </Typography>
               {challenge && (
                 <ChallengeCard
+                  key={challenge._id}
                   type="challenge"
                   hideMoreDetail={true}
                   id={challenge._id}
@@ -87,7 +89,7 @@ class ChallengePage extends Component {
               {challenge &&
                 challenge.submissions.map(sub => {
                   return (
-                    <div key={sub.video_url}>
+                    <div key={sub._id}>
                       <ChallengeCard
                         type="submission"
                         hideMoreDetail={true}

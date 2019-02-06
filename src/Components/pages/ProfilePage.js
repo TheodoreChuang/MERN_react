@@ -51,7 +51,7 @@ class ProfilePage extends Component {
 
     return (
       <div>
-        <NavBar {...this.props} />
+        <NavBar history={this.props.history} />
         <div className={classes.container}>
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12} md={8}>
