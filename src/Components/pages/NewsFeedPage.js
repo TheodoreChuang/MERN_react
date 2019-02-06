@@ -11,7 +11,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.light,
     display: "flex",
     alignItems: "center",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   cardContainer: {
     marginTop: "20px"

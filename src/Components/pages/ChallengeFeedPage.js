@@ -16,7 +16,8 @@ const styles = theme => ({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
-    padding: "20px"
+    padding: "20px",
+    height: "100%"
   }
 });
 class ChallengeFeedPage extends Component {

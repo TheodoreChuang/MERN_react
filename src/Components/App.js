@@ -33,7 +33,7 @@ import { withStyles } from "@material-ui/core/styles";
 // });
 
 const styles = theme => ({
-  root: { margin: "-9px" }
+  // root: { margin: "-9px" }
 });
 
 class App extends Component {
