@@ -23,7 +23,10 @@ const styles = theme => ({
   container: {
     display: "flex",
     maxWidth: "400px",
-    margin: "50px auto 0 auto",
+    margin: "0px",
+    [theme.breakpoints.up("sm")]: {
+      margin: "50px auto 0 auto"
+    },
     position: "center",
     flexDirection: "column",
     justifyContent: "center",
@@ -36,7 +39,7 @@ const styles = theme => ({
     textTransform: "none"
   },
   font: {
-    color: "white"
+    color: theme.palette.primary.contrastText
   },
   checkboxButton: {
     display: "flex",
@@ -47,7 +50,7 @@ const styles = theme => ({
   signin: {
     margin: "10px",
     padding: "20px",
-    color: "white"
+    color: theme.palette.primary.contrastText
   },
   link: {
     margin: theme.spacing.unit,
@@ -67,7 +70,7 @@ class RegisterForm extends Component {
       terms_conditions
     } = formValues;
     const { setAuthToken, history } = this.props;
-
+console.log("here");
     LocalApi.post("/register", {
       first_name,
       last_name,
@@ -87,7 +90,9 @@ class RegisterForm extends Component {
         // Redirect after 2s
         setTimeout(() => history.push("/"), 2000);
       })
-      .catch(error => swal(":(", `${error}`, "error"));
+      .catch(error => {
+        swal(":(", `${error.response.data}`, "error");
+      })
   };
 
   render() {
@@ -96,7 +101,7 @@ class RegisterForm extends Component {
 
     return (
       <div className={classes.body}>
-        <div className={classes.container} onSubmit={this.onRegisterFormSubmit}>
+        <div className={classes.container}>
           <form onSubmit={handleSubmit(this.onRegisterFormSubmit)}>
             <Field
               startAdornment={<PermIdentity />}
@@ -107,7 +112,7 @@ class RegisterForm extends Component {
               fullWidth
               value
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "first name"
               }}
             />
             <Field
@@ -118,7 +123,7 @@ class RegisterForm extends Component {
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "last name"
               }}
             />
             <Field
@@ -129,7 +134,7 @@ class RegisterForm extends Component {
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "nickname"
               }}
             />
             <Field
@@ -140,7 +145,7 @@ class RegisterForm extends Component {
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "email"
               }}
               type="email"
             />
@@ -152,7 +157,7 @@ class RegisterForm extends Component {
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "password"
               }}
               type="password"
             />
@@ -186,7 +191,7 @@ class RegisterForm extends Component {
                 type="submit"
                 variant="extended"
                 color="primary"
-                aria-label="Register"
+                aria-label="submit button"
                 className={classes.button}
               >
                 Register

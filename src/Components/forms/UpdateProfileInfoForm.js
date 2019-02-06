@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-// import swal from "sweetalert";
 import Input from "./fields/Input";
 import { updateCurrentUser } from "./../../actions";
 
@@ -26,7 +25,6 @@ const styles = theme => ({
     position: "center",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center"
   },
   input: {
     margin: theme.spacing.unit,
@@ -55,7 +53,10 @@ const styles = theme => ({
   }
 });
 
+
+
 class UpdateProfileInfoForm extends Component {
+
   updateUserFormSubmit = formValues => {
     this.props.updateCurrentUser(formValues);
     this.props.history.push("/profile");
@@ -86,7 +87,7 @@ class UpdateProfileInfoForm extends Component {
   render() {
     const { classes } = this.props;
     const { handleSubmit } = this.props;
-
+    console.log(this.props.currentUser);
     return (
       <Card className={classes.body}>
         <div className={classes.container} onSubmit={this.updateUserFormSubmit}>
@@ -100,7 +101,7 @@ class UpdateProfileInfoForm extends Component {
               fullWidth
               value
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "first name"
               }}
             />
             <Field
@@ -111,7 +112,7 @@ class UpdateProfileInfoForm extends Component {
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "last name"
               }}
             />
             <Field
@@ -122,7 +123,7 @@ class UpdateProfileInfoForm extends Component {
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "nickname"
               }}
             />
             <Field
@@ -133,7 +134,7 @@ class UpdateProfileInfoForm extends Component {
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "age"
               }}
             />
             <Field
@@ -144,7 +145,7 @@ class UpdateProfileInfoForm extends Component {
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "location"
               }}
             />
             <Field
@@ -200,6 +201,7 @@ class UpdateProfileInfoForm extends Component {
                   color="primary"
                   aria-label="Add"
                   className={classes.margin}
+                  style={{ textTransform: "none" }}
                 >
                   Update
                 </Fab>
@@ -214,6 +216,7 @@ class UpdateProfileInfoForm extends Component {
 
 const WrappedUpdateInfoForm = reduxForm({
   form: "updateUser",
+  enableReinitialize: true,
   validate: ({ first_name, last_name, nickname, bio, age, location }) => {
     const errors = {};
 
@@ -249,7 +252,8 @@ const WrappedUpdateInfoForm = reduxForm({
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    initialValues: state.currentUser
   };
 };
 

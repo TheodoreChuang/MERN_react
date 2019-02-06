@@ -46,6 +46,7 @@ class Inputs extends Component {
     return (
       <div className={classes.container}>
         <Input
+          style={{ margin: "5px"}}
           {...other}
           {...otherInput}
           className={classes.input}

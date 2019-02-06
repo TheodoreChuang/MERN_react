@@ -25,7 +25,7 @@ const styles = theme => ({
     marginTop: "60px"
   },
   font: {
-    color: "white"
+    color: theme.palette.primary.contrastText
   },
   button: {
     margin: theme.spacing.unit,

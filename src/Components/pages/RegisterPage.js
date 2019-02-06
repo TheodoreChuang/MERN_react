@@ -9,7 +9,7 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     height: "100vh",
     textTransform: "none",
     textAlign: "center",
@@ -21,16 +21,13 @@ const styles = theme => ({
     boxShadow: "inset 0 0 0 3000px rgba(0, 0, 0, 0.70)"
   },
   logo: {
-    marginTop: "60px"
+    marginTop: "10px",
+    [theme.breakpoints.up("sm")]: {
+      marginTop: "60px"
+    }
   },
   font: {
-    color: "white"
-  },
-  button: {
-    margin: theme.spacing.unit,
-    width: "250px",
-    borderRadius: "50px",
-    textTransform: "none"
+    color: theme.palette.primary.contrastText
   }
 });
 

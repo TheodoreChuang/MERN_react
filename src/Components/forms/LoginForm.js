@@ -83,7 +83,7 @@ class LoginForm extends Component {
     const { hasError } = this.state;
 
     return (
-      <div className={classes.container} onSubmit={this.onRegisterFormSubmit}>
+      <div className={classes.container}>
         <form onSubmit={handleSubmit(this.onLoginFormSubmit)}>
           <Field
             startAdornment={<Email />}
@@ -93,7 +93,7 @@ class LoginForm extends Component {
             className={classes.input}
             fullWidth
             inputProps={{
-              "aria-label": "Description"
+              "aria-label": "email"
             }}
           />
           <Field
@@ -105,7 +105,7 @@ class LoginForm extends Component {
             className={classes.input}
             fullWidth
             inputProps={{
-              "aria-label": "Description"
+              "aria-label": "password"
             }}
           />
           {hasError ? (
@@ -127,6 +127,7 @@ class LoginForm extends Component {
                   content="A link will be emailed to the address you provide below with instructions."
                   submitButtonText="Send"
                   action={value => {
+                    (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) === true ?
                     LocalApi.post("/reseturl", {
                       email: value
                     })
@@ -139,20 +140,17 @@ class LoginForm extends Component {
                         }
                       })
                       .catch(err => {
-                        let error = "";
-                        for (let i in err.response.data) {
-                          error += `${err.response.data[i]} \r\n`;
-                        }
-                        return swal(":(", `${error}`, "error");
-                      });
-                  }}
+                        return swal(":(", err.response.data, "warning");
+                      })
+                    : swal(":(", "Invalid email!", "error")
+                    )}}
                 />
               </div>
               <Fab
                 type="submit"
                 variant="extended"
                 color="primary"
-                aria-label="Add"
+                aria-label="log in"
                 className={classes.button}
               >
                 Log In

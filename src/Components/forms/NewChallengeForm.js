@@ -89,7 +89,12 @@ class NewChallengeForm extends Component {
             />
           </div>
           <div>
-            <Field name="video" component={Input} type="file" />
+            <Field 
+            name="video" 
+            component={Input} 
+            type="file" 
+            inputProps= {{accept:"video/*" }}
+            />
           </div>
           <div>
             <Button style={{ textTransform: "none" }} type="submit">

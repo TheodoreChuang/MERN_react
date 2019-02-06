@@ -22,14 +22,7 @@ class ChangePasswordForm extends Component {
 
   onFormSubmit = (formValues, dispatch) => {
     const { history } = this.props;
-    const { password, new_password, confirm_password } = formValues;
-
-    if (new_password !== confirm_password) {
-      return swal(":(", "Passwords did not match!", "error", {
-        button: false,
-        timer: 2000
-      });
-    }
+    const { password, new_password } = formValues;
 
     LocalApi.put(`/changepassword`, { password, new_password })
       .then(res => {
