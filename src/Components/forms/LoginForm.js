@@ -93,7 +93,7 @@ class LoginForm extends Component {
             className={classes.input}
             fullWidth
             inputProps={{
-              "aria-label": "Description"
+              "aria-label": "email"
             }}
           />
           <Field
@@ -105,7 +105,7 @@ class LoginForm extends Component {
             className={classes.input}
             fullWidth
             inputProps={{
-              "aria-label": "Description"
+              "aria-label": "password"
             }}
           />
           {hasError ? (
@@ -150,7 +150,7 @@ class LoginForm extends Component {
                 type="submit"
                 variant="extended"
                 color="primary"
-                aria-label="Add"
+                aria-label="log in"
                 className={classes.button}
               >
                 Log In
@@ -158,7 +158,7 @@ class LoginForm extends Component {
             </div>
             <div>
               <Typography className={classes.signin} component="caption">
-                Dont have an account?
+                Don't have an account?
                 <Link to="/register" className={classes.link}>
                   Sign Up
                 </Link>

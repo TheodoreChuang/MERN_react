@@ -183,7 +183,7 @@ class ChallengeCard extends Component {
                 onClick={() => {
                   swal({
                     title: "Thank you for the like!",
-                    text: "Stay tune for this future feature!",
+                    text: "Stay tuned for this future feature!",
                     icon: "info",
                     buttons: { text: "OK" }
                   });

@@ -109,7 +109,7 @@ console.log("here");
               fullWidth
               value
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "first name"
               }}
             />
             <Field
@@ -120,7 +120,7 @@ console.log("here");
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "last name"
               }}
             />
             <Field
@@ -131,7 +131,7 @@ console.log("here");
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "nickname"
               }}
             />
             <Field
@@ -142,7 +142,7 @@ console.log("here");
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "email"
               }}
               type="email"
             />
@@ -154,7 +154,7 @@ console.log("here");
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "password"
               }}
               type="password"
             />
@@ -188,7 +188,7 @@ console.log("here");
                 type="submit"
                 variant="extended"
                 color="primary"
-                aria-label="Register"
+                aria-label="submit button"
                 className={classes.button}
               >
                 Register

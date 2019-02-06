@@ -101,7 +101,7 @@ class UpdateProfileInfoForm extends Component {
               fullWidth
               value
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "first name"
               }}
             />
             <Field
@@ -112,7 +112,7 @@ class UpdateProfileInfoForm extends Component {
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "last name"
               }}
             />
             <Field
@@ -123,7 +123,7 @@ class UpdateProfileInfoForm extends Component {
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "nickname"
               }}
             />
             <Field
@@ -134,7 +134,7 @@ class UpdateProfileInfoForm extends Component {
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "age"
               }}
             />
             <Field
@@ -145,7 +145,7 @@ class UpdateProfileInfoForm extends Component {
               className={classes.input}
               fullWidth
               inputProps={{
-                "aria-label": "Description"
+                "aria-label": "location"
               }}
             />
             <Field

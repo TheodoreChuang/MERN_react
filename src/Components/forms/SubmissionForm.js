@@ -28,13 +28,13 @@ class SubmissionForm extends Component {
     this.setState({ loading: true });
     await LocalApi.post(`/challenges/${match.params.id}/submissions`, fd)
       .then(res => {
-        // if (res.status === 200) {
-        //   // Hide button, and remove alert box after 2s
-        //   swal("Success!", "File uploaded!", "success", {
-        //     button: false,
-        //     timer: 2000
-        //   });
-        // }
+        if (res.status === 200) {
+          // Hide button, and remove alert box after 2s
+          swal("Success!", "File uploaded!", "success", {
+            button: false,
+            timer: 2000
+          });
+        }
         // Redirect after 2s
         setTimeout(() => history.push("/"), 2000);
       })
