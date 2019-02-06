@@ -69,7 +69,12 @@ class SubmissionForm extends Component {
           />
         </div>
         <div>
-          <Field name="video" component={Input} type="file" />
+          <Field 
+          name="video" 
+          component={Input} 
+          type="file" 
+          inputProps= {{accept:"video/*" }}
+          />
         </div>
         <div>
           <Button
