@@ -33,14 +33,11 @@ const styles = theme => ({
     // width: "80vw",
   },
   header: {
-    borderBottom: "1px solid hsl(212, 12%, 72%)"
+    borderBottom: "1px solid hsl(212, 12%, 72%)",
+    padding: `${theme.spacing.unit * 2}px 0px`
   },
   avatar: {
     border: "1px solid hsl(212, 12%, 72%)"
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
   },
   media: {
     height: 0,
@@ -51,7 +48,7 @@ const styles = theme => ({
       .spacing.unit * 0.5}px ${theme.spacing.unit * 2}px`
   },
   actions: {
-    display: "flex"
+    padding: `${theme.spacing.unit}px 0px`
   },
   actionButton: {
     padding: `${theme.spacing.unit}px`
@@ -159,7 +156,6 @@ class ChallengeCard extends Component {
             }
             action={
               <IconButton
-                className={classes.menuButton}
                 color="inherit"
                 aria-label="Open drawer"
                 onClick={this.handleProfileMenuOpen}
@@ -173,7 +169,9 @@ class ChallengeCard extends Component {
           <VideoPlayer url={video_url} />
 
           <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton aria-label="Like this" className={classes.actionButton}
+            <IconButton
+              aria-label="Like this"
+              className={classes.actionButton}
               onClick={() => {
                 swal({
                   title: "Thank you for the like!",
@@ -181,7 +179,8 @@ class ChallengeCard extends Component {
                   icon: "info",
                   buttons: { text: "OK" }
                 });
-              }}>
+              }}
+            >
               <Favorite />
             </IconButton>
             <IconButton aria-label="Share" className={classes.actionButton}>
@@ -190,7 +189,9 @@ class ChallengeCard extends Component {
             {/* Conditional rendering based on type of card */}
             {/* for challenges */}
             {type === "challenge" && currentUser._id === user_id ? (
-              <span
+              <IconButton
+                aria-label="Delete"
+                className={classes.actionButton}
                 onClick={() => {
                   swal({
                     title: "Are you sure?",
@@ -217,13 +218,8 @@ class ChallengeCard extends Component {
                   });
                 }}
               >
-                <IconButton
-                  aria-label="Delete"
-                  className={classes.actionButton}
-                >
-                  <Delete style={{ marginTop: "-5px" }} />
-                </IconButton>
-              </span>
+                <Delete style={{ marginTop: "-5px" }} />
+              </IconButton>
             ) : null}
           </CardActions>
 

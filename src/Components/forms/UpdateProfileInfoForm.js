@@ -24,7 +24,7 @@ const styles = theme => ({
     margin: "30px auto 0 auto",
     position: "center",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   input: {
     margin: theme.spacing.unit,
@@ -53,19 +53,15 @@ const styles = theme => ({
   }
 });
 
-
-
 class UpdateProfileInfoForm extends Component {
-
   updateUserFormSubmit = formValues => {
     this.props.updateCurrentUser(formValues);
     this.props.history.push("/profile");
 
-    // Action does update but no visual response for user
+    // FIXME - Action does update but no visual response for user
     // FIXME - handle response both success and failure
     // updateUserFormSubmit = (formValues, dispatch) => {
     //   const { updateCurrentUser, history } = this.props;
-
     //   updateCurrentUser(formValues)
     //     .then(res => {
     //       console.log(res);
@@ -87,7 +83,7 @@ class UpdateProfileInfoForm extends Component {
   render() {
     const { classes } = this.props;
     const { handleSubmit } = this.props;
-    console.log(this.props.currentUser);
+
     return (
       <Card className={classes.body}>
         <div className={classes.container} onSubmit={this.updateUserFormSubmit}>

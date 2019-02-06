@@ -12,6 +12,7 @@ import Grid from "@material-ui/core/Grid";
 const styles = theme => ({
   container: {
     minHeight: "100vh",
+    marginLeft: "-12px",
     backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-abstract.png)`,
     backgroundRepeat: "repeat",
     backgroundSize: "contain",
