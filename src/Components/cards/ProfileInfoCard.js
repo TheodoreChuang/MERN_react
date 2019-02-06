@@ -79,9 +79,11 @@ class ProfileInfoCard extends Component {
               <Typography className={classes.typography} variant="overline">
                 {gender}
               </Typography>
-              <Typography className={classes.typography} variant="caption">
-                {age} years old
-              </Typography>
+              {age && (
+                <Typography className={classes.typography} variant="caption">
+                  {age} years old
+                </Typography>
+              )}
               <Typography className={classes.typography} variant="caption">
                 {location}
               </Typography>

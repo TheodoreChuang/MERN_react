@@ -4,7 +4,7 @@ import { updateCurrentUserAvatar } from "../../actions";
 import { randomEmojis } from "../../data/emoji";
 
 import { withStyles } from "@material-ui/core/styles";
-import { Card, CardMedia, Grid, Button } from "@material-ui/core/";
+import { Card, CardMedia, Grid, Button, Typography } from "@material-ui/core/";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
 const styles = theme => ({
@@ -40,12 +40,14 @@ const styles = theme => ({
   },
   rightIcon: {
     marginLeft: theme.spacing.unit
-  }
+  },
+  fileError: { color: theme.palette.secondary.dark }
 });
 
 class AvatarUploadForm extends Component {
   state = {
-    file: null
+    file: null,
+    fileError: false
   };
 
   onSubmit = async event => {
@@ -57,6 +59,10 @@ class AvatarUploadForm extends Component {
 
       updateCurrentUserAvatar(formData);
       event.target.querySelector("input").value = null;
+      this.setState({ fileError: false });
+    }
+    if (this.state.file === null) {
+      this.setState({ fileError: true });
     }
   };
 
@@ -66,10 +72,12 @@ class AvatarUploadForm extends Component {
 
   render() {
     const { classes, currentUser } = this.props;
+    const { fileError } = this.state;
 
     return (
       <Card className={classes.container}>
         <Grid container direction="row" alignItems="center" justify="center">
+          {/* Current Profile Photo */}
           <CardMedia
             className={classes.media}
             image={
@@ -87,7 +95,15 @@ class AvatarUploadForm extends Component {
               type="file"
               onChange={this.onChange}
             />
-            <Button raised type="submit">
+
+            {/* Error - if submit and no file chosen */}
+            {fileError ? (
+              <Typography variant="caption" className={classes.fileError}>
+                No image was selected for upload
+              </Typography>
+            ) : null}
+
+            <Button style={{ textTransform: "none" }} type="submit">
               Upload Photo <CloudUploadIcon className={classes.rightIcon} />
             </Button>
           </form>

@@ -49,7 +49,7 @@ class NewChallengeForm extends Component {
         setTimeout(() => history.push("/challenges"), 2000);
       })
       // TODO test error path
-      .catch(error => swal(":(", error, "error"));
+      .catch(error => swal(":(", `${error}`, "error"));
   };
 
   render() {
@@ -113,20 +113,24 @@ const WrappedNewChallengeForm = reduxForm({
 
     if (!title) {
       errors.title = "Required!";
+    } else if (title.length > 60) {
+      errors.title = "Must be 60 characters or less";
     }
 
-    if (!description) {
-      errors.description = "Required!";
+    if (description && description.length > 360) {
+      errors.description = "Must be 360 characters or less";
     }
 
     if (Date.parse(expiry_date) < Date.parse(DateHelper())) {
       errors.expiry_date = "Invalid!";
     }
 
-    if (video) {
-      if (video.length < 1) {
-        errors.video = "Required!";
-      }
+    if (!video) {
+      errors.video = "Required!";
+    }
+
+    if (video && video.length < 1) {
+      errors.video = "Required!";
     }
 
     return errors;

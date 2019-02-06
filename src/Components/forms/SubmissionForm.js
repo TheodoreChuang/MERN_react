@@ -38,7 +38,7 @@ class SubmissionForm extends Component {
         // Redirect after 2s
         setTimeout(() => history.push("/"), 2000);
       })
-      .catch(error => swal(":(", error, "error"));
+      .catch(error => swal(":(", `${error}`, "error"));
   };
 
   render() {
@@ -90,20 +90,25 @@ class SubmissionForm extends Component {
 
 const WrappedSubmissionForm = reduxForm({
   form: "submission",
-  validate: ({ title, video }) => {
+  validate: ({ title, description, video }) => {
     const errors = {};
 
     if (!title) {
       errors.title = "Required!";
+    } else if (title.length > 60) {
+      errors.title = "Must be 60 characters or less";
+    }
+
+    if (description && description.length > 360) {
+      errors.description = "Must be 360 characters or less";
     }
 
     if (!video) {
       errors.video = "Required!";
     }
-    if (video) {
-      if (video.length < 1) {
-        errors.video = "Required!";
-      }
+
+    if (video && video.length < 1) {
+      errors.video = "Required!";
     }
 
     return errors;

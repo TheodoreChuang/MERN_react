@@ -23,14 +23,14 @@ import NotFoundPage from "./pages/NotFoundPage";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import theme from "./theme";
 import { withStyles } from "@material-ui/core/styles";
-import WebFont from "webfontloader";
+// import WebFont from "webfontloader";
 
 // Module to help import google fonts
-WebFont.load({
-  google: {
-    families: ["Muli", "sans-serif"]
-  }
-});
+// WebFont.load({
+//   google: {
+//     families: ["Muli", "sans-serif"]
+//   }
+// });
 
 const styles = theme => ({
   root: { margin: "-9px" }

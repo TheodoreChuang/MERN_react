@@ -27,7 +27,7 @@ class NotFoundPage extends Component {
 
     return (
       <div>
-        <NavBar {...this.props} />
+        <NavBar history={this.props.history} />
 
         <div className={classes.container}>
           <h1 className={classes.font}>Page not found</h1>
