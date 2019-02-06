@@ -10,18 +10,18 @@ import { withStyles } from "@material-ui/core/styles";
 const styles = theme => ({
   container: {
     minHeight: "100vh",
-    marginLeft: "-12px",
+    marginLeft: "-2vw",
     backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-abstract.png)`,
     backgroundRepeat: "repeat",
     backgroundSize: "contain",
     backgroundAttachment: "fixed",
-    boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.97)"
+    boxShadow: "inset 0 0 0 100vw rgba(255, 255, 255, 0.97)"
   },
   profileContainer: {
     margin: "20px"
   },
   subsContainer: {
-    margin: "20px 20px 20px 0px"
+    margin: "20px 20px 20px 1vw"
   },
   typography: {
     textAlign: "center",

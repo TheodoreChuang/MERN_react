@@ -15,7 +15,7 @@ const styles = theme => ({
     backgroundRepeat: "repeat",
     backgroundSize: "contain",
     backgroundAttachment: "fixed",
-    boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.97)"
+    boxShadow: "inset 0 0 0 100vw rgba(255, 255, 255, 0.97)"
   },
   card: {
     minWidth: 340,

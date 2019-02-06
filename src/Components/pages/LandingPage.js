@@ -19,7 +19,7 @@ const styles = theme => ({
     backgroundPosition: "center center",
     backgroundSize: "cover",
     backgroundAttachment: "fixed",
-    boxShadow: "inset 0 0 0 3000px rgba(0, 0, 0, 0.70)"
+    boxShadow: "inset 0 0 0 100vw rgba(0, 0, 0, 0.70)"
   },
   logo: {
     marginTop: "60px"

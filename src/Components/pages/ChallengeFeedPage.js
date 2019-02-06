@@ -10,8 +10,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.light,
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    flexDirection: "column",
+    alignItems: "center"
   },
   cardContainer: {
     marginTop: "20px"
