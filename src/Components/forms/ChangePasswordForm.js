@@ -22,14 +22,7 @@ class ChangePasswordForm extends Component {
 
   onFormSubmit = (formValues, dispatch) => {
     const { history } = this.props;
-    const { password, new_password, confirm_password } = formValues;
-
-    if (new_password !== confirm_password) {
-      return swal(":(", "Passwords did not match!", "error", {
-        button: false,
-        timer: 2000
-      });
-    }
+    const { password, new_password } = formValues;
 
     LocalApi.put(`/changepassword`, { password, new_password })
       .then(res => {
@@ -99,10 +92,14 @@ const WrappedChangePasswordForm = reduxForm({
 
     if (!password) {
       errors.password = "Current password is required!";
+    } else if (password.length < 6 || password.length > 40) {
+      errors.password = "Must be between 6 - 40 characters long";
     }
 
     if (!new_password) {
       errors.new_password = "New password is required!";
+    } else if (new_password.length < 6 || new_password.length > 40) {
+      errors.new_password = "Must be between 6 - 40 characters long";
     }
 
     if (new_password !== confirm_password) {
