@@ -10,6 +10,7 @@ const styles = theme => ({
   container: {
     backgroundColor: theme.palette.background.light,
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     flexDirection: "column",
   },
@@ -39,7 +40,7 @@ class NewsFeedPage extends Component {
           {submissions &&
             submissions.map(function(sub) {
               return (
-                <div key={sub.submission_id} className={classes.cardContainer}>
+                <div key={sub.submission_id}>
                   <ChallengeCard
                     type="submission"
                     sub_id={sub.submission_id}
