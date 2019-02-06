@@ -48,6 +48,11 @@ const styles = theme => ({
     margin: "20px",
     fontSize: "40px"
   },
+  radioField: {
+    [theme.breakpoints.down("sm")]: {
+      padding: `${theme.spacing.unit}px 0px`
+    }
+  },
   title: {
     marginBottom: "10px"
   }
@@ -160,7 +165,7 @@ class UpdateProfileInfoForm extends Component {
                 <Typography color="inherit">Gender</Typography>
               </div>
               <div>
-                <Typography color="inherit">
+                <Typography color="inherit" className={classes.radioField}>
                   <Field
                     name="gender"
                     component="input"
@@ -169,7 +174,7 @@ class UpdateProfileInfoForm extends Component {
                   />{" "}
                   Male
                 </Typography>
-                <Typography color="inherit">
+                <Typography color="inherit" className={classes.radioField}>
                   <Field
                     name="gender"
                     component="input"
@@ -178,7 +183,7 @@ class UpdateProfileInfoForm extends Component {
                   />{" "}
                   Female
                 </Typography>
-                <Typography color="inherit">
+                <Typography color="inherit" className={classes.radioField}>
                   <Field
                     name="gender"
                     component="input"
@@ -248,7 +253,7 @@ const WrappedUpdateInfoForm = reduxForm({
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser,
+    currentUser: state.currentUser
     // initialValues: state.currentUser
   };
 };

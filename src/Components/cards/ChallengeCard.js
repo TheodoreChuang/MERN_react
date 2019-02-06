@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import SocialShareIcon from "./../icons/SocialShareIcon";
 import LocalApi from "./../../apis/local";
@@ -108,6 +108,7 @@ class ChallengeCard extends Component {
       date_created,
       hideMoreDetail
     } = this.props;
+    const currentPath = window.location.pathname;
 
     const renderMenu = (
       <Menu
@@ -186,9 +187,12 @@ class ChallengeCard extends Component {
             <IconButton aria-label="Share" className={classes.actionButton}>
               <SocialShareIcon id={id} />
             </IconButton>
+
             {/* Conditional rendering based on type of card */}
             {/* for challenges */}
-            {type === "challenge" && currentUser._id === user_id ? (
+            {!currentPath.match(/^\/challenges$/) &&
+            type === "challenge" &&
+            currentUser._id === user_id ? (
               <IconButton
                 aria-label="Delete"
                 className={classes.actionButton}
@@ -209,7 +213,9 @@ class ChallengeCard extends Component {
                             button: false,
                             timer: 2000
                           });
-                          setTimeout(() => window.location.reload(), 2000);
+                          setTimeout(() => {
+                            this.props.history.replace("/challenges");
+                          }, 2000);
                         })
                         .catch(error => swal(":(", `${error}`, "error"));
                     } else {
@@ -244,14 +250,6 @@ const mapStateToProps = state => {
   };
 };
 
-// withRouter required???
-// export default withRouter(
-//   connect(mapStateToProps)(withStyles(styles)(ChallengeCard))
-// );
-
-const Wrapped = connect(
-  mapStateToProps,
-  {}
-)(ChallengeCard);
-
-export default withStyles(styles)(Wrapped);
+export default withRouter(
+  connect(mapStateToProps)(withStyles(styles)(ChallengeCard))
+);
