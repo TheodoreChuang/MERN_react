@@ -11,9 +11,9 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
-const styles = () => ({
+const styles = theme => ({
   buttonText: {
-    color: "white"
+    color: theme.palette.primary.contrastText
   }
 });
 

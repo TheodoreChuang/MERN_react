@@ -23,7 +23,10 @@ const styles = theme => ({
   container: {
     display: "flex",
     maxWidth: "400px",
-    margin: "50px auto 0 auto",
+    margin: "0px",
+    [theme.breakpoints.up("sm")]: {
+      margin: "50px auto 0 auto"
+    },
     position: "center",
     flexDirection: "column",
     justifyContent: "center",
@@ -36,7 +39,7 @@ const styles = theme => ({
     textTransform: "none"
   },
   font: {
-    color: "white"
+    color: theme.palette.primary.contrastText
   },
   checkboxButton: {
     display: "flex",
@@ -47,7 +50,7 @@ const styles = theme => ({
   signin: {
     margin: "10px",
     padding: "20px",
-    color: "white"
+    color: theme.palette.primary.contrastText
   },
   link: {
     margin: theme.spacing.unit,

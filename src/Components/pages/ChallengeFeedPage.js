@@ -5,17 +5,13 @@ import LocalApi from "./../../apis/local";
 
 import { withStyles } from "@material-ui/core/styles";
 
-// const mobStyle = {
-//   height:
-// }
-
 const styles = theme => ({
   container: {
     backgroundColor: theme.palette.background.light,
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "column",
     padding: "20px"
   }
 });
@@ -41,7 +37,7 @@ class ChallengeFeedPage extends Component {
           {challenges &&
             challenges.map(function(challenge) {
               return (
-                <div className={classes.cardContainer} key={challenge._id}>
+                <div key={challenge._id}>
                   <ChallengeCard
                     type="challenge"
                     id={challenge._id}

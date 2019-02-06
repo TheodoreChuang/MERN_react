@@ -17,7 +17,7 @@ const styles = theme => ({
     boxShadow: "inset 0 0 0 2000px rgba(0,0,50,0.5)"
   },
   font: {
-    color: "white"
+    color: theme.palette.primary.contrastText
   }
 });
 

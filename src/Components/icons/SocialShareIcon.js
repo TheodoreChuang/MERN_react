@@ -1,10 +1,8 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Modal from "@material-ui/core/Modal";
+import { Modal, List, ListItem, Typography } from "@material-ui/core/";
 import ShareIcon from "@material-ui/icons/Share";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
+
+import { withStyles } from "@material-ui/core/styles";
 import "./SocialShareIcon.css";
 
 function getModalStyle() {
@@ -54,6 +52,7 @@ class ShareSocialIcon extends React.Component {
 
     return (
       <div>
+        {/* FIXME: Works in Chrome but not Firefox */}
         <ShareIcon onClick={this.handleOpen} aria-label="Share" />
 
         <Modal

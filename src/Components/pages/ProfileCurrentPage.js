@@ -19,8 +19,11 @@ const styles = theme => ({
     backgroundAttachment: "fixed",
     boxShadow: "inset 0 0 0 3000px rgba(255, 255, 255, 0.97)"
   },
-  cardContainer: {
-    margin: "30px"
+  profileContainer: {
+    margin: "20px"
+  },
+  subsContainer: {
+    margin: "20px 20px 20px 0px"
   },
   typography: {
     textAlign: "center",
@@ -45,7 +48,7 @@ class ProfileCurrentPage extends Component {
         <div className={classes.container}>
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12} md={8}>
-              <div className={classes.cardContainer}>
+              <div className={classes.profileContainer}>
                 <ProfileInfoCard {...user} />
               </div>
 
@@ -59,7 +62,7 @@ class ProfileCurrentPage extends Component {
                 user.submissions &&
                 user.submissions.map(submission => {
                   return (
-                    <div key={submission._id} className={classes.cardContainer}>
+                    <div key={submission._id} className={classes.subsContainer}>
                       <ChallengeCard
                         user_sub_id={user}
                         type="submission"
