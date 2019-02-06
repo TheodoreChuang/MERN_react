@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-// import swal from "sweetalert";
 import Input from "./fields/Input";
 import { updateCurrentUser } from "./../../actions";
 
@@ -54,7 +53,10 @@ const styles = theme => ({
   }
 });
 
+
+
 class UpdateProfileInfoForm extends Component {
+
   updateUserFormSubmit = formValues => {
     this.props.updateCurrentUser(formValues);
     this.props.history.push("/profile");
@@ -85,7 +87,7 @@ class UpdateProfileInfoForm extends Component {
   render() {
     const { classes } = this.props;
     const { handleSubmit } = this.props;
-
+    console.log(this.props.currentUser);
     return (
       <Card className={classes.body}>
         <div className={classes.container} onSubmit={this.updateUserFormSubmit}>
@@ -213,6 +215,7 @@ class UpdateProfileInfoForm extends Component {
 
 const WrappedUpdateInfoForm = reduxForm({
   form: "updateUser",
+  enableReinitialize: true,
   validate: ({ first_name, last_name, nickname, bio, age, location }) => {
     const errors = {};
 
@@ -248,7 +251,8 @@ const WrappedUpdateInfoForm = reduxForm({
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    initialValues: state.currentUser
   };
 };
 
