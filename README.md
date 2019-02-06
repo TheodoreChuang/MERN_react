@@ -102,7 +102,7 @@
 ![require](docs/DataflowDiagram.png)
 
 ### Schema Design Diagram
-![require](docs/schema.pdf)
+![require](docs/Schema.png)
 
 ## Project Management & Planning
   ### Project plan & timeline
