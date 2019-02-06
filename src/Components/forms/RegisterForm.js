@@ -71,7 +71,7 @@ class RegisterForm extends Component {
       terms_conditions
     } = formValues;
     const { setAuthToken, history } = this.props;
-console.log("here");
+
     LocalApi.post("/register", {
       first_name,
       last_name,
@@ -93,7 +93,7 @@ console.log("here");
       })
       .catch(error => {
         swal(":(", `${error.response.data}`, "error");
-      })
+      });
   };
 
   render() {
