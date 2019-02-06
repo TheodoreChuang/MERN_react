@@ -173,17 +173,16 @@ class ChallengeCard extends Component {
           <VideoPlayer url={video_url} />
 
           <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton aria-label="Like this" className={classes.actionButton}>
-              <Favorite
-                onClick={() => {
-                  swal({
-                    title: "Thank you for the like!",
-                    text: "Stay tuned for this future feature!",
-                    icon: "info",
-                    buttons: { text: "OK" }
-                  });
-                }}
-              />
+            <IconButton aria-label="Like this" className={classes.actionButton}
+              onClick={() => {
+                swal({
+                  title: "Thank you for the like!",
+                  text: "Stay tuned for this future feature!",
+                  icon: "info",
+                  buttons: { text: "OK" }
+                });
+              }}>
+              <Favorite />
             </IconButton>
             <IconButton aria-label="Share" className={classes.actionButton}>
               <SocialShareIcon id={id} />
