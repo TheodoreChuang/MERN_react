@@ -9,6 +9,8 @@ import { withStyles } from "@material-ui/core/styles";
 const styles = theme => ({
   container: {
     minHeight: "100vh",
+    marginTop: "-20px",
+    paddingTop: "20px",
     backgroundImage: `url(https://s3-ap-southeast-2.amazonaws.com/1up.webapp/background-abstract.png)`,
     backgroundRepeat: "repeat",
     backgroundSize: "contain",
