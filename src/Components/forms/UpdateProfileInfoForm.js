@@ -216,7 +216,7 @@ class UpdateProfileInfoForm extends Component {
 
 const WrappedUpdateInfoForm = reduxForm({
   form: "updateUser",
-  enableReinitialize: true,
+  // enableReinitialize: true,
   validate: ({ first_name, last_name, nickname, bio, age, location }) => {
     const errors = {};
 
@@ -253,7 +253,7 @@ const WrappedUpdateInfoForm = reduxForm({
 const mapStateToProps = state => {
   return {
     currentUser: state.currentUser,
-    initialValues: state.currentUser
+    // initialValues: state.currentUser
   };
 };
 

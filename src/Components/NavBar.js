@@ -28,7 +28,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 const styles = theme => ({
   root: {
     width: "100%",
-    marginBottom: "60px"
+    marginTop: "65px"
   },
   toolbar: {
     display: "flex",

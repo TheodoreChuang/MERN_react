@@ -5,7 +5,6 @@ import NavBar from "./../NavBar";
 import ProfileInfoCard from "../cards/ProfileInfoCard";
 import ChallengeCard from "./../cards/ChallengeCard";
 
-import "./../App.css";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
