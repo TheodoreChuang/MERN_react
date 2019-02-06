@@ -14,10 +14,10 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.light,
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
     flexDirection: "column",
-    padding: "20px",
-    height: "100%"
+  },
+  cardContainer: {
+    marginTop: "20px"
   }
 });
 class ChallengeFeedPage extends Component {

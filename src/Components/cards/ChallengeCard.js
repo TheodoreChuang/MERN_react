@@ -201,14 +201,14 @@ class ChallengeCard extends Component {
                     dangerMode: true
                   }).then(willDelete => {
                     if (willDelete) {
-                      LocalApi.delete(`/challenges/submissions/${id}`)
+                      LocalApi.delete(`/challenges/${id}`)
                         .then(res => {
                           swal("The challenge has been deleted!", {
                             icon: "success",
                             button: false,
                             timer: 2000
                           });
-                          setTimeout(() => window.location.reload());
+                          setTimeout(() => window.location.reload(), 2000);
                         })
                         .catch(error => swal(":(", `${error}`, "error"));
                     } else {
