@@ -8,6 +8,8 @@ import { Card, Typography } from "@material-ui/core";
 const styles = theme => ({
   container: {
     height: "100vh",
+    marginTop: "-20px",
+    paddingTop: "20px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
