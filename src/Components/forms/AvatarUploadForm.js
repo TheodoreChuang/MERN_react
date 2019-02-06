@@ -87,7 +87,7 @@ class AvatarUploadForm extends Component {
               type="file"
               onChange={this.onChange}
             />
-            <Button raised type="submit">
+            <Button raised type="submit" style={{ textTransform: "none" }}>
               Upload Photo <CloudUploadIcon className={classes.rightIcon} />
             </Button>
           </form>

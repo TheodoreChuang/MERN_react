@@ -201,6 +201,7 @@ class UpdateProfileInfoForm extends Component {
                   color="primary"
                   aria-label="Add"
                   className={classes.margin}
+                  style={{ textTransform: "none" }}
                 >
                   Update
                 </Fab>
