@@ -61,7 +61,6 @@ const styles = theme => ({
 
 class RegisterForm extends Component {
   onRegisterFormSubmit = formValues => {
-    console.log(formValues);
     const {
       first_name,
       last_name,
@@ -92,7 +91,7 @@ class RegisterForm extends Component {
         setTimeout(() => history.push("/"), 2000);
       })
       .catch(error => {
-        swal(":(", `${error.response.data}`, "error");
+        swal(":(", `${error}`, "error");
       });
   };
 
@@ -171,7 +170,6 @@ class RegisterForm extends Component {
                   className={classes.font}
                   color="primary"
                   type="checkbox"
-                  // required
                 />
               </div>
               <CustomizedDialogDemo
@@ -252,17 +250,14 @@ const WrappedRegisterForm = reduxForm({
     }
 
     if (!password) {
-      console.log("2");
       errors.password = "Required!";
     } else if (password.length < 6 || password.length > 40) {
       errors.password = "Must be between 6 and 40 characters";
     }
 
-    // FIXME
-    if (!terms_conditions) {
-      errors.terms_conditions = "Required!"
+    if (!terms_conditions && terms_conditions !== true) {
+      errors.password = "Accept T & Cs";
     }
- 
 
     return errors;
   }
