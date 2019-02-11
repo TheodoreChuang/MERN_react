@@ -6,8 +6,8 @@
   * http://1up-app.s3-website-ap-southeast-2.amazonaws.com/
 
 ### Github
-  * Front-End (React): https://github.com/Tyson652/MERN_react
-  * Back-End (Node): https://github.com/Tyson652/MERN_express
+  * Front-End (React): https://github.com/TheodoreChuang/MERN_react
+  * Back-End (Node): https://github.com/TheodoreChuang/MERN_express
 
 ## Description
   ### Problem definition / purpose
